@@ -1,0 +1,7 @@
+default:
+  compress: false
+  hostname: ~
+  port: 3000
+production:
+  compress: true
+  port: 80

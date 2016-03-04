@@ -1,0 +1,5 @@
+default:
+  minify: false
+  watchInterval: 10 # seconds
+production:
+  minify: true
