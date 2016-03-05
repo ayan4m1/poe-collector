@@ -5,8 +5,8 @@ angular
   ]
   .controller 'ErrorCtrl', ['$rootScope', '$scope', ($rootScope, $scope) ->
     $scope.error =
-      code: $rootScope.error.code ? 500
-      message: $rootScope.error.message ? 'Unknown error!'
+      code: $rootScope.error?.code ? 500
+      message: $rootScope.error?.message ? 'Unknown error!'
 
     return
   ]

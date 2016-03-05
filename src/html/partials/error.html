@@ -1,6 +1,6 @@
 <div class="container">
     <div class="jumbotron">
-        <h1>Bleep Blorp, HTTP <span ng-bind="error.code">500?</span></h1>
+        <h1>Bleep Blorp, HTTP <span ng-bind="error.code || '500?'"></span></h1>
         <h2>Something got mixed up.</h2>
     </div>
     <div class="col-lg-12" ng-show="error.message">
@@ -8,9 +8,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Details</h3>
             </div>
-            <div class="panel-body">
-                <blockquote ng-bind="error.message"></blockquote>
-            </div>
+            <div class="panel-body" ng-bind="error.message"></div>
         </div>
     </div>
 </div>
