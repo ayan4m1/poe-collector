@@ -9,7 +9,7 @@ angular
     'poe.directives'
     'poe.services'
   ]
-  .config ['$routeProvider', '$locationProvider', '$httpProvider', ($routeProvider, $locationProvider, $httpProvider) ->
+  .config ['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
     # use history.pushState instead of hash-based routing
     $locationProvider.html5Mode(true)
 
@@ -24,5 +24,12 @@ angular
     .when '/error',
       templateUrl: 'partials/error.html'
       controller: 'ErrorCtrl'
-    .otherwise '/error'
+    .otherwise
+      redirectTo: ->
+        # todo: get to rootScope.error here
+        ###rootScope.error =
+          code: 404
+          message: 'Ugh'###
+
+        return '/error'
   ]
