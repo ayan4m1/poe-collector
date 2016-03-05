@@ -13,7 +13,7 @@ angular
     # use history.pushState instead of hash-based routing
     $locationProvider.html5Mode(true)
 
-    # todo: improve routing, reduce boilerplate
+    # todo: better routing scheme
     $routeProvider
     .when '/',
       templateUrl: 'partials/home.html'
