@@ -4,7 +4,6 @@ angular
     primus.$on 'data', (data) ->
       console.dir data
   ]
-  ]
   .controller 'ErrorCtrl', ['$rootScope', '$scope', ($rootScope, $scope) ->
     $scope.error =
       code: $rootScope.error?.code ? 500
