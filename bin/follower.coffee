@@ -1,3 +1,5 @@
+'use strict'
+
 Q = require 'q'
 request = require 'request-promise'
 
