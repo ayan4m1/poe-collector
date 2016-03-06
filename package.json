@@ -16,6 +16,7 @@
     "express": "^4.13.4",
     "faye-websocket": "^0.11.0",
     "gulp-file": "^0.2.0",
+    "jsonfile": "^2.2.3",
     "konfig": "^0.2.1",
     "moment": "^2.11.2",
     "mongoose": "^4.4.5",
