@@ -1,7 +1,9 @@
 angular
   .module 'poe.controllers', [ 'poe.services' ]
-  .controller 'HomeCtrl', ['$scope', ($scope) ->
-
+  .controller 'HomeCtrl', ['$scope', 'primus', ($scope, primus) ->
+    primus.$on 'data', (data) ->
+      console.dir data
+  ]
   ]
   .controller 'ErrorCtrl', ['$rootScope', '$scope', ($rootScope, $scope) ->
     $scope.error =

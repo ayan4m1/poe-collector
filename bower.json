@@ -17,12 +17,14 @@
     "momentjs": "~2.10.x",
     "angular-bootstrap": "~1.2.x",
     "ngstorage": "~0.3.10",
-    "angular-toastr": "~1.7.0"
+    "angular-toastr": "~1.7.0",
+    "angular-primus": "bulletlogic/angular-primus#master",
+    "primus": "~5.0.0"
   },
   "devDependencies": {
     "bootstrap": "3.3.x",
-    "angular": "~1.4.x",
-    "angular-route": "~1.4.x",
-    "angular-mocks": "~1.4.x"
+    "angular": "~1.5.x",
+    "angular-route": "~1.5.x",
+    "angular-mocks": "~1.5.x"
   }
 }

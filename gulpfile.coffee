@@ -9,6 +9,12 @@ coffee = require 'gulp-coffee'
 uglify = require 'gulp-uglify'
 nodemon = require 'gulp-nodemon'
 
+# ws lib generation
+gulpFile = require 'gulp-file'
+Primus = require 'primus'
+primus = Primus.createServer({ port: 8080, transformer: 'faye' })
+primus.destroy()
+
 # return glob for source files by extension
 srcGlob = (exts) ->
   return "src/#{exts}/**/*.#{exts}" unless util.isArray(exts)
@@ -29,6 +35,7 @@ gulp.task 'update', -> [
 
 # js libs
   gulp.src [
+    'lib/primus/'
     'lib/momentjs/moment.js'
     'lib/angular/angular.js'
     'lib/angular-route/angular-route.js'
@@ -37,7 +44,9 @@ gulp.task 'update', -> [
     'lib/ngstorage/ngStorage.js'
     'lib/angular-bootstrap/ui-bootstrap-tpls.js'
     'lib/angular-toastr/dist/angular-toastr.tpls.js'
+    'lib/angular-primus/angular-primus.js'
   ]
+  .pipe(gulpFile('primus.js', primus.library()))
   .pipe(concat('libs.js'))
   .pipe(gulpif(config.build.minify, uglify()))
   .pipe(gulp.dest("www/js"))

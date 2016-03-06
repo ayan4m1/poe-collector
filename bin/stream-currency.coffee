@@ -4,15 +4,19 @@ config = require('konfig')()
 follow = require './follower'
 Primus = require 'primus'
 
-Primus.createServer (spark) ->
-  console.log spark
-,
+notifier = Primus.createServer
   port: config.web.socket
   transformer: 'faye'
 
+notifier.on 'connection', (spark) ->
+  console.log "new connection from #{spark.address}"
+
 handle = (result) ->
+  # todo: wait for new data now
+  return unless result.data?
   console.log "fetched #{result.data.length} stashes"
 
+  # todo: process the new data
   # todo: tell the sparks
 
   result.nextChange()

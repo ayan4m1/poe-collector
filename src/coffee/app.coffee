@@ -1,6 +1,7 @@
 angular
   .module 'poe', [
     # external dependencies
+    'primus'
     'ngRoute'
     'ui.bootstrap'
 
@@ -9,9 +10,11 @@ angular
     'poe.directives'
     'poe.services'
   ]
-  .config ['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
+  .config ['$routeProvider', '$locationProvider', 'primusProvider', ($routeProvider, $locationProvider, primusProvider) ->
     # use history.pushState instead of hash-based routing
     $locationProvider.html5Mode(true)
+
+    primusProvider.setEndpoint('http://localhost:3030')
 
     # todo: better routing scheme
     $routeProvider
