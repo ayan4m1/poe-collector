@@ -31,7 +31,7 @@ processListing = (result) ->
 
       break unless name? and id? and price?.length > 0
       console.log "adding listing #{id}"
-      primus.write
+      notifier.write
         id: id
         name: name
         price: price
