@@ -7,9 +7,9 @@ gulpif = require 'gulp-if'
 concat = require 'gulp-concat'
 coffee = require 'gulp-coffee'
 uglify = require 'gulp-uglify'
-forever = require 'gulp-forever-monitor'
+nodemon = require 'gulp-nodemon'
 
-# ws lib generation
+# ws lib generation, ugly!
 gulpFile = require 'gulp-file'
 Primus = require 'primus'
 primus = Primus.createServer({ port: 8080, transformer: 'faye' })
@@ -67,24 +67,23 @@ gulp.task 'update', -> [
 ]
 
 runScript = (path) ->
-  forever 'coffee',
-    command: 'node'
-    args: [ "#{__dirname}/#{path}" ]
-    sourceDir: config.build.coffeeDir
-    watchIgnorePatterns: [
-      '.git/'
-      'node_modules/*'
-      'lib/*'
-    ]
-    watch: true
-    watchDirectory: 'bin/'
-    env: process.env
+  nodemon path,
+      script: path
+      ignore: [
+        '.git/'
+        'node_modules/*'
+        'lib/*'
+      ]
+      watch: [
+        'bin/'
+        'src/'
+      ]
+      ext: 'coffee html scss'
+      # delay prevents churning due to rapid changes
+      delay: config.build.watchInterval
+      env: process.env
+      tasks: ['update']
 
-gulp.task 'default', ['update'], ->
-  runScript('bin/start-web.coffee')
-
-gulp.task 'start', ['update'], ->
-  runScript('bin/start-web.coffee')
-  runScript('bin/start-watcher.coffee')
-
+gulp.task 'default', ['update'], -> runScript('bin/start-web.coffee')
+gulp.task 'start', ['update'], -> runScript('bin/start-both.coffee')
 gulp.task 'clean', (done) -> require('rimraf')('www/', done)
