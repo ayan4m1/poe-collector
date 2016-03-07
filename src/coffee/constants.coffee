@@ -1,2 +1,4 @@
 angular
-  .module 'poe.constants', []
+  .module 'poe.constants', [
+    'poe.constants.currency'
+  ]
