@@ -28,14 +28,16 @@ gulp.task 'update', -> [
   gulp.src("src/img/**/*.{png,jpg,gif}").pipe(gulp.dest("www/img"))
 
 # css
-  gulp.src(srcGlob('scss'))
+  gulp.src([
+    srcGlob('scss')
+    'lib/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css'
+  ])
   .pipe(gulpif(/\.scss$/, sass()))
   .pipe(concat('main.css'))
   .pipe(gulp.dest("www/css"))
 
 # js libs
   gulp.src [
-    'lib/primus/'
     'lib/momentjs/moment.js'
     'lib/angular/angular.js'
     'lib/angular-route/angular-route.js'
@@ -46,6 +48,7 @@ gulp.task 'update', -> [
     'lib/angular-toastr/dist/angular-toastr.tpls.js'
     'lib/angular-primus/angular-primus.js'
     'lib/seiyria-bootstrap-slider/dist/bootstrap-slider.js'
+    'lib/angular-bootstrap-slider/slider.js'
   ]
   .pipe(gulpFile('primus.js', primus.library()))
   .pipe(concat('libs.js'))
@@ -66,7 +69,7 @@ gulp.task 'update', -> [
 runScript = (path) ->
   forever 'coffee',
     command: 'node'
-    args: [ "#{__dirname}\\#{path}" ]
+    args: [ "#{__dirname}/#{path}" ]
     sourceDir: config.build.coffeeDir
     watchIgnorePatterns: [
       '.git/'
