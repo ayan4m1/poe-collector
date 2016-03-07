@@ -37,7 +37,6 @@ follow = (changeId) ->
     .then (raw) ->
       console.log "fetched #{raw.length} bytes"
       data = JSON.parse(raw)
-      cacheFile =
       jsonfile.writeFile(cacheFile, data)
       resolve(data)
     , (err) ->
