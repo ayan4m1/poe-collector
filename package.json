@@ -13,6 +13,7 @@
     "cheerio": "^0.20.0",
     "compression": "^1.6.1",
     "cors": "^2.7.1",
+    "delayed": "^1.0.1",
     "express": "^4.13.4",
     "faye-websocket": "^0.11.0",
     "jsonfile": "^2.2.3",
