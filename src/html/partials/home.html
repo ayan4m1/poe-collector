@@ -1,6 +1,23 @@
 <div class="container">
     <div class="jumbotron">
-        <h1>Sniper</h1>
-        <h3 class="text-muted">Not a build</h3>
+        <h3>What do you need?</h3>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-9">
+                    <select class="form-control"
+                            ng-options="item for item in currencies"
+                            ng-change="selectCurrency()"
+                            ng-model="desiredCurrency">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-lg-3" ng-show="desiredCurrency">
+                    <p>
+                        <span ng-bind="desiredCurrency"></span> is normally worth <span ng-bind="currentCev"></span> chaos
+                    </p>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
