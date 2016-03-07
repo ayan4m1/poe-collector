@@ -63,8 +63,10 @@ gulp.task 'update', -> [
 ]
 
 runScript = (path) ->
-  forever path,
-    command: 'coffee'
+  forever 'coffee',
+    command: 'node'
+    args: [ "#{__dirname}\\#{path}" ]
+    sourceDir: config.build.coffeeDir
     watchIgnorePatterns: [
       '.git/'
       'node_modules/*'
@@ -72,12 +74,12 @@ runScript = (path) ->
     ]
     watch: true
     watchDirectory: 'bin/'
-    # delay prevents churning due to rapid changes
-    delay: config.build.watchInterval
     env: process.env
-    #tasks: ['update']
 
 gulp.task 'default', ['update'], ->
+  runScript('bin/start-web.coffee')
+
+gulp.task 'start', ['update'], ->
   runScript('bin/start-web.coffee')
   runScript('bin/start-watcher.coffee')
 

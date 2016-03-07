@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "shows users PoE market data",
   "scripts": {
-    "start": "gulp",
+    "start": "gulp start",
     "test": "gulp test"
   },
   "author": "ayan4m1 <andrew@bulletlogic.com>",
@@ -26,6 +26,7 @@
     "yamolo": "github:bulletlogic/yamolo"
   },
   "devDependencies": {
+    "forever-monitor": "^1.7.0",
     "gulp": "^3.9.1",
     "gulp-coffee": "^2.3.1",
     "gulp-concat": "^2.6.0",
