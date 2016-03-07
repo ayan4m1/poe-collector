@@ -4,6 +4,7 @@ angular
     'primus'
     'ngRoute'
     'ui.bootstrap'
+    'ui.bootstrap-slider'
 
     # app modules
     'poe.controllers'

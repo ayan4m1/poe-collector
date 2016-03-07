@@ -1,23 +1,28 @@
 <div class="container">
     <div class="jumbotron">
-        <h3>What do you need?</h3>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-9">
-                    <select class="form-control"
+                    <label for="currency">What do you need?</label>
+                    <select id="currency" class="form-control"
                             ng-options="item for item in currencies"
-                            ng-change="selectCurrency()"
-                            ng-model="desiredCurrency">
+                            ng-change="select()"
+                            ng-model="selected">
                         <option></option>
                     </select>
                 </div>
-                <div class="col-lg-3" ng-show="desiredCurrency">
+                <div class="col-lg-3" ng-show="selected">
                     <p>
-                        <span ng-bind="desiredCurrency"></span> is normally worth <span ng-bind="currentCev"></span> chaos
+                        <span ng-bind="selected"></span> is normally worth <span ng-bind="currentCev"></span> chaos
                     </p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-9">
+                    <label for="rateSlider" class="control-label">How long can you wait?</label>
+                    <slider id="rateSlider" ng-model="desiredCev" min="rate.min" step="rate.step" max="rate.max" value="rate.start"></>
+                </div>
+            </div>
         </div>
-
     </div>
 </div>
