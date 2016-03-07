@@ -7,7 +7,7 @@ gulpif = require 'gulp-if'
 concat = require 'gulp-concat'
 coffee = require 'gulp-coffee'
 uglify = require 'gulp-uglify'
-nodemon = require 'gulp-nodemon'
+forever = require 'gulp-forever-monitor'
 
 # ws lib generation
 gulpFile = require 'gulp-file'
@@ -62,22 +62,23 @@ gulp.task 'update', -> [
   gulp.src(srcGlob('html')).pipe(gulp.dest('www/'))
 ]
 
-gulp.task 'default', ['update'], ->
-  nodemon
-    script: 'bin/start-web.coffee'
-    ignore: [
+runScript = (path) ->
+  forever path,
+    command: 'coffee'
+    watchIgnorePatterns: [
       '.git/'
       'node_modules/*'
       'lib/*'
     ]
-    watch: [
-      'bin/'
-      'src/'
-    ]
-    ext: 'coffee html scss'
+    watch: true
+    watchDirectory: 'bin/'
     # delay prevents churning due to rapid changes
     delay: config.build.watchInterval
     env: process.env
-    tasks: ['update']
+    #tasks: ['update']
+
+gulp.task 'default', ['update'], ->
+  runScript('bin/start-web.coffee')
+  runScript('bin/start-watcher.coffee')
 
 gulp.task 'clean', (done) -> require('rimraf')('www/', done)
