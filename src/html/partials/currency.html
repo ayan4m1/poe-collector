@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="jumbotron">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-9">
+                    <label for="currency">What do you need?</label>
+                    <select id="currency" class="form-control"
+                            ng-options="item for item in currencies"
+                            ng-change="select()"
+                            ng-model="selected">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-lg-3" ng-show="selected">
+                    <p><span ng-bind="selectedCev"></span> CEV</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="rateSlider" class="control-label">How long can you wait?</label>
+                    <slider id="rateSlider" ng-model="desiredCev" min="rate.min" step="rate.step" max="rate.max" value="rate.start"></slider>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

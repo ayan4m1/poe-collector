@@ -6,8 +6,13 @@ angular
   .directive 'navBar', ->
     restrict: 'A'
     templateUrl: 'components/nav-bar.html'
-  .directive 'socketState', ['socketService', ->
+  .directive 'socketStatus', ['$rootScope', ($rootScope) ->
     restrict: 'A'
-    link: (scope) ->
-      scope.active = -> true
+    template: '<i class="fa fa-fw fa-unlink"></i>'
+    link: (scope, elem) ->
+      icon = elem.find('i')
+      $rootScope.$on 'watcher:opened', ->
+        icon.addClass('fa-link').removeClass('fa-unlink')
+      $rootScope.$on 'watcher:closed', ->
+        icon.removeClass('fa-link').addClass('fa-unlink')
   ]

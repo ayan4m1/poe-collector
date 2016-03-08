@@ -1,7 +1,8 @@
 angular
   .module 'poe.controllers', [ 'poe.constants', 'poe.services' ]
-  .controller 'HomeCtrl', ['$scope', 'primus', 'chaosValues', 'watchService', ($scope, primus, chaosValues, watchService) ->
+  .controller 'CurrencyCtrl', ['$scope', 'primus', 'chaosValues', 'watchService', ($scope, primus, chaosValues, watchService) ->
     watchService.init()
+
     $scope.currencies = []
     $scope.currencies.push(key) for key, value of chaosValues
     $scope.selected = null
@@ -24,7 +25,7 @@ angular
 
     return
   ]
-  .controller 'SearchCtrl', ['$scope', 'searchService', ($scope, searchService) ->
+  .controller 'PricingCtrl', ['$scope', 'searchService', ($scope, searchService) ->
     searchService.search(
       index: 'index'
       body:

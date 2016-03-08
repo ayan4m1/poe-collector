@@ -1,5 +1,6 @@
 angular
   .module 'poe.constants', []
+  .constant('socketUri', 'ws://localhost:3030')
   .constant('searchHost', 'api.exiletools.com')
   .constant('apiKey', '42a539e922414f4b63ba0010eca0c13d')
   .value 'chaosValues', {

@@ -13,29 +13,25 @@ angular
     'poe.directives'
     'poe.services'
   ]
-  .config ['$routeProvider', '$locationProvider', 'primusProvider', ($routeProvider, $locationProvider, primusProvider) ->
+  .config ['$routeProvider', '$locationProvider', 'primusProvider', 'socketUri', ($routeProvider, $locationProvider, primusProvider, socketUri) ->
     # use history.pushState instead of hash-based routing
-    $locationProvider.html5Mode(true)
+    $locationProvider.html5Mode true
 
-    primusProvider.setEndpoint('http://localhost:3030')
+    # pull WS config from constants
+    primusProvider.setEndpoint socketUri
 
     # todo: better routing scheme
     $routeProvider
     .when '/',
       templateUrl: 'partials/home.html'
-      controller: 'HomeCtrl'
-    .when '/search',
-      templateUrl: 'partials/search.html'
-      controller: 'SearchCtrl'
+    .when '/currency',
+      templateUrl: 'partials/currency.html'
+      controller: 'CurrencyCtrl'
+    .when '/pricing',
+      templateUrl: 'partials/pricing.html'
+      controller: 'PricingCtrl'
     .when '/error',
       templateUrl: 'partials/error.html'
       controller: 'ErrorCtrl'
-    .otherwise
-      redirectTo: ->
-        # todo: get to rootScope.error here
-        ###rootScope.error =
-          code: 404
-          message: 'Ugh'###
-
-        return '/error'
+    .otherwise { redirectTo: -> '/' }
   ]
