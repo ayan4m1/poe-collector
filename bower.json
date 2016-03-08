@@ -20,13 +20,11 @@
     "angular-toastr": "~1.7.0",
     "angular-primus": "bulletlogic/angular-primus#master",
     "primus": "~5.0.0",
-    "seiyria-bootstrap-slider": "~6.1.2",
-    "angular-bootstrap-slider": "^0.1.26"
-  },
-  "devDependencies": {
     "bootstrap": "3.3.x",
     "angular": "~1.5.x",
     "angular-route": "~1.5.x",
-    "angular-mocks": "~1.5.x"
+    "angular-mocks": "~1.5.x",
+    "angular-bootstrap-slider": "master",
+    "elasticsearch": "^10.1.3"
   }
 }

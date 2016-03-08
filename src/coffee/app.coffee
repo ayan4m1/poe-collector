@@ -5,9 +5,11 @@ angular
     'ngRoute'
     'ui.bootstrap'
     'ui.bootstrap-slider'
+    'elasticsearch'
 
     # app modules
     'poe.controllers'
+    'poe.constants'
     'poe.directives'
     'poe.services'
   ]
