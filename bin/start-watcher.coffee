@@ -53,7 +53,7 @@ handle = (result) ->
     .catch (err) ->
       console.error err
     .done()
-  , 45000) if result.nextChange?
+  , 20000) if result.nextChange?
 
 # main app loop
 follow()
