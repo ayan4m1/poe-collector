@@ -68,22 +68,22 @@ gulp.task 'update', -> [
 ]
 
 runScript = (path) ->
-  nodemon path,
-      script: path
-      ignore: [
-        '.git/'
-        'node_modules/*'
-        'lib/*'
-      ]
-      watch: [
-        'bin/'
-        'src/'
-      ]
-      ext: 'coffee html scss'
-      # delay prevents churning due to rapid changes
-      delay: config.build.watchInterval
-      env: process.env
-      tasks: ['update']
+  nodemon
+    script: path
+    ignore: [
+      '.git/'
+      'node_modules/*'
+      'lib/*'
+    ]
+    watch: [
+      'bin/'
+      'src/'
+    ]
+    ext: 'coffee html scss'
+    # delay prevents churning due to rapid changes
+    delay: config.build.watchInterval
+    env: process.env
+    tasks: ['update']
 
 gulp.task 'default', ['update'], -> runScript('bin/start-web.coffee')
 gulp.task 'start', ['update'], -> runScript('bin/start-both.coffee')

@@ -1,6 +1,5 @@
 default:
   minify: false
   watchInterval: 10 # seconds
-  coffeeDir: '/path/to/coffee'
 production:
   minify: true
