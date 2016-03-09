@@ -26,61 +26,59 @@ angular
     return
   ]
   .controller 'PricingCtrl', ['$scope', 'searchService', ($scope, searchService) ->
+    $scope.searchPhrase = ''
     $scope.percentiles = [ 5, 15, 50, 90 ]
     $scope.items = []
-    searchService.search(
-      index: 'index'
-      size: 1
-      sort: [
-        'shop.chaosEquiv'
-      ]
-      body:
-        query:
-          filtered:
-            filter:
-              bool:
-                must: [
-                  { term: { 'attributes.lockedToCharacter': 'no' } }
-                  { term: { 'attributes.league': 'Perandus' } }
-                  { term: { 'shop.hasPrice': 'yes' } }
-                  { term: { 'attributes.rarity': 'Unique' } }
-                  { range: { 'shop.chaosEquiv': { 'gt': 0 } } }
-                ]
-        aggs:
-          name:
-            terms:
-              field: 'info.name'
-            aggs:
-              currency:
-                terms:
-                  field: 'shop.currency'
-                  min_doc_count: 4
-                aggs:
-                  price:
-                    percentiles:
-                      field: 'shop.chaosEquiv'
-                      percents: $scope.percentiles
-    ).then (data) ->
-      return unless data?.hits?.hits.length > 0
-      $scope.items = []
-      for nameBucket in data.aggregations.name.buckets
-        $scope.items.push
-          name: nameBucket.key
-          currencies: ({
-            name: currencyBucket.key
-            prices: currencyBucket.price.values
-          } for currencyBucket in nameBucket.currency.buckets)
-
-      ###debugger
-      console.dir data.aggregations.name.buckets
-      for row in data.hits.hits
-        result =
-          name: row._source.info.fullName
-          icon: row._source.info.icon
-          price: row._source.shop.chaosEquiv
-        console.dir result###
-    , (err) ->
-      console.error err
+    $scope.search = ->
+      searchService.search(
+        index: 'index'
+        size: 50
+        sort: [
+          'shop.chaosEquiv'
+        ]
+        body:
+          query:
+            filtered:
+              query:
+                match_phrase:
+                  { 'info.tokenized.fullName': $scope.searchPhrase }
+              filter:
+                bool:
+                  must: [
+                    { term: { 'attributes.lockedToCharacter': 'no' } }
+                    { term: { 'attributes.league': 'Perandus' } }
+                    { term: { 'shop.hasPrice': 'yes' } }
+                    { term: { 'attributes.rarity': 'Unique' } }
+                    { range: { 'shop.chaosEquiv': { 'gt': 0 } } }
+                  ]
+          aggs:
+            currency:
+              terms:
+                field: 'shop.currency'
+                min_doc_count: 4
+              aggs:
+                price:
+                  percentiles:
+                    field: 'shop.chaosEquiv'
+                    percents: $scope.percentiles
+      ).then (data) ->
+        $scope.items =
+          {
+            id: row._source.uuid
+            name: row._source.info.fullName
+            icon: row._source.info.icon
+            price: row._source.shop.chaosEquiv
+          } for row in data.hits.hits
+        ###$scope.items = []
+        for nameBucket in data.aggregations.name.buckets
+          $scope.items.push
+            name: nameBucket.key
+            currencies: ({
+              name: currencyBucket.key
+              prices: currencyBucket.price.values
+            } for currencyBucket in nameBucket.currency.buckets)###
+      , (err) ->
+        console.error err
 
     return
   ]

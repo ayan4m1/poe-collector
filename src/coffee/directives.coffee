@@ -16,3 +16,8 @@ angular
       $rootScope.$on 'watcher:closed', ->
         icon.removeClass('fa-link').addClass('fa-unlink')
   ]
+  .directive 'pricingRow', ->
+    restrict: 'A'
+    templateUrl: 'components/pricing-row.html'
+    scope:
+      item: '='
