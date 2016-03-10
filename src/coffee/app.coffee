@@ -1,6 +1,7 @@
 angular
   .module 'poe', [
     # external dependencies
+    'cgBusy'
     'primus'
     'ngRoute'
     'ui.bootstrap'

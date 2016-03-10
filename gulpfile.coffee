@@ -31,6 +31,7 @@ gulp.task 'update', -> [
   gulp.src([
     srcGlob('scss')
     'lib/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css'
+    'lib/dist/angular-busy.css'
   ])
   .pipe(gulpif(/\.scss$/, sass()))
   .pipe(concat('main.css'))
@@ -50,6 +51,7 @@ gulp.task 'update', -> [
     'lib/seiyria-bootstrap-slider/dist/bootstrap-slider.js'
     'lib/angular-bootstrap-slider/slider.js'
     'lib/elasticsearch/elasticsearch.angular.js'
+    'lib/angular-busy/dist/angular-busy.js'
   ]
   .pipe(gulpFile('primus.js', primus.library()))
   .pipe(concat('libs.js'))

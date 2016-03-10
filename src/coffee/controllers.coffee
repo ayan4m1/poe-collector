@@ -32,8 +32,9 @@ angular
     $scope.items = []
     $scope.range = []
 
-    $scope.search = ->
-      searchService.search(
+    $scope.search = null
+    $scope.reload = ->
+      $scope.search = searchService.search(
         index: 'index'
         size: 10
         sort: [
@@ -65,7 +66,9 @@ angular
                   percentiles:
                     field: 'shop.chaosEquiv'
                     percents: $scope.percentiles
-      ).then (data) ->
+      )
+
+      $scope.search.then (data) ->
         $scope.items = ({
           id: row._id
           name: row._source.info.fullName
