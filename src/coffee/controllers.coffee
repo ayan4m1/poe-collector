@@ -28,11 +28,14 @@ angular
   .controller 'PricingCtrl', ['$scope', 'searchService', ($scope, searchService) ->
     $scope.searchPhrase = ''
     $scope.percentiles = [ 5, 15, 50, 90 ]
+
     $scope.items = []
+    $scope.range = []
+
     $scope.search = ->
       searchService.search(
         index: 'index'
-        size: 50
+        size: 10
         sort: [
           'shop.chaosEquiv'
         ]
@@ -49,6 +52,7 @@ angular
                     { term: { 'attributes.league': 'Perandus' } }
                     { term: { 'shop.hasPrice': 'yes' } }
                     { term: { 'attributes.rarity': 'Unique' } }
+                    { term: { 'shop.verified': 'YES' } }
                     { range: { 'shop.chaosEquiv': { 'gt': 0 } } }
                   ]
           aggs:
@@ -62,21 +66,24 @@ angular
                     field: 'shop.chaosEquiv'
                     percents: $scope.percentiles
       ).then (data) ->
-        $scope.items =
-          {
-            id: row._source.uuid
-            name: row._source.info.fullName
-            icon: row._source.info.icon
-            price: row._source.shop.chaosEquiv
-          } for row in data.hits.hits
-        ###$scope.items = []
-        for nameBucket in data.aggregations.name.buckets
-          $scope.items.push
-            name: nameBucket.key
-            currencies: ({
-              name: currencyBucket.key
-              prices: currencyBucket.price.values
-            } for currencyBucket in nameBucket.currency.buckets)###
+        $scope.items = ({
+          id: row._id
+          name: row._source.info.fullName
+          icon: row._source.info.icon
+          price: row._source.shop.chaosEquiv
+          mods: key.replace('#', value) for key, value of row._source.modsTotal
+        } for row in data.hits.hits when row._id?)
+
+        $scope.range = ({
+          name: bucket.key
+          average: bucket.price.values['15.0'] # 15th percentile
+          count: bucket.doc_count
+          percentiles: bucket.price.values
+        } for bucket in data.aggregations.currency.buckets)
+
+        total = 0
+        total += currency.count for currency in $scope.range
+        $scope.totalListings = total
       , (err) ->
         console.error err
 

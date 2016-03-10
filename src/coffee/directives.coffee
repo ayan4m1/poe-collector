@@ -21,3 +21,8 @@ angular
     templateUrl: 'components/pricing-row.html'
     scope:
       item: '='
+  .directive 'currencyRow', ->
+    restrict: 'A'
+    templateUrl: 'components/currency-row.html'
+    scope:
+      currency: '='

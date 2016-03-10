@@ -1,0 +1,17 @@
+<div class="col-lg-6">
+	<div class="row">
+		<div class="col-lg-3">
+			<h4 ng-bind="currency.name"></h4>
+			<p>{{currency.average.toFixed(2)}} CEV</p>
+			<p>{{currency.count}} listings</p>
+		</div>
+		<div class="col-lg-9">
+			<uib-progress>
+				<uib-bar value="5" type="danger"><span>{{currency.percentiles['5.0'].toFixed(2)}}</span></uib-bar>
+				<uib-bar value="10" type="success"><span>{{currency.percentiles['15.0'].toFixed(2)}}</span></uib-bar>
+				<uib-bar value="35" type="warning"><span>{{currency.percentiles['50.0'].toFixed(2)}}</span></uib-bar>
+				<uib-bar value="40" type="default"><span>{{currency.percentiles['90.0'].toFixed(2)}}</span></uib-bar>
+			</uib-progress>
+		</div>
+	</div>
+</div>

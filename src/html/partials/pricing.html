@@ -4,9 +4,32 @@
 			<label for="searchPhrase">Search phrase</label>
 			<input type="text" class="form-control" id="searchPhrase" ng-model="searchPhrase" placeholder="&quot;Redbeak&quot;, &quot;Shav&quot;">
 		</div>
-		<button type="button" class="btn btn-default" ng-click="search()">Search</button>
+		<div class="row text-right">
+			<button type="button" class="btn btn-default" ng-click="search()">Search</button>
+		</div>
 	</form>
 	<div class="container-fluid">
-		<div pricing-row item="item" ng-repeat="item in items track by item.id"></div>
+		<div class="row" ng-show="range.length > 0">
+			<div class="col-lg-12">
+				<h3>Average prices by currency</h3>
+			</div>
+			<div class="col-lg-12">
+				<uib-progress max="totalListings">
+					<uib-bar ng-repeat="currency in range" value="currency.count">
+						<span ng-hide="(currency.count / totalListings) < 0.2">{{currency.name}} ({{((currency.count / totalListings) * 100).toFixed(2)}}%)</span>
+						<span ng-show="(currency.count / totalListings) < 0.2" title="{{currency.name}}">&hellip;</span>
+					</uib-bar>
+				</uib-progress>
+			</div>
+		</div>
+		<div currency-row currency="currency" ng-repeat="currency in range"></div>
+	</div>
+	<div class="container-fluid">
+		<div class="row" ng-show="items.length > 0">
+			<div class="col-lg-12">
+				<h3>Cheapest 10 results</h3>
+			</div>
+		</div>
+		<div pricing-row item="item" ng-repeat="item in items"></div>
 	</div>
 </div>

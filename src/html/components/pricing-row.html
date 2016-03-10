@@ -1,11 +1,15 @@
 <div class="row">
 	<div class="col-lg-3">
-		<img class="img-responsive" ng-src="{{icon}}" />
+		<img class="" ng-src="{{item.icon}}" />
+		<p class="text-primary" ng-bind="item.name"></p>
+		<p>{{item.price.toFixed(2)}} CEV</p>
 	</div>
 	<div class="col-lg-6">
-		Currencies listed
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="mod in item.mods" ng-bind="mod"></li>
+		</ul>
 	</div>
 	<div class="col-lg-3">
-		Some metadata
+		More here.
 	</div>
 </div>
