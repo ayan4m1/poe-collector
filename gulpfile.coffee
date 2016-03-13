@@ -31,7 +31,7 @@ gulp.task 'update', -> [
   gulp.src([
     srcGlob('scss')
     'lib/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css'
-    'lib/dist/angular-busy.css'
+    'lib/angular-toastr/dist/angular-toastr.css'
   ])
   .pipe(gulpif(/\.scss$/, sass()))
   .pipe(concat('main.css'))
@@ -42,6 +42,7 @@ gulp.task 'update', -> [
     'lib/momentjs/moment.js'
     'lib/angular/angular.js'
     'lib/angular-route/angular-route.js'
+    'lib/angular-animate/angular-animate.js'
     'lib/jquery/dist/jquery.js'
     'lib/bootstrap/dist/js/bootstrap.js' # must be included after jQuery
     'lib/ngstorage/ngStorage.js'

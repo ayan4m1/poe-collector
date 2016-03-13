@@ -1,11 +1,15 @@
 angular
   .module 'poe', [
-    # external dependencies
-    'primus'
-    'ngRoute'
+    # ui deps
     'ui.bootstrap'
     'ui.bootstrap-slider'
     'angularSpinner'
+    'toastr'
+
+    # libs
+    'primus'
+    'ngRoute'
+    'ngAnimate'
     'elasticsearch'
 
     # app modules

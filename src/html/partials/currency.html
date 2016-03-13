@@ -1,5 +1,19 @@
 <div class="container">
     <div class="container-fluid">
+        <table class="table table-striped">
+            <thead>
+            <tr><th>Item</th><th>Price</th><th>Added</th></tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="listing in listings">
+                <td ng-bind="listing.name"></td>
+                <td ng-bind="listing.price"></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container-fluid">
         <div currency-row currency="currency" ng-repeat="currency in currencies | orderBy:count"></div>
     </div>
 <!--    <form role="form" class="jumbotron">

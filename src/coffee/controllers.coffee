@@ -1,13 +1,14 @@
 angular
   .module 'poe.controllers', [ 'poe.constants', 'poe.services' ]
-  .controller 'CurrencyCtrl', ['$scope', 'SearchService', 'SocketService', 'chaosValues',
-  ($scope, SearchService, SocketService, chaosValues) ->
-    SocketService.attach $scope, 'watcher:item', (item) ->
-      # notify if we care about it
-      console.dir item
+  .controller 'CurrencyCtrl', ['$scope', 'toastr', 'SearchService', 'SocketService', 'chaosValues'
+  ($scope, toastr, SearchService, SocketService, chaosValues) ->
+    SocketService.attach $scope, 'watcher:item', (event, item) ->
+      $scope.listings.push item
+      toastr.info "#{item.name} for #{item.price[2]} #{item.price[3]}", 'Listing!'
 
     $scope.currencies = []
-    #$scope.currencies.push(key) for key, value of chaosValues
+    $scope.listings = []
+
     SearchService.getCurrencyTrades().then (data) ->
       $scope.currencies = ({
         name: currency.key
