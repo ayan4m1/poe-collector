@@ -40,7 +40,7 @@ follow = (changeId) ->
 
     console.log "cache hit"
     jsonfile.readFile cacheFile, (err, data) ->
-      followed.reject err if err?
+      followed.reject(err) if err?
       resolve(data) if data?
   catch err
     url = 'http://www.pathofexile.com/api/public-stash-tabs'
