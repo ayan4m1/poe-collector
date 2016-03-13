@@ -53,7 +53,7 @@ handle = (result) ->
     .catch (err) ->
       console.error err
     .done()
-  , 20000) if result.nextChange?
+  , config.watcher.delay * 1000) if result.nextChange?
 
 # main app loop
 follow()
