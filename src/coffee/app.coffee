@@ -1,11 +1,11 @@
 angular
   .module 'poe', [
     # external dependencies
-    'cgBusy'
     'primus'
     'ngRoute'
     'ui.bootstrap'
     'ui.bootstrap-slider'
+    'angularSpinner'
     'elasticsearch'
 
     # app modules

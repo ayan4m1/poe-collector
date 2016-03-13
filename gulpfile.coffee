@@ -51,7 +51,8 @@ gulp.task 'update', -> [
     'lib/seiyria-bootstrap-slider/dist/bootstrap-slider.js'
     'lib/angular-bootstrap-slider/slider.js'
     'lib/elasticsearch/elasticsearch.angular.js'
-    'lib/angular-busy/dist/angular-busy.js'
+    'lib/spin.js/spin.js'
+    'lib/angular-spinner/angular-spinner.js'
   ]
   .pipe(gulpFile('primus.js', primus.library()))
   .pipe(concat('libs.js'))

@@ -25,7 +25,7 @@ angular
 
     return
   ]
-  .controller 'PricingCtrl', ['$scope', 'searchService', ($scope, searchService) ->
+  .controller 'PricingCtrl', ['$scope', 'searchService', 'usSpinnerService', ($scope, searchService, usSpinnerService) ->
     $scope.searchPhrase = ''
     $scope.percentiles = [ 5, 15, 50, 90 ]
 
@@ -34,6 +34,7 @@ angular
 
     $scope.search = null
     $scope.reload = ->
+      usSpinnerService.spin('search')
       $scope.search = searchService.search(
         index: 'index'
         size: 10
@@ -69,6 +70,7 @@ angular
       )
 
       $scope.search.then (data) ->
+        usSpinnerService.stop('search')
         $scope.items = ({
           id: row._id
           name: row._source.info.fullName
