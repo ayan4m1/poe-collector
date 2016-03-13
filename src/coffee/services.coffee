@@ -3,19 +3,22 @@ angular
   # expose moment as a service for in-angular access and mocking
   .factory 'moment', ['$window', ($window) -> $window.moment]
   # watch socket events
-  .factory 'watchService', ['$rootScope', 'primus', ($rootScope, primus) ->
-    watchService = {
-      init: ->
-        primus.on 'open', ->
-          $rootScope.$broadcast 'watcher:opened'
-        primus.on 'close', ->
-          $rootScope.$broadcast 'watcher:closed'
-
-        primus.on('data', (data) ->
-          console.log "got data: " + data
-        )
+  .factory 'SocketService', ['$rootScope', 'primus', ($rootScope, primus) ->
+    SocketService = {
+      attach: (scope, event, cb) ->
+        handler = $rootScope.$on event, cb
+        scope.$on 'destroy', handler
+        return
     }
-    watchService
+
+    primus.on 'data', (data) ->
+      $rootScope.$emit 'watcher:item', data
+    primus.on 'open', ->
+      $rootScope.$emit 'watcher:opened'
+    primus.on 'close', ->
+      $rootScope.$emit 'watcher:closed'
+
+    SocketService
   ]
   .service 'searchService', ['esFactory', 'searchHost', 'apiKey', (esFactory, searchHost, apiKey) ->
     esFactory
