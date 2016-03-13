@@ -6,14 +6,14 @@ angular
   .directive 'navBar', ->
     restrict: 'A'
     templateUrl: 'components/nav-bar.html'
-  .directive 'socketStatus', ['$rootScope', ($rootScope) ->
+  .directive 'socketStatus', ['SocketService', (SocketService) ->
     restrict: 'A'
     template: '<i class="fa fa-fw fa-unlink"></i>'
     link: (scope, elem) ->
       icon = elem.find('i')
-      $rootScope.$on 'watcher:opened', ->
+      SocketService.attach scope, 'watcher:opened', ->
         icon.addClass('fa-link').removeClass('fa-unlink')
-      $rootScope.$on 'watcher:closed', ->
+      SocketService.attach scope, 'watcher:closed', ->
         icon.removeClass('fa-link').addClass('fa-unlink')
   ]
   .directive 'pricingRow', ->

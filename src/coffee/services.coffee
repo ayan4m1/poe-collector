@@ -20,12 +20,13 @@ angular
 
     SocketService
   ]
-  .service 'searchService', ['esFactory', 'searchHost', 'apiKey', (esFactory, searchHost, apiKey) ->
+  .service 'SearchService', ['esFactory', 'searchHost', 'apiKey', 'percentiles',
+  (esFactory, searchHost, apiKey, percentiles) ->
     es = esFactory
       host: "http://apikey:#{apiKey}@#{searchHost}"
       suggestCompression: true
 
-    searchService =
+    SearchService =
       es: es
       getCurrencies: ->
         @es.search(
@@ -54,12 +55,26 @@ angular
                   { term: { 'shop.hasPrice': 'YES' } }
                   { term: { 'shop.verified': 'YES' } }
                   { range: { 'shop.chaosEquiv': { 'gt': 0 } } }
+                  { range: { 'properties.stackSize.current': { gt: 0, lt: 2 } } } # single unit
                 ]
+            aggs:
+              name:
+                terms:
+                  field: 'info.name'
+                aggs:
+                  priceStats:
+                    stats:
+                      field: 'shop.chaosEquiv'
+                      #script: "doc['shop.chaosEquiv'].value / doc['properties.stackSize.current'].value"
+                  pricePercentile:
+                    percentiles:
+                      field: 'shop.chaosEquiv'
+                      percents: percentiles
         )
       getItem: (options) ->
         @es.search(
           index: 'index'
-          size: 50
+          size: options.size ? 50
           sort: [
             'shop.chaosEquiv'
           ]
@@ -68,17 +83,17 @@ angular
               filtered:
                 query:
                   match_phrase:
-                  { 'info.tokenized.fullName': $scope.searchPhrase }
-            filter:
-              bool:
-                must: [
-                  { term: { 'shop.hasPrice': 'YES' } }
-                  { term: { 'shop.verified': 'YES' } }
-                  { term: { 'attributes.lockedToCharacter': 'no' } }
-                  { term: { 'attributes.league': options.league ? 'Perandus' } }
-                  { term: { 'attributes.rarity': options.rarity ? 'Unique' } }
-                  { range: { 'shop.chaosEquiv': { 'gt': options.minPrice ? 0 } } }
-                ]
+                    { 'info.tokenized.fullName': options.name }
+                filter:
+                  bool:
+                    must: [
+                      { term: { 'shop.hasPrice': 'YES' } }
+                      { term: { 'shop.verified': 'YES' } }
+                      { term: { 'attributes.lockedToCharacter': 'no' } }
+                      { term: { 'attributes.league': options.league ? 'Perandus' } }
+                      { term: { 'attributes.rarity': options.rarity ? 'Unique' } }
+                      { range: { 'shop.chaosEquiv': { 'gt': options.minPrice ? 0 } } }
+                    ]
             ###
             aggs:
               currency:
@@ -93,5 +108,5 @@ angular
             ###
         )
 
-    searchService
+    SearchService
   ]

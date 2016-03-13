@@ -1,11 +1,14 @@
 <div class="container">
-    <div class="jumbotron">
+    <div class="container-fluid">
+        <div currency-row currency="currency" ng-repeat="currency in currencies | orderBy:count"></div>
+    </div>
+<!--    <form role="form" class="jumbotron">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-9">
                     <label for="currency">What do you need?</label>
                     <select id="currency" class="form-control"
-                            ng-options="item for item in currencies"
+                            ng-options="currency.name for currency in currencies track by currency.name"
                             ng-change="select()"
                             ng-model="selected">
                         <option></option>
@@ -22,5 +25,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>-->
 </div>
