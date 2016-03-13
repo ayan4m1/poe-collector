@@ -33,11 +33,16 @@ angular
     $scope.range = []
 
     $scope.search = null
+
+	$scope.init = ->
+		searchService.getCurrencies().then (currencies) ->
+			console.dir currencies
+
     $scope.reload = ->
       usSpinnerService.spin('search')
       $scope.search = searchService.search(
         index: 'index'
-        size: 10
+        size: 0
         sort: [
           'shop.chaosEquiv'
         ]

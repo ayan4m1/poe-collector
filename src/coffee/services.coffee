@@ -21,7 +21,77 @@ angular
     SocketService
   ]
   .service 'searchService', ['esFactory', 'searchHost', 'apiKey', (esFactory, searchHost, apiKey) ->
-    esFactory
+    es = esFactory
       host: "http://apikey:#{apiKey}@#{searchHost}"
       suggestCompression: true
+
+    searchService =
+      es: es
+      getCurrencies: ->
+        @es.search(
+          index: 'index'
+          size: 0
+          body:
+            query:
+              bool:
+                must: [
+                  { term: { 'attributes.frameType': { value: 5 } } }
+                ]
+            aggs:
+              name:
+                terms:
+                  field: 'info.name'
+        ).then (rawData) -> bucket.key for bucket in rawData.aggregations.name.buckets
+      getCurrencyTrades: ->
+        @es.search(
+          index: 'index'
+          size: 50
+          body:
+            query:
+              bool:
+                must: [
+                  { term: { 'attributes.frameType': { value: 5 } } }
+                  { term: { 'shop.hasPrice': 'YES' } }
+                  { term: { 'shop.verified': 'YES' } }
+                  { range: { 'shop.chaosEquiv': { 'gt': 0 } } }
+                ]
+        )
+      getItem: (options) ->
+        @es.search(
+          index: 'index'
+          size: 50
+          sort: [
+            'shop.chaosEquiv'
+          ]
+          body:
+            query:
+              filtered:
+                query:
+                  match_phrase:
+                  { 'info.tokenized.fullName': $scope.searchPhrase }
+            filter:
+              bool:
+                must: [
+                  { term: { 'shop.hasPrice': 'YES' } }
+                  { term: { 'shop.verified': 'YES' } }
+                  { term: { 'attributes.lockedToCharacter': 'no' } }
+                  { term: { 'attributes.league': options.league ? 'Perandus' } }
+                  { term: { 'attributes.rarity': options.rarity ? 'Unique' } }
+                  { range: { 'shop.chaosEquiv': { 'gt': options.minPrice ? 0 } } }
+                ]
+            ###
+            aggs:
+              currency:
+                terms:
+                  field: 'shop.currency'
+                  min_doc_count: 4
+                aggs:
+                  price:
+                    percentiles:
+                      field: 'shop.chaosEquiv'
+                      percents: $scope.percentiles
+            ###
+        )
+
+    searchService
   ]
