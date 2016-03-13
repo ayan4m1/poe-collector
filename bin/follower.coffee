@@ -5,6 +5,22 @@ fs = require 'fs'
 jsonfile = require 'jsonfile'
 request = require 'request-promise'
 
+findStart = ->
+  found = Q.defer()
+
+  cacheDir = "#{__dirname}/../cache"
+  fs.readdir cacheDir, (err, items) ->
+    found.reject(err) if err?
+    found.resolve(null) unless items?.length > 0
+
+    # most recent first
+    items.sort (a, b) ->
+      fs.statSync("#{cacheDir}/#{a}").mtime.getTime() - fs.statSync("#{cacheDir}/#{b}").mtime.getTime()
+
+    found.resolve(items.pop())
+
+  found.promise
+
 follow = (changeId) ->
   followed = Q.defer()
 
@@ -44,4 +60,5 @@ follow = (changeId) ->
 
   followed.promise
 
-module.exports = follow
+module.exports = ->
+  findStart().then(follow)
