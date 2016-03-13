@@ -53,7 +53,7 @@ follow = (changeId) ->
     .then (raw) ->
       console.log "fetched #{raw.length} bytes"
       data = JSON.parse(raw)
-      jsonfile.writeFile(cacheFile, data)
+      jsonfile.writeFile(cacheFile, data) if changeId?
       resolve(data)
     , (err) ->
       followed.reject(err)
