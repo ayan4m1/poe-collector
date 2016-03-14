@@ -23,7 +23,6 @@ process = (result) ->
     for item in stashTab.items
       # frameType 5 is currency
       break unless item.frameType is 5
-      console.log 'found currency'
 
       id = item.id
       name = item.typeLine
@@ -35,18 +34,21 @@ process = (result) ->
         else if item.stashName? then item.stashName.match /\~(b\/o|price|c\/o|gb\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/
 
       break unless name? and id? and price?.length > 0
-      console.log "adding listing #{id}"
-      jsonfile.writeFileSync("#{__dirname}/../cache/listings/#{id}", item)
+      console.log "adding listing #{id} for #{name}"
+
+      jsonfile.writeFileSync "#{cacheDir}/listings/#{id}", item
+
+      # todo: don't walk this whole thing...
       for prop in item.properties
-        continue unless prop.name is 'Stack Size'
+        continue unless prop.name is 'Stack Size' and prop.values?.length > 0
         stackSize = prop.values[0][0].split(/\//)[0]
 
       notifier.write
         id: id
         name: name
         qty: stackSize ? 1
-        added: moment().format('x')
-        price: "#{price[2].toFixed(2)} "
+        added: moment()
+        price: "#{price[2].toFixed(2)} #{price[3]}"
 
 # handle is a variable so it can be called recursively
 handle = (result) ->
