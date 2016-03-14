@@ -13,6 +13,10 @@ findStart = ->
     found.reject(err) if err?
     found.resolve(null) unless items?.length > 0
 
+    # prune non-files
+    items = items.filter (v) ->
+      return fs.statSync("#{cacheDir}/#{v}").isFile()
+
     # most recent first
     items.sort (a, b) ->
       fs.statSync("#{cacheDir}/#{a}").mtime.getTime() - fs.statSync("#{cacheDir}/#{b}").mtime.getTime()

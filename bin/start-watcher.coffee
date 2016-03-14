@@ -1,6 +1,7 @@
 'use strict'
 config = require('konfig')()
 
+moment = require 'moment'
 Primus = require 'primus'
 delayed = require 'delayed'
 jsonfile = require 'jsonfile'
@@ -33,10 +34,16 @@ processListing = (result) ->
       break unless name? and id? and price?.length > 0
       console.log "adding listing #{id}"
       jsonfile.writeFileSync("#{__dirname}/../cache/listings/#{id}", item)
+      for prop in item.properties
+        continue unless prop.name is 'Stack Size'
+        stackSize = prop.values[0][0].split(/\//)[0]
+
       notifier.write
         id: id
         name: name
-        price: price
+        qty: stackSize ? 1
+        added: moment().format('x')
+        price: "#{price[2].toFixed(2)} "
 
 # handle is a variable so it can be called recursively
 handle = (result) ->
