@@ -1,6 +1,7 @@
 'use strict'
 config = require('konfig')()
 
+fs = require 'fs'
 moment = require 'moment'
 Primus = require 'primus'
 delayed = require 'delayed'
@@ -14,7 +15,9 @@ notifier = Primus.createServer
 notifier.on 'connection', (spark) ->
   console.log "new connection from #{spark.address}"
 
-processListing = (result) ->
+cacheDir = "#{__dirname}/../cache"
+
+process = (result) ->
   console.log "fetched #{result.data.length} stashes"
   for stashTab in result.data
     for item in stashTab.items
@@ -51,19 +54,26 @@ handle = (result) ->
   return unless result.data?
 
   # process the data
-  processListing(result)
+  process(result)
+
+  # cull any old cache data
+  fs.readdir cacheDir, (files) ->
+    return unless files?.length > 0
+    for file in files
+      fs.stat "#{cacheDir}#{file}", (info) ->
+        if info.isFile() and moment(info.mtime).isBefore(moment().subtract(1, 'days'))
+          fs.unlinkSync "#{cacheDir}#{file}"
 
   # fetch the next change set to continue
   delayed.delay(->
     result.nextChange()
     .then handle
-    .catch (err) ->
-      console.error err
+    .catch (err) -> console.error err
     .done()
   , config.watcher.delay * 1000) if result.nextChange?
 
 # main app loop
 follow()
-.then(handle)
+.then handle
 .catch (err) -> console.error err
 .done()
