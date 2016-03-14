@@ -1,10 +1,11 @@
 angular
   .module 'poe.controllers', [ 'poe.constants', 'poe.services' ]
-  .controller 'CurrencyCtrl', ['$scope', 'toastr', 'SearchService', 'SocketService', 'chaosValues'
-  ($scope, toastr, SearchService, SocketService, chaosValues) ->
+  .controller 'CurrencyCtrl', ['$scope', 'toastr', 'moment', 'SearchService', 'SocketService', 'chaosValues'
+  ($scope, toastr, moment, SearchService, SocketService, chaosValues) ->
     SocketService.attach $scope, 'watcher:item', (event, item) ->
+      item.added = moment(item.added)
       $scope.listings.push item
-      toastr.info "#{item.name} for #{item.price[2]} #{item.price[3]}", 'Listing!'
+      toastr.info "#{item.name} for #{item.costValue} #{item.costUnit}", 'New listing!'
 
     $scope.currencies = []
     $scope.listings = []

@@ -11,6 +11,7 @@ angular
     'ngRoute'
     'ngAnimate'
     'elasticsearch'
+    'angularMoment'
 
     # app modules
     'poe.controllers'

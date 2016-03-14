@@ -55,6 +55,7 @@ gulp.task 'update', -> [
     'lib/elasticsearch/elasticsearch.angular.js'
     'lib/spin.js/spin.js'
     'lib/angular-spinner/angular-spinner.js'
+    'lib/angular-moment/angular-moment.js'
   ]
   .pipe(gulpFile('primus.js', primus.library()))
   .pipe(concat('libs.js'))

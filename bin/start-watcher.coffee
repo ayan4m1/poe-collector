@@ -38,17 +38,22 @@ process = (result) ->
 
       jsonfile.writeFileSync "#{cacheDir}/listings/#{id}", item
 
+      stackSize = null
+
       # todo: don't walk this whole thing...
       for prop in item.properties
         continue unless prop.name is 'Stack Size' and prop.values?.length > 0
-        stackSize = prop.values[0][0].split(/\//)[0]
+        stackInfo = prop.values[0][0]
+        continue unless stackInfo?
+        stackSize = stackInfo.split(/\//)[0]
 
       notifier.write
         id: id
         name: name
         qty: stackSize ? 1
-        added: moment()
-        price: "#{price[2].toFixed(2)} #{price[3]}"
+        added: moment().format()
+        costValue: parseFloat(price[2]).toFixed(2) ? 0
+        costUnit: price[3] ? '?'
 
 # handle is a variable so it can be called recursively
 handle = (result) ->
