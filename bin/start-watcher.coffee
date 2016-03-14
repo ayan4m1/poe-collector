@@ -64,10 +64,12 @@ handle = (result) ->
   process(result)
 
   # cull any old cache data
-  fs.readdir cacheDir, (files) ->
+  fs.readdir cacheDir, (err, files) ->
+    console.error err if err?
     return unless files?.length > 0
     for file in files
-      fs.stat "#{cacheDir}#{file}", (info) ->
+      fs.stat "#{cacheDir}/#{file}", (err, info) ->
+        console.error err if err?
         if info.isFile() and moment(info.mtime).isBefore(moment().subtract(1, 'days'))
           fs.unlinkSync "#{cacheDir}#{file}"
 
