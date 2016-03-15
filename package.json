@@ -17,6 +17,8 @@
     "delayed": "^1.0.1",
     "express": "^4.13.4",
     "faye-websocket": "^0.11.0",
+    "gulp-file": "^0.2.0",
+    "gulp-ng-constant": "^1.1.0",
     "jsonfile": "^2.2.3",
     "konfig": "^0.2.1",
     "moment": "^2.11.2",

@@ -4,13 +4,14 @@ util = require 'util'
 gulp = require 'gulp'
 sass = require 'gulp-sass'
 gulpif = require 'gulp-if'
+gulpFile = require 'gulp-file'
 concat = require 'gulp-concat'
 coffee = require 'gulp-coffee'
 uglify = require 'gulp-uglify'
 nodemon = require 'gulp-nodemon'
+ngConstant = require 'gulp-ng-constant'
 
 # ws lib generation, ugly!
-gulpFile = require 'gulp-file'
 Primus = require 'primus'
 primus = Primus.createServer({ port: 8080, transformer: 'faye' })
 primus.destroy()
@@ -66,6 +67,18 @@ gulp.task 'update', -> [
   .pipe(concat('app.js'))
   .pipe(gulpif(config.build.minify, uglify()))
   .pipe(gulp.dest("www/js"))
+
+# app config
+  gulp.src('config/config.json')
+  .pipe(ngConstant(
+    name: 'poe.config'
+    constants:
+      socketHost: config.web.hostname
+      socketPort: config.web.socket
+      esHost: config.web.esHost
+      esApiKey: config.web.esApiKey
+  ))
+  .pipe(gulp.dest('www/js'))
 
 # html
   gulp.src(srcGlob('html')).pipe(gulp.dest('www/'))

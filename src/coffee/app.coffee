@@ -15,15 +15,17 @@ angular
     # app modules
     'poe.controllers'
     'poe.constants'
+    'poe.config'
     'poe.directives'
     'poe.services'
   ]
-  .config ['$routeProvider', '$locationProvider', 'primusProvider', 'socketUri', ($routeProvider, $locationProvider, primusProvider, socketUri) ->
+  .config ['$routeProvider', '$locationProvider', 'primusProvider', 'socketHost', 'socketPort',
+  ($routeProvider, $locationProvider, primusProvider, socketHost, socketPort) ->
     # use history.pushState instead of hash-based routing
     $locationProvider.html5Mode true
 
     # pull WS config from constants
-    primusProvider.setEndpoint socketUri
+    primusProvider.setEndpoint "ws://#{socketHost}:#{socketPort}"
 
     # todo: better routing scheme
     $routeProvider

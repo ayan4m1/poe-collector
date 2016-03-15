@@ -20,10 +20,10 @@ angular
 
     SocketService
   ]
-  .service 'SearchService', ['esFactory', 'searchHost', 'apiKey', 'percentiles',
-  (esFactory, searchHost, apiKey, percentiles) ->
+  .service 'SearchService', ['esFactory', 'esHost', 'esApiKey', 'percentiles',
+  (esFactory, esHost, esApiKey, percentiles) ->
     es = esFactory
-      host: "http://apikey:#{apiKey}@#{searchHost}"
+      host: "http://apikey:#{esApiKey}@#{esHost}"
       suggestCompression: true
 
     SearchService =
