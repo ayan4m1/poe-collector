@@ -68,10 +68,11 @@ handle = (result) ->
     console.error err if err?
     return unless files?.length > 0
     for file in files
-      fs.stat "#{cacheDir}/#{file}", (err, info) ->
-        console.error err if err?
-        if info.isFile() and moment(info.mtime).isBefore(moment().subtract(1, 'days'))
-          fs.unlinkSync "#{cacheDir}#{file}"
+      do (file) ->
+        fs.stat "#{cacheDir}/#{file}", (err, info) ->
+          console.error err if err?
+          return unless info.isFile() and moment(info.mtime).isBefore(moment().subtract(1, 'days'))
+          fs.unlinkSync "#{cacheDir}/#{file}"
 
   # fetch the next change set to continue
   delayed.delay(->
