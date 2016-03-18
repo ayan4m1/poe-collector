@@ -104,5 +104,4 @@ runScript = (path) ->
     tasks: ['update']
 
 gulp.task 'default', ['update'], -> runScript('bin/start-web.coffee')
-gulp.task 'start', ['update'], -> runScript('bin/start-both.coffee')
 gulp.task 'clean', (done) -> require('rimraf')('www/', done)
