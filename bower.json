@@ -13,21 +13,8 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.x",
     "bootswatch": "~3.3.x",
-    "fontawesome": "~4.5.x",
-    "momentjs": "~2.10.x",
-    "angular-bootstrap": "~1.2.x",
-    "ngstorage": "^0.3.10",
-    "angular-toastr": "^1.7.0",
-    "angular-primus": "bulletlogic/angular-primus#master",
-    "primus": "~5.0.x",
-    "bootstrap": "~3.3.x",
-    "angular": "^1.3.x",
-    "angular-route": "^1.3.x",
-    "angular-mocks": "^1.3.x",
-    "angular-bootstrap-slider": "master",
-    "elasticsearch": "^10.1.3",
-    "angular-spinner": "^0.8.1",
-    "angular-animate": "~1.5.0",
-    "angular-moment": "^1.0.0-beta.4"
+    "fontawesome": "^4.7.x",
+    "momentjs": "~2.17.x",
+    "bootstrap": "~3.3.x"
   }
 }
