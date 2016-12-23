@@ -1,6 +1,9 @@
 .idea/
 dist/
+www/
+
 lib/
 node_modules/
-www/
 cache/
+
+*.js.map
