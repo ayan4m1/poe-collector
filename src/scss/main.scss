@@ -4,12 +4,10 @@
 @import 'lib/bootstrap-sass/assets/stylesheets/bootstrap';
 @import 'lib/bootswatch/readable/bootswatch';
 
+@import 'node_modules/angular2-toaster/toaster';
+
 // bootstrap buttons + fontawesome icons fixes
 .btn .fa {
   vertical-align: middle;
 }
 
-// fix for angular + bootstrap navbar
-body > .ng-scope {
-  margin-top: $navbar-height * 1.75;
-}
