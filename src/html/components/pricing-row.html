@@ -1,13 +1,13 @@
 <div class="col-lg-6">
 	<div class="row">
 		<div class="col-lg-3">
-			<img class="" ng-src="{{item.icon}}" />
-			<p class="text-primary" ng-bind="item.name"></p>
+			<img class="" [src]="{{item.icon}}" />
+			<p class="text-primary">{{item.name}}</p>
 			<p>{{item.price.toFixed(2)}} CEV ({{item.rawPrice}})</p>
 		</div>
 		<div class="col-lg-9">
 			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="mod in item.mods" ng-bind="mod"></li>
+				<li class="list-group-item" *ngFor="let mod of item.mods">{{mod}}</li>
 			</ul>
 		</div>
 	</div>
