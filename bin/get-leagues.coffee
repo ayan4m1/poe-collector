@@ -1,30 +1,33 @@
+config = require('konfig')()
 request = require 'request-promise'
 elastic = require 'elasticsearch'
 
+log = require './logging'
+
+# this gets us current leagues in a more compact form
 baseUrl = 'http://api.pathofexile.com/leagues?type=main&compact=1'
 
 client = new elastic.Client(
-  host: 'http://localhost:9200'
-  log: 'debug'
+  host: config.watcher.elastic.hostname
+  log: config.watcher.elastic.logLevel
 )
 
 request(baseUrl)
 .then((data) ->
   leagues = JSON.parse(data)
-  console.dir(leagues)
+  log.as.info("[league] parsed #{leagues.count}")
 
   for league in leagues
+    log.as.debug("[league] processing update for #{league.id}")
     client.index(
-      index: 'poe-league'
+      index: config.watcher.elastic.leagueShard
       type: 'league'
       body: league
     , (err, resp) ->
-      console.error(err) if err?
-      console.dir(resp) if resp?
+      log.as.error(err) if err?
+      log.as.debug(resp) if resp?
     )
-
-).catch((err) ->
-  console.error(err)
-).done(() ->
-  console.log('completed league update')
+).catch(log.as.error)
+.done(() ->
+  log.as.info('[league] completed league update')
 )

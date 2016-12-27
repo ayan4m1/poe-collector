@@ -5,3 +5,8 @@ default:
   retention:
     interval: 1
     unit: hours
+  elastic:
+    host: http://localhost:9200
+    logLevel: error
+    dataShard: poe-data
+    leagueShard: poe-league

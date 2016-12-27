@@ -1,0 +1,4 @@
+default:
+  level: info
+production:
+  level: warning
