@@ -2,58 +2,120 @@
 config = require('konfig')()
 
 fs = require 'fs'
+proc = require 'process'
 moment = require 'moment'
 Primus = require 'primus'
 delayed = require 'delayed'
 jsonfile = require 'jsonfile'
+
 follow = require './follower'
+parser = require './parser'
 
-notifier = Primus.createServer
-  port: config.web.socket
-  transformer: 'faye'
-
-notifier.on 'connection', (spark) ->
-  console.log "new connection from #{spark.address}"
+elasticsearch = require 'elasticsearch'
+client = new elasticsearch.Client(
+  host: 'http://localhost:9200'
+  log: 'error'
+  requestTimeout: 180000
+)
 
 cacheDir = "#{__dirname}/../cache"
 
 process = (result) ->
-  console.log "fetched #{result.data.length} stashes"
+  #shard = 'poe-data-' + moment().format('YYYY-MM-DD')
+  shard = 'poe-data'
+  docs = []
+  startTime = proc.hrtime()
+
   for stashTab in result.data
     for item in stashTab.items
-      # frameType 5 is currency
-      break unless item.frameType is 5
+      parsed = {
+        id: item.id
+        seller:
+          account: stashTab.accountName
+          character: stashTab.lastCharacterName
+        stash:
+          id: item.inventoryId
+          league: item.league
+          name: item.stash
+          x: item.x
+          y: item.y
+        width: item.w ? 0
+        height: item.h ? 0
+        name: item.name
+        typeLine: item.typeLine
+        icon: item.icon
+        note: item.note
+        level: item.ilvl
+        identified: item.identified
+        corrupted: item.corrupted
+        verified: item.verified
+        frame: item.frameType
+        requirements: []
+        attributes: []
+        modifiers: []
+        sockets: []
+        stack:
+          count: 0
+          maximum: null
+        price: null
+      }
 
-      id = item.id
-      name = item.typeLine
-      # stole these regexes from
-      # https://github.com/trackpete/exiletools-indexer/blob/master/subs/sub.formatJSON.pl
-      # thanks pete :)
-      price =
+      if item.requirements?
+        for req in item.requirements
+          parsed.requirements.push
+            name: req.name
+            minimum: req.values.min
+            maximum: req.values.max
+            hidden: req.displayMode is 0
+
+      if item.explicitMods?
+        for mod in item.explicitMods
+          parsed.modifiers.push mod
+
+      if item.properties?
+        for prop in item.properties
+          if prop.name is 'Stack Size' and prop.values?.length > 0
+            stackInfo = prop.values[0][0]
+            continue unless stackInfo?
+            stackSize = stackInfo.split(/\//)[0]
+
+          parsed.attributes.push
+            name: prop.name
+            minimum: prop.values.min
+            maximum: prop.values.max
+            hidden: prop.displayMode is 0
+            typeId: prop.type
+
+      if item.sockets?
+        for socket in item.sockets
+          parsed.sockets.push socket
+
+      item.price =
         if item.note? then item.note.match /\~(b\/o|price|c\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/
         else if item.stashName? then item.stashName.match /\~(b\/o|price|c\/o|gb\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/
 
-      break unless name? and id? and price?.length > 0
-      console.log "adding listing #{id} for #{name}"
+      item.stack =
+        count: stackInfo
+        maximum: stackSize
 
-      jsonfile.writeFileSync "#{cacheDir}/listings/#{id}", item
+      # todo: use bulk() with a tuned buffer size
+      docs.push(
+        index:
+          _index: shard
+          _type: 'poe-listing'
+      )
+      docs.push(parsed)
 
-      stackSize = null
+  client.bulk(
+    body: docs
+  , (err) ->
+    console.error(err) if err?
+    duration = proc.hrtime(startTime)
+    duration = (duration[0] + (duration[1] / 1e9)).toFixed(4)
+    console.log "parsed #{result.data.length} items in #{duration} seconds (#{Math.floor(result.data.length / duration)} items/sec)"
+  )
 
-      # todo: don't walk this whole thing...
-      for prop in item.properties
-        continue unless prop.name is 'Stack Size' and prop.values?.length > 0
-        stackInfo = prop.values[0][0]
-        continue unless stackInfo?
-        stackSize = stackInfo.split(/\//)[0]
-
-      notifier.write
-        id: id
-        name: name
-        qty: stackSize ? 1
-        added: moment().format()
-        costValue: parseFloat(price[2]).toFixed(2) ? 0
-        costUnit: price[3] ? '?'
+  return null
 
 # handle is a variable so it can be called recursively
 handle = (result) ->
@@ -71,16 +133,25 @@ handle = (result) ->
       do (file) ->
         fs.stat "#{cacheDir}/#{file}", (err, info) ->
           console.error err if err?
-          return unless info.isFile() and moment(info.mtime).isBefore(moment().subtract(1, 'days'))
+          retainAfter = moment().subtract(config.watcher.retention.interval, config.watcher.retention.unit)
+          return unless info.isFile() and moment(info.mtime).isBefore(retainAfter)
           fs.unlinkSync "#{cacheDir}/#{file}"
 
   # fetch the next change set to continue
+  delayMs = moment.duration(config.watcher.delay.interval, config.watcher.delay.unit).asMilliseconds()
   delayed.delay(->
     result.nextChange()
     .then handle
     .catch (err) -> console.error err
     .done()
-  , config.watcher.delay * 1000) if result.nextChange?
+  , delayMs) if result.nextChange?
+
+###notifier = Primus.createServer
+  port: config.web.socket
+  transformer: 'faye'
+
+notifier.on 'connection', (spark) ->
+  console.log "new connection from #{spark.address}"###
 
 # main app loop
 follow()
