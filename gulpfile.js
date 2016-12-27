@@ -20,9 +20,7 @@ var out = "www/";
 
 var browserifier = browserify()
       .add('src/ts/main.ts')
-      .plugin(tsify, {
-        project: 'config/'
-      });
+      .plugin(tsify);
 
 gulp.task('update', [], function () { return [
   gulp.src('lib/fontawesome/fonts/*')
