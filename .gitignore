@@ -6,4 +6,6 @@ lib/
 node_modules/
 cache/
 
+src/ts/**/*.js
+
 *.js.map

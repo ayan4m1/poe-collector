@@ -10,11 +10,11 @@
             <tr><th>Item</th><th>Price</th><th>Unit Price</th><th>Added</th></tr>
             </thead>
             <tbody>
-            <tr ng-repeat="listing in listings">
+            <tr *ngFor="let listing of listings">
                 <td>{{listing.qty}} {{listing.name}}</td>
                 <td>{{listing.costValue}} {{listing.costUnit}}</td>
                 <td>{{(listing.costValue / listing.qty).toFixed(2)}} {{listing.costUnit}}</td>
-                <td><span am-time-ago="listing.added"></span></td>
+                <td>{{ listing.added | amTimeAgo }}</td>
             </tr>
             </tbody>
         </table>
