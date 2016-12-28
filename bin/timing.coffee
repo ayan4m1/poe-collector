@@ -5,6 +5,7 @@ process = require 'process'
 module.exports =
   time: (callback) ->
     start = process.hrtime()
+    # force synchronous execution of the task
     Q(callback()).done()
     end = process.hrtime(start)
     duration = moment.duration(end[0] + (end[1] / 1e9), 'seconds')

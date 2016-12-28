@@ -1,7 +1,7 @@
 Q = require 'q'
+moment = require 'moment'
 
-config = require('konfig')()
-
+elastic = require './elastic'
 timing = require './timing'
 log = require './logging'
 
@@ -76,32 +76,37 @@ parseItem = (item, stashTab) ->
     count: stackInfo
     maximum: stackSize
 
+  existsTime = timing.time =>
+    elastic.client.exists(
+      index: elastic.config.dataShard,
+      type: 'poe-listing'
+      id: item.id
+    , (err, exists) ->
+      return log.as.error(err) if err?
+      parsed.firstSeen = moment().toDate() if exists is true
+      parsed.lastSeen = moment().toDate() if exists is false
+    )
+  log.as.debug("[parser] exists took #{existsTime.asSeconds()}s")
+
   parsed
 
-parseItems = (result) ->
-  docs = []
-
-  for stashTab in result.data
-    for item in stashTab.items
-      docs.push(
-        index:
-          _index: config.watcher.elastic.dataShard
-          _type: 'poe-listing'
-      )
-      docs.push(parseItem(item, stashTab))
-
-  docs
-
 module.exports =
-  merge: (client, result) ->
-    docs = null
+  merge: (result) ->
+    docs = []
 
-    prepareTime = timing.time ->
-      docs = parseItems(result)
+    prepareTime = timing.time =>
+      for stashTab in result.data
+        for item in stashTab.items
+          docs.push(
+            index:
+              _index: elastic.config.dataShard
+              _type: 'poe-listing'
+          )
+          docs.push(parseItem(item, stashTab))
 
-    updateTime = timing.time ->
-      Q.denodeify(client.bulk({ body: docs }))
+    updateTime = timing.time -> Q.denodeify(elastic.client.bulk({ body: docs }))
 
+    # calculate some rate statistics
     items = docs.length / 2
     duration = prepareTime.asSeconds() + updateTime.asSeconds()
     log.as.info("[parser] #{items} items in #{duration.toFixed(2)} seconds (#{Math.floor(items / duration)} items/sec)")

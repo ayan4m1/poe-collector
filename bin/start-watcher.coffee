@@ -5,16 +5,10 @@ fs = require 'fs'
 moment = require 'moment'
 Primus = require 'primus'
 delayed = require 'delayed'
-elasticsearch = require 'elasticsearch'
 
 follow = require './follower'
 parser = require './parser'
 log = require './logging'
-
-client = new elasticsearch.Client(
-  host: config.watcher.elastic.host
-  level: config.watcher.elastic.logLevel
-)
 
 cacheDir = "#{__dirname}/../cache"
 
@@ -24,7 +18,7 @@ handle = (result) ->
   return unless result.data?
 
   # process the data
-  parser.merge(client, result)
+  parser.merge(result)
 
   # cull any old cache data
   fs.readdir cacheDir, (err, files) ->

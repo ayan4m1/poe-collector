@@ -24,7 +24,9 @@ findStart = ->
     items.sort (a, b) ->
       fs.statSync("#{cacheDir}/#{a}").mtime.getTime() - fs.statSync("#{cacheDir}/#{b}").mtime.getTime()
 
-    found.resolve(items.pop())
+    changeId = items.pop()
+    log.as.info("[follow] resuming from change #{changeId}")
+    found.resolve(changeId)
 
   found.promise
 
