@@ -1,9 +1,11 @@
 Q = require 'q'
-jsonfile = require 'jsonfile'
+
+config = require('konfig')()
 
 timing = require './timing'
+log = require './logging'
 
-parse = (item) ->
+parseItem = (item, stashTab) ->
   parsed = {
     id: item.id
     seller:
@@ -76,32 +78,31 @@ parse = (item) ->
 
   parsed
 
-module.exports = (path) ->
-  parse: ->
+parseItems = (result) ->
+  docs = []
 
-    .then (result) ->
-      docs = []
-      prepareTime = timing.time =>
-        for stashTab in result.data
-          for item in stashTab.items
-            docs.push(
-              index:
-                _index: shard
-                _type: 'poe-listing'
-            )
-            docs.push(parse(item))
+  for stashTab in result.data
+    for item in stashTab.items
+      docs.push(
+        index:
+          _index: config.watcher.elastic.dataShard
+          _type: 'poe-listing'
+      )
+      docs.push(parseItem(item, stashTab))
 
-      updateTime = timing.time ->
-        client.bulk(
-          body: docs
-        , (err) ->
-          console.error(err) if err?
-          duration = proc.hrtime(startTime)
-          duration = (duration[0] + (duration[1] / 1e9)).toFixed(4)
-          console.log "parsed #{result.data.length} items in #{duration} seconds (#{Math.floor(result.data.length / duration)} items/sec)"
-        )
+  docs
 
-      log.as.info("[profiling] prepare #{prepareTime.toFixed(4)}s update #{updateTime.toFixed(2)}")
-      console.log('finished processing')
-    .catch log.as.error
-    .done()
+module.exports =
+  merge: (client, result) ->
+    docs = null
+
+    prepareTime = timing.time ->
+      docs = parseItems(result)
+
+    updateTime = timing.time ->
+      Q.denodeify(client.bulk({ body: docs }))
+
+    items = docs.length / 2
+    duration = prepareTime.asSeconds() + updateTime.asSeconds()
+    log.as.info("[parser] #{items} items in #{duration.toFixed(2)} seconds (#{Math.floor(items / duration)} items/sec)")
+    log.as.info("[parser] prepare #{prepareTime.asSeconds().toFixed(4)}s update #{updateTime.asSeconds().toFixed(2)}s")

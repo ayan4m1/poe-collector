@@ -2,14 +2,19 @@
 config = require('konfig')()
 
 fs = require 'fs'
-proc = require 'process'
 moment = require 'moment'
 Primus = require 'primus'
 delayed = require 'delayed'
-jsonfile = require 'jsonfile'
+elasticsearch = require 'elasticsearch'
 
 follow = require './follower'
 parser = require './parser'
+log = require './logging'
+
+client = new elasticsearch.Client(
+  host: config.watcher.elastic.host
+  level: config.watcher.elastic.logLevel
+)
 
 cacheDir = "#{__dirname}/../cache"
 
@@ -19,17 +24,16 @@ handle = (result) ->
   return unless result.data?
 
   # process the data
-  Q.denodeify(jsonfile.readFile)()
-  .then(parser.parse)
+  parser.merge(client, result)
 
   # cull any old cache data
   fs.readdir cacheDir, (err, files) ->
-    console.error err if err?
+    return log.as.error(err) if err?
     return unless files?.length > 0
     for file in files
       do (file) ->
         fs.stat "#{cacheDir}/#{file}", (err, info) ->
-          console.error err if err?
+          log.as.error(err) if err?
           retainAfter = moment().subtract(config.watcher.retention.interval, config.watcher.retention.unit)
           return unless info.isFile() and moment(info.mtime).isBefore(retainAfter)
           fs.unlinkSync "#{cacheDir}/#{file}"

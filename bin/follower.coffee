@@ -2,12 +2,11 @@
 
 Q = require 'q'
 fs = require 'fs'
+touch = require 'touch'
 jsonfile = require 'jsonfile'
 request = require 'request-promise'
 
 log = require './logging'
-
-touch = require 'touch'
 
 findStart = ->
   found = Q.defer()
@@ -38,33 +37,27 @@ follow = (changeId) ->
     followed.resolve
       data: data.stashes
       nextChange: ->
-        console.log "fetching changes from #{data.next_change_id}"
+        log.as.info("[follow] fetching changes from #{data.next_change_id}")
         follow(data.next_change_id)
 
   cacheFile = "#{__dirname}/../cache/#{changeId}"
-  try
-    throw new Error() unless changeId?
-    fs.accessSync(cacheFile, fs.F_OK)
+  url = 'http://www.pathofexile.com/api/public-stash-tabs'
+  url += "?id=#{changeId}" if changeId?
 
-    console.log "cache hit"
-    jsonfile.readFile cacheFile, (err, data) ->
-      followed.reject(err) if err?
-      resolve(data) if data?
-  catch err
-    url = 'http://www.pathofexile.com/api/public-stash-tabs'
-    url += "?id=#{changeId}" if changeId?
-
-    console.log "miss, fetching #{url}"
-    request
-      url: url
-      gzip: true
-    .then (raw) ->
-      log.as.info("[http] ]fetched #{raw.length} bytes in #{duration} seconds (#{(raw.length / duration / 1000).toFixed(4)} Kbps)")
-      touch.sync(changeId
-      resolve(JSON.parse(raw))
-    .catch (err) ->
-      log.as.error(err)
-      followed.reject(err)
+  log.as.debug("[follow] fetching #{url}")
+  duration = process.hrtime()
+  request
+    url: url
+    gzip: true
+  .then (raw) ->
+    duration = process.hrtime(duration)
+    duration = duration[0] + (duration[1] / 1e9)
+    log.as.info("[http] fetched #{raw.length} bytes in #{duration} seconds (#{(raw.length / duration / 1000).toFixed(4)} Kbps)")
+    touch.sync(cacheFile)
+    resolve(JSON.parse(raw))
+  .catch (err) ->
+    log.as.error(err)
+    followed.reject(err)
 
   followed.promise
 
