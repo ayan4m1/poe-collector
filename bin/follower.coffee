@@ -4,7 +4,10 @@ Q = require 'q'
 fs = require 'fs'
 jsonfile = require 'jsonfile'
 request = require 'request-promise'
-proc = require 'process'
+
+log = require './logging'
+
+touch = require 'touch'
 
 findStart = ->
   found = Q.defer()
@@ -52,18 +55,15 @@ follow = (changeId) ->
     url += "?id=#{changeId}" if changeId?
 
     console.log "miss, fetching #{url}"
-    startTime = proc.hrtime()
     request
       url: url
       gzip: true
     .then (raw) ->
-      duration = proc.hrtime(startTime)
-      duration = duration[0] + (duration[1] / 1e9)
-      console.log "fetched #{raw.length} bytes in #{duration} seconds (#{(raw.length / duration / 1000).toFixed(4)} Kbps)"
-      data = JSON.parse(raw)
-      #jsonfile.writeFileSync(cacheFile, data) if changeId?
-      resolve(data)
+      log.as.info("[http] ]fetched #{raw.length} bytes in #{duration} seconds (#{(raw.length / duration / 1000).toFixed(4)} Kbps)")
+      touch.sync(changeId
+      resolve(JSON.parse(raw))
     .catch (err) ->
+      log.as.error(err)
       followed.reject(err)
 
   followed.promise
