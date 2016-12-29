@@ -77,17 +77,15 @@ parseItem = (item, stashTab) ->
     count: stackInfo[0]
     maximum: stackInfo[1]
 
-  elastic.client.exists(
+  elastic.client.get(
     index: elastic.config.dataShard,
     type: 'poe-listing'
     id: item.id
-  , (err, exists) ->
-    if err?
-      parsed.reject(err)
-      return
-
-    result.firstSeen = moment().toDate() if exists is true
-    result.lastSeen = moment().toDate() if exists is false
+  , (err, existingDoc) ->
+    stamp = moment().toDate()
+    result.firstSeen = existingDoc.firstSeen if not err?
+    result.firstSeen = stamp if err?
+    result.lastSeen = stamp
 
     parsed.resolve result
   )
