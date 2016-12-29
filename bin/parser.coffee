@@ -110,6 +110,7 @@ module.exports =
             index:
               _index: elastic.config.dataShard
               _type: 'poe-listing'
+              _id: result.id
           docs.push result
 
         elastic.client.bulk { body: docs }
