@@ -1,3 +1,5 @@
+'use strict'
+
 Q = require 'q'
 moment = require 'moment'
 
@@ -6,7 +8,9 @@ timing = require './timing'
 log = require './logging'
 
 parseItem = (item, stashTab) ->
-  parsed = {
+  parsed = Q.defer()
+
+  result = {
     id: item.id
     seller:
       account: stashTab.accountName
@@ -40,74 +44,82 @@ parseItem = (item, stashTab) ->
 
   if item.requirements?
     for req in item.requirements
-      parsed.requirements.push
+      result.requirements.push
         name: req.name
-        minimum: req.values.min
-        maximum: req.values.max
+        value: parseInt(req.values[0][0])
         hidden: req.displayMode is 0
 
   if item.explicitMods?
     for mod in item.explicitMods
-      parsed.modifiers.push mod
+      result.modifiers.push mod
 
+  stackInfo = []
   if item.properties?
     for prop in item.properties
       if prop.name is 'Stack Size' and prop.values?.length > 0
-        stackInfo = prop.values[0][0]
-        continue unless stackInfo?
-        stackSize = stackInfo.split(/\//)[0]
+        stackInfo = prop.values[0][0].split(/\//)
 
-      parsed.attributes.push
+      result.attributes.push
         name: prop.name
-        minimum: prop.values.min
-        maximum: prop.values.max
+        values: prop.values ? []
         hidden: prop.displayMode is 0
         typeId: prop.type
 
   if item.sockets?
     for socket in item.sockets
-      parsed.sockets.push socket
+      result.sockets.push(socket)
 
-  parsed.price =
-    if item.note? then item.note.match /\~(b\/o|price|c\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/
-    else if item.stashName? then item.stashName.match /\~(b\/o|price|c\/o|gb\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/
+  result.price =
+    if item.note? then item.note.match(/\~(b\/o|price|c\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/)
+    else if item.stashName? then item.stashName.match(/\~(b\/o|price|c\/o|gb\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/)
 
-  parsed.stack =
-    count: stackInfo
-    maximum: stackSize
+  result.stack =
+    count: stackInfo[0]
+    maximum: stackInfo[1]
 
-  existsTime = timing.time =>
-    elastic.client.exists(
-      index: elastic.config.dataShard,
-      type: 'poe-listing'
-      id: item.id
-    , (err, exists) ->
-      return log.as.error(err) if err?
-      parsed.firstSeen = moment().toDate() if exists is true
-      parsed.lastSeen = moment().toDate() if exists is false
-    )
-  log.as.debug("[parser] exists took #{existsTime.asSeconds()}s")
+  elastic.client.exists(
+    index: elastic.config.dataShard,
+    type: 'poe-listing'
+    id: item.id
+  , (err, exists) ->
+    if err?
+      parsed.reject(err)
+      return
 
-  parsed
+    result.firstSeen = moment().toDate() if exists is true
+    result.lastSeen = moment().toDate() if exists is false
+
+    parsed.resolve result
+  )
+
+  parsed.promise
 
 module.exports =
   merge: (result) ->
-    docs = []
+    parses = []
 
     prepareTime = timing.time =>
       for stashTab in result.data
         for item in stashTab.items
-          docs.push(
+          parses.push(parseItem(item, stashTab))
+
+      Q.all(parses)
+      .then (results) ->
+        docs = []
+
+        for result in results
+          docs.push
             index:
               _index: elastic.config.dataShard
               _type: 'poe-listing'
-          )
-          docs.push(parseItem(item, stashTab))
+          docs.push result
 
-    updateTime = timing.time -> Q.denodeify(elastic.client.bulk({ body: docs }))
+        elastic.client.bulk { body: docs }
+      .done()
+
+      return
 
     # calculate some rate statistics
-    items = docs.length / 2
-    duration = prepareTime.asSeconds() + updateTime.asSeconds()
+    items = parses.length
+    duration = prepareTime.asSeconds()
     log.as.info("[parser] #{items} items in #{duration.toFixed(2)} seconds (#{Math.floor(items / duration)} items/sec)")
-    log.as.info("[parser] prepare #{prepareTime.asSeconds().toFixed(4)}s update #{updateTime.asSeconds().toFixed(2)}s")

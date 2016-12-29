@@ -1,3 +1,5 @@
+'use strict'
+
 Q = require 'q'
 moment = require 'moment'
 process = require 'process'
