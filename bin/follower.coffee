@@ -12,6 +12,7 @@ findStart = ->
   found = Q.defer()
 
   cacheDir = "#{__dirname}/../cache"
+  log.as.debug("[follow] searching cache dir #{cacheDir}")
   fs.readdir cacheDir, (err, items) ->
     found.reject(err) if err?
     found.resolve(null) unless items?.length > 0
@@ -39,10 +40,10 @@ follow = (changeId) ->
     followed.resolve
       data: data.stashes
       nextChange: ->
+        return follow(null) unless data.next_change_id?
         log.as.info("[follow] fetching changes from #{data.next_change_id}")
         follow(data.next_change_id)
 
-  cacheFile = "#{__dirname}/../cache/#{changeId}"
   url = 'http://www.pathofexile.com/api/public-stash-tabs'
   url += "?id=#{changeId}" if changeId?
 
@@ -54,9 +55,10 @@ follow = (changeId) ->
   .then (raw) ->
     duration = process.hrtime(duration)
     duration = duration[0] + (duration[1] / 1e9)
-    log.as.info("[http] fetched #{raw.length} bytes in #{duration} seconds (#{(raw.length / duration / 1000).toFixed(4)} Kbps)")
-    touch.sync(cacheFile)
+    log.as.info("[http] fetched #{raw.length} bytes in #{duration} seconds (#{(raw.length / duration / 1000).toFixed(2)} KBps)")
     resolve(JSON.parse(raw))
+    log.as.debug('[follow] marking change as processed')
+    touch.sync("#{__dirname}/../cache/#{changeId}")
   .catch (err) ->
     log.as.error(err)
     followed.reject(err)

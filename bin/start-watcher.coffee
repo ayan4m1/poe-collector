@@ -1,6 +1,7 @@
 'use strict'
 config = require('konfig')()
 
+Q = require 'q'
 fs = require 'fs'
 moment = require 'moment'
 Primus = require 'primus'
@@ -10,27 +11,11 @@ follow = require './follower'
 parser = require './parser'
 log = require './logging'
 
-cacheDir = "#{__dirname}/../cache"
-
 # handle is a variable so it can be called recursively
 handle = (result) ->
-  # todo: wait for new data here
-  return unless result.data?
+  handled = Q.defer()
 
-  # process the data
-  parser.merge(result)
-
-  # cull any old cache data
-  fs.readdir cacheDir, (err, files) ->
-    return log.as.error(err) if err?
-    return unless files?.length > 0
-    for file in files
-      do (file) ->
-        fs.stat "#{cacheDir}/#{file}", (err, info) ->
-          log.as.error(err) if err?
-          retainAfter = moment().subtract(config.watcher.retention.interval, config.watcher.retention.unit)
-          return unless info.isFile() and moment(info.mtime).isBefore(retainAfter)
-          fs.unlinkSync "#{cacheDir}/#{file}"
+  parser.merge(result) if result.data?
 
   # fetch the next change set to continue
   delayMs = moment.duration(config.watcher.delay.interval, config.watcher.delay.unit).asMilliseconds()
@@ -39,7 +24,7 @@ handle = (result) ->
     .then(handle)
     .catch (err) -> console.error err
     .done()
-  , delayMs) if result.nextChange?
+  , delayMs)
 
 ###notifier = Primus.createServer
   port: config.web.socket

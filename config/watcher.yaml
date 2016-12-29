@@ -1,7 +1,4 @@
 default:
   delay:
-    interval: 5
+    interval: 2
     unit: seconds
-  retention:
-    interval: 1
-    unit: hours
