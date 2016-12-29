@@ -4,7 +4,7 @@ Q = require 'q'
 fs = require 'fs'
 touch = require 'touch'
 jsonfile = require 'jsonfile'
-request = require 'request-promise'
+request = require 'request-promise-native'
 
 log = require './logging'
 

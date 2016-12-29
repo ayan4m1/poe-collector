@@ -1,5 +1,5 @@
 config = require('konfig')()
-request = require 'request-promise'
+request = require 'request-promise-native'
 elastic = require 'elasticsearch'
 
 log = require './logging'
