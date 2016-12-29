@@ -5,6 +5,7 @@ www/
 lib/
 node_modules/
 cache/
+log/
 
 src/ts/**/*.js
 
