@@ -1,7 +1,7 @@
 Pick One:
 
 * Attacks / Spells
-* Life / ES / Low Life / CI
+* Life / Hybrid / ES
 * Critical / Non-Critical
 
 Pick One: 
