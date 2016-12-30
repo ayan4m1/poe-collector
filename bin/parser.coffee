@@ -40,6 +40,7 @@ parseItem = (item, stashTab) ->
       count: 0
       maximum: null
     price: null
+    locked: item.lockedToCharacter
   }
 
   if item.requirements?
@@ -61,7 +62,7 @@ parseItem = (item, stashTab) ->
 
       result.attributes.push
         name: prop.name
-        values: prop.values ? []
+        values: parseInt(prop.values[0][0]) if prop.values?.length > 0
         hidden: prop.displayMode is 0
         typeId: prop.type
 
