@@ -66,8 +66,32 @@ parseItem = (item, stashTab) ->
         typeId: prop.type
 
   if item.sockets?
+    sockets = {
+      red: 0
+      green: 0
+      blue: 0
+      white: 0
+      links: []
+      linkCount: linkCount
+    }
+
+    # logic for restructuring the socket/link count data
+    group = 0
+    linkCount = 0
     for socket in item.sockets
-      result.sockets.push(socket)
+      # codes based on stat names Str Dex Int ... Global???
+      switch (socket.attr)
+        when 'S' then sockets.red++
+        when 'D' then sockets.green++
+        when 'I' then sockets.blue++
+        when 'G' then sockets.white++
+
+      if socket.group is group and linkCount isnt 6
+      then linkCount++
+      else if linkCount > 1
+        sockets.links.push (i for i in [1 .. linkCount])
+
+    result.sockets = sockets
 
   result.price =
     if item.note? then item.note.match(/\~(b\/o|price|c\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/)
