@@ -4,7 +4,6 @@ config = require('konfig')()
 Q = require 'q'
 fs = require 'fs'
 moment = require 'moment'
-Primus = require 'primus'
 delayed = require 'delayed'
 
 follow = require './follower'
@@ -13,8 +12,6 @@ log = require './logging'
 
 # handle is a variable so it can be called recursively
 handle = (result) ->
-  handled = Q.defer()
-
   parser.merge(result) if result.data?
 
   # fetch the next change set to continue
@@ -22,7 +19,7 @@ handle = (result) ->
   delayed.delay(->
     result.nextChange()
     .then(handle)
-    .catch (err) -> console.error err
+    .catch(log.as.error)
     .done()
   , delayMs)
 
