@@ -2,36 +2,33 @@
 
 Q = require 'q'
 moment = require 'moment'
+process = require 'process'
 
 elastic = require './elastic'
 timing = require './timing'
 log = require './logging'
 
-parseItem = (item, stashTab) ->
-  parsed = Q.defer()
-
+parseItem = (item) ->
   result = {
     id: item.id
-    seller:
-      account: stashTab.accountName
-      character: stashTab.lastCharacterName
-    stash:
-      id: item.inventoryId
-      league: item.league
-      name: item.stash
-      x: item.x
-      y: item.y
+    league: item.league
+    x: item.x
+    y: item.y
     width: item.w ? 0
     height: item.h ? 0
     name: item.name
+    baseLine: null
+    rarity: null
     typeLine: item.typeLine
     icon: item.icon
     note: item.note
     level: item.ilvl
+    locked: item.lockedToCharacter
     identified: item.identified
     corrupted: item.corrupted
     verified: item.verified
     frame: item.frameType
+    frameType: null
     requirements: []
     attributes: []
     modifiers: []
@@ -40,7 +37,9 @@ parseItem = (item, stashTab) ->
       count: 0
       maximum: null
     price: null
-    locked: item.lockedToCharacter
+    removed: false
+    chaosPrice: 0
+    firstSeen: moment().toDate()
   }
 
   if item.requirements?
@@ -73,7 +72,6 @@ parseItem = (item, stashTab) ->
       blue: 0
       white: 0
       links: []
-      linkCount: linkCount
     }
 
     # logic for restructuring the socket/link count data
@@ -90,7 +88,8 @@ parseItem = (item, stashTab) ->
       if socket.group is group and linkCount isnt 6
       then linkCount++
       else if linkCount > 1
-        sockets.links.push (i for i in [1 .. linkCount])
+        sockets.links.push (i for i in [(group + 1) .. linkCount * (group + 1)])
+        linkCount = 1
 
     result.sockets = sockets
 
@@ -102,48 +101,134 @@ parseItem = (item, stashTab) ->
     count: stackInfo[0]
     maximum: stackInfo[1]
 
-  elastic.client.get(
-    index: elastic.config.dataShard,
-    type: 'poe-listing'
-    id: item.id
-  , (err, existingDoc) ->
-    stamp = moment().toDate()
-    result.firstSeen = existingDoc.firstSeen if not err?
-    result.firstSeen = stamp if err?
-    result.lastSeen = stamp
+  result
 
-    parsed.resolve result
+bulk = (type, docs) ->
+  bulked = Q.defer()
+
+  elastic.client.bulk({
+    index: elastic.config.dataShard
+    type: type
+    body: docs
+  }, (err, res) ->
+      return bulked.reject(err) if err?
+      bulked.resolve(res) if res?
   )
 
-  parsed.promise
+  bulked.promise
+
+findOrphans = (stashId, itemIds) ->
+  found = Q.defer()
+
+  elastic.client.updateByQuery(
+    index: elastic.config.dataShard
+    type: 'listing'
+    body:
+      script:
+        lang: 'painless'
+        inline: 'ctx.removed=true'
+      query:
+        bool:
+          must: [
+            parent_id:
+              type: 'listing'
+              id: stashId
+          ]
+          must_not: itemIds
+  , (err, res) ->
+      return found.reject(err) if err?
+      found.resolve(res) if res?
+  )
+
+  found.promise
+
+update = (item) ->
+  added = Q.defer()
+
+  elastic.client.get({
+    index: elastic.config.dataShard,
+    type: 'listing'
+    id: item.id
+    parent: item.stash.id
+  }, (err, doc) ->
+    result = [
+      index:
+        _index: elastic.config.dataShard
+        _type: 'listing'
+        _id: item.id
+        _parent: item.stash.id
+    ]
+
+    if err?.status is 404
+      result.push(parseItem(item))
+    else if doc?
+      doc._source.lastSeen = moment().toDate()
+      result.push(doc._source)
+
+    added.resolve(result)
+  )
+
+  added.promise
 
 module.exports =
+  # merge process
+  #   loop through stashes
+  #     add stash to bulk list
+  #     loop through items in stash
+  #       check elastic index for item
+  #       parse item if not indexed yet
+  #       update price and time if item is indexed
+  #       add item to orphan list
+  #       check elastic index for orphans
+  #       update state for orphans
   merge: (result) ->
-    parses = []
+    tasks = []
+    stashes = []
+    listings = []
+    timestamp = moment().toDate()
 
-    prepareTime = timing.time =>
-      for stashTab in result.data
-        for item in stashTab.items
-          parses.push(parseItem(item, stashTab))
+    for stashTab in result.data
+      itemsInTab = []
+      stash =
+        id: stashTab.id
+        name: stashTab.stash
+        lastSeen: timestamp
+        owner:
+          account: stashTab.accountName
+          character: stashTab.lastCharacterName
 
-      Q.all(parses)
-      .then (results) ->
-        docs = []
+      stashes.push({ index: _id: stash.id })
+      stashes.push(stash)
 
-        for result in results
-          docs.push
-            index:
-              _index: elastic.config.dataShard
-              _type: 'poe-listing'
-              _id: result.id
-          docs.push result
+      for item in stashTab.items
+        item.stash = stash
+        listings.push(update(item))
+        itemsInTab.push({ term: id: item.id })
 
-        elastic.client.bulk { body: docs }
+      tasks.push(findOrphans(stash.id, itemsInTab))
+
+    bulk('stash', stashes)
+      .then (res) ->
+        log.as.info("[stash] completed update of #{res.items?.length} stashes")
+      .catch(log.as.error)
       .done()
 
-      return
+    Q.all(listings)
+      .then (items) ->
+        result = []
+        result.push(item[0], item[1]) for item in items
+        bulk('listing', result)
+          .then ->
+            log.as.info("[listing] completed update of #{items.length} items")
+        .catch(log.as.error)
+        .done()
+      .done()
+        # calculate some rate statistics
+        #duration = prepareTime.asSeconds()
+        #log.as.info("[parser] #{res.affected} items in #{duration.toFixed(2)} seconds (#{Math.floor(items / duration)} items/sec)")
 
-    # calculate some rate statistics
-    items = parses.length
-    duration = prepareTime.asSeconds()
-    log.as.info("[parser] #{items} items in #{duration.toFixed(2)} seconds (#{Math.floor(items / duration)} items/sec)")
+    Q.all(tasks)
+      .done ->
+        log.as.info('[listing] orphaned listings were marked')
+
+    return
