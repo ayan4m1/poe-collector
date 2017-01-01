@@ -1,7 +1,6 @@
 'use strict'
 config = require('konfig')()
 
-Q = require 'q'
 fs = require 'fs'
 moment = require 'moment'
 delayed = require 'delayed'
@@ -23,15 +22,8 @@ handle = (result) ->
     .done()
   , delayMs)
 
-###notifier = Primus.createServer
-  port: config.web.socket
-  transformer: 'faye'
-
-notifier.on 'connection', (spark) ->
-  console.log "new connection from #{spark.address}"###
-
 # main app loop
 follow()
 .then(handle)
-.catch (err) -> console.error err
+.catch(log.as.error)
 .done()
