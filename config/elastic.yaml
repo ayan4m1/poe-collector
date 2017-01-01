@@ -3,3 +3,6 @@ default:
   logLevel: error
   dataShard: poe-data
   leagueShard: poe-league
+  timeout:
+    interval: 180
+    unit: seconds
