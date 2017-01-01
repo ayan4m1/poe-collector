@@ -40,7 +40,7 @@ follow = (changeId) ->
     followed.resolve
       data: data.stashes
       nextChange: ->
-        return follow(null) unless data.next_change_id?
+        return unless data.next_change_id?
         log.as.info("[follow] fetching changes from #{data.next_change_id}")
         follow(data.next_change_id)
 
@@ -58,7 +58,7 @@ follow = (changeId) ->
     log.as.info("[http] fetched #{raw.length} bytes in #{duration} seconds (#{(raw.length / duration / 1000).toFixed(2)} KBps)")
     resolve(JSON.parse(raw))
     log.as.debug('[follow] marking change as processed')
-    touch.sync("#{__dirname}/../cache/#{changeId}")
+    touch.sync("#{__dirname}/../cache/#{changeId}") if changeId?
   .catch (err) ->
     log.as.error(err)
     followed.reject(err)
