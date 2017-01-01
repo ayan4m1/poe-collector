@@ -9,8 +9,8 @@ import { SearchComponent } from './component/search';
 import { PricingComponent } from './component/pricing';
 import { SearchesComponent } from './component/searches';
 import { HeaderComponent, NavComponent } from './component/header';
-import { AppSettings } from './constants';
 
+import { SpinnerComponent } from 'angular2-spinner';
 import { MomentModule } from 'angular2-moment';
 
 const routes: Routes = [
@@ -29,8 +29,12 @@ const routes: Routes = [
   ],
   declarations: [
     AppComponent,
+    NavComponent,
+    HeaderComponent,
     SearchComponent,
-    RiverComponent
+    SearchesComponent,
+    RiverComponent,
+    PricingComponent
   ],
   bootstrap: [ AppComponent ]
 }) export class AppModule { }
