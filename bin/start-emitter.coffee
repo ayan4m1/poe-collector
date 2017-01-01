@@ -20,14 +20,21 @@ log.as.info("emitter started on port #{config.emitter.port}")
 notifier.on 'connection', (spark) ->
   log.as.info("new connection from #{spark.address}")
   hosts.push
-    address: spark.address
-    queries: [
+    spark: spark
+    queries: [{
       query:
         bool:
-          must:
+          must: [
             term:
-              league: 'Breach'
-    ]
+              league: "Breach"
+            filter:
+              range:
+                lastSeen:
+                  gt: moment().subtract(10, 'minutes').toISOString()
+                  lt: moment().toISOString()
+          ]
+    }]
+  null
 
 process = ->
   log.as.info('starting processing')
@@ -39,23 +46,24 @@ process = ->
       for query in host.queries
         searches.push
           index: elastic.config.dataShard
+          type: 'listing'
         searches.push(query)
 
-      elastic.client.msearch host.queries
-      , (err, res) ->
+      elastic.client.msearch
+        body: searches
+      , (err, res) =>
         return log.as.error(err) if err?
-        if res.hits?.hits > 0
-          log.as.info("query for host #{host.address} got a hit")
-          console.dir(res)
+        for doc in res.responses
+          if doc.hits?.total > 0
+            log.as.info("query for host #{host.spark.address} got a hit")
+            console.dir(doc)
 
   log.as.info("host queue exhausted in #{processTime.asMilliseconds().toFixed(2)}ms")
   return null
 
 processLoop = ->
-  Q(process()).then ->
-    delayed.delay(
-      processLoop,
-      moment.duration(config.emitter.delay.interval, config.emitter.delay.unit).asMilliseconds()
-    )
+  Q(process()).delay(
+    moment.duration(config.emitter.delay.interval, config.emitter.delay.unit).asMilliseconds() / 5
+  ).then(processLoop)
 
 processLoop().done()
