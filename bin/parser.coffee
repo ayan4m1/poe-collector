@@ -69,6 +69,7 @@ parseCurrency = (item, result) ->
         if regex.test(term)
           log.as.debug("[currency] input #{term} matched #{key}")
           factor = currencyFactors[key]
+
           break
     else quantity = parseInt(term)
 
@@ -195,25 +196,35 @@ parseItem = (item) ->
       maximum: null
     offense:
       elemental:
-        fire: null
-        cold: null
-        lightning: null
-      chaos: null
-      physical: null
-      attackRate: null
-      range: null
+        fire:
+          min: 0
+          max: 0
+        cold:
+          min: 0
+          max: 0
+        lightning:
+          min: 0
+          max: 0
+      chaos:
+        min: 0
+        max: 0
+      physical:
+        min: 0
+        max: 0
+      attackRate: 0
+      range: 0
     defense:
       resistance:
         elemental:
-          fire: null
-          cold: null
-          lightning: null
-        chaos: null
-      armour: null
-      evasion: null
-      shield: null
+          fire: 0
+          cold: 0
+          lightning: 0
+        chaos: 0
+      armour: 0
+      evasion: 0
+      shield: 0
     price: null
-    chaosPrice: null
+    chaosPrice: 0
     removed: false
     firstSeen: moment().toDate()
 
@@ -310,7 +321,7 @@ module.exports =
     listings = []
     timestamp = moment().toDate()
 
-    for stashTab in result.data
+    for stashTab in result.stashes
       itemsInTab = []
       stash =
         id: stashTab.id
