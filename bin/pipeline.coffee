@@ -27,16 +27,6 @@ touchFile = Q.denodeify(touch)
 readFile = Q.denodeify(jsonfile.readFile)
 writeFile = Q.denodeify(jsonfile.writeFile)
 
-exists = (path) ->
-  stat(path)
-    .then (info) -> info.isFile()
-    .catch -> false
-
-empty = (path) ->
-  stat(path)
-    .then (info) -> info['size'] is 0
-    .catch -> false
-
 recentFiles = (items, base) ->
   items = items.filter (v) ->
     fs.statSync("#{base}/#{v}").isFile()
@@ -45,70 +35,69 @@ recentFiles = (items, base) ->
   items
 
 fetchChange = (changeId) ->
-  log.as.info("fetching change #{changeId}")
-  url = baseUrl
-  url += "?id=#{changeId}" if changeId?
+  fetched = Q.defer()
 
-  request(
-    url: url
-    gzip: true
-  ).then (res) ->
-    id: changeId
-    body: JSON.parse(res)
+  limiter.removeTokens(1, ->
+    log.as.info("fetching change #{changeId}")
+    url = baseUrl
+    url += "?id=#{changeId}" if changeId?
 
+    request
+      url: url
+      gzip: true
+    .then (res) ->
+      id: changeId
+      body: JSON.parse(res)
+    .then(fetched.resolve)
+    .catch(fetched.reject)
+  )
 
-saveChange = (data) ->
-  cacheFile = "#{cacheDir}/#{data.id}"
-  writeFile(cacheFile, data.body)
-    .then -> log.as.info("saved document for entry #{data.id}")
-    .catch(log.as.error)
+  fetched.promise
+
+mostRecent = ->
+  readDir(cacheDir)
+  .then (items) -> recentFiles(items, cacheDir)
 
 processBacklog = ->
-  readDir(cacheDir)
-    .then (items) ->
+  mostRecent()
+  .then (items) ->
       tasks = []
-      items = recentFiles(items, cacheDir)
       if items.length > 0
         tasks.push(processChange(item)) for item in items
 
       log.as.info("added #{items.length} cached files to the processing queue")
       Q.all(tasks)
-    .then ->
-      log.as.info("finished processing backlog")
-    .catch(log.as.error)
+  .then -> log.as.info("finished processing backlog")
+  .catch(log.as.error)
 
 processChange = (changeId) ->
-  limiter.removeTokens(1, ->
-    cacheFile = "#{cacheDir}/#{changeId}"
-    stat(cacheFile)
-      .then (info) ->
-        return unless info.isFile()
-        opened =
-          if info['size'] is 0
-          then fetchChange(changeId)
-          else readFile(cacheFile).then (data) -> { id: changeId, body: data }
+  cacheFile = "#{cacheDir}/#{changeId}"
+  stat(cacheFile)
+    .then (info) ->
+      return unless info.isFile()
+      opened =
+        if info['size'] is 0
+        then fetchChange(changeId)
+        else readFile(cacheFile).then (data) -> { id: changeId, body: data }
 
-        opened
-          .then (data) ->
-            return unless data.body?
+      opened
+        .then (data) ->
+          parser.merge(data.body) if data.body?
 
-            parser.merge(data.body)
+          return unless data.body.next_change_id?
+          touchFile("#{cacheDir}/#{data.body.next_change_id}")
+            .then(removeFile(cacheFile))
+        .catch(log.as.error)
 
-            removeFile(cacheFile)
-              .then(touchFile(cacheFile))
-          .catch(log.as.error)
-  )
-
-# returns a promise to retreive the next change ID based on the current change ID
-fetchNextChange = (changeId) ->
-  Q.delay(moment.duration(config.watcher.delay.interval, config.watcher.delay.unit).asMilliseconds())
-    .then(fetchChange(changeId))
-    .then(saveChange)
+fetchNextChange = ->
+  mostRecent()
+    .then(processChange)
+    .then(fetchNextChange)
 
 orchestrator = new Orchestrator()
 
-orchestrator.add('fetchNextChange', fetchNextChange)
-orchestrator.add('processBacklog', processBacklog)
+orchestrator.add('processBacklog', [], processBacklog)
+orchestrator.add('fetchNextChange', ['processBacklog'], fetchNextChange)
 
 module.exports = {
   orchestrator: orchestrator

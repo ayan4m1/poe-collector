@@ -93,9 +93,15 @@ parseProperty = (prop, result) ->
         max: parseInt(range[1])
     when prop.name is 'Elemental Damage'
       result.offense.elemental =
-        fire: 0
-        lightning: 0
-        cold: 0
+        fire:
+          min: 0
+          max: 0
+        lightning:
+          min: 0
+          max: 0
+        cold:
+          min: 0
+          max: 0
     when prop.name is 'Stack Size'
       stackInfo = prop.values[0][0].split(/\//)
       result.stack =
@@ -260,7 +266,7 @@ findOrphans = (stashId, itemIds) ->
     body:
       script:
         lang: 'painless'
-        inline: 'ctx._source.removed=true;ctx._source.lastSeen=_now;'
+        inline: 'ctx._source.removed=true;ctx._source.lastSeen=ctx._now;'
       query:
         bool:
           must: [
@@ -271,7 +277,7 @@ findOrphans = (stashId, itemIds) ->
           must_not: itemIds
   , (err, res) ->
       return found.reject(err) if err?
-      found.resolve(res) if res?
+      found.resolve(res.updated) if res?
   )
 
   found.promise
@@ -350,8 +356,9 @@ module.exports =
       .done()
 
     duration = stashTime.asMilliseconds()
-    log.as.info("[stash] #{stashes.length / 2} stashes in #{duration.toFixed(2)}ms, #{Math.floor(stashes.length / 2 / duration * 1e3)} stashes/sec")
+    log.as.info("merged #{stashes.length / 2} stashes in #{duration.toFixed(2)}ms, #{Math.floor(stashes.length / 2 / duration * 1e3)} stashes/sec")
 
+    # needed to wait for stashes to exist to do parent-child
     Q.all(listings)
       .then (items) ->
         result = []
@@ -367,11 +374,15 @@ module.exports =
 
         # calculate some rate statistics
         duration = itemTime.asMilliseconds()
-        log.as.info("[parser] #{items.length} items in #{duration.toFixed(2)}ms, #{Math.floor(items.length / duration * 1e3)} items/sec")
+        log.as.info("merged #{items.length} items in #{duration.toFixed(2)}ms, #{Math.floor(items.length / duration * 1e3)} items/sec")
       .done()
 
+    # needed to wait for items to be synced to do orphaning
     Q.all(tasks)
-      .done ->
-        log.as.info("[listing] #{tasks.length} orphaned listings were marked")
+      .done (results) ->
+        orphanCount = results.reduce(
+          (accum, result) -> accum + result
+        , 0)
+        log.as.info("removed #{orphanCount} listings from #{tasks.length} stash tabs")
 
     return
