@@ -1,6 +1,5 @@
 'use strict'
 
-Q = require 'q'
 moment = require 'moment'
 process = require 'process'
 
@@ -170,6 +169,7 @@ parseItem = (item) ->
   result =
     id: item.id
     league: item.league
+    stash: item.stash
     x: item.x
     y: item.y
     width: item.w
@@ -257,132 +257,14 @@ parseItem = (item) ->
 
   result
 
-findOrphans = (stashId, itemIds) ->
-  found = Q.defer()
-
-  elastic.client.updateByQuery(
-    index: elastic.config.dataShard
-    type: 'listing'
-    body:
-      script:
-        lang: 'painless'
-        inline: 'ctx._source.removed=true;ctx._source.lastSeen=ctx._now;'
-      query:
-        bool:
-          must: [
-            parent_id:
-              type: 'listing'
-              id: stashId
-          ]
-          must_not: itemIds
-  , (err, res) ->
-      return found.reject(err) if err?
-      found.resolve(res.updated) if res?
-  )
-
-  found.promise
-
-update = (item) ->
-  added = Q.defer()
-
-  elastic.client.get({
-    index: elastic.config.dataShard,
-    type: 'listing'
-    id: item.id
-    parent: item.stash.id
-  }, (err, doc) ->
-    result = [
-      index:
-        _index: elastic.config.dataShard
-        _type: 'listing'
-        _id: item.id
-        _parent: item.stash.id
-    ]
-
-    if err?.status is 404
-      result.push(parseItem(item))
-    else if doc?
-      doc._source.lastSeen = moment().toDate()
-      result.push(doc._source)
-
-    added.resolve(result)
-  )
-
-  added.promise
+parseStash = (stash) ->
+  id: stash.id
+  name: stash.stash
+  lastSeen: moment().toDate()
+  owner:
+    account: stash.accountName
+    character: stash.lastCharacterName
 
 module.exports =
-  # merge process
-  #   loop through stashes
-  #     add stash to bulk list
-  #     loop through items in stash
-  #       check elastic index for item
-  #       parse item if not indexed yet
-  #       update price and time if item is indexed
-  #       add item to orphan list
-  #       check elastic index for orphans
-  #       update state for orphans
-  merge: (result) ->
-    tasks = []
-    stashes = []
-    listings = []
-    timestamp = moment().toDate()
-
-    for stashTab in result.stashes
-      itemsInTab = []
-      stash =
-        id: stashTab.id
-        name: stashTab.stash
-        lastSeen: timestamp
-        owner:
-          account: stashTab.accountName
-          character: stashTab.lastCharacterName
-
-      stashes.push({ index: _id: stash.id })
-      stashes.push(stash)
-
-      for item in stashTab.items
-        item.stash = stash
-        listings.push(update(item))
-        itemsInTab.push({ term: id: item.id })
-
-      tasks.push(findOrphans(stash.id, itemsInTab))
-
-    stashTime = timing.time ->
-      elastic.bulk
-        index: 'poe-data'
-        type: 'stash'
-        body: stashes
-      .catch(log.as.error)
-      .done()
-
-    duration = stashTime.asMilliseconds()
-    log.as.info("merged #{stashes.length / 2} stashes in #{duration.toFixed(2)}ms, #{Math.floor(stashes.length / 2 / duration * 1e3)} stashes/sec")
-
-    # needed to wait for stashes to exist to do parent-child
-    Q.all(listings)
-      .then (items) ->
-        result = []
-        result.push(item[0], item[1]) for item in items
-
-        itemTime = timing.time ->
-          elastic.bulk
-            index: 'poe-data'
-            type: 'listing'
-            body: result
-          .catch(log.as.error)
-          .done()
-
-        # calculate some rate statistics
-        duration = itemTime.asMilliseconds()
-        log.as.info("merged #{items.length} items in #{duration.toFixed(2)}ms, #{Math.floor(items.length / duration * 1e3)} items/sec")
-      .done()
-
-    # needed to wait for items to be synced to do orphaning
-    Q.all(tasks)
-      .done (results) ->
-        orphanCount = results.reduce(
-          (accum, result) -> accum + result
-        , 0)
-        log.as.info("removed #{orphanCount} listings from #{tasks.length} stash tabs")
-
-    return
+  stash: parseStash
+  listing: parseItem

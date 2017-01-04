@@ -42,13 +42,10 @@ fetchChange = (changeId) ->
     url = baseUrl
     url += "?id=#{changeId}" if changeId?
 
-    request
+    request(
       url: url
       gzip: true
-    .then (res) ->
-      id: changeId
-      body: JSON.parse(res)
-    .then(fetched.resolve)
+    ).then (res) -> writeFile("#{cacheDir}/#{changeId}", JSON.parse(res))
     .catch(fetched.reject)
   )
 
