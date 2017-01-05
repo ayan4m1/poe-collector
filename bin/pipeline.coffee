@@ -9,93 +9,97 @@ jsonfile = require 'jsonfile'
 moment = require 'moment'
 request = require 'request-promise-native'
 
-Orchestrator = require 'orchestrator'
 RateLimiter = require('limiter').RateLimiter
 
+elastic = require './elastic'
 log = require './logging'
-parser = require './parser'
 
 baseUrl = "http://api.pathofexile.com/public-stash-tabs"
 cacheDir = "#{__dirname}/../cache"
 
+# allow one request every configured interval
 limiter = new RateLimiter(1, moment.duration(config.watcher.delay.interval, config.watcher.delay.unit).asMilliseconds())
 
 stat = Q.denodeify(fs.stat)
 readDir = Q.denodeify(fs.readdir)
 removeFile = Q.denodeify(fs.unlink)
-touchFile = Q.denodeify(touch)
 readFile = Q.denodeify(jsonfile.readFile)
 writeFile = Q.denodeify(jsonfile.writeFile)
-
-recentFiles = (items, base) ->
-  items = items.filter (v) ->
-    fs.statSync("#{base}/#{v}").isFile()
-  items.sort (a, b)->
-    fs.statSync("#{base}/#{a}").mtime.getTime() - fs.statSync("#{base}/#{b}").mtime.getTime()
-  items
 
 fetchChange = (changeId) ->
   fetched = Q.defer()
 
-  limiter.removeTokens(1, ->
-    log.as.info("fetching change #{changeId}")
-    url = baseUrl
-    url += "?id=#{changeId}" if changeId?
+  log.as.info("enqueuing a request for change #{changeId}")
+  url = baseUrl
+  url += "?id=#{changeId}" if changeId?
 
+  limiter.removeTokens(1, ->
+    duration = process.hrtime()
     request(
-      url: url
+      uri: url
       gzip: true
-    ).then (res) -> writeFile("#{cacheDir}/#{changeId}", JSON.parse(res))
-    .catch(fetched.reject)
+    ).then (res) ->
+      data = JSON.parse(res)
+      duration = process.hrtime(duration)
+      duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
+      fetchTime = duration.asSeconds()
+      sizeKb = res.length / 1e3
+      log.as.info("finished fetch in #{(fetchTime * 1e3)}ms (#{(sizeKb / fetchTime).toFixed(1)} KBps)")
+
+      writeFile("#{cacheDir}/#{changeId}", data)
+        .then ->
+          fetched.resolve
+            id: changeId
+            body: data
+        .catch(fetched.reject)
+      .catch(fetched.reject)
   )
 
   fetched.promise
 
-mostRecent = ->
-  readDir(cacheDir)
-  .then (items) -> recentFiles(items, cacheDir)
-
-processBacklog = ->
-  mostRecent()
-  .then (items) ->
-      tasks = []
-      if items.length > 0
-        tasks.push(processChange(item)) for item in items
-
-      log.as.info("added #{items.length} cached files to the processing queue")
-      Q.all(tasks)
-  .then -> log.as.info("finished processing backlog")
-  .catch(log.as.error)
-
 processChange = (changeId) ->
+  log.as.info("reading cached data for change #{changeId}")
   cacheFile = "#{cacheDir}/#{changeId}"
-  stat(cacheFile)
+  readFile(cacheFile)
+    .then (data) ->
+      tasks = []
+
+      tasks.push(
+        elastic.mergeStashes(data.stashes)
+          .then(elastic.mergeListings)
+      )
+      tasks.push(fetchChange(data.next_change_id)) if data.next_change_id?
+
+      Q.all(tasks)
+  .then(removeFile(cacheFile))
+  .then ->
+    touch.sync(cacheFile)
+
+changeExists = (path) ->
+  stat(path)
     .then (info) ->
-      return unless info.isFile()
-      opened =
-        if info['size'] is 0
-        then fetchChange(changeId)
-        else readFile(cacheFile).then (data) -> { id: changeId, body: data }
+      if info.isFile() and info['size'] > 0 then info['size'] else 0
 
-      opened
-        .then (data) ->
-          parser.merge(data.body) if data.body?
+processOrFetchChange = (changeId) ->
+  cacheFile = "#{cacheDir}/#{changeId}"
+  log.as.info("checking state of #{cacheFile}")
+  changeExists(cacheFile)
+    .then (valid) ->
+      if valid <= 0 then fetchChange(changeId)
+      else processChange(changeId)
+    .catch(log.as.error)
 
-          return unless data.body.next_change_id?
-          touchFile("#{cacheDir}/#{data.body.next_change_id}")
-            .then(removeFile(cacheFile))
-        .catch(log.as.error)
+findLatestChange = ->
+  readDir(cacheDir)
+    .then (items) ->
+      items = items.filter (v) ->
+        fs.statSync("#{cacheDir}/#{v}").isFile()
+      items.sort (a, b)->
+        fs.statSync("#{cacheDir}/#{a}").mtime.getTime() - fs.statSync("#{cacheDir}/#{b}").mtime.getTime()
+      items.pop()
 
-fetchNextChange = ->
-  mostRecent()
-    .then(processChange)
-    .then(fetchNextChange)
-
-orchestrator = new Orchestrator()
-
-orchestrator.add('processBacklog', [], processBacklog)
-orchestrator.add('fetchNextChange', ['processBacklog'], fetchNextChange)
-
-module.exports = {
-  orchestrator: orchestrator
-}
+module.exports =
+  next: (current) ->
+    getChange = if current? then current else findLatestChange
+    getChange()
+      .then(processOrFetchChange)

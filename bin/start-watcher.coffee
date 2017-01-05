@@ -2,4 +2,9 @@
 
 pipeline = require './pipeline'
 
-pipeline.orchestrator.start('fetchNextChange')
+processLoop = ->
+  pipeline.next()
+    .then(processLoop)
+
+processLoop().done()
+
