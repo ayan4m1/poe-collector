@@ -80,7 +80,7 @@ module.exports =
           duration = process.hrtime(duration)
           duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds').asMilliseconds()
           docCount = docs.length / 2
-          log.as.info("updated #{docCount} stashes in #{duration}ms (#{Math.floor(docCount / (duration * 1e3)} stashes/sec)")
+          log.as.info("updated #{docCount} stashes in #{duration}ms (#{Math.floor(docCount / (duration * 1e3))} stashes/sec)")
 
       Q(listings)
 
