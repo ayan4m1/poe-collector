@@ -108,6 +108,7 @@ module.exports =
 
           docCount = docs.length / 2
           client.bulk({ body: docs })
+        .catch(log.as.error)
     )
 
     duration = process.hrtime()
@@ -117,6 +118,7 @@ module.exports =
         duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds').asMilliseconds()
         log.as.info("updated #{docCount} listings in #{duration.toFixed(2)}ms (#{Math.floor((duration * 1e3) / docCount)} items/sec)")
       .catch(log.as.error)
+
   client: client
   config: config.elastic
 

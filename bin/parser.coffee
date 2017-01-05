@@ -217,7 +217,7 @@ parseItem = (item) ->
       physical:
         min: 0
         max: 0
-      attackRate: 0
+      attacksPerSecond: 0.0
       range: 0
     defense:
       resistance:
