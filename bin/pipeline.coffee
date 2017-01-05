@@ -71,9 +71,9 @@ processChange = (changeId) ->
       tasks.push(fetchChange(data.next_change_id)) if data.next_change_id?
 
       Q.all(tasks)
-  .then(removeFile(cacheFile))
-  .then ->
-    touch.sync(cacheFile)
+        .then ->
+          removeFile(cacheFile)
+          .then -> touch(cacheFile)
 
 changeExists = (path) ->
   stat(path)

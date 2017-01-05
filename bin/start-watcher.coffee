@@ -7,4 +7,3 @@ processLoop = ->
     .then(processLoop)
 
 processLoop().done()
-
