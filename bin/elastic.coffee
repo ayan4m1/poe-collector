@@ -79,7 +79,8 @@ module.exports =
         .then ->
           duration = process.hrtime(duration)
           duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds').asMilliseconds()
-          log.as.info("updated #{docs.length / 2} stashes in #{duration}ms (#{Math.floor((duration * 1e3) / (docs.length / 2))} stashes/sec)")
+          docCount = docs.length / 2
+          log.as.info("updated #{docCount} stashes in #{duration}ms (#{Math.floor(docCount / (duration * 1e3)} stashes/sec)")
 
       Q(listings)
 
@@ -119,7 +120,7 @@ module.exports =
       .then ->
         duration = process.hrtime(duration)
         duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds').asMilliseconds()
-        log.as.info("updated #{docCount} listings in #{duration.toFixed(2)}ms (#{Math.floor((duration * 1e3) / docCount)} items/sec)")
+        log.as.info("updated #{docCount} listings in #{duration.toFixed(2)}ms (#{Math.floor(docCount / (duration * 1e3))} items/sec)")
       .catch(log.as.error)
 
   client: client
