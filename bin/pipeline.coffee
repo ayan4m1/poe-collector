@@ -73,7 +73,7 @@ processChange = (changeId) ->
       Q.all(tasks)
         .then ->
           removeFile(cacheFile)
-          .then -> touch(cacheFile)
+            .then -> touch(cacheFile)
 
 changeExists = (path) ->
   stat(path)
