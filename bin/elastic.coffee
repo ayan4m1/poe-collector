@@ -56,9 +56,7 @@ orphan = (stashId, itemIds) ->
               removed: false
           ]
           must_not: itemIds
-  ).then (results) ->
-    return unless results.updated > 0
-    log.as.info("orphaned #{results.updated} items from stash #{stashId}")
+  )
 
 module.exports =
   mergeStashes: (stashes) ->
