@@ -20,6 +20,7 @@
     "angular2-moment": "^1.0.0",
     "angular2-toaster": "^2.0.0",
     "body-parser": "^1.15.0",
+    "bottleneck": "^1.15.0",
     "browserify": "^13.1.1",
     "cheerio": "^0.20.0",
     "coffee-script": "^1.10.0",

@@ -1,4 +1,5 @@
 default:
+  concurrency: 4
   delay:
-    interval: 10
+    interval: 60
     unit: seconds

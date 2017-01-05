@@ -7,9 +7,8 @@ fs = require 'fs'
 touch = require 'touch'
 jsonfile = require 'jsonfile'
 moment = require 'moment'
-request = require 'request-promise-native'
-
-RateLimiter = require('limiter').RateLimiter
+requestPromise = require 'request-promise-native'
+Bottleneck = require 'bottleneck'
 
 elastic = require './elastic'
 log = require './logging'
@@ -18,25 +17,23 @@ baseUrl = "http://api.pathofexile.com/public-stash-tabs"
 cacheDir = "#{__dirname}/../cache"
 
 # allow one request every configured interval
-limiter = new RateLimiter(1, moment.duration(config.watcher.delay.interval, config.watcher.delay.unit).asMilliseconds())
+limiter = new Bottleneck(config.watcher.concurrency, moment.duration(config.watcher.delay.interval, config.watcher.delay.unit).asMilliseconds())
 
 stat = Q.denodeify(fs.stat)
 readDir = Q.denodeify(fs.readdir)
 removeFile = Q.denodeify(fs.unlink)
 readFile = Q.denodeify(jsonfile.readFile)
 writeFile = Q.denodeify(jsonfile.writeFile)
+doTouch = Q.denodeify(touch)
 
 fetchChange = (changeId) ->
-  fetched = Q.defer()
+  log.as.debug("enqueuing a request for change #{changeId}")
 
-  log.as.info("enqueuing a request for change #{changeId}")
-  url = baseUrl
-  url += "?id=#{changeId}" if changeId?
-
-  limiter.removeTokens(1, ->
+  limiter.schedule ->
+    log.as.info("resolving a request for change #{changeId}")
     duration = process.hrtime()
-    request(
-      uri: url
+    requestPromise(
+      uri: "#{baseUrl}?id=#{changeId}"
       gzip: true
     ).then (res) ->
       data = JSON.parse(res)
@@ -44,36 +41,22 @@ fetchChange = (changeId) ->
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       fetchTime = duration.asSeconds()
       sizeKb = res.length / 1e3
-      log.as.info("finished fetch in #{(fetchTime * 1e3)}ms (#{(sizeKb / fetchTime).toFixed(1)} KBps)")
+      log.as.info("fetched #{sizeKb}KB in #{(fetchTime * 1e3)}ms (#{(sizeKb / fetchTime).toFixed(1)} KBps)")
 
       writeFile("#{cacheDir}/#{changeId}", data)
-        .then ->
-          fetched.resolve
-            id: changeId
-            body: data
-        .catch(fetched.reject)
-      .catch(fetched.reject)
-  )
-
-  fetched.promise
 
 processChange = (changeId) ->
   log.as.info("reading cached data for change #{changeId}")
   cacheFile = "#{cacheDir}/#{changeId}"
+
   readFile(cacheFile)
     .then (data) ->
-      tasks = []
+      fetchChange(data.next_change_id) if data.next_change_id?
 
-      tasks.push(
-        elastic.mergeStashes(data.stashes)
-          .then(elastic.mergeListings)
-      )
-      tasks.push(fetchChange(data.next_change_id)) if data.next_change_id?
-
-      Q.all(tasks)
-        .then ->
-          removeFile(cacheFile)
-            .then -> touch(cacheFile)
+      elastic.mergeStashes(data.stashes)
+        .then(elastic.mergeListings)
+    .then(removeFile(cacheFile))
+    .then(doTouch(cacheFile))
 
 changeExists = (path) ->
   stat(path)
@@ -85,7 +68,7 @@ processOrFetchChange = (changeId) ->
   log.as.info("checking state of #{cacheFile}")
   changeExists(cacheFile)
     .then (valid) ->
-      if valid <= 0 then fetchChange(changeId)
+      if valid is 0 then fetchChange(changeId)
       else processChange(changeId)
     .catch(log.as.error)
 
