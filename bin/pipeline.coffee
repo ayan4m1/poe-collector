@@ -16,15 +16,18 @@ log = require './logging'
 baseUrl = "http://api.pathofexile.com/public-stash-tabs"
 cacheDir = "#{__dirname}/../cache"
 
-# allow one request every configured interval
-limiter = new Bottleneck(config.watcher.concurrency, moment.duration(config.watcher.delay.interval, config.watcher.delay.unit).asMilliseconds())
+# configurable concurrency level and scheduling interval
+limiter = new Bottleneck(
+  config.watcher.concurrency,
+  moment.duration(config.watcher.delay.interval, config.watcher.delay.unit).asMilliseconds()
+)
 
 stat = Q.denodeify(fs.stat)
 readDir = Q.denodeify(fs.readdir)
 removeFile = Q.denodeify(fs.unlink)
 readFile = Q.denodeify(jsonfile.readFile)
 writeFile = Q.denodeify(jsonfile.writeFile)
-doTouch = Q.denodeify(touch)
+touchFile = Q.denodeify(touch)
 
 fetchChange = (changeId) ->
   log.as.debug("enqueuing a request for change #{changeId}")
@@ -32,10 +35,11 @@ fetchChange = (changeId) ->
   limiter.schedule ->
     log.as.info("resolving a request for change #{changeId}")
     duration = process.hrtime()
-    requestPromise(
+
+    requestPromise({
       uri: "#{baseUrl}?id=#{changeId}"
       gzip: true
-    ).then (res) ->
+    }).then (res) ->
       data = JSON.parse(res)
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
@@ -51,12 +55,12 @@ processChange = (changeId) ->
 
   readFile(cacheFile)
     .then (data) ->
-      fetchChange(data.next_change_id) if data.next_change_id?
-
       elastic.mergeStashes(data.stashes)
         .then(elastic.mergeListings)
-    .then(removeFile(cacheFile))
-    .then(doTouch(cacheFile))
+        .then(removeFile(cacheFile))
+        .then(touchFile(cacheFile))
+
+      fetchChange(data.next_change_id) if data.next_change_id?
 
 changeExists = (path) ->
   stat(path)
