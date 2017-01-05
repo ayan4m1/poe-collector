@@ -15,24 +15,27 @@ client = new elasticsearch.Client(
 )
 
 mergeListing = (listing) ->
+  result = [
+    index:
+      _index: config.elastic.dataShard
+      _type: 'listing'
+      _id: listing.id
+      _parent: listing.stash.id
+  ]
+
   client.get(
     index: config.elastic.dataShard,
     type: 'listing'
     id: listing.id
     parent: listing.stash.id
-  ).then (item) ->
-    result = [
-      index:
-        _index: config.elastic.dataShard
-        _type: 'listing'
-        _id: listing.id
-        _parent: listing.stash.id
-    ]
-
-    item._source.lastSeen = moment().toDate()
-    result.push(item._source)
-
-    result
+  )
+    .then (item) ->
+      item._source.lastSeen = moment().toDate()
+      result.push(item._source)
+      result
+    .catch (err) ->
+      result.push(parser.listing(listing)) if err.status is 404
+      result
 
 orphan = (stashId, itemIds) ->
   client.updateByQuery(
