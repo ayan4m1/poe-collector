@@ -6,4 +6,6 @@ processLoop = ->
   pipeline.next()
     .then(processLoop)
 
-processLoop().done()
+
+processLoop()
+.done()

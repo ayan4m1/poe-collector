@@ -53,6 +53,15 @@ currencyFactors =
   eternal: 10000
   mirror: 5000
 
+parseDamageType = (id) ->
+  switch id
+    when 1 then return 'Physical'
+    when 4 then return 'Fire'
+    when 5 then return 'Cold'
+    when 6 then return 'Lightning'
+    when 7 then return 'Chaos'
+    else return 'Unknown'
+
 parseCurrency = (item, result) ->
   result.price =
     if item.note? then item.note.match(/\~(b\/o|price|c\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/)
@@ -76,31 +85,39 @@ parseCurrency = (item, result) ->
   return unless factor > 0 and quantity > 0
   result.chaosPrice = factor * quantity
 
+parseRange = (range) ->
+  results = range.match(/(\d+)-(\d+)/)
+
+  {
+    min: parseInt(results[0])
+    max: parseInt(results[1])
+  }
+
 parseProperty = (prop, result) ->
   switch
     when /[One|Two] Handed/.test(prop.name)
-      result.gearType = prop.name
+      hands = prop.name.match(/([One|Two])/)[0]
+      weaponType = if result.baseLine.endsWith('Wand') then 'Projectile' else 'Melee'
+
+      result.gearType =
+        if result.baseLine.endsWith('Bow') then 'Bow'
+        else "#{hands} Handed #{weaponType} Weapon"
+    when prop.name is 'Quality'
+      result.quality = parseInt(prop.values[0].replace(/\+/g, ''))
     when prop.name is 'Physical Damage'
-      range = prop.values[0][0].match(/(\d+)-(\d+)/)
-      result.offense.physical =
-        min: parseInt(range[0])
-        max: parseInt(range[1])
+      result.offense.physical = parseRange(prop.values[0][0])
     when prop.name is 'Chaos Damage'
-      range = prop.values[0][0].match(/(\d+)-(\d+)/)
-      result.offense.chaos =
-        min: parseInt(range[0])
-        max: parseInt(range[1])
+      result.offense.chaos = parseRange(prop.values[0][0])
     when prop.name is 'Elemental Damage'
-      result.offense.elemental =
-        fire:
-          min: 0
-          max: 0
-        lightning:
-          min: 0
-          max: 0
-        cold:
-          min: 0
-          max: 0
+      damage = {}
+
+      for value in prop.values
+        range = parseRange(value[0])
+        damageType = parseDamageType(value[1])
+        damageKey = damageType.toLowerCase()
+        damage[damageKey] = range
+
+      result.offense.elemental = damage
     when prop.name is 'Stack Size'
       stackInfo = prop.values[0][0].split(/\//)
       result.stack =
@@ -126,16 +143,25 @@ parseType = (item, result) ->
   if item.frameType < 4
     result.rarity = frame
   else if frame?
-    result.itemLine = frame
+    result.itemType = frame
   else
-    result.itemLine =
-      switch
-        when /^Travel to this Map by using it in the Eternal Laboratory/.text(item.descrText) then 'Map'
-        when /^Place into an allocated Jewel Socket/.test(item.descrText) then 'Jewel'
-        when /^Right click to drink/.test(item.descrText) then 'Flask'
-        else 'Gear'
+    result.itemType =
+      if /^Travel to this Map by using it in the Eternal Laboratory/.test(item.descrText) then 'Map'
+      else if /^Place into an allocated Jewel Socket/.test(item.descrText) then 'Jewel'
+      else if /^Right click to drink/.test(item.descrText) then 'Flask'
+      else 'Gear'
 
-  result.baseLine
+  if result.itemType is 'Gear'
+    result.gearType = 'Unknown'
+
+parseRequirements = (item, result) ->
+  for req in item.requirements
+    parsed =
+      name: req.name
+      value: parseInt(req.values[0][0])
+
+    parsed.name = parsed.name.substring(0, 3) if ['Intelligence', 'Strength', 'Dexterity'].indexOf(parsed.name) > 0
+    result.requirements[parsed.name.toLowerCase()] = parsed.value
 
 parseSockets = (item, result) ->
   sockets = {
@@ -193,10 +219,15 @@ parseItem = (item) ->
     identified: item.identified
     corrupted: item.corrupted
     verified: item.verified
-    requirements: []
+    requirements:
+      level: 0
+      int: 0
+      dex: 0
+      str: 0
     attributes: []
     modifiers: []
     sockets: []
+    quality: 0
     stack:
       count: null
       maximum: null
@@ -233,6 +264,10 @@ parseItem = (item) ->
     chaosPrice: 0
     removed: false
     firstSeen: moment().toDate()
+    flavourText: item.flavourText ? null
+
+  if result.fullName.startsWith('Superior')
+    result.fullName = result.fullName.replace(/Superior\s+/, '')
 
   parseType(item, result)
   parseCurrency(item, result)
@@ -245,15 +280,10 @@ parseItem = (item) ->
       parseProperty(prop, result)
 
   if item.requirements?
-    for req in item.requirements
-      result.requirements.push
-        name: req.name
-        value: parseInt(req.values[0][0])
-        hidden: req.displayMode is 0
+    parseRequirements(item, result)
 
   if item.explicitMods?
-    for mod in item.explicitMods
-      result.modifiers.push mod
+    result.modifiers = item.explicitMods
 
   result
 

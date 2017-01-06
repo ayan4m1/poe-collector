@@ -23,12 +23,12 @@ mergeListing = (listing) ->
       _parent: listing.stash.id
   ]
 
-  client.get(
-    index: config.elastic.dataShard,
+  client.get({
+    index: config.elastic.dataShard
     type: 'listing'
     id: listing.id
     parent: listing.stash.id
-  )
+  })
     .then (item) ->
       item._source.lastSeen = moment().toDate()
       result.push(item._source)
@@ -47,14 +47,11 @@ orphan = (stashId, itemIds) ->
         inline: 'ctx._source.removed=true;ctx._source.lastSeen=ctx._now;'
       query:
         bool:
-          must: [
+          must: [{
             parent_id:
               type: 'listing'
               id: stashId
-          ,
-            term:
-              removed: false
-          ]
+          }, { term: removed: false }]
           must_not: itemIds
   )
 
@@ -66,7 +63,7 @@ module.exports =
       for stash in stashes
         docs.push
           index:
-            _index: 'poe-data'
+            _index: config.elastic.dataShard
             _type: 'stash'
             _id: stash.id
         docs.push(parser.stash(stash))

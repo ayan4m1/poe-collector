@@ -1,0 +1,316 @@
+{
+  "data": {
+    "settings": {
+      "number_of_shards": 2
+    },
+    "mappings": {
+      "stash": {
+        "properties": {
+          "id": {
+            "type": "keyword"
+          },
+          "league": {
+            "type": "keyword"
+          },
+          "name": {
+            "type": "text"
+          },
+          "lastSeen": {
+            "type": "date"
+          },
+          "seller": {
+            "properties": {
+              "account": {
+                "type": "keyword"
+              },
+              "character": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      },
+      "listing": {
+        "_parent": {
+          "type": "stash"
+        },
+        "_routing": {
+          "required": "true"
+        },
+        "properties": {
+          "id": {
+            "type": "keyword"
+          },
+          "name": {
+            "type": "text"
+          },
+          "fullName": {
+            "type": "text"
+          },
+          "itemType": {
+            "type": "keyword"
+          },
+          "gearType": {
+            "type": "keyword"
+          },
+          "baseLine": {
+            "type": "text"
+          },
+          "rarity": {
+            "type": "keyword"
+          },
+          "x": {
+            "type": "integer"
+          },
+          "y": {
+            "type": "integer"
+          },
+          "sockets": {
+            "properties": {
+              "red": {
+                "type": "integer"
+              },
+              "green": {
+                "type": "string"
+              },
+              "blue": {
+                "type": "integer"
+              },
+              "white": {
+                "type": "integer"
+              },
+              "links": {
+                "type": "integer"
+              }
+            }
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "values": {
+                "type": "string",
+                "index": "not_analyzed"
+              },
+              "hidden": {
+                "type": "boolean"
+              },
+              "typeId": {
+                "type": "integer"
+              }
+            }
+          },
+          "requirements": {
+            "properties": {
+              "level": {
+                "type": "integer"
+              },
+              "str": {
+                "type": "integer"
+              },
+              "int": {
+                "type": "integer"
+              },
+              "dex": {
+                "type": "integer"
+              }
+            }
+          },
+          "modifiers": {
+            "type": "text"
+          },
+          "offense": {
+            "type": "object",
+            "properties": {
+              "elemental": {
+                "properties": {
+                  "fire": {
+                    "type": "nested",
+                    "properties": {
+                      "min": {
+                        "type": "integer"
+                      },
+                      "max": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "cold": {
+                    "type": "nested",
+                    "properties": {
+                      "min": {
+                        "type": "integer"
+                      },
+                      "max": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "lightning": {
+                    "type": "nested",
+                    "properties": {
+                      "min": {
+                        "type": "integer"
+                      },
+                      "max": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "physical": {
+                "type": "nested",
+                "properties": {
+                  "min": {
+                    "type": "integer"
+                  },
+                  "max": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "chaos": {
+                "type": "nested",
+                "properties": {
+                  "min": {
+                    "type": "integer"
+                  },
+                  "max": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "attacksPerSecond": {
+                "type": "float"
+              },
+              "meleeRange": {
+                "type": "integer"
+              }
+            }
+          },
+          "defense": {
+            "type": "object",
+            "properties": {
+              "resistance": {
+                "properties": {
+                  "elemental": {
+                    "properties": {
+                      "fire": {
+                        "type": "integer"
+                      },
+                      "cold": {
+                        "type": "integer"
+                      },
+                      "lightning": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "physical": {
+                    "type": "integer"
+                  },
+                  "chaos": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "armour": {
+                "type": "integer"
+              },
+              "evasion": {
+                "type": "integer"
+              },
+              "shield": {
+                "type": "integer"
+              }
+            }
+          },
+          "quality": {
+            "type": "integer"
+          },
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "note": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "identified": {
+            "type": "boolean"
+          },
+          "corrupted": {
+            "type": "boolean"
+          },
+          "locked": {
+            "type": "boolean"
+          },
+          "icon": {
+            "type": "text",
+            "index": "not_analyzed"
+          },
+          "flavourText": {
+            "type": "text"
+          },
+          "price": {
+            "type": "text",
+            "index": "not_analyzed"
+          },
+          "chaosPrice": {
+            "type": "float"
+          },
+          "stack": {
+            "properties": {
+              "count": {
+                "type": "integer"
+              },
+              "maximum": {
+                "type": "integer"
+              }
+            }
+          },
+          "firstSeen": {
+            "type": "date"
+          },
+          "lastSeen": {
+            "type": "date"
+          },
+          "removed": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "league": {
+    "settings": {
+      "number_of_shards": 1
+    },
+    "mappings": {
+      "league": {
+        "properties": {
+          "id": {
+            "type": "keyword"
+          },
+          "url": {
+            "type": "keyword"
+          },
+          "startAt": {
+            "type": "date"
+          },
+          "endAt": {
+            "type": "date"
+          }
+        }
+      }
+    }
+  }
+}
