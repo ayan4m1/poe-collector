@@ -2,10 +2,13 @@
 
 moment = require 'moment'
 process = require 'process'
+jsonfile = require 'jsonfile'
 
 elastic = require './elastic'
 timing = require './timing'
 log = require './logging'
+
+baseTypes = jsonfile.readFileSync("#{__dirname}/../itemTypes.json")
 
 currencyRegexes =
   bauble: /(Glassblower)?'?s?Bauble/i
@@ -142,7 +145,8 @@ parseType = (item, result) ->
       else null
 
   result.name = item.name.replace(/(<<set:MS>><<set:M>><<set:S>>|Superior\s+)/g, '')
-  result.baseLine = item.typeLine
+  result.typeLine = item.typeLine
+  result.baseLine = baseTypes[item.typeLine]
   if item.frameType < 4
     result.rarity = frame
     result.fullName = "#{result.name} #{item.typeLine}"
@@ -214,11 +218,8 @@ parseItem = (item) ->
     name: null
     # the full name (e.g. Rare affixes)
     fullName: null
-    # a string for all items (e.g. "Map" or "Gear")
     itemType: null
-    # a string which describes gear (e.g. "Amulet")
     gearType: null
-    # the "base item" for gear
     baseLine: null
     # Normal, Magic, Rare, Unique if applicable
     rarity: null
