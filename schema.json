@@ -1,7 +1,39 @@
 {
   "data": {
     "settings": {
-      "number_of_shards": 2
+      "index": {
+        "refresh_interval": "10s",
+        "number_of_shards": "1",
+        "number_of_replicas": "0",
+        "requests.cache.enable": true,
+        "translog.durability": "async",
+        "translog.sync_interval": "5s"
+      },
+      "analysis": {
+        "analyzer": {
+          "ngram": {
+            "tokenizer": "ngram"
+          },
+          "analyzer_keyword": {
+            "tokenizer": "keyword",
+            "filter": "lowercase"
+          }
+        },
+        "tokenizer": {
+          "ngram": {
+            "type": "nGram",
+            "min_gram": "4",
+            "max_gram": "8",
+            "token_chars": [
+              "letter",
+              "digit",
+              "whitespace",
+              "punctuation",
+              "symbol"
+            ]
+          }
+        }
+      }
     },
     "mappings": {
       "stash": {
