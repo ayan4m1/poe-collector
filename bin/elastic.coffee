@@ -111,8 +111,7 @@ module.exports =
 
         docCount = docs.length / 2
         tasks.push(client.bulk({body: docs }))
-      .catch(log.as.error)
-      .then(Q.all(tasks))
+      .then -> Q.all(tasks)
       .then ->
         duration = process.hrtime(duration)
         duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds').asMilliseconds()

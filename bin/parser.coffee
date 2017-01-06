@@ -95,20 +95,20 @@ parseRange = (range) ->
 
 parseProperty = (prop, result) ->
   switch prop.name
-    when 'One Handed Weapon', 'Two Handed Weapon' then ->
+    when 'One Handed', 'Two Handed'
       hands = prop.name.match(/([One|Two])/)[0]
       weaponType = if result.baseLine.endsWith('Wand') then 'Projectile' else 'Melee'
 
       result.gearType =
         if result.baseLine.endsWith('Bow') then 'Bow'
         else "#{hands} Handed #{weaponType} Weapon"
-    when 'Quality' then ->
-      result.quality = parseInt(prop.values[0].replace(/\+/g, ''))
-    when 'Physical Damage' then ->
+    when 'Quality'
+      result.quality = parseInt(prop.values[0][0].replace(/[%\\+]/g, ''))
+    when 'Physical Damage'
       result.offense.physical = parseRange(prop.values[0][0])
-    when 'Chaos Damage' then ->
+    when 'Chaos Damage'
       result.offense.chaos = parseRange(prop.values[0][0])
-    when 'Elemental Damage' then ->
+    when 'Elemental Damage'
       damage = {}
 
       for value in prop.values
@@ -118,17 +118,18 @@ parseProperty = (prop, result) ->
         damage[damageKey] = range
 
       result.offense.elemental = damage
-    when prop.name is 'Stack Size' then ->
+    when 'Stack Size'
       stackInfo = prop.values[0][0].split(/\//)
       result.stack =
         count: stackInfo[0]
         maximum: stackInfo[1]
-    when prop.name is 'Map Tier' then ->
+    when 'Map Tier'
       result.tier = parseInt(prop.values[0][0])
+  null
 
 parseType = (item, result) ->
   frame =
-    switch (item.frameType)
+    switch item.frameType
       when 0 then 'Normal'
       when 1 then 'Magic'
       when 2 then 'Rare'
@@ -140,20 +141,28 @@ parseType = (item, result) ->
       when 8 then 'Prophecy'
       else null
 
+  result.name = item.name.replace(/(<<set:MS>><<set:M>><<set:S>>|Superior\s+)/g, '')
+  result.baseLine = item.typeLine
   if item.frameType < 4
     result.rarity = frame
+    result.fullName = "#{result.name} #{item.typeLine}"
     result.itemType =
-      if /^(Bow|Axe|Sword|Dagger|Mace|Staff|Claw|Sceptre|Wand|Fishing Rod)$/.test(item.typeLine) then 'Weapon'
-      else if /^(Helmet|Gloves|Boots|Body|Shield|Quiver)$/.test(item.typeLine) then 'Armour'
-      else if /^(Amulet|Belt|Ring)$/.test(item.typeLine) then 'Jewelry'
-      else if /^Travel to this Map by using it in the Eternal Laboratory/.test(item.descrText) then 'Map'
-      else if /^Place into an allocated Jewel Socket/.test(item.descrText) then 'Jewel'
-      else if /^Right click to drink/.test(item.descrText) then 'Flask'
-      else 'Gear'
+      switch
+        when /^(Bow|Axe|Sword|Dagger|Mace|Staff|Claw|Sceptre|Wand|Fishing Rod)$/.test(item.typeLine) then 'Weapon'
+        when /^(Helmet|Gloves|Boots|Body|Shield|Quiver)$/.test(item.typeLine) then 'Armour'
+        when /^(Amulet|Belt|Ring)$/.test(item.typeLine) then 'Accessory'
+        when /^Travel to this Map by using it in the Eternal Laboratory/.test(item.descrText) then 'Map'
+        when /^Place into an allocated Jewel Socket/.test(item.descrText) then 'Jewel'
+        when /^Right click to drink/.test(item.descrText) then 'Flask'
+        else 'Gear'
   else if frame?
     result.itemType = frame
   else
     result.itemType = 'Unknown'
+
+  switch result.itemType
+    when 'Weapon', 'Armour', 'Accessory'
+      result.gearType = item.typeLine.split(' ')[-1]
 
 parseRequirements = (item, result) ->
   for req in item.requirements
@@ -202,9 +211,9 @@ parseItem = (item) ->
     width: item.w
     height: item.h
     # the name of the item, scrub the oddball prefix
-    name: item.name.replace(/<<set:MS>><<set:M>><<set:S>>/, '')
+    name: null
     # the full name (e.g. Rare affixes)
-    fullName: item.typeLine
+    fullName: null
     # a string for all items (e.g. "Map" or "Gear")
     itemType: null
     # a string which describes gear (e.g. "Amulet")
