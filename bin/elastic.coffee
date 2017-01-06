@@ -57,27 +57,31 @@ orphan = (stashId, itemIds) ->
 
 module.exports =
   mergeStashes: (stashes) ->
-      docs = []
-      listings = {}
+    merged = Q.defer()
 
-      for stash in stashes
-        docs.push
-          index:
-            _index: config.elastic.dataShard
-            _type: 'stash'
-            _id: stash.id
-        docs.push(parser.stash(stash))
-        listings[stash.id] = stash.items
+    docs = []
+    listings = {}
 
-      duration = process.hrtime()
-      client.bulk({ body: docs })
-        .then ->
-          duration = process.hrtime(duration)
-          duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds').asMilliseconds()
-          docCount = docs.length / 2
-          log.as.info("updated #{docCount} stashes in #{duration}ms (#{Math.floor(docCount / (duration / 1e3))} stashes/sec)")
+    for stash in stashes
+      docs.push
+        index:
+          _index: config.elastic.dataShard
+          _type: 'stash'
+          _id: stash.id
+      docs.push(parser.stash(stash))
+      listings[stash.id] = stash.items
 
-      Q(listings)
+    duration = process.hrtime()
+    client.bulk({ body: docs })
+      .then ->
+        duration = process.hrtime(duration)
+        duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds').asMilliseconds()
+        docCount = docs.length / 2
+        log.as.info("updated #{docCount} stashes in #{duration}ms (#{Math.floor(docCount / (duration / 1e3))} stashes/sec)")
+        merged.resolve(listings)
+      .catch(merged.reject)
+
+    merged.promise
 
   mergeListings: (data) ->
     tasks = []
@@ -96,22 +100,19 @@ module.exports =
 
       tasks.push(orphan(stashId, itemIds))
 
-    tasks.push(
-      Q.allSettled(prepares)
-        .then (results) ->
-          docs = []
-
-          for result in results
-            continue unless result.state is 'fulfilled'
-            docs = docs.concat(result.value)
-
-          docCount = docs.length / 2
-          client.bulk({ body: docs })
-        .catch(log.as.error)
-    )
-
     duration = process.hrtime()
-    Q.all(tasks)
+    Q.allSettled(prepares)
+      .then (results) ->
+        docs = []
+
+        for result in results
+          continue unless result.state is 'fulfilled'
+          docs = docs.concat(result.value)
+
+        docCount = docs.length / 2
+        tasks.push(client.bulk({body: docs }))
+      .catch(log.as.error)
+      .then(Q.all(tasks))
       .then ->
         duration = process.hrtime(duration)
         duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds').asMilliseconds()

@@ -94,21 +94,21 @@ parseRange = (range) ->
   }
 
 parseProperty = (prop, result) ->
-  switch
-    when /[One|Two] Handed/.test(prop.name)
+  switch prop.name
+    when 'One Handed Weapon', 'Two Handed Weapon' then ->
       hands = prop.name.match(/([One|Two])/)[0]
       weaponType = if result.baseLine.endsWith('Wand') then 'Projectile' else 'Melee'
 
       result.gearType =
         if result.baseLine.endsWith('Bow') then 'Bow'
         else "#{hands} Handed #{weaponType} Weapon"
-    when prop.name is 'Quality'
+    when 'Quality' then ->
       result.quality = parseInt(prop.values[0].replace(/\+/g, ''))
-    when prop.name is 'Physical Damage'
+    when 'Physical Damage' then ->
       result.offense.physical = parseRange(prop.values[0][0])
-    when prop.name is 'Chaos Damage'
+    when 'Chaos Damage' then ->
       result.offense.chaos = parseRange(prop.values[0][0])
-    when prop.name is 'Elemental Damage'
+    when 'Elemental Damage' then ->
       damage = {}
 
       for value in prop.values
@@ -118,12 +118,12 @@ parseProperty = (prop, result) ->
         damage[damageKey] = range
 
       result.offense.elemental = damage
-    when prop.name is 'Stack Size'
+    when prop.name is 'Stack Size' then ->
       stackInfo = prop.values[0][0].split(/\//)
       result.stack =
         count: stackInfo[0]
         maximum: stackInfo[1]
-    when prop.name is 'Map Tier'
+    when prop.name is 'Map Tier' then ->
       result.tier = parseInt(prop.values[0][0])
 
 parseType = (item, result) ->
@@ -142,17 +142,18 @@ parseType = (item, result) ->
 
   if item.frameType < 4
     result.rarity = frame
-  else if frame?
-    result.itemType = frame
-  else
     result.itemType =
-      if /^Travel to this Map by using it in the Eternal Laboratory/.test(item.descrText) then 'Map'
+      if /^(Bow|Axe|Sword|Dagger|Mace|Staff|Claw|Sceptre|Wand|Fishing Rod)$/.test(item.typeLine) then 'Weapon'
+      else if /^(Helmet|Gloves|Boots|Body|Shield|Quiver)$/.test(item.typeLine) then 'Armour'
+      else if /^(Amulet|Belt|Ring)$/.test(item.typeLine) then 'Jewelry'
+      else if /^Travel to this Map by using it in the Eternal Laboratory/.test(item.descrText) then 'Map'
       else if /^Place into an allocated Jewel Socket/.test(item.descrText) then 'Jewel'
       else if /^Right click to drink/.test(item.descrText) then 'Flask'
       else 'Gear'
-
-  if result.itemType is 'Gear'
-    result.gearType = 'Unknown'
+  else if frame?
+    result.itemType = frame
+  else
+    result.itemType = 'Unknown'
 
 parseRequirements = (item, result) ->
   for req in item.requirements
@@ -200,8 +201,8 @@ parseItem = (item) ->
     y: item.y
     width: item.w
     height: item.h
-    # the name of the item
-    name: item.name
+    # the name of the item, scrub the oddball prefix
+    name: item.name.replace(/<<set:MS>><<set:M>><<set:S>>/, '')
     # the full name (e.g. Rare affixes)
     fullName: item.typeLine
     # a string for all items (e.g. "Map" or "Gear")
@@ -264,10 +265,7 @@ parseItem = (item) ->
     chaosPrice: 0
     removed: false
     firstSeen: moment().toDate()
-    flavourText: item.flavourText ? null
-
-  if result.fullName.startsWith('Superior')
-    result.fullName = result.fullName.replace(/Superior\s+/, '')
+    flavourText: item.flavourText?.join()
 
   parseType(item, result)
   parseCurrency(item, result)
