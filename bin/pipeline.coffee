@@ -88,5 +88,4 @@ findLatestChange = ->
 module.exports =
   next: (current) ->
     getChange = if current? then current else findLatestChange
-    getChange()
-      .then(processOrFetchChange)
+    getChange().then(processOrFetchChange)
