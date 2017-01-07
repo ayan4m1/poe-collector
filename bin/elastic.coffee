@@ -12,7 +12,7 @@ client = new elasticsearch.Client(
   requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
 )
 
-mergeListing = (item) ->
+mergeListing = (docs, item) ->
   key =
     _index: config.elastic.dataShard
     _type: 'listing'
@@ -26,14 +26,14 @@ mergeListing = (item) ->
     parent: item.stash.id
   )
     .then (exists) ->
-      [
+      docs.push(
         if exists then { update: key } else { index: key },
         if exists then {
           doc:
             # todo: update price here
             lastSeen: moment().toDate()
         } else parser.listing(item)
-      ]
+      )
 
 orphan = (stashId, itemIds) ->
   client.updateByQuery(
@@ -52,12 +52,8 @@ orphan = (stashId, itemIds) ->
           }, { term: removed: false }]
           must_not: itemIds
   )
-    .then -> []
 
-mergeStash = (stash) ->
-  merged = Q.defer()
-  docs = []
-
+mergeStash = (docs, stash) ->
   client.exists(
     index: config.elastic.dataShard
     type: 'stash'
@@ -95,7 +91,7 @@ mergeStash = (stash) ->
           id: stash.id
 
         # add a promise to merge this listing
-        tasks.push(mergeListing(item))
+        tasks.push(mergeListing(docs, item))
 
         # build a search term for this item ID so that we can orphan removed items later
         itemIds.push(
@@ -106,36 +102,15 @@ mergeStash = (stash) ->
       # if itemIds is empty, remove all items, otherwise orphan the ones NOT present in itemIds
       tasks.push(orphan(stash.id, itemIds))
 
-      Q.allSettled(tasks)
-        .then (results) ->
-          for result in results
-            continue unless result.state is 'fulfilled' and result.value.length > 0
-            Array.prototype.push.apply(docs, result.value)
-
-          merged.resolve(docs)
-        .catch(merged.reject)
-      .catch(merged.reject)
-
-  merged.promise
+      Q.all(tasks)
 
 mergeStashes = (stashes) ->
-  merged = Q.defer()
-  tasks = []
-  for stash in stashes
-    tasks.push(mergeStash(stash))
+  docs = []
+  tasks = mergeStash(docs, stash) for stash in stashes
 
   Q.allSettled(tasks)
-    .then (results) ->
-      docs = []
-      for result in results
-        continue unless result.state is 'fulfilled' and result.value.length > 0
-        Array.prototype.push.apply(docs, result.value)
-
-      client.bulk({ body: docs })
-        .then(merged.resolve(docs.length / 2))
-        .catch(merged.reject)
-
-  merged.promise
+    .then -> client.bulk({ body: docs })
+    .then -> docs.length / 2
 
 module.exports =
   mergeStashes: mergeStashes
