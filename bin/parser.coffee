@@ -105,6 +105,8 @@ parseProperty = (prop, result) ->
       result.gearType =
         if result.baseLine.endsWith('Bow') then 'Bow'
         else "#{hands} Handed #{weaponType} Weapon"
+    when 'Level'
+      result.level = parseInt(prop.values[0][0])
     when 'Quality'
       result.quality = parseInt(prop.values[0][0].replace(/[%\\+]/g, ''))
     when 'Physical Damage'
@@ -206,6 +208,7 @@ parseSockets = (item, result) ->
   result.sockets = sockets
 
 parseItem = (item) ->
+  timestamp = moment().toDate()
   result =
     id: item.id
     league: item.league
@@ -225,7 +228,8 @@ parseItem = (item) ->
     rarity: null
     icon: item.icon
     note: item.note
-    level: item.ilvl
+    metaLevel: item.ilvl
+    level: null
     locked: item.lockedToCharacter
     identified: item.identified
     corrupted: item.corrupted
@@ -274,8 +278,12 @@ parseItem = (item) ->
     price: null
     chaosPrice: 0
     removed: false
-    firstSeen: moment().toDate()
-    flavourText: item.flavourText?.join()
+    firstSeen: timestamp
+    lastSeen: timestamp
+    flavourText: null
+
+  if item.flavourText?
+    result.flavourText = item.flavourText.join('\r').replace(/\\r/, ' ')
 
   parseType(item, result)
   parseCurrency(item, result)
@@ -295,14 +303,5 @@ parseItem = (item) ->
 
   result
 
-parseStash = (stash) ->
-  id: stash.id
-  name: stash.stash
-  lastSeen: moment().toDate()
-  owner:
-    account: stash.accountName
-    character: stash.lastCharacterName
-
 module.exports =
-  stash: parseStash
   listing: parseItem

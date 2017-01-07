@@ -4,7 +4,7 @@ pipeline = require './pipeline'
 
 handle = ->
   pipeline.next()
-    .then(pipeline.next)
+    .then(handle)
 
 handle()
   .then(handle)

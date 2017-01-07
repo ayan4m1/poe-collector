@@ -54,10 +54,13 @@ fetchChange = (changeId) ->
 
 processChange = (data) ->
   log.as.info("merging data for change #{data.id}")
+  duration = process.hrtime()
   elastic.mergeStashes(data.body.stashes)
-    .then(elastic.mergeListings)
-    .then ->
-      log.as.info("completed merge of #{data.id}")
+    .catch(log.as.error)
+    .then (res) ->
+      duration = process.hrtime(duration)
+      duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
+      log.as.info("merged #{res} documents in #{duration.asMilliseconds().toFixed(2)}ms, (#{Math.floor(res / duration.asSeconds())} docs/sec)")
       touch("#{cacheDir}/#{data.body.next_change_id}")
       Q(data.body.next_change_id ? data.id)
 

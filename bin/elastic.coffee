@@ -2,9 +2,7 @@ config = require('konfig')()
 
 Q = require 'q'
 moment = require 'moment'
-process = require 'process'
 
-log = require './logging'
 parser = require './parser'
 
 elasticsearch = require 'elasticsearch'
@@ -14,28 +12,28 @@ client = new elasticsearch.Client(
   requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
 )
 
-mergeListing = (listing) ->
-  result = [
-    index:
-      _index: config.elastic.dataShard
-      _type: 'listing'
-      _id: listing.id
-      _parent: listing.stash.id
-  ]
+mergeListing = (item) ->
+  key =
+    _index: config.elastic.dataShard
+    _type: 'listing'
+    _id: item.id
+    _parent: item.stash.id
 
-  client.get({
+  client.exists(
     index: config.elastic.dataShard
     type: 'listing'
-    id: listing.id
-    parent: listing.stash.id
-  })
-    .then (item) ->
-      item._source.lastSeen = moment().toDate()
-      result.push(item._source)
-      result
-    .catch (err) ->
-      result.push(parser.listing(listing)) if err.status is 404
-      result
+    id: item.id
+    parent: item.stash.id
+  )
+    .then (exists) ->
+      [
+        if exists then { update: key } else { index: key },
+        if exists then {
+          doc:
+            # todo: update price here
+            lastSeen: moment().toDate()
+        } else parser.listing(item)
+      ]
 
 orphan = (stashId, itemIds) ->
   client.updateByQuery(
@@ -54,70 +52,93 @@ orphan = (stashId, itemIds) ->
           }, { term: removed: false }]
           must_not: itemIds
   )
+    .then -> []
 
-module.exports =
-  mergeStashes: (stashes) ->
-    merged = Q.defer()
+mergeStash = (stash) ->
+  merged = Q.defer()
+  docs = []
 
-    docs = []
-    listings = {}
+  client.exists(
+    index: config.elastic.dataShard
+    type: 'stash'
+    id: stash.id
+  )
+    .then (exists) ->
+      key =
+        _index: config.elastic.dataShard
+        _type: 'stash'
+        _id: stash.id
 
-    for stash in stashes
-      docs.push
-        index:
-          _index: config.elastic.dataShard
-          _type: 'stash'
-          _id: stash.id
-      docs.push(parser.stash(stash))
-      listings[stash.id] = stash.items
+      docs.push(
+        if exists then { update: key } else { index: key },
+        if exists then {
+          doc:
+            name: stash.name
+            lastSeen: moment().toDate()
+            owner:
+              character: stash.lastCharacterName
+        } else {
+          id: stash.id
+          name: stash.stash
+          lastSeen: moment().toDate()
+          owner:
+            account: stash.accountName
+            character: stash.lastCharacterName
+        }
+      )
 
-    duration = process.hrtime()
-    client.bulk({ body: docs })
-      .then ->
-        duration = process.hrtime(duration)
-        duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds').asMilliseconds()
-        docCount = docs.length / 2
-        log.as.info("updated #{docCount} stashes in #{duration}ms (#{Math.floor(docCount / (duration / 1e3))} stashes/sec)")
-        merged.resolve(listings)
+      tasks = []
+      itemIds = []
+      for item in stash.items
+        # need a non-circular reference to the ID
+        item.stash =
+          id: stash.id
+
+        # add a promise to merge this listing
+        tasks.push(mergeListing(item))
+
+        # build a search term for this item ID so that we can orphan removed items later
+        itemIds.push(
+          term:
+            id: item.id
+        )
+
+      # if itemIds is empty, remove all items, otherwise orphan the ones NOT present in itemIds
+      tasks.push(orphan(stash.id, itemIds))
+
+      Q.allSettled(tasks)
+        .then (results) ->
+          for result in results
+            continue unless result.state is 'fulfilled' and result.value.length > 0
+            Array.prototype.push.apply(docs, result.value)
+
+          merged.resolve(docs)
+        .catch(merged.reject)
       .catch(merged.reject)
 
-    merged.promise
+  merged.promise
 
-  mergeListings: (data) ->
-    tasks = []
-    prepares = []
-    docCount = 0
+mergeStashes = (stashes) ->
+  merged = Q.defer()
+  tasks = []
+  for stash in stashes
+    tasks.push(mergeStash(stash))
 
-    for stashId, listings of data
-      for listing in listings
-        listing.stash =
-          id: stashId
-        prepares.push(mergeListing(listing))
+  Q.allSettled(tasks)
+    .then (results) ->
+      docs = []
+      for result in results
+        continue unless result.state is 'fulfilled' and result.value.length > 0
+        Array.prototype.push.apply(docs, result.value)
 
-      itemIds = listings.map (listing) ->
-        term:
-          id: listing.id
+      client.bulk({ body: docs })
+        .then(merged.resolve(docs.length / 2))
+        .catch(merged.reject)
 
-      tasks.push(orphan(stashId, itemIds))
+  merged.promise
 
-    duration = process.hrtime()
-    Q.allSettled(prepares)
-      .then (results) ->
-        docs = []
-
-        for result in results
-          continue unless result.state is 'fulfilled'
-          docs = docs.concat(result.value)
-
-        docCount = docs.length / 2
-        tasks.push(client.bulk({body: docs }))
-      .then -> Q.all(tasks)
-      .then ->
-        duration = process.hrtime(duration)
-        duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds').asMilliseconds()
-        log.as.info("updated #{docCount} listings in #{duration.toFixed(2)}ms (#{Math.floor(docCount / (duration / 1e3))} items/sec)")
-      .catch(log.as.error)
-
+module.exports =
+  mergeStashes: mergeStashes
   client: client
   config: config.elastic
 
