@@ -56,6 +56,18 @@ currencyFactors =
   eternal: 10000
   mirror: 5000
 
+regexes =
+  price:
+    note: /\~(b\/o|price|c\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/
+    name: /\~(b\/o|price|c\/o|gb\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/
+  type:
+    weapon: /^(Bow|Axe|Sword|Dagger|Mace|Staff|Claw|Sceptre|Wand|Fishing Rod)$/
+    armour: /^(Helmet|Gloves|Boots|Body|Shield|Quiver)$/
+    accessory: /^(Amulet|Belt|Ring)$/
+    map: /^Travel to this Map by using it in the Eternal Laboratory/
+    flask: /^Right click to drink/
+    jewel: /^Place into an allocated Jewel Socket/
+
 parseDamageType = (id) ->
   switch id
     when 1 then return 'Physical'
@@ -67,8 +79,8 @@ parseDamageType = (id) ->
 
 parseCurrency = (item, result) ->
   result.price =
-    if item.note? then item.note.match(/\~(b\/o|price|c\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/)
-    else if item.stashName? then item.stashName.match(/\~(b\/o|price|c\/o|gb\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/)
+    if item.note? then item.note.match(regexes.price.note)
+    else if item.stashName? then item.stashName.match(regexes.price.name)
 
   return unless result.price?.length > 0
   factor = 0
@@ -80,7 +92,6 @@ parseCurrency = (item, result) ->
         if regex.test(term)
           log.as.debug("[currency] input #{term} matched #{key}")
           factor = currencyFactors[key]
-
           break
     else quantity = parseInt(term)
 
@@ -154,12 +165,12 @@ parseType = (item, result) ->
     result.fullName = "#{result.name} #{item.typeLine}"
     result.itemType =
       switch
-        when /^(Bow|Axe|Sword|Dagger|Mace|Staff|Claw|Sceptre|Wand|Fishing Rod)$/.test(item.typeLine) then 'Weapon'
-        when /^(Helmet|Gloves|Boots|Body|Shield|Quiver)$/.test(item.typeLine) then 'Armour'
-        when /^(Amulet|Belt|Ring)$/.test(item.typeLine) then 'Accessory'
-        when /^Travel to this Map by using it in the Eternal Laboratory/.test(item.descrText) then 'Map'
-        when /^Place into an allocated Jewel Socket/.test(item.descrText) then 'Jewel'
-        when /^Right click to drink/.test(item.descrText) then 'Flask'
+        when regexes.type.weapon.test(item.typeLine) then 'Weapon'
+        when regexes.type.armour.test(item.typeLine) then 'Armour'
+        when regexes.type.accessory.test(item.typeLine) then 'Accessory'
+        when regexes.type.map.test(item.descrText) then 'Map'
+        when regexes.type.jewel.test(item.descrText) then 'Jewel'
+        when regexes.type.flask.test(item.descrText) then 'Flask'
         else 'Gear'
   else if frame?
     result.itemType = frame
