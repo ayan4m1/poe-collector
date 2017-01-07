@@ -2,10 +2,9 @@
 
 pipeline = require './pipeline'
 
-processLoop = ->
+handle = ->
   pipeline.next()
-    .then(processLoop)
+    .then(pipeline.next)
 
-
-processLoop()
-.done()
+handle()
+  .then(handle)
