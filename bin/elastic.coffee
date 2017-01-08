@@ -3,6 +3,7 @@ config = require('konfig')()
 Q = require 'q'
 moment = require 'moment'
 
+log = require './logging'
 parser = require './parser'
 
 elasticsearch = require 'elasticsearch'
@@ -13,27 +14,16 @@ client = new elasticsearch.Client(
 )
 
 mergeListing = (docs, item) ->
-  key =
-    _index: config.elastic.dataShard
-    _type: 'listing'
-    _id: item.id
-    _parent: item.stash.id
-
-  client.exists(
-    index: config.elastic.dataShard
-    type: 'listing'
-    id: item.id
-    parent: item.stash.id
+  docs.push({
+    index:
+      _index: config.elastic.dataShard
+      _type: 'listing'
+      _id: item.id
+      _parent: item.stash.id
+    }
+  ,
+      parser.listing(item)
   )
-    .then (exists) ->
-      docs.push(
-        if exists then { update: key } else { index: key },
-        if exists then {
-          doc:
-            # todo: update price here
-            lastSeen: moment().toDate()
-        } else parser.listing(item)
-      )
 
 orphan = (stashId, itemIds) ->
   client.updateByQuery(
@@ -54,62 +44,51 @@ orphan = (stashId, itemIds) ->
   )
 
 mergeStash = (docs, stash) ->
-  client.exists(
-    index: config.elastic.dataShard
-    type: 'stash'
+  docs.push({
+    index:
+      _index: config.elastic.dataShard
+      _type: 'stash'
+      _id: stash.id
+  })
+  docs.push({
     id: stash.id
-  )
-    .then (exists) ->
-      key =
-        _index: config.elastic.dataShard
-        _type: 'stash'
-        _id: stash.id
+    name: stash.stash
+    lastSeen: moment().toDate()
+    owner:
+      account: stash.accountName
+      character: stash.lastCharacterName
+  })
 
-      docs.push(
-        if exists then { update: key } else { index: key },
-        if exists then {
-          doc:
-            name: stash.name
-            lastSeen: moment().toDate()
-            owner:
-              character: stash.lastCharacterName
-        } else {
-          id: stash.id
-          name: stash.stash
-          lastSeen: moment().toDate()
-          owner:
-            account: stash.accountName
-            character: stash.lastCharacterName
-        }
-      )
+  log.as.debug("parsing stash #{stash.id}")
+  itemIds = []
+  for item in stash.items
+    # need a non-circular reference to the ID
+    item.stash =
+      id: stash.id
 
-      tasks = []
-      itemIds = []
-      for item in stash.items
-        # need a non-circular reference to the ID
-        item.stash =
-          id: stash.id
+    mergeListing(docs, item)
 
-        # add a promise to merge this listing
-        tasks.push(mergeListing(docs, item))
+    # build a search term for this item ID so that we can orphan removed items later
+    itemIds.push(
+      term:
+        id: item.id
+    )
 
-        # build a search term for this item ID so that we can orphan removed items later
-        itemIds.push(
-          term:
-            id: item.id
-        )
-
-      # if itemIds is empty, remove all items, otherwise orphan the ones NOT present in itemIds
-      tasks.push(orphan(stash.id, itemIds))
-
-      Q.all(tasks)
+  # if itemIds is empty, remove all items, otherwise orphan the ones NOT present in itemIds
+  orphan(stash.id, itemIds)
 
 mergeStashes = (stashes) ->
   docs = []
-  tasks = mergeStash(docs, stash) for stash in stashes
+  tasks = []
 
-  Q.allSettled(tasks)
-    .then -> client.bulk({ body: docs })
+  log.as.info("starting merge of #{stashes.length} stashes")
+  for stash in stashes
+    tasks.push(mergeStash(docs, stash))
+
+  # bulk the documents and then process orphans
+  client.bulk({ body: docs })
+    .then(Q.allSettled(tasks))
+    .catch(log.as.error)
     .then -> docs.length / 2
 
 module.exports =
