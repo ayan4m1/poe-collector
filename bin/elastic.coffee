@@ -14,15 +14,28 @@ client = new elasticsearch.Client(
 )
 
 mergeListing = (docs, item) ->
-  docs.push({
-    index:
-      _index: config.elastic.dataShard
-      _type: 'listing'
-      _id: item.id
-      _parent: item.stash.id
-    }
-  ,
-      parser.listing(item)
+  client.get(
+    index: config.elastic.dataShard
+    type: 'listing'
+    id: item.id
+    parent: item.stash.id
+  , (err, res) ->
+    listing = {}
+    if err?.status is 404
+      listing = parser.listing(item)
+    else
+      listing = res._source
+      listing.lastSeen = res._now
+      # todo: update price
+      # listing.price =
+
+    docs.push({
+      index:
+        _index: config.elastic.dataShard
+        _type: 'listing'
+        _id: item.id
+        _parent: item.stash.id
+    }, listing)
   )
 
 orphan = (stashId, itemIds) ->
@@ -60,13 +73,14 @@ mergeStash = (docs, stash) ->
   })
 
   log.as.debug("parsing stash #{stash.id}")
+  tasks = []
   itemIds = []
   for item in stash.items
     # need a non-circular reference to the ID
     item.stash =
       id: stash.id
 
-    mergeListing(docs, item)
+    tasks.push(mergeListing(docs, item))
 
     # build a search term for this item ID so that we can orphan removed items later
     itemIds.push(
@@ -75,7 +89,9 @@ mergeStash = (docs, stash) ->
     )
 
   # if itemIds is empty, remove all items, otherwise orphan the ones NOT present in itemIds
-  orphan(stash.id, itemIds)
+  tasks.push(orphan(stash.id, itemIds))
+
+  Q.all(tasks)
 
 mergeStashes = (stashes) ->
   docs = []
