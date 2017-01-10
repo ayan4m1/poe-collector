@@ -246,14 +246,14 @@ parseItem = (item) ->
     corrupted: item.corrupted
     verified: item.verified
     requirements:
-      level: 0
-      int: 0
-      dex: 0
-      str: 0
+      level: null
+      int: null
+      dex: null
+      str: null
     attributes: []
     modifiers: []
     sockets: []
-    quality: 0
+    quality: null
     stack:
       count: null
       maximum: null

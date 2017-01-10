@@ -13,30 +13,30 @@ client = new elasticsearch.Client(
   requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
 )
 
-mergeListing = (docs, item) ->
-  client.get(
+mergeListing = (item) ->
+  merged = Q.defer()
+
+  client.get({
     index: config.elastic.dataShard
     type: 'listing'
     id: item.id
     parent: item.stash.id
-  , (err, res) ->
-    listing = {}
-    if err?.status is 404
-      listing = parser.listing(item)
-    else
-      listing = res._source
-      listing.lastSeen = res._now
-      # todo: update price
-      # listing.price =
+  }, (err, res) ->
+    return merged.reject(err) if err? and err?.status isnt 404
 
-    docs.push({
+    listing = if err?.status is 404 then parser.listing(item) else res._source
+    listing.lastSeen = res._now if res?
+
+    merged.resolve([{
       index:
         _index: config.elastic.dataShard
         _type: 'listing'
         _id: item.id
         _parent: item.stash.id
-    }, listing)
+    }, listing])
   )
+
+  merged.promise
 
 orphan = (stashId, itemIds) ->
   client.updateByQuery(
@@ -56,22 +56,7 @@ orphan = (stashId, itemIds) ->
           must_not: itemIds
   )
 
-mergeStash = (docs, stash) ->
-  docs.push({
-    index:
-      _index: config.elastic.dataShard
-      _type: 'stash'
-      _id: stash.id
-  })
-  docs.push({
-    id: stash.id
-    name: stash.stash
-    lastSeen: moment().toDate()
-    owner:
-      account: stash.accountName
-      character: stash.lastCharacterName
-  })
-
+mergeStash = (stash) ->
   log.as.debug("parsing stash #{stash.id}")
   tasks = []
   itemIds = []
@@ -80,7 +65,7 @@ mergeStash = (docs, stash) ->
     item.stash =
       id: stash.id
 
-    tasks.push(mergeListing(docs, item))
+    tasks.push(mergeListing(item))
 
     # build a search term for this item ID so that we can orphan removed items later
     itemIds.push(
@@ -88,10 +73,9 @@ mergeStash = (docs, stash) ->
         id: item.id
     )
 
-  # if itemIds is empty, remove all items, otherwise orphan the ones NOT present in itemIds
   tasks.push(orphan(stash.id, itemIds))
 
-  Q.all(tasks)
+  tasks
 
 mergeStashes = (stashes) ->
   docs = []
@@ -99,13 +83,34 @@ mergeStashes = (stashes) ->
 
   log.as.info("starting merge of #{stashes.length} stashes")
   for stash in stashes
-    tasks.push(mergeStash(docs, stash))
+    docs.push({
+      index:
+        _index: config.elastic.dataShard
+        _type: 'stash'
+        _id: stash.id
+    }, {
+      id: stash.id
+      name: stash.stash
+      lastSeen: moment().toDate()
+      owner:
+        account: stash.accountName
+        character: stash.lastCharacterName
+    })
 
-  # bulk the documents and then process orphans
+    Array.prototype.push.apply(tasks, mergeStash(stash))
+
   client.bulk({ body: docs })
-    .then(Q.allSettled(tasks))
-    .catch(log.as.error)
-    .then -> docs.length / 2
+    .then -> Q.all(tasks)
+    .then (results) ->
+      listings = []
+
+      for result in results
+        continue unless Array.isArray(result)
+        Array.prototype.push.apply(listings, result)
+
+      client.bulk({ body: listings })
+        .then -> listings.length / 2
+
 
 module.exports =
   mergeStashes: mergeStashes
