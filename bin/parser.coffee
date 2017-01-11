@@ -68,6 +68,21 @@ regexes =
     map: /^Travel to this Map by using it in the Eternal Laboratory/
     flask: /^Right click to drink/
     jewel: /^Place into an allocated Jewel Socket/
+  mods:
+    offense: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less) (Spell|Cast|Attack|Projectile|Movement|Melee Physical) (Damage|Speed)/
+    defense: /([-+]?)(\d*\.?\d+%?) (to|increased) (Armour|Evasion Rating|Energy Shield)/
+    stun: /([-+]?)(\d*\.?\d+%?) (increased|reduced) Stun and Block Recovery/
+    block: /([-+]?)(\d*\.?\d+%?) additional Chance to Block with (Staves|Axes|Maces|Swords)/
+    reflect: /Reflects (\d+) to (\d+) (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
+
+parseMod = (mod, result) ->
+  ###for type, regex of regexes.mods
+    matchData = mod.match(regex)
+    continue unless matchData?
+    log.as.info("found mod matching type #{type}")
+    return###
+
+  result.modifiers.push(mod)
 
 parseDamageType = (id) ->
   switch id
@@ -303,10 +318,9 @@ parseItem = (item) ->
       evasion: 0
       shield: 0
     price: null
-    chaosPrice: 0
+    chaosPrice: null
     removed: false
     firstSeen: timestamp
-    lastSeen: timestamp
     flavourText: null
 
   if item.icon?
@@ -330,8 +344,16 @@ parseItem = (item) ->
   if item.requirements?
     parseRequirements(item, result)
 
+  # we don't care which is which
+  mods = []
+  if item.implicitMods?
+    Array.prototype.push.apply(mods, item.implicitMods)
+
   if item.explicitMods?
-    result.modifiers = item.explicitMods
+    Array.prototype.push.apply(mods, item.explicitMods)
+
+  for mod in mods
+    parseMod(mod, result)
 
   result
 

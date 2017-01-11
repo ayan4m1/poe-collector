@@ -63,7 +63,8 @@ mergeListing = (item) ->
   }, (err, res) ->
     return merged.reject(err) if err? and err?.status isnt 404
 
-    listing = if err?.status is 404 then parser.listing(item) else res._source
+    listing = parser.listing(item) if err?.status is 404
+    listing = res._source if res?._source?
 
     unless err?.status is 404
       listing.lastSeen = moment().toDate()
