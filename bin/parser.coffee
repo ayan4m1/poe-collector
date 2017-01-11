@@ -121,6 +121,12 @@ parseProperty = (prop, result) ->
       result.level = parseInt(prop.values[0][0])
     when 'Quality'
       result.quality = parseInt(prop.values[0][0].replace(/[%\\+]/g, ''))
+    when 'Evasion Rating'
+      result.defense.evasion += parseInt(prop.values[0][0])
+    when 'Energy Shield'
+      result.defense.shield += parseInt(prop.values[0][0])
+    when 'Armour'
+      result.defense.armour += parseInt(prop.values[0][0])
     when 'Physical Damage'
       result.offense.physical = parseRange(prop.values[0][0])
     when 'Chaos Damage'
@@ -135,6 +141,12 @@ parseProperty = (prop, result) ->
         damage[damageKey] = range
 
       result.offense.elemental = damage
+    when 'Critical Strike Chance'
+      result.offense.critChance = parseFloat(prop.values[0][0].replace('%', ''))
+    when 'Attacks per Second'
+      result.offense.attacksPerSecond = parseFloat(prop.values[0][0])
+    when 'Weapon Range'
+      result.offense.meleeRange = parseInt(prop.values[0][0])
     when 'Stack Size'
       stackInfo = prop.values[0][0].split(/\//)
       result.stack =
@@ -276,6 +288,7 @@ parseItem = (item) ->
       physical:
         min: 0
         max: 0
+      critChance: 0
       attacksPerSecond: 0
       meleeRange: 0
     defense:

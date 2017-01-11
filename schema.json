@@ -229,6 +229,9 @@
                   }
                 }
               },
+              "critChance": {
+                "type": "float"
+              },
               "attacksPerSecond": {
                 "type": "float"
               },
