@@ -297,8 +297,8 @@ parseItem = (item) ->
 
   if item.icon?
     iconHash = qs.parse(item.icon.substring(item.icon.indexOf('?')))
-    item.icon = item.icon.substring(0, item.icon.indexOf('?'))
-    item.iconVersion = iconHash.v
+    result.icon = item.icon.substring(0, item.icon.indexOf('?'))
+    result.iconVersion = iconHash.v
 
   if item.flavourText?
     result.flavourText = item.flavourText.join('\r').replace(/\\r/, ' ')
