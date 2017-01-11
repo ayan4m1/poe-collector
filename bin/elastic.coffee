@@ -25,7 +25,7 @@ mergeListing = (item) ->
     return merged.reject(err) if err? and err?.status isnt 404
 
     listing = if err?.status is 404 then parser.listing(item) else res._source
-    listing.lastSeen = res._now if res?
+    listing.lastSeen = moment().toDate() if res?
 
     merged.resolve([{
       index:
