@@ -17,7 +17,8 @@
             "type": "keyword"
           },
           "league": {
-            "type": "keyword"
+            "type": "keyword",
+            "fielddata": "true"
           },
           "name": {
             "type": "text"
@@ -84,6 +85,10 @@
           "stash": {
             "type": "keyword"
           },
+          "league": {
+            "type": "keyword",
+            "fielddata": "true"
+          }
           "name": {
             "type": "text"
           },
