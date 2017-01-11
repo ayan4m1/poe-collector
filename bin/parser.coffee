@@ -101,7 +101,7 @@ parseCurrency = (item, result) ->
   return unless result.price?.length > 0
   factor = 0
   quantity = 0
-  result.price.pop()
+  result.price.shift()
   for term in result.price
     continue if term is 'price' or term is 'b/o'
     if isNaN(parseInt(term))
