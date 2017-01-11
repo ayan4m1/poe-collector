@@ -23,7 +23,7 @@ currencyRegexes =
   alch: /(Orb)?(of)?Alch(emy)?/i
   regal: /Regal(Orb)?/i
   aug: /Orb(of)?Augmentation/i
-  exalt: /^Ex(alted)?(Orb)?$/i
+  exalt: /Ex(alted)?(Orb)?/i
   alt: /Alt|(Orb)?(of)?Alteration/i
   chaos: /Ch?(aos)?(Orb)?/i
   blessed: /Bless|Blessed(Orb)?/i
