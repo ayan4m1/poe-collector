@@ -306,6 +306,10 @@
             "type": "text",
             "index": "not_analyzed"
           },
+          "iconVersion": {
+            "type": "text",
+            "index": "not_analyzed"
+          },
           "flavourText": {
             "type": "text"
           },
