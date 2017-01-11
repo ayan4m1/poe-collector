@@ -1,5 +1,6 @@
 'use strict'
 
+vm = require 'vm'
 qs = require 'qs'
 moment = require 'moment'
 process = require 'process'
@@ -75,12 +76,63 @@ regexes =
     block: /([-+]?)(\d*\.?\d+%?) additional Chance to Block with (Staves|Axes|Maces|Swords)/
     reflect: /Reflects (\d+) to (\d+) (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
 
+modOperators =
+  increased: (a, b) -> a * (b + 1.0)
+  reduced: (a, b) -> a * (1.0 - b)
+  less: (a, b) -> a - b
+  more: (a, b) -> a + b
+  to: (a, b, sign) -> if sign is '+' then modOperators.more(a, b) else modOperators.less(a, b)
+
+modParsers =
+  defense: (mod, result) ->
+    mod.shift()
+    operator = modOperators[mod[2]]
+    if mod[1].indexOf('%') > 0
+      value = parseInt(mod[1].replace('%','')) * 0.01
+    else
+      value = parseInt(mod[1])
+
+    switch mod[3]
+      when 'Armour'
+        result.defense.armour = operator(result.defense.armour, value, mod[0])
+      when 'Evasion Rating'
+        result.defense.evasion = operator(result.defense.evasion, value, mod[0])
+      when 'Energy Shield'
+        result.defense.shield = operator(result.defense.shield, value, mod[0])
+  offense: (mod, result) ->
+    mod.shift()
+    value = parseInt(mod[1].replace('%', ''))
+    if mod[1].indexOf('%') > 0 then value *= 0.01
+    if mod[0] is '-' then value *= -1
+
+    operator = modOperators[mod[2]]
+    switch mod[4]
+      when 'Speed'
+        switch mod[3]
+          when 'Attack'
+            result.offense.attacksPerSecond = operator(result.offense.attacksPerSecond, value)
+          when 'Cast'
+            result.effects.spellSpeed = operator(result.effects.spellSpeed, value)
+          when 'Projectile'
+            result.effects.projectileSpeed = operator(result.effects.projectileSpeed, value)
+          when 'Movement'
+            result.effects.movementSpeed = operator(result.effects.movementSpeed, value)
+      when 'Damage'
+        switch mod[3]
+          when 'Projectile'
+            result.effects.projectileDamage = operator(result.effects.projectileDamage, value)
+          when 'Spell'
+            result.effects.spellDamage = operator(result.effects.spellDamage, value)
+          when 'Melee Physical'
+            result.offense.physical.min = operator(result.offense.physical.min, value)
+            result.offense.physical.max = operator(result.offense.physical.max, value)
+
 parseMod = (mod, result) ->
-  ###for type, regex of regexes.mods
+  for type, regex of regexes.mods
     matchData = mod.match(regex)
     continue unless matchData?
-    log.as.info("found mod matching type #{type}")
-    return###
+    return unless modParsers[type]?
+    modParsers[type](matchData, result)
 
   result.modifiers.push(mod)
 
@@ -287,6 +339,12 @@ parseItem = (item) ->
     stack:
       count: null
       maximum: null
+    effects:
+      projectileSpeed: 1.0
+      projectileDamage: 1.0
+      movementSpeed: 1.0
+      spellSpeed: 1.0
+      spellDamage: 1.0
     offense:
       elemental:
         fire:
