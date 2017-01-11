@@ -17,8 +17,7 @@
             "type": "keyword"
           },
           "league": {
-            "type": "keyword",
-            "fielddata": "true"
+            "type": "keyword"
           },
           "name": {
             "type": "text"
@@ -86,8 +85,7 @@
             "type": "keyword"
           },
           "league": {
-            "type": "keyword",
-            "fielddata": "true"
+            "type": "keyword"
           },
           "name": {
             "type": "text"
