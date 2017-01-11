@@ -47,5 +47,15 @@ Q.spread [
   process($pre)
   process($post)
 
-  console.dir(affixes)
   jsonfile.writeFileSync('affixes.json', affixes)
+
+  bucket = []
+
+  for gear, mods of affixes
+    for mod in mods
+      for stat in mod.stats
+        name = stat.replace('Local ', '').replace('Minimum ', '').replace('Maximum', '').trim()
+        if bucket.indexOf(name) < 0
+          bucket.push(name)
+
+  jsonfile.writeFileSync('stats.json', bucket)
