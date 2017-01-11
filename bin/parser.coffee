@@ -1,5 +1,6 @@
 'use strict'
 
+qs = require 'qs'
 moment = require 'moment'
 process = require 'process'
 jsonfile = require 'jsonfile'
@@ -237,7 +238,8 @@ parseItem = (item) ->
     baseLine: null
     # Normal, Magic, Rare, Unique if applicable
     rarity: null
-    icon: item.icon
+    icon: null
+    iconVersion: null
     note: item.note
     metaLevel: item.ilvl
     level: null
@@ -292,6 +294,11 @@ parseItem = (item) ->
     firstSeen: timestamp
     lastSeen: timestamp
     flavourText: null
+
+  if item.icon?
+    iconHash = qs.parse(item.icon.substring(item.icon.indexOf('?')))
+    item.icon = item.icon.substring(0, item.icon.indexOf('?'))
+    item.iconVersion = iconHash.v
 
   if item.flavourText?
     result.flavourText = item.flavourText.join('\r').replace(/\\r/, ' ')
