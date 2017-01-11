@@ -1,10 +1,12 @@
 'use strict'
 
+elastic = require './elastic'
 pipeline = require './pipeline'
 
 handle = ->
   pipeline.next()
     .then(handle)
 
-handle()
+elastic.updateIndices()
+  .then(handle)
   .then(handle)

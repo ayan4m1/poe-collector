@@ -1,9 +1,49 @@
 {
-  "data": {
+  "stash": {
     "settings": {
       "index": {
-        "refresh_interval": "15s",
-        "number_of_shards": "2",
+        "refresh_interval": "10s",
+        "number_of_shards": "1",
+        "number_of_replicas": "0",
+        "requests.cache.enable": true,
+        "translog.durability": "async",
+        "translog.sync_interval": "5s"
+      }
+    },
+    "mappings": {
+      "stash": {
+        "properties": {
+          "id": {
+            "type": "keyword"
+          },
+          "league": {
+            "type": "keyword"
+          },
+          "name": {
+            "type": "text"
+          },
+          "lastSeen": {
+            "type": "date"
+          },
+          "seller": {
+            "properties": {
+              "account": {
+                "type": "keyword"
+              },
+              "character": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "listing": {
+    "settings": {
+      "index": {
+        "refresh_interval": "20s",
+        "number_of_shards": "5",
         "number_of_replicas": "0",
         "requests.cache.enable": true,
         "translog.durability": "async",
@@ -36,41 +76,12 @@
       }
     },
     "mappings": {
-      "stash": {
-        "properties": {
-          "id": {
-            "type": "keyword"
-          },
-          "league": {
-            "type": "keyword"
-          },
-          "name": {
-            "type": "text"
-          },
-          "lastSeen": {
-            "type": "date"
-          },
-          "seller": {
-            "properties": {
-              "account": {
-                "type": "keyword"
-              },
-              "character": {
-                "type": "keyword"
-              }
-            }
-          }
-        }
-      },
       "listing": {
-        "_parent": {
-          "type": "stash"
-        },
-        "_routing": {
-          "required": "true"
-        },
         "properties": {
           "id": {
+            "type": "keyword"
+          },
+          "stash": {
             "type": "keyword"
           },
           "name": {
@@ -327,7 +338,10 @@
   },
   "league": {
     "settings": {
-      "number_of_shards": 1
+      "index": {
+        "number_of_shards": "1",
+        "number_of_replicas": "0"
+      }
     },
     "mappings": {
       "league": {

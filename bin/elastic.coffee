@@ -2,6 +2,7 @@ config = require('konfig')()
 
 Q = require 'q'
 moment = require 'moment'
+jsonfile = require 'jsonfile'
 
 log = require './logging'
 parser = require './parser'
@@ -13,34 +14,73 @@ client = new elasticsearch.Client(
   requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
 )
 
+putTemplate = (name, settings, mappings) ->
+  client.indices.putTemplate
+    create: false
+    name: "#{name}*"
+    body:
+      template: "#{name}*"
+      settings: settings
+      mappings: mappings
+
+createTemplates = ->
+  schema = jsonfile.readFileSync("#{__dirname}/../schema.json")
+
+  tasks = []
+  for shard, info of schema
+    shardName = "poe-#{shard}"
+    tasks.push(putTemplate(shardName, info.settings, info.mappings))
+
+    # only create date partitioned indices for stash and listing
+    if shard isnt 'listing' and shard isnt 'stash'
+      tasks.push(createIndex(shardName))
+    else
+      tasks.push(createDatedIndices(shardName, 7))
+
+  Q.all(tasks)
+
+createIndex = (name) ->
+  client.indices.exists({ index: name })
+  .then (exists) ->
+    return if exists
+    log.as.info("creating index #{name}")
+    client.indices.create({ index: name })
+
+createDatedIndices = (baseName, dayCount) ->
+  tasks = []
+  for day in [ -1 ... dayCount ]
+    tasks.push(createIndex("#{baseName}-#{moment().add(day, 'day').format('YYYY-MM-DD')}"))
+  Q.all(tasks)
+
 mergeListing = (item) ->
   merged = Q.defer()
 
+  shard = "poe-listing-#{moment().format('YYYY-MM-DD')}"
   client.get({
-    index: config.elastic.dataShard
+    index: shard
     type: 'listing'
     id: item.id
-    parent: item.stash.id
   }, (err, res) ->
     return merged.reject(err) if err? and err?.status isnt 404
 
     listing = if err?.status is 404 then parser.listing(item) else res._source
-    listing.lastSeen = moment().toDate() if res?
+    listing.lastSeen = moment().toDate() unless err?.status is 404
 
+    shard = "poe-listing-#{moment().format('YYYY-MM-DD')}"
     merged.resolve([{
       index:
-        _index: config.elastic.dataShard
+        _index: shard
         _type: 'listing'
         _id: item.id
-        _parent: item.stash.id
     }, listing])
   )
 
   merged.promise
 
 orphan = (stashId, itemIds) ->
+  shard = "poe-listing-#{moment().format('YYYY-MM-DD')}"
   client.updateByQuery(
-    index: config.elastic.dataShard
+    index: shard
     type: 'listing'
     body:
       script:
@@ -49,10 +89,12 @@ orphan = (stashId, itemIds) ->
       query:
         bool:
           must: [{
-            parent_id:
-              type: 'listing'
-              id: stashId
-          }, { term: removed: false }]
+            term:
+              stash: stashId
+          }, {
+            term:
+              removed: false
+          }]
           must_not: itemIds
   )
 
@@ -61,9 +103,7 @@ mergeStash = (stash) ->
   tasks = []
   itemIds = []
   for item in stash.items
-    # need a non-circular reference to the ID
-    item.stash =
-      id: stash.id
+    item.stash = stash.id
 
     tasks.push(mergeListing(item))
 
@@ -82,10 +122,11 @@ mergeStashes = (stashes) ->
   tasks = []
 
   log.as.info("starting merge of #{stashes.length} stashes")
+  shard = "poe-stash-#{moment().format('YYYY-MM-DD')}"
   for stash in stashes
     docs.push({
       index:
-        _index: config.elastic.dataShard
+        _index: shard
         _type: 'stash'
         _id: stash.id
     }, {
@@ -99,20 +140,21 @@ mergeStashes = (stashes) ->
 
     Array.prototype.push.apply(tasks, mergeStash(stash))
 
-  client.bulk({ body: docs })
-    .then -> Q.all(tasks)
+  Q.all(tasks)
     .then (results) ->
-      listings = []
-
       for result in results
         continue unless Array.isArray(result)
-        Array.prototype.push.apply(listings, result)
+        Array.prototype.push.apply(docs, result)
 
-      client.bulk({ body: listings })
-        .then -> listings.length / 2
+      client.bulk({ body: docs })
 
+      Q(docs.length / 2)
 
 module.exports =
+  updateIndices: ->
+    createTemplates()
+      .then ->
+        log.as.info("finished setting up indices")
   mergeStashes: mergeStashes
   client: client
   config: config.elastic
