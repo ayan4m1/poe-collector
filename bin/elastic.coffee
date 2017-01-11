@@ -57,6 +57,7 @@ mergeListing = (item) ->
 
   shard = "poe-listing-#{moment().format('YYYY-MM-DD')}"
   client.get({
+    index: 'poe-listing*'
     type: 'listing'
     id: item.id
   }, (err, res) ->
