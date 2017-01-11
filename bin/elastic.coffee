@@ -57,14 +57,21 @@ mergeListing = (item) ->
 
   shard = "poe-listing-#{moment().format('YYYY-MM-DD')}"
   client.get({
-    index: shard
     type: 'listing'
     id: item.id
   }, (err, res) ->
     return merged.reject(err) if err? and err?.status isnt 404
 
     listing = if err?.status is 404 then parser.listing(item) else res._source
-    listing.lastSeen = moment().toDate() unless err?.status is 404
+
+    unless err?.status is 404
+      listing.lastSeen = moment().toDate()
+      # need to remove this document from the old index
+      if res._index isnt shard
+        client.delete
+          index: res._index
+          type: 'listing'
+          id: item.id
 
     shard = "poe-listing-#{moment().format('YYYY-MM-DD')}"
     merged.resolve([{
