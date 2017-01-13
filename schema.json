@@ -167,69 +167,284 @@
           "modifiers": {
             "type": "text"
           },
+          "gemLevel": {
+            "all": {
+              "type": "integer"
+            },
+            "bow": {
+              "type": "integer"
+            },
+            "chaos": {
+              "type": "integer"
+            },
+            "cold": {
+              "type": "integer"
+            },
+            "fire": {
+              "type": "integer"
+            },
+            "lightning": {
+              "type": "integer"
+            },
+            "melee": {
+              "type": "integer"
+            },
+            "minion": {
+              "type": "integer"
+            },
+            "spell": {
+              "type": "integer"
+            }
+          },
+          "stats": {
+            "type": "object",
+            "properties": {
+              "attribute": {
+                "properties": {
+                  "int": {
+                    "type": "integer"
+                  },
+                  "str": {
+                    "type": "integer"
+                  },
+                  "dex": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "attributeRequirementReduction": {
+                "type": "float"
+              },
+              "manaCostReduction": {
+                "type": "float"
+              },
+              "itemRarity": {
+                "type": "float"
+              },
+              "life": {
+                "type": "integer"
+              },
+              "mana": {
+                "type": "integer"
+              },
+              "regen": {
+                "properties": {
+                  "life": {
+                    "type": "float"
+                  },
+                  "mana": {
+                    "type": "float"
+                  }
+                }
+              },
+              "movementSpeed": {
+                "type": "float"
+              },
+              "lightRadius": {
+                "type": "float"
+              }
+            }
+          },
           "offense": {
             "type": "object",
             "properties": {
-              "elemental": {
+              "onHit": {
                 "properties": {
-                  "fire": {
-                    "type": "nested",
+                  "life": {
+                    "type": "integer"
+                  },
+                  "mana": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "onKill": {
+                "properties": {
+                  "life": {
+                    "type": "integer"
+                  },
+                  "mana": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "leech": {
+                "properties": {
+                  "life": {
+                    "type": "float"
+                  },
+                  "mana": {
+                    "type": "float"
+                  }
+                }
+              },
+              "perTarget": {
+                "properties": {
+                  "life": {
+                    "type": "integer"
+                  },
+                  "shield": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "damage": {
+                "all": {
+                  "type": "float"
+                },
+                "melee": {
+                  "type": "float"
+                },
+                "projectile": {
+                  "type": "float"
+                },
+                "areaOfEffect": {
+                  "type": "float"
+                },
+                "elemental": {
+                  "properties": {
+                    "fire": {
+                      "type": "nested",
+                      "properties": {
+                        "min": {
+                          "type": "integer"
+                        },
+                        "max": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "cold": {
+                      "type": "nested",
+                      "properties": {
+                        "min": {
+                          "type": "integer"
+                        },
+                        "max": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "lightning": {
+                      "type": "nested",
+                      "properties": {
+                        "min": {
+                          "type": "integer"
+                        },
+                        "max": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "physical": {
+                  "type": "nested",
+                  "properties": {
+                    "min": {
+                      "type": "integer"
+                    },
+                    "max": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "chaos": {
+                  "type": "nested",
+                  "properties": {
+                    "min": {
+                      "type": "integer"
+                    },
+                    "max": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "critical": {
+                "properties": {
+                  "chance": {
+                    "type": "float"
+                  },
+                  "multiplier": {
+                    "type": "float"
+                  },
+                  "elemental": {
                     "properties": {
-                      "min": {
-                        "type": "integer"
+                      "chance": {
+                        "type": "float"
                       },
-                      "max": {
-                        "type": "integer"
+                      "multiplier": {
+                        "type": "float"
                       }
                     }
                   },
-                  "cold": {
-                    "type": "nested",
+                  "spell": {
                     "properties": {
-                      "min": {
-                        "type": "integer"
+                      "chance": {
+                        "type": "float"
                       },
-                      "max": {
-                        "type": "integer"
+                      "multiplier": {
+                        "type": "float"
                       }
                     }
                   },
-                  "lightning": {
-                    "type": "nested",
+                  "melee": {
                     "properties": {
-                      "min": {
+                      "chance": {
+                        "type": "float"
+                      },
+                      "multiplier": {
+                        "type": "float"
+                      }
+                    }
+                  }
+                }
+              },
+              "spell": {
+                "properties": {
+                  "damage": {
+                    "type": "float"
+                  },
+                  "elemental": {
+                    "properties": {
+                      "fire": {
                         "type": "integer"
                       },
-                      "max": {
+                      "cold": {
+                        "type": "integer"
+                      },
+                      "lightning": {
                         "type": "integer"
                       }
                     }
                   }
                 }
               },
-              "physical": {
-                "type": "nested",
+              "projectile": {
                 "properties": {
-                  "min": {
-                    "type": "integer"
+                  "damage": {
+                    "type": "float"
                   },
-                  "max": {
-                    "type": "integer"
+                  "speed": {
+                    "type": "float"
                   }
                 }
               },
-              "chaos": {
-                "type": "nested",
+              "stun": {
                 "properties": {
-                  "min": {
-                    "type": "integer"
+                  "duration": {
+                    "type": "float"
                   },
-                  "max": {
-                    "type": "integer"
+                  "thresholdReduction": {
+                    "type": "float"
                   }
                 }
               },
-              "critChance": {
+              "attackSpeed": {
+                "type": "float"
+              },
+              "castSpeed": {
                 "type": "float"
               },
               "attacksPerSecond": {
@@ -237,13 +452,16 @@
               },
               "meleeRange": {
                 "type": "integer"
+              },
+              "knockbackChance": {
+                "type": "float"
               }
             }
           },
           "defense": {
             "type": "object",
             "properties": {
-              "resistance": {
+              "resist": {
                 "properties": {
                   "elemental": {
                     "properties": {
@@ -274,6 +492,45 @@
               },
               "shield": {
                 "type": "integer"
+              },
+              "blockChance": {
+                "type": "float"
+              },
+              "physicalDamageReduction": {
+                "type": "float"
+              },
+              "totem": {
+                "properties": {
+                  "resist": {
+                    "properties": {
+                      "elemental": {
+                        "properties": {
+                          "all": {
+                            "type": "float"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "minion": {
+                "properties": {
+                  "blockChance": {
+                    "type": "float"
+                  },
+                  "resist": {
+                    "properties": {
+                      "elemental": {
+                        "properties": {
+                          "all": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           },

@@ -6,57 +6,12 @@ moment = require 'moment'
 process = require 'process'
 jsonfile = require 'jsonfile'
 
+currency = require './currency'
 elastic = require './elastic'
 timing = require './timing'
 log = require './logging'
 
 baseTypes = jsonfile.readFileSync("#{__dirname}/../itemTypes.json")
-
-currencyRegexes =
-  bauble: /(Glassblower)?'?s?Bauble/i
-  chisel: /(Cartographer)?'?s?Chis(el)?/i
-  gcp: /(Gemcutter'?s?)?(Prism|gpc)/i
-  jewelers: /Jew(eller)?'?s?(Orb)?/i
-  chrome: /Chrom(atic)?(Orb)?/i
-  fuse: /(Orb)?(of)?Fus(ing|e)?/i
-  transmute: /(Orb)?(of)?Trans(mut(ation|e))?/i
-  chance: /(Orb)?(of)?Chance/i
-  alch: /(Orb)?(of)?Alch(emy)?/i
-  regal: /Regal(Orb)?/i
-  aug: /Orb(of)?Augmentation/i
-  exalt: /Ex(alted)?(Orb)?/i
-  alt: /Alt|(Orb)?(of)?Alteration/i
-  chaos: /Ch?(aos)?(Orb)?/i
-  blessed: /Bless|Blessed(Orb)?/i
-  divine: /Divine(Orb)?/i
-  scour: /Scour|(Orb)?(of)?Scouring/i
-  mirror: /Mir+(or)?(of)?(Kalandra)?/i
-  regret: /(Orb)?(of)?Regret/i
-  vaal: /Vaal(Orb)?/i
-  eternal: /Eternal(Orb)?/i
-  gold: /PerandusCoins?/i
-  silver: /(Silver|Coin)+/i
-
-currencyFactors =
-  # < 1 chaos, fluctuates
-  blessed: 1 / 3
-  chisel: 1 / 3
-  chrome: 1 / 12
-  alt: 1 / 10
-  fuse: 1 / 2
-  alch: 1 / 2
-  scour: 1 / 2
-  # chaos-equivalent
-  chaos: 1
-  vaal: 1
-  regret: 1
-  regal: 1
-  # > 1 chaos
-  divine: 10
-  exalt: 70
-  # these are silly
-  eternal: 10000
-  mirror: 5000
 
 regexes =
   price:
@@ -71,8 +26,7 @@ regexes =
     jewel: /^Place into an allocated Jewel Socket/
   mods:
     offense: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less) (Spell|Cast|Attack|Projectile|Movement|Melee Physical) (Damage|Speed)/
-    defense: /([-+]?)(\d*\.?\d+%?) (to|increased) (Armour|Evasion Rating|Energy Shield)/
-    stun: /([-+]?)(\d*\.?\d+%?) (increased|reduced) Stun and Block Recovery/
+    defense: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced) (Armour|Evasion Rating|Energy Shield|Stun and Block Recovery)/
     block: /([-+]?)(\d*\.?\d+%?) additional Chance to Block with (Staves|Axes|Maces|Swords)/
     reflect: /Reflects (\d+) to (\d+) (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
 
@@ -110,22 +64,22 @@ modParsers =
       when 'Speed'
         switch mod[3]
           when 'Attack'
-            result.offense.attacksPerSecond = operator(result.offense.attacksPerSecond, value)
+            result.offense.attackSpeed = operator(result.offense.attacksSpeed, value)
           when 'Cast'
-            result.effects.spellSpeed = operator(result.effects.spellSpeed, value)
+            result.offense.castSpeed = operator(result.offense.castSpeed, value)
           when 'Projectile'
-            result.effects.projectileSpeed = operator(result.effects.projectileSpeed, value)
+            result.offense.projectileSpeed = operator(result.offense.projectileSpeed, value)
           when 'Movement'
-            result.effects.movementSpeed = operator(result.effects.movementSpeed, value)
+            result.stats.movementSpeed = operator(result.stats.movementSpeed, value)
       when 'Damage'
         switch mod[3]
           when 'Projectile'
-            result.effects.projectileDamage = operator(result.effects.projectileDamage, value)
+            result.offense.damage.projectile.all = operator(result.offense.damage.projectile.all, value)
           when 'Spell'
-            result.effects.spellDamage = operator(result.effects.spellDamage, value)
+            result.offense.damage.spell.all = operator(result.offense.damage.spell.all, value)
           when 'Melee Physical'
-            result.offense.physical.min = operator(result.offense.physical.min, value)
-            result.offense.physical.max = operator(result.offense.physical.max, value)
+            result.offense.damage.physical.min = operator(result.offense.damage.physical.min, value)
+            result.offense.damage.physical.max = operator(result.offense.damage.physical.max, value)
 
 parseMod = (mod, result) ->
   for type, regex of regexes.mods
@@ -157,10 +111,10 @@ parseCurrency = (item, result) ->
   for term in result.price
     continue if term is 'price' or term is 'b/o'
     if isNaN(parseInt(term))
-      for key, regex of currencyRegexes
+      for key, regex of currency.regexes
         if regex.test(term)
           log.as.debug("[currency] input #{term} matched #{key}")
-          factor = currencyFactors[key]
+          factor = currency.values[key]
           break
     else quantity = parseInt(term)
 
@@ -196,9 +150,9 @@ parseProperty = (prop, result) ->
     when 'Armour'
       result.defense.armour += parseInt(prop.values[0][0])
     when 'Physical Damage'
-      result.offense.physical = parseRange(prop.values[0][0])
+      result.offense.damage.physical = parseRange(prop.values[0][0])
     when 'Chaos Damage'
-      result.offense.chaos = parseRange(prop.values[0][0])
+      result.offense.damage.chaos = parseRange(prop.values[0][0])
     when 'Elemental Damage'
       damage = {}
 
@@ -208,9 +162,9 @@ parseProperty = (prop, result) ->
         damageKey = damageType.toLowerCase()
         damage[damageKey] = range
 
-      result.offense.elemental = damage
+      result.offense.damage.elemental = damage
     when 'Critical Strike Chance'
-      result.offense.critChance = parseFloat(prop.values[0][0].replace('%', ''))
+      result.offense.critical.chance = parseFloat(prop.values[0][0].replace('%', ''))
     when 'Attacks per Second'
       result.offense.attacksPerSecond = parseFloat(prop.values[0][0])
     when 'Weapon Range'
@@ -273,10 +227,10 @@ parseRequirements = (item, result) ->
 
 parseSockets = (item, result) ->
   sockets = {
-    red: 0
-    green: 0
-    blue: 0
-    white: 0
+    red: null
+    green: null
+    blue: null
+    white: null
     links: []
   }
 
@@ -339,46 +293,126 @@ parseItem = (item) ->
     stack:
       count: null
       maximum: null
-    effects:
-      projectileSpeed: 1.0
-      projectileDamage: 1.0
-      movementSpeed: 1.0
-      spellSpeed: 1.0
-      spellDamage: 1.0
+    stats:
+      attribute:
+        str: null
+        dex: null
+        int: null
+      life: null
+      mana: null
+      regen:
+        life: null
+        mana: null
+      attributeRequirementReduction: null
+      manaCostReduction: null
+      movementSpeed: null
+      lightRadius: null
+      itemRarity: null
+    gemLevel:
+      bow: null
+      chaos: null
+      cold: null
+      fire: null
+      any: null
+      lightning: null
+      melee: null
+      minion: null
+      spell: null
     offense:
-      elemental:
-        fire:
-          min: 0
-          max: 0
-        cold:
-          min: 0
-          max: 0
-        lightning:
-          min: 0
-          max: 0
-      chaos:
-        min: 0
-        max: 0
-      physical:
-        min: 0
-        max: 0
-      critChance: 0
-      attacksPerSecond: 0
-      meleeRange: 0
-    defense:
-      resistance:
+      onKill:
+        life: null
+        mana: null
+      onHit:
+        life: null
+        mana: null
+      perTarget:
+        life: null
+        shield: null
+      leech:
+        life: null
+        mana: null
+      critical:
         elemental:
-          fire: 0
-          cold: 0
-          lightning: 0
-        chaos: 0
-      armour: 0
-      evasion: 0
-      shield: 0
+          chance: null
+          multiplier: null
+        spell:
+          chance: null
+          multiplier: null
+        melee:
+          chance: null
+          multiplier: null
+      ailment:
+        freeze:
+          chance: null
+          duration: null
+        shock:
+          chance: null
+          duration: null
+        ignite:
+          chance: null
+          duration: null
+      damage:
+        all: null
+        projectile:
+          all: null
+        melee: null
+        spell:
+          all: null
+          elemental:
+            fire: null
+            cold: null
+            lightning: null
+        elemental:
+          all:
+            min: null
+            max: null
+          fire:
+            min: null
+            max: null
+          cold:
+            min: null
+            max: null
+          lightning:
+            min: null
+            max: null
+        chaos:
+          min: null
+          max: null
+        physical:
+          min: null
+          max: null
+      stun:
+        duration: null
+        thresholdReduction: null
+      knockbackChance: null
+      projectileSpeed: null
+      accuracyRating: null
+      attacksPerSecond: null
+      meleeRange: null
+      attackSpeed: null
+      castSpeed: null
+    defense:
+      resist:
+        elemental:
+          fire: null
+          cold: null
+          lightning: null
+        chaos: null
+      armour: null
+      evasion: null
+      shield: null
+      blockChance: null
+      stunRecovery: null
+      physicalDamageReduction: null
+      minion:
+        blockChance: null
+        resist:
+          elemental: null
     price: null
     chaosPrice: null
     removed: false
     firstSeen: timestamp
+    lastSeen: timestamp
     flavourText: null
 
   if item.icon?

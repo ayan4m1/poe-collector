@@ -37,14 +37,14 @@ createTemplates = ->
     else
       tasks.push(createDatedIndices(shardName, 7))
 
-  Q.all(tasks)
+  Q.allSettled(tasks)
 
 createIndex = (name) ->
-  client.indices.exists({ index: name })
-  .then (exists) ->
-    return if exists
-    log.as.info("creating index #{name}")
-    client.indices.create({ index: name })
+  client.indices.exists({index: name})
+    .then (exists) ->
+      return if exists
+      log.as.info("creating index #{name}")
+      client.indices.create({index: name})
 
 createDatedIndices = (baseName, dayCount) ->
   tasks = []
@@ -52,10 +52,13 @@ createDatedIndices = (baseName, dayCount) ->
     tasks.push(createIndex("#{baseName}-#{moment().add(day, 'day').format('YYYY-MM-DD')}"))
   Q.all(tasks)
 
-mergeListing = (item) ->
+getShard = (type, date) ->
+  date = date ? moment()
+  "poe-#{type}-#{date.format('YYYY-MM-DD')}"
+
+mergeListing = (shard, item) ->
   merged = Q.defer()
 
-  shard = "poe-listing-#{moment().format('YYYY-MM-DD')}"
   client.get({
     index: 'poe-listing*'
     type: 'listing'
@@ -75,7 +78,6 @@ mergeListing = (item) ->
           type: 'listing'
           id: item.id
 
-    shard = "poe-listing-#{moment().format('YYYY-MM-DD')}"
     merged.resolve([{
       index:
         _index: shard
@@ -87,9 +89,8 @@ mergeListing = (item) ->
   merged.promise
 
 orphan = (stashId, itemIds) ->
-  shard = "poe-listing-#{moment().format('YYYY-MM-DD')}"
   client.updateByQuery(
-    index: shard
+    index: 'poe-listing*'
     type: 'listing'
     body:
       script:
@@ -111,16 +112,18 @@ mergeStash = (stash) ->
   log.as.debug("parsing stash #{stash.id}")
   tasks = []
   itemIds = []
+  shard = getShard('listing')
+
   for item in stash.items
     item.stash = stash.id
 
-    tasks.push(mergeListing(item))
+    tasks.push(mergeListing(shard, item))
 
     # build a search term for this item ID so that we can orphan removed items later
-    itemIds.push(
+    itemIds.push({
       term:
         id: item.id
-    )
+    })
 
   tasks.push(orphan(stash.id, itemIds))
 
@@ -131,7 +134,7 @@ mergeStashes = (stashes) ->
   tasks = []
 
   log.as.info("starting merge of #{stashes.length} stashes")
-  shard = "poe-stash-#{moment().format('YYYY-MM-DD')}"
+  shard = getShard('stash')
   for stash in stashes
     docs.push({
       index:
@@ -155,15 +158,13 @@ mergeStashes = (stashes) ->
         continue unless Array.isArray(result)
         Array.prototype.push.apply(docs, result)
 
-      client.bulk({ body: docs })
-
+      client.bulk({body: docs})
       Q(docs.length / 2)
 
 module.exports =
   updateIndices: ->
     createTemplates()
-      .then ->
-        log.as.info("finished setting up indices")
+      .then -> log.as.info("finished setting up indices")
   mergeStashes: mergeStashes
   client: client
   config: config.elastic
