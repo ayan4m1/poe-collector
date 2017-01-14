@@ -25,10 +25,15 @@ regexes =
     flask: /^Right click to drink/
     jewel: /^Place into an allocated Jewel Socket/
   mods:
-    offense: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less) (Spell|Cast|Attack|Projectile|Movement|Melee Physical) (Damage|Speed)/
+    offense: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less) (Spell|Cast|Attack|Projectile|Movement|Melee Physical|Mine|Trap|Totem) (Throwing|Laying)?\s*(Damage|Speed|Life)/
     defense: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced) (Armour|Evasion Rating|Energy Shield|Stun and Block Recovery)/
-    block: /([-+]?)(\d*\.?\d+%?) additional Chance to Block with (Staves|Axes|Maces|Swords)/
+    block: /([-+]?)(\d*\.?\d+%?)(?: additional) (?:Chance to Block|Block Chance)( Spells)?\s*(?:with|while)?\s*(Staves|Shields|Dual Wielding)?/
     reflect: /Reflects (\d+) to (\d+) (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
+    resist: /([-+]?)(\d+%) to (Lightning|Cold|Fire|Chaos|all Elemental) Resistance(s?)/
+    attribute: /([-+]?)(\d+) to (Strength|Dexterity|Intelligence)( and (Dexterity|Intelligence))?/
+    vitals: /([-+]?)(\d+%?) to maximum (Life|Mana|Energy Shield)/
+    minions: /Minions (deal|have) [+-]?(\d+%) (Chance|increased|to) (Damage|maximum Life|Movement Speed|all Elemental Resistances)/
+    gemLevel: /\+\d to Level of Socketed (Bow|Chaos|Cold|Elemental|Fire|Lightning|Melee|Minion|Spell)? Gems/
 
 modOperators =
   increased: (a, b) -> a * (b + 1.0)
@@ -64,7 +69,7 @@ modParsers =
       when 'Speed'
         switch mod[3]
           when 'Attack'
-            result.offense.attackSpeed = operator(result.offense.attacksSpeed, value)
+            result.offense.attackSpeed = operator(result.offense.attackSpeed, value)
           when 'Cast'
             result.offense.castSpeed = operator(result.offense.castSpeed, value)
           when 'Projectile'
@@ -80,6 +85,18 @@ modParsers =
           when 'Melee Physical'
             result.offense.damage.physical.min = operator(result.offense.damage.physical.min, value)
             result.offense.damage.physical.max = operator(result.offense.damage.physical.max, value)
+  block: ->
+    mod.shift()
+
+  reflect: ->
+
+  resist: ->
+
+  attribute: ->
+
+  vitals: ->
+
+  gemLevel: ->
 
 parseMod = (mod, result) ->
   for type, regex of regexes.mods
@@ -276,25 +293,26 @@ parseItem = (item) ->
     iconVersion: null
     note: item.note
     metaLevel: item.ilvl
-    level: null
     locked: item.lockedToCharacter
     identified: item.identified
     corrupted: item.corrupted
     verified: item.verified
+    attributes: []
+    modifiers: []
+    sockets: []
     requirements:
       level: null
       int: null
       dex: null
       str: null
-    attributes: []
-    modifiers: []
-    sockets: []
+    level: null
     quality: null
     stack:
       count: null
       maximum: null
     stats:
       attribute:
+        all: null
         str: null
         dex: null
         int: null
@@ -308,6 +326,7 @@ parseItem = (item) ->
       movementSpeed: null
       lightRadius: null
       itemRarity: null
+      itemQuantity: null
     gemLevel:
       bow: null
       chaos: null
@@ -318,13 +337,49 @@ parseItem = (item) ->
       melee: null
       minion: null
       spell: null
+    flask:
+      charges: null
+      chargedUsed: null
+      duration: null
+      amount: null
+      recovery:
+        amount: null
+        speed: null
+      onCrit:
+        charges: null
+      onUse:
+        removeSouls: null
+      during:
+        damage:
+          lightning: null
+        reverseKnockback: null
+        stunImmunity: null
+        itemQuantity: null
+        itemRarity: null
+        lightRadius: null
+        soulEater: null
+        block: null
+      removeAilment:
+        bleed: null
+        burning: null
+        chill: null
+        poison: null
+        shock: null
     offense:
       onKill:
         life: null
         mana: null
+        damage: null
+        frenzyCharge: null
       onHit:
         life: null
         mana: null
+        frenzyCharge: null
+      onIgnite:
+        frenzyCharge: null
+      onCrit:
+        bleed: null
+        poison: null
       perTarget:
         life: null
         shield: null
@@ -332,6 +387,9 @@ parseItem = (item) ->
         life: null
         mana: null
       critical:
+        chance: null
+        multiplier: null
+        perPowerCharge: null
         elemental:
           chance: null
           multiplier: null
@@ -352,39 +410,63 @@ parseItem = (item) ->
           chance: null
           duration: null
       damage:
-        all: null
+        all:
+          flat: null
+          percent: null
         projectile:
-          all: null
+          percent: null
         melee: null
+        perCurse: null
         spell:
           all: null
-          elemental:
-            fire: null
-            cold: null
-            lightning: null
         elemental:
           all:
-            min: null
-            max: null
+            flat:
+              min: null
+              max: null
+            percent: null
           fire:
-            min: null
-            max: null
+            flat:
+              min: null
+              max: null
+            percent: null
           cold:
-            min: null
-            max: null
+            flat:
+              min: null
+              max: null
+            percent: null
           lightning:
+            flat:
+              min: null
+              max: null
+            percent: null
+        chaos:
+          flat:
             min: null
             max: null
-        chaos:
-          min: null
-          max: null
+          percent: null
         physical:
-          min: null
-          max: null
+          flat:
+            min: null
+            max: null
+          percent: null
+        against:
+          nearby: null
+          blinded: null
+          rares: null
+        conversion:
+          coldToFire: null
+          fireToChaos: null
+          lightningToChaos: null
+          lightningToCold: null
+          physicalToCold: null
+          physicalToFire: null
+          physicalToLightning: null
       stun:
         duration: null
         thresholdReduction: null
       knockbackChance: null
+      pierceChance: null
       projectileSpeed: null
       accuracyRating: null
       attacksPerSecond: null
@@ -393,6 +475,7 @@ parseItem = (item) ->
       castSpeed: null
     defense:
       resist:
+        all: null
         elemental:
           fire: null
           cold: null
@@ -403,11 +486,26 @@ parseItem = (item) ->
       shield: null
       blockChance: null
       stunRecovery: null
+      onLowLife:
+        prevent:
+          stun: null
+      prevent:
+        ailment:
+          chill: null
+          freeze: null
+          shock: null
+          ignite: null
+        stun: null
       physicalDamageReduction: null
       minion:
         blockChance: null
         resist:
           elemental: null
+      recentBlock:
+        armour: null
+      onTrap:
+        shield: null
+        frenzyCharge: null
     price: null
     chaosPrice: null
     removed: false
@@ -444,6 +542,7 @@ parseItem = (item) ->
   if item.explicitMods?
     Array.prototype.push.apply(mods, item.explicitMods)
 
+  result.modifiers = mods
   for mod in mods
     parseMod(mod, result)
 

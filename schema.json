@@ -130,24 +130,6 @@
               }
             }
           },
-          "attributes": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "values": {
-                "type": "string",
-                "index": "not_analyzed"
-              },
-              "hidden": {
-                "type": "boolean"
-              },
-              "typeId": {
-                "type": "integer"
-              }
-            }
-          },
           "requirements": {
             "properties": {
               "level": {
@@ -201,6 +183,9 @@
             "properties": {
               "attribute": {
                 "properties": {
+                  "all": {
+                    "type": "integer"
+                  },
                   "int": {
                     "type": "integer"
                   },
