@@ -25,15 +25,17 @@ regexes =
     flask: /^Right click to drink/
     jewel: /^Place into an allocated Jewel Socket/
   mods:
-    offense: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less) (Spell|Cast|Attack|Projectile|Movement|Melee Physical|Mine|Trap|Totem) (Throwing|Laying)?\s*(Damage|Speed|Life)/
-    defense: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced) (Armour|Evasion Rating|Energy Shield|Stun and Block Recovery)/
-    block: /([-+]?)(\d*\.?\d+%?)(?: additional) (?:Chance to Block|Block Chance)( Spells)?\s*(?:with|while)?\s*(Staves|Shields|Dual Wielding)?/
+    defense: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced) (Armour and Evasion Rating|Armour|Evasion Rating|Stun and Block Recovery)/
+    offense: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less) (Cold |Fire |Lightning )?(Global Critical Strike Multiplier|Global Critical Strike Chance|Burning|Spell|Cast|Attack|Projectile|Movement|Melee Physical|Mine|Trap|Totem) (Throwing|Laying)?\s*(Damage|Speed|Life)( with Weapons| for Spells)?/
+    flatOffense: /Adds (\d+)( to (\d+))? (Chaos |Elemental |Fire |Physical |Cold |Lightning )?Damage to (Attacks|Spells)/
+    block: /([-+]?)(\d*\.?\d+%?)(?: additional| to maximum) (?:Chance to Block|Block Chance)( Spells)?\s*(?:with|while)?\s*(Staves|Shields|Dual Wielding)?/
     reflect: /Reflects (\d+) to (\d+) (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
-    resist: /([-+]?)(\d+%) to (Lightning|Cold|Fire|Chaos|all Elemental) Resistance(s?)/
-    attribute: /([-+]?)(\d+) to (Strength|Dexterity|Intelligence)( and (Dexterity|Intelligence))?/
+    resist: /([-+]?)(\d+%) to ( all)?(Lightning|Cold|Fire|Chaos|Elemental) Resistance(s?)/
+    attribute: /([-+]?)(\d+) to (all Attributes|Strength|Dexterity|Intelligence)( and (Dexterity|Intelligence))?/
     vitals: /([-+]?)(\d+%?) to maximum (Life|Mana|Energy Shield)/
     minions: /Minions (deal|have) [+-]?(\d+%) (Chance|increased|to) (Damage|maximum Life|Movement Speed|all Elemental Resistances)/
     gemLevel: /\+\d to Level of Socketed (Bow|Chaos|Cold|Elemental|Fire|Lightning|Melee|Minion|Spell)? Gems/
+    gemEffect: /Socketed (Curse) Gems .*/
 
 modOperators =
   increased: (a, b) -> a * (b + 1.0)
@@ -44,30 +46,53 @@ modOperators =
 
 modParsers =
   defense: (mod, result) ->
-    mod.shift()
-    operator = modOperators[mod[2]]
-    if mod[1].indexOf('%') > 0
-      value = parseInt(mod[1].replace('%','')) * 0.01
-    else
-      value = parseInt(mod[1])
+    [ fullText, sign, value, op, type ] = mod
+    operator = modOperators[op]
+    isPercent = value.indexOf('%') > 0
+    value = parseInt(modValue.replace('%', ''))
+    if isNaN(value) then value = parseFloat(value)
+    if isPercent then value *= 0.01
 
-    switch mod[3]
+    switch type.trim()
       when 'Armour'
-        result.defense.armour = operator(result.defense.armour, value, mod[0])
+        result.defense.armour = operator(result.defense.armour, value, sign)
       when 'Evasion Rating'
-        result.defense.evasion = operator(result.defense.evasion, value, mod[0])
-      when 'Energy Shield'
-        result.defense.shield = operator(result.defense.shield, value, mod[0])
-  offense: (mod, result) ->
-    mod.shift()
-    value = parseInt(mod[1].replace('%', ''))
-    if mod[1].indexOf('%') > 0 then value *= 0.01
-    if mod[0] is '-' then value *= -1
+        result.defense.evasion = operator(result.defense.evasion, value, sign)
+      when 'Armour and Evasion Rating'
+        result.defense.armour = operator(result.defense.armour, value, sign)
+        result.defense.evasion = operator(result.defense.evasion, value, sign)
+      when 'Stun and Block Recovery'
+        result.defense.shield = operator(result.defense.stunRecovery, value, sign)
+  flatOffense: (mod, result) ->
+    [ fullText, min, bogus, max, type, target ] = mod
+    type = type.trim()
+    range =
+      min: parseInt(min)
+      max: parseInt(max)
+    return if isNaN(range.min) or isNaN(range.max)
 
-    operator = modOperators[mod[2]]
-    switch mod[4]
+    # todo: handle pseudos
+    switch type
+      when 'Elemental'
+        result.offense.damage.elemental.all.flat.min += range.min
+        result.offense.damage.elemental.all.flat.max += range.max
+      when 'Cold', 'Lightning', 'Fire'
+        result.offense.damage.elemental[type.toLowerCase()].flat.min += range.min
+        result.offense.damage.elemental[type.toLowerCase()].flat.max += range.max
+      when 'Physical', 'Chaos'
+        result.offense.damage[type.toLowerCase()].flat.min += range.min
+        result.offense.damage[type.toLowerCase()].flat.max += range.max
+  offense: (mod, result) ->
+    [ sign, value, op, first, second, third, fourth, fifth, sixth ] = mod
+
+    value = parseInt(value.replace('%', ''))
+    if value.indexOf('%') > 0 then value *= 0.01
+    if sign is '-' then value *= -1
+
+    operator = modOperators[op]
+    switch second
       when 'Speed'
-        switch mod[3]
+        switch first
           when 'Attack'
             result.offense.attackSpeed = operator(result.offense.attackSpeed, value)
           when 'Cast'
@@ -77,7 +102,7 @@ modParsers =
           when 'Movement'
             result.stats.movementSpeed = operator(result.stats.movementSpeed, value)
       when 'Damage'
-        switch mod[3]
+        switch first
           when 'Projectile'
             result.offense.damage.projectile.all = operator(result.offense.damage.projectile.all, value)
           when 'Spell'
@@ -85,18 +110,52 @@ modParsers =
           when 'Melee Physical'
             result.offense.damage.physical.min = operator(result.offense.damage.physical.min, value)
             result.offense.damage.physical.max = operator(result.offense.damage.physical.max, value)
-  block: ->
-    mod.shift()
+  block: (mod, result) ->
+    [ sign, value, spell, weapon ] = mod
+    isPercent = value.indexOf('%') > 0
+    value = parseInt(value.replace('%',''))
+    if isPercent then value *= 0.01
+    return if isNaN(value)
 
-  reflect: ->
+    if spell?
+      result.defense.blockChance.spells += value
+    else if weapon is 'Dual Wielding'
+      result.defense.blockChance.whileDualWielding += value
+    else
+      # todo: break this out into the types
+      result.defense.blockChance.weapons += value
+  reflect: (mod, result) ->
+    [ min, max, type, melee, block ] = mod
+    range =
+      min: parseInt(min)
+      max: parseInt(max)
+    return if isNan(range.min) or isNaN(range.max)
 
-  resist: ->
+    #switch type
+    #  when 'Physical'
+    #  when 'Cold', 'Fire', 'Lightning'
+  resist: (mod, result) ->
+    [ sign, value, all, type ] = mod
+    isPercent = value.indexOf('%') > 0
+    value = parseInt(value.replace('%',''))
+    if isPercent then value *= 0.01
 
-  attribute: ->
-
-  vitals: ->
-
-  gemLevel: ->
+    operator = modOperators[if sign is '+' then 'more' else 'less']
+    switch type
+      when 'Elemental'
+        result.defense.resist.elemental.all = operator(result.defense.resist.elemental.all, value)
+      when 'Chaos'
+        result.defense.resist.chaos = operator(result.defense.resist.chaos, value)
+      when all is 'all'
+        result.defense.resist.all = operator(result.defense.resist.all, value)
+  attribute: (mod, result) ->
+    log.as.debug('no-op attribute parse')
+  vitals: (mod, result) ->
+    log.as.debug('no-op vitals parse')
+  gemLevel: (mod, result) ->
+    log.as.debug('no-op gem level bonus parse')
+  gemEffect: (mod, result) ->
+    log.as.debug('no-op gem effect parse')
 
 parseMod = (mod, result) ->
   for type, regex of regexes.mods
@@ -104,6 +163,7 @@ parseMod = (mod, result) ->
     continue unless matchData?
     return unless modParsers[type]?
     modParsers[type](matchData, result)
+    break
 
   result.modifiers.push(mod)
 
@@ -337,6 +397,14 @@ parseItem = (item) ->
       melee: null
       minion: null
       spell: null
+    meta:
+      crafting:
+        openPrefix: null
+        openSuffix: null
+      total:
+        allResist: null
+        elementalResist: null
+        damagePerSecond: null
     flask:
       charges: null
       chargedUsed: null
@@ -413,12 +481,10 @@ parseItem = (item) ->
         all:
           flat: null
           percent: null
-        projectile:
-          percent: null
+        projectile: null
+        spell: null
         melee: null
         perCurse: null
-        spell:
-          all: null
         elemental:
           all:
             flat:
@@ -468,7 +534,9 @@ parseItem = (item) ->
       knockbackChance: null
       pierceChance: null
       projectileSpeed: null
-      accuracyRating: null
+      accuracyRating:
+        flat: null
+        percent: null
       attacksPerSecond: null
       meleeRange: null
       attackSpeed: null
@@ -484,7 +552,10 @@ parseItem = (item) ->
       armour: null
       evasion: null
       shield: null
-      blockChance: null
+      blockChance:
+        weapons: null
+        spells: null
+        whileDualWielding: null
       stunRecovery: null
       onLowLife:
         prevent:
