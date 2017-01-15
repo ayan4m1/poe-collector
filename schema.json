@@ -206,27 +206,58 @@
               "itemRarity": {
                 "type": "float"
               },
+              "itemQuantity": {
+                "type": "float"
+              },
               "life": {
-                "type": "integer"
-              },
-              "mana": {
-                "type": "integer"
-              },
-              "regen": {
                 "properties": {
-                  "life": {
-                    "type": "float"
+                  "flat": {
+                    "type": "integer"
                   },
-                  "mana": {
+                  "percent": {
                     "type": "float"
                   }
                 }
               },
-              "movementSpeed": {
-                "type": "float"
+              "mana": {
+                "properties": {
+                  "flat": {
+                    "type": "integer"
+                  },
+                  "percent": {
+                    "type": "float"
+                  }
+                }
               },
-              "lightRadius": {
-                "type": "float"
+              "regen": {
+                "properties": {
+                  "life": {
+                    "properties": {
+                      "flat": {
+                        "type": "integer"
+                      },
+                      "percent": {
+                        "type": "float"
+                      }
+                    }
+                  },
+                  "mana": {
+                    "properties": {
+                      "flat": {
+                        "type": "integer"
+                      },
+                      "percent": {
+                        "type": "float"
+                      }
+                    }
+                  }
+                },
+                "movementSpeed": {
+                  "type": "float"
+                },
+                "lightRadius": {
+                  "type": "float"
+                }
               }
             }
           },
@@ -273,173 +304,193 @@
                   }
                 }
               },
-              "damage": {
-                "all": {
-                  "type": "float"
-                },
-                "melee": {
-                  "type": "float"
-                },
-                "projectile": {
-                  "type": "float"
-                },
-                "areaOfEffect": {
-                  "type": "float"
-                },
-                "elemental": {
-                  "properties": {
-                    "fire": {
-                      "type": "nested",
-                      "properties": {
-                        "min": {
-                          "type": "integer"
-                        },
-                        "max": {
-                          "type": "integer"
-                        }
-                      }
-                    },
-                    "cold": {
-                      "type": "nested",
-                      "properties": {
-                        "min": {
-                          "type": "integer"
-                        },
-                        "max": {
-                          "type": "integer"
-                        }
-                      }
-                    },
-                    "lightning": {
-                      "type": "nested",
-                      "properties": {
-                        "min": {
-                          "type": "integer"
-                        },
-                        "max": {
-                          "type": "integer"
-                        }
-                      }
-                    }
-                  }
-                },
-                "physical": {
-                  "type": "nested",
-                  "properties": {
-                    "min": {
-                      "type": "integer"
-                    },
-                    "max": {
-                      "type": "integer"
-                    }
-                  }
-                },
-                "chaos": {
-                  "type": "nested",
-                  "properties": {
-                    "min": {
-                      "type": "integer"
-                    },
-                    "max": {
-                      "type": "integer"
-                    }
-                  }
-                }
+              "projectileSpeed": {
+                "type": "float"
               },
-              "critical": {
+              "damage": {
                 "properties": {
-                  "chance": {
-                    "type": "float"
-                  },
-                  "multiplier": {
-                    "type": "float"
-                  },
-                  "elemental": {
+                  "all": {
                     "properties": {
-                      "chance": {
-                        "type": "float"
+                      "flat": {
+                        "type": "integer"
                       },
-                      "multiplier": {
-                        "type": "float"
-                      }
-                    }
-                  },
-                  "spell": {
-                    "properties": {
-                      "chance": {
-                        "type": "float"
-                      },
-                      "multiplier": {
+                      "percent": {
                         "type": "float"
                       }
                     }
                   },
                   "melee": {
-                    "properties": {
-                      "chance": {
-                        "type": "float"
-                      },
-                      "multiplier": {
-                        "type": "float"
-                      }
-                    }
-                  }
-                }
-              },
-              "spell": {
-                "properties": {
-                  "damage": {
+                    "type": "float"
+                  },
+                  "projectile": {
+                    "type": "float"
+                  },
+                  "areaOfEffect": {
                     "type": "float"
                   },
                   "elemental": {
                     "properties": {
                       "fire": {
-                        "type": "integer"
+                        "properties": {
+                          "flat": {
+                            "properties": {
+                              "min": {
+                                "type": "integer"
+                              },
+                              "max": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "percent": {
+                            "type": "float"
+                          }
+                        }
                       },
                       "cold": {
-                        "type": "integer"
+                        "properties": {
+                          "flat": {
+                            "properties": {
+                              "min": {
+                                "type": "integer"
+                              },
+                              "max": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "percent": {
+                            "type": "float"
+                          }
+                        }
                       },
                       "lightning": {
+                        "properties": {
+                          "flat": {
+                            "properties": {
+                              "min": {
+                                "type": "integer"
+                              },
+                              "max": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "percent": {
+                            "type": "float"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "physical": {
+                    "type": "nested",
+                    "properties": {
+                      "min": {
+                        "type": "integer"
+                      },
+                      "max": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "chaos": {
+                    "type": "nested",
+                    "properties": {
+                      "min": {
+                        "type": "integer"
+                      },
+                      "max": {
                         "type": "integer"
                       }
                     }
                   }
-                }
-              },
-              "projectile": {
-                "properties": {
-                  "damage": {
-                    "type": "float"
-                  },
-                  "speed": {
-                    "type": "float"
+                },
+                "critical": {
+                  "properties": {
+                    "chance": {
+                      "type": "float"
+                    },
+                    "multiplier": {
+                      "type": "float"
+                    },
+                    "elemental": {
+                      "properties": {
+                        "chance": {
+                          "type": "float"
+                        },
+                        "multiplier": {
+                          "type": "float"
+                        }
+                      }
+                    },
+                    "spell": {
+                      "properties": {
+                        "chance": {
+                          "type": "float"
+                        },
+                        "multiplier": {
+                          "type": "float"
+                        }
+                      }
+                    },
+                    "melee": {
+                      "properties": {
+                        "chance": {
+                          "type": "float"
+                        },
+                        "multiplier": {
+                          "type": "float"
+                        }
+                      }
+                    }
                   }
-                }
-              },
-              "stun": {
-                "properties": {
-                  "duration": {
-                    "type": "float"
-                  },
-                  "thresholdReduction": {
-                    "type": "float"
+                },
+                "spell": {
+                  "properties": {
+                    "damage": {
+                      "type": "float"
+                    },
+                    "elemental": {
+                      "properties": {
+                        "fire": {
+                          "type": "integer"
+                        },
+                        "cold": {
+                          "type": "integer"
+                        },
+                        "lightning": {
+                          "type": "integer"
+                        }
+                      }
+                    }
                   }
+                },
+                "stun": {
+                  "properties": {
+                    "duration": {
+                      "type": "float"
+                    },
+                    "thresholdReduction": {
+                      "type": "float"
+                    }
+                  }
+                },
+                "attackSpeed": {
+                  "type": "float"
+                },
+                "castSpeed": {
+                  "type": "float"
+                },
+                "attacksPerSecond": {
+                  "type": "float"
+                },
+                "meleeRange": {
+                  "type": "integer"
+                },
+                "knockbackChance": {
+                  "type": "float"
                 }
-              },
-              "attackSpeed": {
-                "type": "float"
-              },
-              "castSpeed": {
-                "type": "float"
-              },
-              "attacksPerSecond": {
-                "type": "float"
-              },
-              "meleeRange": {
-                "type": "integer"
-              },
-              "knockbackChance": {
-                "type": "float"
               }
             }
           },
@@ -470,30 +521,100 @@
                 }
               },
               "armour": {
-                "type": "integer"
+                "properties": {
+                  "flat": {
+                    "type": "integer"
+                  },
+                  "percent": {
+                    "type": "float"
+                  }
+                }
               },
               "evasion": {
-                "type": "integer"
+                "properties": {
+                  "flat": {
+                    "type": "integer"
+                  },
+                  "percent": {
+                    "type": "float"
+                  }
+                }
               },
               "shield": {
-                "type": "integer"
+                "properties": {
+                  "recharge": {
+                    "type": "float"
+                  },
+                  "flat": {
+                    "type": "integer"
+                  },
+                  "percent": {
+                    "type": "float"
+                  }
+                }
               },
               "blockChance": {
+                "properties": {
+                  "weapons": {
+                    "type": "float"
+                  },
+                  "spells": {
+                    "type": "float"
+                  },
+                  "whileDualWielding": {
+                    "type": "float"
+                  }
+                }
+              },
+              "stunRecovery": {
                 "type": "float"
               },
               "physicalDamageReduction": {
                 "type": "float"
               },
-              "totem": {
+              "onRecentBlock": {
+                "type": "object",
                 "properties": {
-                  "resist": {
+                  "armour": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "onTrap": {
+                "shield": {
+                  "type": "integer"
+                },
+                "frenzyCharge": {
+                  "type": "integer"
+                }
+              },
+              "onLowLife": {
+                "properties": {
+                  "prevent": {
                     "properties": {
-                      "elemental": {
-                        "properties": {
-                          "all": {
-                            "type": "float"
-                          }
-                        }
+                      "stun": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              },
+              "prevent": {
+                "type": "object",
+                "properties": {
+                  "ailment": {
+                    "properties": {
+                      "chill": {
+                        "type": "boolean"
+                      },
+                      "freeze": {
+                        "type": "boolean"
+                      },
+                      "shock": {
+                        "type": "boolean"
+                      },
+                      "ignite": {
+                        "type": "boolean"
                       }
                     }
                   }
@@ -509,7 +630,22 @@
                       "elemental": {
                         "properties": {
                           "all": {
-                            "type": "integer"
+                            "type": "float"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "totem": {
+                "properties": {
+                  "resist": {
+                    "properties": {
+                      "elemental": {
+                        "properties": {
+                          "all": {
+                            "type": "float"
                           }
                         }
                       }

@@ -1,6 +1,5 @@
 'use strict'
 
-vm = require 'vm'
 qs = require 'qs'
 moment = require 'moment'
 process = require 'process'
@@ -30,9 +29,9 @@ regexes =
     flatOffense: /Adds (\d+)( to (\d+))? (Chaos |Elemental |Fire |Physical |Cold |Lightning )?Damage to (Attacks|Spells)/
     block: /([-+]?)(\d*\.?\d+%?)(?: additional| to maximum) (?:Chance to Block|Block Chance)( Spells)?\s*(?:with|while)?\s*(Staves|Shields|Dual Wielding)?/
     reflect: /Reflects (\d+) to (\d+) (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
-    resist: /([-+]?)(\d+%) to ( all)?(Lightning|Cold|Fire|Chaos|Elemental) Resistance(s?)/
-    attribute: /([-+]?)(\d+) to (all Attributes|Strength|Dexterity|Intelligence)( and (Dexterity|Intelligence))?/
-    vitals: /([-+]?)(\d+%?) to maximum (Life|Mana|Energy Shield)/
+    resist: /([-+]?)(\d+%) to (all )?(Lightning|Cold|Fire|Chaos|Elemental) Resistance(s?)/
+    attribute: /([-+]?)(\d+) to (all )?(Attributes|Strength|Dexterity|Intelligence)( and (Dexterity|Intelligence))?/
+    vitals: /([-+]?)(\d+%?) (increased|reduced|to)(?: maximum)? (Life|Mana|Energy Shield)( Recharge Rate)?/
     minions: /Minions (deal|have) [+-]?(\d+%) (Chance|increased|to) (Damage|maximum Life|Movement Speed|all Elemental Resistances)/
     gemLevel: /\+\d to Level of Socketed (Bow|Chaos|Cold|Elemental|Fire|Lightning|Melee|Minion|Spell)? Gems/
     gemEffect: /Socketed (Curse) Gems .*/
@@ -47,22 +46,24 @@ modOperators =
 modParsers =
   defense: (mod, result) ->
     [ fullText, sign, value, op, type ] = mod
+    return new Error(mod) unless value?
     operator = modOperators[op]
     isPercent = value.indexOf('%') > 0
-    value = parseInt(modValue.replace('%', ''))
+    value = parseInt(value.replace('%', ''))
     if isNaN(value) then value = parseFloat(value)
     if isPercent then value *= 0.01
+    bucket = if isPercent then 'percent' else 'flat'
 
     switch type.trim()
       when 'Armour'
-        result.defense.armour = operator(result.defense.armour, value, sign)
+        result.defense.armour[bucket] = operator(result.defense.armour[bucket], value, sign)
       when 'Evasion Rating'
-        result.defense.evasion = operator(result.defense.evasion, value, sign)
+        result.defense.evasion[bucket] = operator(result.defense.evasion[bucket], value, sign)
       when 'Armour and Evasion Rating'
-        result.defense.armour = operator(result.defense.armour, value, sign)
-        result.defense.evasion = operator(result.defense.evasion, value, sign)
+        result.defense.armour[bucket] = operator(result.defense.armour[bucket], value, sign)
+        result.defense.evasion[bucket] = operator(result.defense.evasion[bucket], value, sign)
       when 'Stun and Block Recovery'
-        result.defense.shield = operator(result.defense.stunRecovery, value, sign)
+        result.defense.stunRecovery = operator(result.defense.stunRecovery, value, sign)
   flatOffense: (mod, result) ->
     [ fullText, min, bogus, max, type, target ] = mod
     type = type.trim()
@@ -84,10 +85,11 @@ modParsers =
         result.offense.damage[type.toLowerCase()].flat.max += range.max
   offense: (mod, result) ->
     [ sign, value, op, first, second, third, fourth, fifth, sixth ] = mod
-
+    return new Error(mod) unless value?
+    isPercent = value.indexOf('%')
     value = parseInt(value.replace('%', ''))
-    if value.indexOf('%') > 0 then value *= 0.01
-    if sign is '-' then value *= -1
+    if isPercent then value *= 0.01
+    #if sign is '-' then value *= -1
 
     operator = modOperators[op]
     switch second
@@ -104,7 +106,7 @@ modParsers =
       when 'Damage'
         switch first
           when 'Projectile'
-            result.offense.damage.projectile.all = operator(result.offense.damage.projectile.all, value)
+            result.offense.damage.projectile = operator(result.offense.damage.projectile, value)
           when 'Spell'
             result.offense.damage.spell.all = operator(result.offense.damage.spell.all, value)
           when 'Melee Physical'
@@ -112,6 +114,7 @@ modParsers =
             result.offense.damage.physical.max = operator(result.offense.damage.physical.max, value)
   block: (mod, result) ->
     [ sign, value, spell, weapon ] = mod
+    return new Error(mod) unless value?
     isPercent = value.indexOf('%') > 0
     value = parseInt(value.replace('%',''))
     if isPercent then value *= 0.01
@@ -129,33 +132,64 @@ modParsers =
     range =
       min: parseInt(min)
       max: parseInt(max)
-    return if isNan(range.min) or isNaN(range.max)
+    return if isNaN(range.min) or isNaN(range.max)
 
     #switch type
     #  when 'Physical'
     #  when 'Cold', 'Fire', 'Lightning'
   resist: (mod, result) ->
     [ sign, value, all, type ] = mod
+    return new Error(mod) unless value?
     isPercent = value.indexOf('%') > 0
     value = parseInt(value.replace('%',''))
     if isPercent then value *= 0.01
 
-    operator = modOperators[if sign is '+' then 'more' else 'less']
+    operator = modOperators.to
     switch type
       when 'Elemental'
-        result.defense.resist.elemental.all = operator(result.defense.resist.elemental.all, value)
+        result.defense.resist.elemental.all = operator(result.defense.resist.elemental.all, value, sign)
       when 'Chaos'
-        result.defense.resist.chaos = operator(result.defense.resist.chaos, value)
+        result.defense.resist.chaos = operator(result.defense.resist.chaos, value, sign)
       when all is 'all'
-        result.defense.resist.all = operator(result.defense.resist.all, value)
+        result.defense.resist.all = operator(result.defense.resist.all, value, sign)
   attribute: (mod, result) ->
-    log.as.debug('no-op attribute parse')
+    [ sign, value, all, first, second ] = mod
+    value = parseInt(value)
+    return new Error(mod) if isNaN(value)
+
+    operator = modOperators.to
+    if all is 'all'
+      result.stats.attribute.all = operator(result.stats.attribute.all, value, sign)
+    else
+      firstCat = first.toLowerCase().substring(0, 3)
+      result.stats.attribute[firstCat] = operator(result.stats.attribute[firstCat], value, sign)
+      if second?
+        secondCat = second.toLowerCase().substring(0, 3)
+        result.stats.attribute[secondCat] = operator(result.stats.attribute[secondCat], value, sign)
   vitals: (mod, result) ->
-    log.as.debug('no-op vitals parse')
+    [ sign, value, op, type, recharge ] = mod
+    isPercent = value.indexOf('%') > 0
+    value = parseInt(value.replace('%', ''))
+    if isPercent then value *= 0.01
+    bucket = if isPercent then 'percent' else 'flat'
+
+    operator = modOperators[op]
+    if recharge is 'Recharge Rate'
+      result.defense.shield.recharge = operator(result.defense.shield.recharge, value, sign)
+    else
+      switch type
+        when 'Life'
+          result.stats.life[bucket] = operator(result.stats.life[bucket], value, sign)
+        when 'Mana'
+          result.stats.mana[bucket] = operator(result.stats.mana[bucket], value, sign)
+        when 'Energy Shield'
+          result.defense.shield[bucket] = operator(result.defense.shield[bucket], value, sign)
   gemLevel: (mod, result) ->
     log.as.debug('no-op gem level bonus parse')
   gemEffect: (mod, result) ->
     log.as.debug('no-op gem effect parse')
+  minions: (mod, result) ->
+    log.as.debug('no-op minions parse')
 
 parseMod = (mod, result) ->
   for type, regex of regexes.mods
@@ -221,15 +255,15 @@ parseProperty = (prop, result) ->
     when 'Quality'
       result.quality = parseInt(prop.values[0][0].replace(/[%\\+]/g, ''))
     when 'Evasion Rating'
-      result.defense.evasion += parseInt(prop.values[0][0])
+      result.defense.evasion.flat += parseInt(prop.values[0][0])
     when 'Energy Shield'
-      result.defense.shield += parseInt(prop.values[0][0])
+      result.defense.shield.flat += parseInt(prop.values[0][0])
     when 'Armour'
-      result.defense.armour += parseInt(prop.values[0][0])
+      result.defense.armour.flat += parseInt(prop.values[0][0])
     when 'Physical Damage'
-      result.offense.damage.physical = parseRange(prop.values[0][0])
+      result.offense.damage.physical.flat = parseRange(prop.values[0][0])
     when 'Chaos Damage'
-      result.offense.damage.chaos = parseRange(prop.values[0][0])
+      result.offense.damage.chaos.flat = parseRange(prop.values[0][0])
     when 'Elemental Damage'
       damage = {}
 
@@ -239,7 +273,8 @@ parseProperty = (prop, result) ->
         damageKey = damageType.toLowerCase()
         damage[damageKey] = range
 
-      result.offense.damage.elemental = damage
+      for type, range of damage
+        result.offense.damage.elemental[type].flat = range
     when 'Critical Strike Chance'
       result.offense.critical.chance = parseFloat(prop.values[0][0].replace('%', ''))
     when 'Attacks per Second'
@@ -361,222 +396,242 @@ parseItem = (item) ->
     modifiers: []
     sockets: []
     requirements:
-      level: null
-      int: null
-      dex: null
-      str: null
-    level: null
-    quality: null
+      level: 0
+      int: 0
+      dex: 0
+      str: 0
+    level: 0
+    quality: 0
     stack:
-      count: null
-      maximum: null
+      count: 0
+      maximum: 0
     stats:
       attribute:
-        all: null
-        str: null
-        dex: null
-        int: null
-      life: null
-      mana: null
+        all: 0
+        str: 0
+        dex: 0
+        int: 0
+      life:
+        flat: 0
+        percent: 0
+      mana:
+        flat: 0
+        percent: 0
       regen:
-        life: null
-        mana: null
-      attributeRequirementReduction: null
-      manaCostReduction: null
-      movementSpeed: null
-      lightRadius: null
-      itemRarity: null
-      itemQuantity: null
+        life:
+          flat: 0
+          percent: 0
+        mana:
+          flat: 0
+          percent: 0
+      attributeRequirementReduction: 0
+      manaCostReduction: 0
+      movementSpeed: 0
+      lightRadius: 0
+      itemRarity: 0
+      itemQuantity: 0
     gemLevel:
-      bow: null
-      chaos: null
-      cold: null
-      fire: null
-      any: null
-      lightning: null
-      melee: null
-      minion: null
-      spell: null
+      bow: 0
+      chaos: 0
+      cold: 0
+      fire: 0
+      any: 0
+      lightning: 0
+      melee: 0
+      minion: 0
+      spell: 0
     meta:
       crafting:
-        openPrefix: null
-        openSuffix: null
+        openPrefix: 0
+        openSuffix: 0
       total:
-        allResist: null
-        elementalResist: null
-        damagePerSecond: null
+        allResist: 0
+        elementalResist: 0
+        damagePerSecond: 0
     flask:
-      charges: null
-      chargedUsed: null
-      duration: null
-      amount: null
+      charges: 0
+      chargedUsed: 0
+      duration: 0
+      amount: 0
       recovery:
-        amount: null
-        speed: null
+        amount: 0
+        speed: 0
       onCrit:
-        charges: null
+        charges: 0
       onUse:
-        removeSouls: null
+        removeSouls: 0
       during:
         damage:
-          lightning: null
-        reverseKnockback: null
-        stunImmunity: null
-        itemQuantity: null
-        itemRarity: null
-        lightRadius: null
-        soulEater: null
-        block: null
+          lightning: 0
+        reverseKnockback: 0
+        stunImmunity: 0
+        itemQuantity: 0
+        itemRarity: 0
+        lightRadius: 0
+        soulEater: 0
+        block: 0
       removeAilment:
-        bleed: null
-        burning: null
-        chill: null
-        poison: null
-        shock: null
+        bleed: 0
+        burning: 0
+        chill: 0
+        poison: 0
+        shock: 0
     offense:
       onKill:
-        life: null
-        mana: null
-        damage: null
-        frenzyCharge: null
+        life: 0
+        mana: 0
+        damage: 0
+        frenzyCharge: 0
       onHit:
-        life: null
-        mana: null
-        frenzyCharge: null
+        life: 0
+        mana: 0
+        frenzyCharge: 0
       onIgnite:
-        frenzyCharge: null
+        frenzyCharge: 0
       onCrit:
-        bleed: null
-        poison: null
+        bleed: 0
+        poison: 0
       perTarget:
-        life: null
-        shield: null
+        life: 0
+        shield: 0
       leech:
-        life: null
-        mana: null
+        life: 0
+        mana: 0
       critical:
-        chance: null
-        multiplier: null
-        perPowerCharge: null
+        chance: 0
+        multiplier: 0
+        perPowerCharge: 0
         elemental:
-          chance: null
-          multiplier: null
+          chance: 0
+          multiplier: 0
         spell:
-          chance: null
-          multiplier: null
+          chance: 0
+          multiplier: 0
         melee:
-          chance: null
-          multiplier: null
+          chance: 0
+          multiplier: 0
       ailment:
         freeze:
-          chance: null
-          duration: null
+          chance: 0
+          duration: 0
         shock:
-          chance: null
-          duration: null
+          chance: 0
+          duration: 0
         ignite:
-          chance: null
-          duration: null
+          chance: 0
+          duration: 0
       damage:
         all:
-          flat: null
-          percent: null
-        projectile: null
-        spell: null
-        melee: null
-        perCurse: null
+          flat: 0
+          percent: 0
+        projectile: 0
+        spell: 0
+        melee: 0
+        perCurse: 0
         elemental:
           all:
             flat:
-              min: null
-              max: null
-            percent: null
+              min: 0
+              max: 0
+            percent: 0
           fire:
             flat:
-              min: null
-              max: null
-            percent: null
+              min: 0
+              max: 0
+            percent: 0
           cold:
             flat:
-              min: null
-              max: null
-            percent: null
+              min: 0
+              max: 0
+            percent: 0
           lightning:
             flat:
-              min: null
-              max: null
-            percent: null
+              min: 0
+              max: 0
+            percent: 0
         chaos:
           flat:
-            min: null
-            max: null
-          percent: null
+            min: 0
+            max: 0
+          percent: 0
         physical:
           flat:
-            min: null
-            max: null
-          percent: null
+            min: 0
+            max: 0
+          percent: 0
         against:
-          nearby: null
-          blinded: null
-          rares: null
+          nearby: 0
+          blinded: 0
+          rares: 0
         conversion:
-          coldToFire: null
-          fireToChaos: null
-          lightningToChaos: null
-          lightningToCold: null
-          physicalToCold: null
-          physicalToFire: null
-          physicalToLightning: null
+          coldToFire: 0
+          fireToChaos: 0
+          lightningToChaos: 0
+          lightningToCold: 0
+          physicalToCold: 0
+          physicalToFire: 0
+          physicalToLightning: 0
       stun:
-        duration: null
-        thresholdReduction: null
-      knockbackChance: null
-      pierceChance: null
-      projectileSpeed: null
+        duration: 0
+        thresholdReduction: 0
+      knockbackChance: 0
+      pierceChance: 0
+      projectileSpeed: 0
       accuracyRating:
-        flat: null
-        percent: null
-      attacksPerSecond: null
-      meleeRange: null
-      attackSpeed: null
-      castSpeed: null
+        flat: 0
+        percent: 0
+      attacksPerSecond: 0
+      meleeRange: 0
+      attackSpeed: 0
+      castSpeed: 0
     defense:
       resist:
-        all: null
+        all: 0
         elemental:
-          fire: null
-          cold: null
-          lightning: null
-        chaos: null
-      armour: null
-      evasion: null
-      shield: null
+          fire: 0
+          cold: 0
+          lightning: 0
+        chaos: 0
+      armour:
+        flat: 0
+        percent: 0
+      evasion:
+        flat: 0
+        percent: 0
+      shield:
+        recharge: 0
+        flat: 0
+        percent: 0
       blockChance:
-        weapons: null
-        spells: null
-        whileDualWielding: null
-      stunRecovery: null
+        weapons: 0
+        spells: 0
+        whileDualWielding: 0
+      stunRecovery: 0
+      physicalDamageReduction: 0
       onLowLife:
         prevent:
-          stun: null
+          stun: false
       prevent:
         ailment:
-          chill: null
-          freeze: null
-          shock: null
-          ignite: null
-        stun: null
-      physicalDamageReduction: null
+          chill: false
+          freeze: false
+          shock: false
+          ignite: false
+        stun: false
       minion:
-        blockChance: null
+        blockChance: 0
         resist:
-          elemental: null
-      recentBlock:
-        armour: null
+          elemental:
+            all: 0
+      totem:
+        resist:
+          elemental:
+            all: 0
+      onRecentBlock:
+        armour: 0
       onTrap:
-        shield: null
-        frenzyCharge: null
+        shield: 0
+        frenzyCharge: 0
     price: null
     chaosPrice: null
     removed: false
