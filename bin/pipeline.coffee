@@ -52,7 +52,7 @@ fetchChange = (changeId) ->
 
   fetched.promise
     .then (data) ->
-      fetchChange(data.next_change_id ? data.id)
+      fetchChange(data.body.next_change_id ? data.id)
         .then(processChange)
         .then(processChange(data))
 
