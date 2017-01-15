@@ -50,7 +50,11 @@ fetchChange = (changeId) ->
   log.as.info("adding a request for change #{changeId}")
   limiter.schedule(downloadChange, changeId, fetched)
 
-  fetched.promise.then(processChange)
+  fetched.promise
+    .then (data) ->
+      fetchChange(data.next_change_id ? data.id)
+        .then(processChange)
+        .then(processChange(data))
 
 processChange = (data) ->
   log.as.info("merging data for change #{data.id}")
@@ -62,7 +66,6 @@ processChange = (data) ->
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       log.as.info("merged #{res} documents in #{duration.asMilliseconds().toFixed(2)}ms, (#{Math.floor(res / duration.asSeconds())} docs/sec)")
       touch("#{cacheDir}/#{data.body.next_change_id}")
-      Q(data.body.next_change_id ? data.id)
 
 findLatestChange = ->
   readDir(cacheDir)

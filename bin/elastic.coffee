@@ -56,7 +56,7 @@ createDatedIndices = (baseName, dayCount) ->
     tasks.push(createIndex("#{baseName}-#{moment().add(day, 'day').format('YYYY-MM-DD')}"))
   Q.all(tasks)
 
-removeDatedIndices = (baseName) ->
+pruneIndices = (baseName) ->
   client.cat.indices(
     index: "#{baseName}*"
     format: 'json'
@@ -184,15 +184,14 @@ mergeStashes = (stashes) ->
         continue unless Array.isArray(result)
         Array.prototype.push.apply(docs, result)
 
-      client.bulk({body: docs})
+      client.bulk({ body: docs })
       Q(docs.length / 2)
 
 module.exports =
   updateIndices: ->
     createTemplates()
-      .then -> log.as.info("finished setting up indices")
   pruneIndices: ->
-    removeDatedIndices('poe-listing')
+    pruneIndices('poe-listing')
   mergeStashes: mergeStashes
   client: client
   config: config.elastic
