@@ -1,0 +1,4 @@
+# min   hour    dom   mon   dow   command
+
+  30    23       *     *     *     coffee bin/update-indices.coffee
+  45    22       *     *     *     coffee bin/prune-indices.coffee

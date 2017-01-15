@@ -4,6 +4,8 @@ Q = require 'q'
 moment = require 'moment'
 jsonfile = require 'jsonfile'
 
+process = require 'process'
+
 log = require './logging'
 parser = require './parser'
 
@@ -53,6 +55,28 @@ createDatedIndices = (baseName, dayCount) ->
   for day in [ -1 ... dayCount ]
     tasks.push(createIndex("#{baseName}-#{moment().add(day, 'day').format('YYYY-MM-DD')}"))
   Q.all(tasks)
+
+removeDatedIndices = (baseName) ->
+  client.cat.indices(
+    index: "#{baseName}*"
+    format: 'json'
+    bytes: 'm'
+  )
+    .then (indices) ->
+      toRemove = []
+      oldestToRetain = moment().subtract(config.watcher.retention.interval, config.watcher.retention.unit)
+      for info in indices
+        date = moment(info.index.substr(-10), 'YYYY-MM-DD')
+        if date.isBefore(oldestToRetain)
+          toRemove.push(info.index)
+          log.as.info("removing #{info.index} with size #{info['store.size']} MB")
+        else
+          log.as.info("keeping #{info.index} with size #{info['store.size']} MB")
+
+      return unless toRemove.length > 0
+      client.indices.delete({ index: toRemove })
+        .then ->
+          log.as.info("finished pruning #{toRemove.length} old indices")
 
 getShard = (type, date) ->
   date = date ? moment()
@@ -167,6 +191,8 @@ module.exports =
   updateIndices: ->
     createTemplates()
       .then -> log.as.info("finished setting up indices")
+  pruneIndices: ->
+    removeDatedIndices('poe-listing')
   mergeStashes: mergeStashes
   client: client
   config: config.elastic

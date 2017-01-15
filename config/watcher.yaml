@@ -3,3 +3,6 @@ default:
   delay:
     interval: 10
     unit: seconds
+  retention:
+    interval: 7
+    unit: days
