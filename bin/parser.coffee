@@ -25,7 +25,7 @@ regexes =
     jewel: /^Place into an allocated Jewel Socket/
   mods:
     defense: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced) (Armour and Evasion Rating|Armour|Evasion Rating|Stun and Block Recovery)/
-    offense: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less) (Cold |Fire |Lightning )?(Global Critical Strike Multiplier|Global Critical Strike Chance|Burning|Spell|Cast|Attack|Projectile|Movement|Melee Physical|Mine|Trap|Totem) (Throwing|Laying)?\s*(Damage|Speed|Life)( with Weapons| for Spells)?/
+    offense: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less) (Cold |Fire |Lightning )?(Global Critical Strike Multiplier|Global Critical Strike Chance|Burning|Spell|Cast|Attack|Projectile|Movement|Elemental|Physical|Mine|Trap|Totem) (Throwing|Laying)?\s*(Damage|Speed|Life)( with Weapons| for Spells)?/
     flatOffense: /Adds (\d+)( to (\d+))? (Chaos |Elemental |Fire |Physical |Cold |Lightning )?Damage to (Attacks|Spells)/
     block: /([-+]?)(\d*\.?\d+%?)(?: additional| to maximum) (?:Chance to Block|Block Chance)( Spells)?\s*(?:with|while)?\s*(Staves|Shields|Dual Wielding)?/
     reflect: /Reflects (\d+) to (\d+) (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
@@ -35,6 +35,9 @@ regexes =
     minions: /Minions (deal|have) [+-]?(\d+%) (Chance|increased|to) (Damage|maximum Life|Movement Speed|all Elemental Resistances)/
     gemLevel: /\+\d to Level of Socketed (Bow|Chaos|Cold|Elemental|Fire|Lightning|Melee|Minion|Spell)? Gems/
     gemEffect: /Socketed (Curse) Gems .*/
+    ailment: /(\d+%) (?: chance)(to|increased) (Shock|Ignite|Freeze)( Duration on Enemies)?/
+    resistPen: /Penetrates (\d+%) (Cold|Lightning|Fire|Chaos) Resistance/
+    flaskAilment: /Removes (Bleeding|Burning|Curses|Freeze and Chill|Shock) on use/
 
 modOperators =
   increased: (a, b) -> a * (b + 1.0)
@@ -44,6 +47,24 @@ modOperators =
   to: (a, b, sign) -> if sign is '+' then modOperators.more(a, b) else modOperators.less(a, b)
 
 modParsers =
+  resistPen: (mod, result) ->
+    [ value, type ] = mod
+    bucket = type.toLowerCase()
+    value = parseInt(value.replace('%', '')) * 0.01
+    result.offense.damage.penetration[bucket] += value
+  flaskAilment: (mod, result) ->
+    [ type ] = mod
+    log.as.debug('no-op flask ailment parse')
+  ailment: (mod, result) ->
+    [ value, op, type, duration ] = mod
+    bucket = type.toLowerCase()
+    subBucket = if duration is ' Duration on Enemies' then 'duration' else 'chance'
+    isPercent = value.indexOf('%') > 0
+    value = parseInt(value.replace('%', ''))
+    if isPercent then value *= 0.01
+    # "to" verb is always positive here, so hardcode sign
+    operator = modOperators[op]
+    result.offense.ailment[bucket][subBucket] = operator(result.offense.ailment[bucket][subBucket], value, '+')
   defense: (mod, result) ->
     [ fullText, sign, value, op, type ] = mod
     return new Error(mod) unless value?
@@ -84,13 +105,13 @@ modParsers =
         result.offense.damage[type.toLowerCase()].flat.min += range.min
         result.offense.damage[type.toLowerCase()].flat.max += range.max
   offense: (mod, result) ->
-    [ sign, value, op, first, second, third, fourth, fifth, sixth ] = mod
+    [ fullText, sign, value, op, first, second, third, fourth, fifth, sixth ] = mod
     return new Error(mod) unless value?
     isPercent = value.indexOf('%')
     value = parseInt(value.replace('%', ''))
     if isPercent then value *= 0.01
-    #if sign is '-' then value *= -1
 
+    # todo: handle pseudos
     operator = modOperators[op]
     switch second
       when 'Speed'
@@ -109,11 +130,15 @@ modParsers =
             result.offense.damage.projectile = operator(result.offense.damage.projectile, value)
           when 'Spell'
             result.offense.damage.spell.all = operator(result.offense.damage.spell.all, value)
-          when 'Melee Physical'
-            result.offense.damage.physical.min = operator(result.offense.damage.physical.min, value)
-            result.offense.damage.physical.max = operator(result.offense.damage.physical.max, value)
+          #when 'Melee Physical'
+          #  result.offense.damage.physical.min = operator(result.offense.damage.physical.min, value)
+          #  result.offense.damage.physical.max = operator(result.offense.damage.physical.max, value)
+          when 'Elemental'
+            result.offense.damage.elemental.percent = operator(result.offense.damage.elemental.percent)
+          when 'Physical'
+            result.offense.damage.physical.percent = operator(result.offense.damage.physical.percent)
   block: (mod, result) ->
-    [ sign, value, spell, weapon ] = mod
+    [ fullText, sign, value, spell, weapon ] = mod
     return new Error(mod) unless value?
     isPercent = value.indexOf('%') > 0
     value = parseInt(value.replace('%',''))
@@ -128,7 +153,7 @@ modParsers =
       # todo: break this out into the types
       result.defense.blockChance.weapons += value
   reflect: (mod, result) ->
-    [ min, max, type, melee, block ] = mod
+    [ fullText, min, max, type, melee, block ] = mod
     range =
       min: parseInt(min)
       max: parseInt(max)
@@ -138,7 +163,7 @@ modParsers =
     #  when 'Physical'
     #  when 'Cold', 'Fire', 'Lightning'
   resist: (mod, result) ->
-    [ sign, value, all, type ] = mod
+    [ fullText, sign, value, all, type ] = mod
     return new Error(mod) unless value?
     isPercent = value.indexOf('%') > 0
     value = parseInt(value.replace('%',''))
@@ -147,13 +172,14 @@ modParsers =
     operator = modOperators.to
     switch type
       when 'Elemental'
+        # todo: do we have an "all" or do we just add each one
         result.defense.resist.elemental.all = operator(result.defense.resist.elemental.all, value, sign)
       when 'Chaos'
         result.defense.resist.chaos = operator(result.defense.resist.chaos, value, sign)
       when all is 'all'
         result.defense.resist.all = operator(result.defense.resist.all, value, sign)
   attribute: (mod, result) ->
-    [ sign, value, all, first, second ] = mod
+    [ fullText, sign, value, all, first, second ] = mod
     value = parseInt(value)
     return new Error(mod) if isNaN(value)
 
@@ -167,7 +193,7 @@ modParsers =
         secondCat = second.toLowerCase().substring(0, 3)
         result.stats.attribute[secondCat] = operator(result.stats.attribute[secondCat], value, sign)
   vitals: (mod, result) ->
-    [ sign, value, op, type, recharge ] = mod
+    [ fullText, sign, value, op, type, recharge ] = mod
     isPercent = value.indexOf('%') > 0
     value = parseInt(value.replace('%', ''))
     if isPercent then value *= 0.01
@@ -246,10 +272,9 @@ parseProperty = (prop, result) ->
     when 'One Handed', 'Two Handed'
       hands = prop.name.match(/([One|Two])/)[0]
       weaponType = if result.baseLine.endsWith('Wand') then 'Projectile' else 'Melee'
-
-      result.gearType =
-        if result.baseLine.endsWith('Bow') then 'Bow'
-        else "#{hands} Handed #{weaponType} Weapon"
+      result.gearType = "#{hands} Handed #{weaponType} Weapon"
+    when 'Bow'
+      result.gearType = 'Bow'
     when 'Level'
       result.level = parseInt(prop.values[0][0])
     when 'Quality'
@@ -307,6 +332,7 @@ parseType = (item, result) ->
   result.name = item.name.replace(/(<<set:MS>><<set:M>><<set:S>>|Superior\s+)/g, '')
   result.typeLine = item.typeLine
   result.baseLine = baseTypes[item.typeLine]
+  # < 4 means Normal, Magic, or Rare item
   if item.frameType < 4
     result.rarity = frame
     result.fullName = "#{result.name} #{item.typeLine}"
@@ -387,7 +413,6 @@ parseItem = (item) ->
     icon: null
     iconVersion: null
     note: item.note
-    metaLevel: item.ilvl
     locked: item.lockedToCharacter
     identified: item.identified
     corrupted: item.corrupted
@@ -441,18 +466,22 @@ parseItem = (item) ->
       minion: 0
       spell: 0
     meta:
+      level: 0
       crafting:
-        openPrefix: 0
-        openSuffix: 0
+        openPrefix: false
+        openSuffix: false
       total:
-        allResist: 0
-        elementalResist: 0
-        damagePerSecond: 0
+        resistance:
+          all: 0
+          elemental: 0
+        damagePerSecond:
+          all: 0
+          physical: 0
+          elemental: 0
     flask:
       charges: 0
       chargedUsed: 0
       duration: 0
-      amount: 0
       recovery:
         amount: 0
         speed: 0
@@ -460,47 +489,53 @@ parseItem = (item) ->
         charges: 0
       onUse:
         removeSouls: 0
+        armour: 0
       during:
         damage:
+          all: 0
           lightning: 0
-        reverseKnockback: 0
+        reverseKnockback: false
         stunImmunity: 0
         itemQuantity: 0
         itemRarity: 0
         lightRadius: 0
-        soulEater: 0
+        soulEater: false
         block: 0
       removeAilment:
-        bleed: 0
+        bleeding: 0
         burning: 0
-        chill: 0
-        poison: 0
+        freezeAndChill: 0
         shock: 0
     offense:
       onKill:
         life: 0
         mana: 0
         damage: 0
-        frenzyCharge: 0
+        frenzyCharge: false
       onHit:
         life: 0
         mana: 0
-        frenzyCharge: 0
+        frenzyCharge: false
       onIgnite:
-        frenzyCharge: 0
+        frenzyCharge: false
       onCrit:
-        bleed: 0
-        poison: 0
+        bleed: false
+        poison: false
       perTarget:
         life: 0
         shield: 0
       leech:
-        life: 0
-        mana: 0
+        life:
+          flat: 0
+          percent: 0
+        mana:
+          flat: 0
+          percent: 0
       critical:
         chance: 0
         multiplier: 0
-        perPowerCharge: 0
+        perPowerCharge:
+          chance: 0
         elemental:
           chance: 0
           multiplier: 0
@@ -525,9 +560,18 @@ parseItem = (item) ->
           flat: 0
           percent: 0
         projectile: 0
-        spell: 0
+        spell:
+          all: 0
+          elemental:
+            fire: 0
+            cold: 0
+            lightning: 0
         melee: 0
         perCurse: 0
+        penetration:
+          fire: 0
+          cold: 0
+          lightning: 0
         elemental:
           all:
             flat:
@@ -564,13 +608,17 @@ parseItem = (item) ->
           blinded: 0
           rares: 0
         conversion:
-          coldToFire: 0
-          fireToChaos: 0
-          lightningToChaos: 0
-          lightningToCold: 0
-          physicalToCold: 0
-          physicalToFire: 0
-          physicalToLightning: 0
+          cold:
+            fire: 0
+          fire:
+            chaos: 0
+          lightning:
+            chaos: 0
+            cold: 0
+          physical:
+            cold: 0
+            fire: 0
+            lightning: 0
       stun:
         duration: 0
         thresholdReduction: 0
@@ -668,7 +716,6 @@ parseItem = (item) ->
   if item.explicitMods?
     Array.prototype.push.apply(mods, item.explicitMods)
 
-  result.modifiers = mods
   for mod in mods
     parseMod(mod, result)
 
