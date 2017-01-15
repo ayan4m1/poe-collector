@@ -26,10 +26,11 @@ putTemplate = (name, settings, mappings) ->
 createTemplates = ->
   schema = jsonfile.readFileSync("#{__dirname}/../schema.json")
 
+  templates = []
   tasks = []
   for shard, info of schema
     shardName = "poe-#{shard}"
-    tasks.push(putTemplate(shardName, info.settings, info.mappings))
+    templates.push(putTemplate(shardName, info.settings, info.mappings))
 
     # only create date partitioned indices for stash and listing
     if shard isnt 'listing' and shard isnt 'stash'
@@ -37,7 +38,8 @@ createTemplates = ->
     else
       tasks.push(createDatedIndices(shardName, 7))
 
-  Q.allSettled(tasks)
+  Q.allSettled(templates)
+    .then(Q.allSettled(tasks))
 
 createIndex = (name) ->
   client.indices.exists({index: name})
