@@ -77,11 +77,13 @@ handleChange = (changeId) ->
   info = fs.statSync(filePath)
   return fetchChange(changeId) if info.size is 0
 
-  log.as.info("processing change #{changeId}")
-  readFile(filePath)
-    .then (data) ->
-      processLimiter.schedule(processChange, data, processed)
-    .catch(log.as.error)
+  processLimiter.schedule( ->
+    log.as.info("processing change #{changeId}")
+    readFile(filePath)
+      .then(processChange)
+      .catch(log.as.error)
+      .finally(processed.resolve)
+  )
 
   processed.promise
 
@@ -90,14 +92,12 @@ processChange = (data) ->
   filePath = "#{cacheDir}/#{data.id}"
   duration = process.hrtime()
   elastic.mergeStashes(data.body.stashes)
-    .catch(log.as.error)
     .then (res) ->
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       log.as.info("merged #{res} listings across #{data.body.stashes.length} tabs in #{duration.asMilliseconds().toFixed(2)}ms @ #{Math.floor(res / duration.asSeconds())} docs/sec")
-
-      unlink(filePath)
-        .then -> touch(filePath)
+    .then -> unlink(filePath)
+    .then -> touch(filePath)
 
 findLatestChange = ->
   readDir(cacheDir)
@@ -134,7 +134,7 @@ module.exports =
           info = fs.statSync("#{cacheDir}/#{v}")
           info.isFile() and info.size > 0
 
-        return unless items.length > 0
+        return Q([]) unless items.length > 0
         tasks = handleChange(item) for item in items
 
         Q.all(tasks)

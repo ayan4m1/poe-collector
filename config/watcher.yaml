@@ -8,5 +8,9 @@ default:
     interval: 5
     unit: seconds
   retention:
-    interval: 7
-    unit: days
+    stashes:
+      interval: 30
+      unit: days
+    listings:
+      interval: 7
+      unit: days

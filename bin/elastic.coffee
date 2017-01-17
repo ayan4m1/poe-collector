@@ -8,6 +8,11 @@ jsonfile = require 'jsonfile'
 log = require './logging'
 parser = require './parser'
 
+buffer =
+  docs: []
+  count: 0
+
+
 elasticsearch = require 'elasticsearch'
 client = new elasticsearch.Client(
   host: config.elastic.host
@@ -55,7 +60,7 @@ createDatedIndices = (baseName, dayCount) ->
     tasks.push(createIndex("#{baseName}-#{moment().add(day, 'day').format('YYYY-MM-DD')}"))
   Q.all(tasks)
 
-pruneIndices = (baseName) ->
+pruneIndices = (baseName, retention) ->
   client.cat.indices(
     index: "poe-#{baseName}*"
     format: 'json'
@@ -63,7 +68,7 @@ pruneIndices = (baseName) ->
   )
     .then (indices) ->
       toRemove = []
-      oldestToRetain = moment().subtract(config.watcher.retention.interval, config.watcher.retention.unit)
+      oldestToRetain = moment().subtract(retention.interval, retention.unit)
       for info in indices
         date = moment(info.index.substr(-10), 'YYYY-MM-DD')
         if date.isBefore(oldestToRetain)
@@ -82,36 +87,36 @@ getShard = (type, date) ->
   "poe-#{type}-#{date.format('YYYY-MM-DD')}"
 
 mergeListing = (shard, item) ->
-  merged = Q.defer()
-
   client.get({
     index: 'poe-listing*'
     type: 'listing'
     id: item.id
   }, (err, res) ->
-    return merged.reject(err) if err? and err?.status isnt 404
+    return err if err? and err?.status isnt 404
 
-    listing = parser.listing(item) if err?.status is 404
-    listing = res._source if res?._source?
-
-    unless err?.status is 404
+    listing = null
+    if err?.status is 404
+      listing = parser.listing(item)
+    else if res?._source?
+      listing = res._source
       listing.lastSeen = moment().toDate()
-      # need to remove this document from the old index
-      if res._index isnt shard
-        client.delete
-          index: res._index
-          type: 'listing'
-          id: item.id
 
-    merged.resolve([{
+    if res?._index? and res._index isnt shard
+      log.as.info("pulling #{item.id} from #{res._index} into #{shard}")
+      # need to remove this document from the old index
+      client.delete(
+        index: res._index
+        type: 'listing'
+        id: item.id
+      )
+
+    buffer.docs.push({
       index:
         _index: shard
         _type: 'listing'
         _id: item.id
-    }, listing])
+    }, listing)
   )
-
-  merged.promise
 
 orphan = (stashId, itemIds) ->
   client.updateByQuery(
@@ -131,36 +136,14 @@ orphan = (stashId, itemIds) ->
               removed: false
           }]
           must_not: itemIds
-  )
-
-mergeStash = (stash) ->
-  log.as.debug("parsing stash #{stash.id}")
-  tasks = []
-  itemIds = []
-  shard = getShard('listing')
-
-  for item in stash.items
-    item.stash = stash.id
-
-    tasks.push(mergeListing(shard, item))
-
-    # build a search term for this item ID so that we can orphan removed items later
-    itemIds.push({
-      term:
-        id: item.id
-    })
-
-  tasks.push(orphan(stash.id, itemIds))
-
-  tasks
+  ).then -> []
 
 mergeStashes = (stashes) ->
-  docs = []
   tasks = []
-
   shard = getShard('stash')
+  listingShard = getShard('listing')
   for stash in stashes
-    docs.push({
+    buffer.docs.push({
       index:
         _index: shard
         _type: 'stash'
@@ -174,22 +157,37 @@ mergeStashes = (stashes) ->
         character: stash.lastCharacterName
     })
 
-    Array.prototype.push.apply(tasks, mergeStash(stash))
+    itemIds = []
+    for item in stash.items
+      item.stash = item.stash ? stash.id
+
+      mergeListing(listingShard, item)
+
+      # build a search term for this item ID so that we can orphan removed items later
+      itemIds.push({
+        term:
+          id: item.id
+      })
+
+    tasks.push(orphan(stash.id, itemIds))
+
+  if buffer.docs.length >= config.elastic.batchSize
+    buffer.count = buffer.docs.length
+    toFlush = buffer.docs
+    delete buffer['docs']
+    buffer.docs = []
+    client.bulk({ body: toFlush })
+      .then -> buffer.count = 0
 
   Q.all(tasks)
-    .then (results) ->
-      for result in results
-        continue unless Array.isArray(result)
-        Array.prototype.push.apply(docs, result)
-
-      client.bulk({ body: docs })
-        .then( -> docs.length / 2)
+    .then -> buffer.count
 
 module.exports =
   updateIndices: ->
     createTemplates()
   pruneIndices: ->
-    pruneIndices('listing')
+    for type in [ 'stash', 'listing' ]
+      pruneIndices(type, config.watcher.retention[type])
   mergeStashes: mergeStashes
   client: client
   config: config.elastic
