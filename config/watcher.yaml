@@ -1,7 +1,11 @@
 default:
-  concurrency: 2
-  delay:
-    interval: 10
+  process:
+    concurrency: 1
+    interval: 5
+    unit: seconds
+  fetch:
+    concurrency: 2
+    interval: 5
     unit: seconds
   retention:
     interval: 7

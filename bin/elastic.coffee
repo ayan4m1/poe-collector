@@ -2,9 +2,8 @@ config = require('konfig')()
 
 Q = require 'q'
 moment = require 'moment'
-jsonfile = require 'jsonfile'
-
 process = require 'process'
+jsonfile = require 'jsonfile'
 
 log = require './logging'
 parser = require './parser'
@@ -58,7 +57,7 @@ createDatedIndices = (baseName, dayCount) ->
 
 pruneIndices = (baseName) ->
   client.cat.indices(
-    index: "#{baseName}*"
+    index: "poe-#{baseName}*"
     format: 'json'
     bytes: 'm'
   )
@@ -159,7 +158,6 @@ mergeStashes = (stashes) ->
   docs = []
   tasks = []
 
-  log.as.info("starting merge of #{stashes.length} stashes")
   shard = getShard('stash')
   for stash in stashes
     docs.push({
@@ -185,13 +183,16 @@ mergeStashes = (stashes) ->
         Array.prototype.push.apply(docs, result)
 
       client.bulk({ body: docs })
-      Q(docs.length / 2)
+      Q({
+        stashes: stashes.length
+        listings: docs.length / 2
+      })
 
 module.exports =
   updateIndices: ->
     createTemplates()
   pruneIndices: ->
-    pruneIndices('poe-listing')
+    pruneIndices('listing')
   mergeStashes: mergeStashes
   client: client
   config: config.elastic
