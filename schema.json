@@ -1008,5 +1008,30 @@
         }
       }
     }
+  },
+  "stats": {
+    "settings": {
+      "index": {
+        "number_of_shards": "2"
+      }
+    },
+    "mappings": {
+      "fetch": {
+        "properties": {
+          "changeId": {
+            "type": "keyword"
+          },
+          "fileSizeKb": {
+            "type": "float"
+          },
+          "downloadTimeMs": {
+            "type": "float"
+          },
+          "timestamp": {
+            "type": "date"
+          }
+        }
+      }
+    }
   }
 }

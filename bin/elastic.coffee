@@ -12,7 +12,6 @@ buffer =
   docs: []
   count: 0
 
-
 elasticsearch = require 'elasticsearch'
 client = new elasticsearch.Client(
   host: config.elastic.host
@@ -136,7 +135,7 @@ orphan = (stashId, itemIds) ->
               removed: false
           }]
           must_not: itemIds
-  ).then -> []
+  )
 
 mergeStashes = (stashes) ->
   tasks = []
@@ -171,16 +170,23 @@ mergeStashes = (stashes) ->
 
     tasks.push(orphan(stash.id, itemIds))
 
-  if buffer.docs.length >= config.elastic.batchSize
-    buffer.count = buffer.docs.length
+  buffer.count = buffer.docs.length / 2
+  if buffer.count >= config.elastic.batchSize
     toFlush = buffer.docs
+    docCount = buffer.count
     delete buffer['docs']
     buffer.docs = []
+    buffer.count = 0
+    duration = process.hrtime()
     client.bulk({ body: toFlush })
-      .then -> buffer.count = 0
+      .then ->
+        duration = process.hrtime(duration)
+        duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
+        log.as.info("merged #{docCount} documents @ #{Math.floor(docCount / duration.asSeconds())} docs/sec")
+      .then -> Q.all(tasks)
+      .catch(log.as.error)
 
-  Q.all(tasks)
-    .then -> buffer.count
+  Q()
 
 module.exports =
   updateIndices: ->

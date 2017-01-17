@@ -1,10 +1,10 @@
 default:
   process:
     concurrency: 1
-    interval: 5
+    interval: 3
     unit: seconds
   fetch:
-    concurrency: 2
+    concurrency: 1
     interval: 5
     unit: seconds
   retention:

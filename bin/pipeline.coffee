@@ -6,11 +6,10 @@ Q = require 'q'
 fs = require 'fs'
 path = require 'path'
 touch = require 'touch'
-watch = require 'node-watch'
 moment = require 'moment'
+chokidar = require 'chokidar'
 jsonfile = require 'jsonfile'
 Bottleneck = require 'bottleneck'
-Orchestrator = require 'orchestrator'
 requestPromise = require 'request-promise-native'
 
 log = require './logging'
@@ -50,7 +49,15 @@ downloadChange = (changeId, promise) ->
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       fetchTime = duration.asSeconds()
       sizeKb = res.length / 1e3
-      log.as.info("fetched #{sizeKb}KB in #{(fetchTime * 1e3)}ms (#{(sizeKb / fetchTime).toFixed(1)} KBps)")
+      elastic.client.index(
+        index: 'poe-stats'
+        type: 'fetch'
+        id: changeId
+        doc:
+          timestamp: moment().toDate()
+          fileSizeKb: sizeKb
+          downloadTimeMs: fetchTime * 1e3
+      )
 
       promise.resolve
         id: changeId
@@ -67,7 +74,8 @@ fetchChange = (changeId) ->
   fetched.promise
     .then (data) ->
       writeFile(filePath, data)
-      return unless data.body.next_change_id?
+      return Q(data) unless data.body.next_change_id?
+      log.as.info("following river to #{data.body.next_change_id}")
       fetchChange(data.body.next_change_id)
 
 handleChange = (changeId) ->
@@ -92,10 +100,10 @@ processChange = (data) ->
   filePath = "#{cacheDir}/#{data.id}"
   duration = process.hrtime()
   elastic.mergeStashes(data.body.stashes)
-    .then (res) ->
+    .then ->
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-      log.as.info("merged #{res} listings across #{data.body.stashes.length} tabs in #{duration.asMilliseconds().toFixed(2)}ms @ #{Math.floor(res / duration.asSeconds())} docs/sec")
+      log.as.info("processed #{data.body.stashes.length} tabs in #{duration.asMilliseconds().toFixed(2)}ms")
     .then -> unlink(filePath)
     .then -> touch(filePath)
 
@@ -113,12 +121,17 @@ findLatestChange = ->
 watchCache = ->
   dir = path.normalize(cacheDir)
   log.as.debug("registering watch for #{dir}")
-  watcher = watch(dir)
+  watcher = chokidar.watch(dir, {
+    usePolling: true
+    interval: 100
+    awaitWriteFinish: {
+      stabilityThreshold: 1500
+      pollInterval: 100
+    }
+  })
 
-  watcher.on('change', (file) ->
+  watcher.on('add', (file) ->
     changeId = path.basename(file)
-    size = fs.statSync("#{cacheDir}/#{changeId}")?.size
-    return unless size isnt 0
     log.as.debug("watcher queued processing for #{changeId}")
     handleChange(changeId)
   )
