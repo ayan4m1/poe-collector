@@ -95,8 +95,9 @@ processChange = (data) ->
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       log.as.info("merged #{res} listings across #{data.body.stashes.length} tabs in #{duration.asMilliseconds().toFixed(2)}ms @ #{Math.floor(res / duration.asSeconds())} docs/sec")
-    .then -> unlink(filePath)
-    .then -> touch(filePath)
+
+      unlink(filePath)
+        .then -> touch(filePath)
 
 findLatestChange = ->
   readDir(cacheDir)
