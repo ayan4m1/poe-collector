@@ -684,7 +684,7 @@ parseItem = (item) ->
     chaosPrice: null
     removed: false
     firstSeen: timestamp
-    lastSeen: timestamp
+    lastSeen: null
     flavourText: null
 
   if item.icon?
