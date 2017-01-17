@@ -183,10 +183,7 @@ mergeStashes = (stashes) ->
         Array.prototype.push.apply(docs, result)
 
       client.bulk({ body: docs })
-      Q({
-        stashes: stashes.length
-        listings: docs.length / 2
-      })
+      Q(docs.length / 2)
 
 module.exports =
   updateIndices: ->
