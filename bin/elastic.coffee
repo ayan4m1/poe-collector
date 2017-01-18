@@ -74,7 +74,7 @@ pruneIndices = (baseName, retention) ->
         else
           log.as.info("keeping #{info.index} with size #{info['store.size']} MB")
 
-      return unless toRemove.length > 0
+      return Q(toRemove) unless toRemove.length > 0
       client.indices.delete({ index: toRemove })
         .then ->
           log.as.info("finished pruning #{toRemove.length} old indices")
@@ -207,8 +207,10 @@ logFetch = (changeId, doc) ->
 module.exports =
   updateIndices: createTemplates
   pruneIndices: ->
+    tasks = []
     for type in [ 'stash', 'listing' ]
-      pruneIndices(type, config.watcher.retention[type])
+      tasks.push(pruneIndices(type, config.watcher.retention[type]))
+    Q.all(tasks)
   mergeStashes: mergeStashes
   logFetch: logFetch
   getBufferSize: -> (buffer.docs.length / config.elastic.batchSize)
