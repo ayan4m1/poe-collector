@@ -54,7 +54,7 @@ modParsers =
     result.offense.damage.penetration[bucket] += value
   flaskAilment: (mod, result) ->
     [ type ] = mod
-    log.as.debug('no-op flask ailment parse')
+    log.as.silly('no-op flask ailment parse')
   ailment: (mod, result) ->
     [ value, op, type, duration ] = mod
     bucket = type.toLowerCase()
@@ -211,11 +211,11 @@ modParsers =
         when 'Energy Shield'
           result.defense.shield[bucket] = operator(result.defense.shield[bucket], value, sign)
   gemLevel: (mod, result) ->
-    log.as.debug('no-op gem level bonus parse')
+    log.as.silly('no-op gem level bonus parse')
   gemEffect: (mod, result) ->
-    log.as.debug('no-op gem effect parse')
+    log.as.silly('no-op gem effect parse')
   minions: (mod, result) ->
-    log.as.debug('no-op minions parse')
+    log.as.silly('no-op minions parse')
 
 parseMod = (mod, result) ->
   for type, regex of regexes.mods
@@ -250,12 +250,10 @@ parseCurrency = (item, result) ->
     if isNaN(parseInt(term))
       for key, regex of currency.regexes
         if regex.test(term)
-          log.as.debug("[currency] input #{term} matched #{key}")
           factor = currency.values[key]
           break
     else quantity = parseInt(term)
 
-  log.as.debug("[currency] factor #{factor} qty #{quantity}")
   return unless factor > 0 and quantity > 0
   result.chaosPrice = factor * quantity
 

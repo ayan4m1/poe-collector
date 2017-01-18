@@ -1,16 +1,16 @@
 default:
   process:
-    concurrency: 1
-    interval: 3
+    concurrency: 2
+    interval: 2
     unit: seconds
   fetch:
-    concurrency: 1
-    interval: 5
+    concurrency: 2
+    interval: 10
     unit: seconds
   retention:
-    stashes:
+    stash:
       interval: 30
       unit: days
-    listings:
+    listing:
       interval: 7
       unit: days

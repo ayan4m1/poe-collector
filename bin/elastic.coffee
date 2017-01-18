@@ -10,7 +10,7 @@ parser = require './parser'
 
 buffer =
   docs: []
-  count: 0
+  updates: []
 
 elasticsearch = require 'elasticsearch'
 client = new elasticsearch.Client(
@@ -54,9 +54,7 @@ createIndex = (name) ->
       client.indices.create({index: name})
 
 createDatedIndices = (baseName, dayCount) ->
-  tasks = []
-  for day in [ -1 ... dayCount ]
-    tasks.push(createIndex("#{baseName}-#{moment().add(day, 'day').format('YYYY-MM-DD')}"))
+  tasks = createIndex("#{baseName}-#{moment().add(day, 'day').format('YYYY-MM-DD')}") for day in [ -1 ... dayCount ]
   Q.all(tasks)
 
 pruneIndices = (baseName, retention) ->
@@ -136,9 +134,11 @@ orphan = (stashId, itemIds) ->
           }]
           must_not: itemIds
   )
+    .then (res) ->
+      return unless res?.updated > 0
+      log.as.info("orphaned #{res.updated} listings")
 
 mergeStashes = (stashes) ->
-  tasks = []
   shard = getShard('stash')
   listingShard = getShard('listing')
   for stash in stashes
@@ -168,33 +168,41 @@ mergeStashes = (stashes) ->
           id: item.id
       })
 
-    tasks.push(orphan(stash.id, itemIds))
+    buffer.updates.push(orphan(stash.id, itemIds))
 
-  buffer.count = buffer.docs.length / 2
-  if buffer.count >= config.elastic.batchSize
-    toFlush = buffer.docs
-    docCount = buffer.count
-    delete buffer['docs']
-    buffer.docs = []
-    buffer.count = 0
-    duration = process.hrtime()
-    client.bulk({ body: toFlush })
-      .then ->
-        duration = process.hrtime(duration)
-        duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-        log.as.info("merged #{docCount} documents @ #{Math.floor(docCount / duration.asSeconds())} docs/sec")
-      .then -> Q.all(tasks)
-      .catch(log.as.error)
+  log.as.debug("buffer is " + Math.floor((buffer.docs.length / config.elastic.batchSize) * 1e3).toFixed(0) + "% full")
+  return Q() unless buffer.docs.length > config.elastic.batchSize
 
-  Q()
+  flush = buffer.docs
+  buffer.docs = []
+  docCount = flush.length / 2
+  log.as.debug("starting bulk index of #{docCount} docs")
+  duration = process.hrtime()
+  client.bulk({ body: flush })
+    .then ->
+      duration = process.hrtime(duration)
+      duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
+      log.as.info("merged #{docCount} documents @ #{Math.floor(docCount / duration.asSeconds())} docs/sec")
+    .then ->
+      Q.all(buffer.updates)
+        .then -> buffer.updates = []
+    .catch(log.as.error)
+
+logFetch = (changeId, doc) ->
+  buffer.docs.push({
+    index:
+      _index: 'poe-stats'
+      _type: 'fetch'
+      _id: changeId
+  }, doc)
 
 module.exports =
-  updateIndices: ->
-    createTemplates()
+  updateIndices: createTemplates
   pruneIndices: ->
     for type in [ 'stash', 'listing' ]
       pruneIndices(type, config.watcher.retention[type])
   mergeStashes: mergeStashes
+  logFetch: logFetch
   client: client
   config: config.elastic
 

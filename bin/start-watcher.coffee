@@ -1,8 +1,5 @@
 'use strict'
 
-Q = require 'q'
-Orchestrator = require 'orchestrator'
-
 log = require './logging'
 pipeline = require './pipeline'
 

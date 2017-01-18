@@ -36,7 +36,9 @@ processLimiter = new Bottleneck(
   moment.duration(config.watcher.process.interval, config.watcher.process.unit).asMilliseconds()
 )
 
-downloadChange = (changeId, promise) ->
+downloadChange = (changeId) ->
+  downloaded = Q.defer()
+
   log.as.debug("handling the request to fetch change #{changeId}")
   duration = process.hrtime(duration)
   requestPromise(
@@ -44,62 +46,53 @@ downloadChange = (changeId, promise) ->
     gzip: true
   )
     .then (res) ->
+      downloaded.resolve()
       data = JSON.parse(res)
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       fetchTime = duration.asSeconds()
       sizeKb = res.length / 1e3
-      elastic.client.index(
-        index: 'poe-stats'
-        type: 'fetch'
-        id: changeId
-        doc:
-          timestamp: moment().toDate()
-          fileSizeKb: sizeKb
-          downloadTimeMs: fetchTime * 1e3
-      )
+      elastic.logFetch(changeId, {
+        timestamp: moment().toDate()
+        fileSizeKb: sizeKb
+        downloadTimeMs: fetchTime * 1e3
+      })
 
-      promise.resolve
+      writeFile("#{cacheDir}/#{changeId}", {
         id: changeId
         body: data
-    .catch(promise.reject)
+      })
+
+      return unless data.next_change_id?
+      log.as.info("following river to #{data.next_change_id}")
+      fetchChange(data.next_change_id)
+    .catch(downloaded.reject)
+
+  downloaded.promise
+
+readChange = (changeId) ->
+  readFile("#{cacheDir}/#{changeId}")
+    .then (data) -> processChange(data)
+    .catch(log.as.error)
 
 fetchChange = (changeId) ->
-  fetched = Q.defer()
-
   log.as.debug("adding a request for change #{changeId}")
-  downloadLimiter.schedule(downloadChange, changeId, fetched)
-
-  filePath = "#{cacheDir}/#{changeId}"
-  fetched.promise
-    .then (data) ->
-      writeFile(filePath, data)
-      return Q(data) unless data.body.next_change_id?
-      log.as.info("following river to #{data.body.next_change_id}")
-      fetchChange(data.body.next_change_id)
+  downloadLimiter.schedule(downloadChange, changeId)
 
 handleChange = (changeId) ->
-  processed = Q.defer()
-
-  filePath = "#{cacheDir}/#{changeId}"
-  info = fs.statSync(filePath)
-  return fetchChange(changeId) if info.size is 0
-
-  processLimiter.schedule( ->
-    log.as.info("processing change #{changeId}")
-    readFile(filePath)
-      .then(processChange)
-      .catch(log.as.error)
-      .finally(processed.resolve)
-  )
-
-  processed.promise
+  log.as.debug("scheduling the read of #{changeId}")
+  processLimiter.schedule(readChange, changeId)
 
 processChange = (data) ->
-  log.as.debug("merging data for change #{data.id}")
   filePath = "#{cacheDir}/#{data.id}"
+  if not data?.id? or data?.error?
+    return unlink(filePath)
+      .then -> touch(filePath)
+
+  log.as.debug("merging data for change #{data.id}")
   duration = process.hrtime()
   elastic.mergeStashes(data.body.stashes)
+    .catch(log.as.error)
     .then ->
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
@@ -122,20 +115,25 @@ watchCache = ->
   dir = path.normalize(cacheDir)
   log.as.debug("registering watch for #{dir}")
   watcher = chokidar.watch(dir, {
+    depth: 0
+    persistent: true
     usePolling: true
-    interval: 100
-    awaitWriteFinish: {
-      stabilityThreshold: 1500
-      pollInterval: 100
-    }
+    interval: 250
+    ignoreInitial: true
+    awaitWriteFinish:
+      pollInterval: 250
+      stabilityThreshold: 1000
   })
 
-  watcher.on('add', (file) ->
+  eventHandler = (file) ->
     changeId = path.basename(file)
+    size = fs.statSync(file)?.size
+    return unless size > 0
     log.as.debug("watcher queued processing for #{changeId}")
     handleChange(changeId)
-  )
 
+  watcher.on('add', eventHandler)
+  watcher.on('change', eventHandler)
   watcher.on('error', log.as.error)
 
 module.exports =
@@ -147,11 +145,12 @@ module.exports =
           info = fs.statSync("#{cacheDir}/#{v}")
           info.isFile() and info.size > 0
 
-        return Q([]) unless items.length > 0
-        tasks = handleChange(item) for item in items
+        tasks = []
+        if items.length > 0
+          tasks.push(handleChange(item)) for item in items
 
         Q.all(tasks)
           .catch(log.as.error)
   next: ->
     findLatestChange()
-      .then(handleChange)
+      .then(fetchChange)
