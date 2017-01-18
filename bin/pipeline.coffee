@@ -96,7 +96,7 @@ processChange = (data) ->
     .then ->
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-      log.as.info("processed #{data.body.stashes.length} tabs in #{duration.asMilliseconds().toFixed(2)}ms")
+      log.as.info("processed #{data.body.stashes.length} tabs in #{duration.asMilliseconds().toFixed(2)}ms, buffer at #{elastic.getBufferSize().toFixed(1)}%")
     .then -> unlink(filePath)
     .then -> touch(filePath)
 
