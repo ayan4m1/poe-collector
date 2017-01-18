@@ -84,12 +84,14 @@ getShard = (type, date) ->
   "poe-#{type}-#{date.format('YYYY-MM-DD')}"
 
 mergeListing = (shard, item) ->
+  merged = Q.defer()
+
   client.get({
     index: 'poe-listing*'
     type: 'listing'
     id: item.id
   }, (err, res) ->
-    return err if err? and err?.status isnt 404
+    return merged.reject(err) if err? and err?.status isnt 404
 
     listing = null
     if err?.status is 404
@@ -113,7 +115,10 @@ mergeListing = (shard, item) ->
         _type: 'listing'
         _id: item.id
     }, listing)
+    merged.resolve()
   )
+
+  merged.promise
 
 orphan = (stashId, itemIds) ->
   client.updateByQuery(
@@ -139,6 +144,7 @@ orphan = (stashId, itemIds) ->
       log.as.debug("orphaned #{res.updated} listings")
 
 mergeStashes = (stashes) ->
+  tasks = []
   shard = getShard('stash')
   listingShard = getShard('listing')
   for stash in stashes
@@ -160,7 +166,7 @@ mergeStashes = (stashes) ->
     for item in stash.items
       item.stash = item.stash ? stash.id
 
-      mergeListing(listingShard, item)
+      tasks.push(mergeListing(listingShard, item))
 
       # build a search term for this item ID so that we can orphan removed items later
       itemIds.push({
@@ -170,22 +176,25 @@ mergeStashes = (stashes) ->
 
     buffer.updates.push(orphan(stash.id, itemIds))
 
-  return Q() unless buffer.docs.length > config.elastic.batchSize
-
-  flush = buffer.docs
-  orphans = buffer.updates
-  buffer.docs = []
-  buffer.updates = []
-  docCount = flush.length / 2
-  log.as.info("starting bulk index of #{docCount} docs and #{orphans.length} queries")
-  duration = process.hrtime()
-  client.bulk({ body: flush })
+  Q.all(tasks)
     .then ->
-      duration = process.hrtime(duration)
-      duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-      log.as.info("merged #{docCount} documents @ #{Math.floor(docCount / duration.asSeconds())} docs/sec")
-    .then -> Q.all(orphans)
-    .catch(log.as.error)
+      # check to see if we should flush out a batch of documents next
+      return Q() unless buffer.docs.length > config.elastic.batchSize
+
+      flush = buffer.docs
+      orphans = buffer.updates
+      buffer.docs = []
+      buffer.updates = []
+      docCount = flush.length / 2
+      log.as.info("starting bulk index of #{docCount} docs and #{orphans.length} queries")
+      duration = process.hrtime()
+      client.bulk({ body: flush })
+        .then ->
+          duration = process.hrtime(duration)
+          duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
+          log.as.info("merged #{docCount} documents @ #{Math.floor(docCount / duration.asSeconds())} docs/sec")
+        .then -> Q.all(orphans)
+        .catch(log.as.error)
 
 logFetch = (changeId, doc) ->
   buffer.docs.push({

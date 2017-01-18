@@ -1,11 +1,11 @@
 default:
   process:
-    concurrency: 2
-    interval: 2
+    concurrency: 1
+    interval: 1
     unit: seconds
   fetch:
     concurrency: 2
-    interval: 10
+    interval: 8
     unit: seconds
   retention:
     stash:
