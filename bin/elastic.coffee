@@ -87,34 +87,30 @@ mergeListing = (shard, item) ->
   merged = Q.defer()
 
   client.get({
-    index: 'poe-listing*'
+    index: shard
     type: 'listing'
     id: item.id
   }, (err, res) ->
     return merged.reject(err) if err? and err?.status isnt 404
 
     listing = null
+    verb = 'index'
     if err?.status is 404
       listing = parser.listing(item)
     else if res?._source?
+      verb = 'update'
       listing = res._source
       listing.lastSeen = moment().toDate()
 
-    if res?._index? and res._index isnt shard
-      log.as.info("pulling #{item.id} from #{res._index} into #{shard}")
-      # need to remove this document from the old index
-      client.delete(
-        index: res._index
-        type: 'listing'
-        id: item.id
-      )
-
-    buffer.docs.push({
-      index:
-        _index: shard
-        _type: 'listing'
-        _id: item.id
-    }, listing)
+    header = {}
+    header[verb] =
+      _index: shard
+      _type: 'listing'
+      _id: item.id
+    payload = listing
+    if verb is 'update'
+      payload = { doc: payload }
+    buffer.docs.push(header, payload)
     merged.resolve()
   )
 
