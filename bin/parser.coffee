@@ -464,7 +464,7 @@ parseItem = (item) ->
       minion: 0
       spell: 0
     meta:
-      level: 0
+      level: item.ilvl ? 0
       crafting:
         openPrefix: false
         openSuffix: false
@@ -678,12 +678,12 @@ parseItem = (item) ->
       onTrap:
         shield: 0
         frenzyCharge: 0
-    price: null
-    chaosPrice: null
+    price: []
+    chaosPrice: 0
     removed: false
     firstSeen: timestamp
     lastSeen: null
-    flavourText: null
+    flavourText: ""
 
   if item.icon?
     iconHash = qs.parse(item.icon.substring(item.icon.indexOf('?')))
@@ -719,5 +719,11 @@ parseItem = (item) ->
 
   result
 
+updateListing = (item, result) ->
+  result.lastSeen = moment().toDate()
+  parseCurrency(item, result)
+  result
+
 module.exports =
-  listing: parseItem
+  new: parseItem
+  existing: updateListing

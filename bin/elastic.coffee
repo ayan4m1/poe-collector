@@ -28,24 +28,6 @@ putTemplate = (name, settings, mappings) ->
       settings: settings
       mappings: mappings
 
-createTemplates = ->
-  schema = jsonfile.readFileSync("#{__dirname}/../schema.json")
-
-  templates = []
-  tasks = []
-  for shard, info of schema
-    shardName = "poe-#{shard}"
-    templates.push(putTemplate(shardName, info.settings, info.mappings))
-
-    # only create date partitioned indices for stash and listing
-    if shard isnt 'listing' and shard isnt 'stash'
-      tasks.push(createIndex(shardName))
-    else
-      tasks.push(createDatedIndices(shardName, 7))
-
-  Q.allSettled(templates)
-    .then(Q.allSettled(tasks))
-
 createIndex = (name) ->
   client.indices.exists({index: name})
     .then (exists) ->
@@ -84,23 +66,32 @@ getShard = (type, date) ->
   "poe-#{type}-#{date.format('YYYY-MM-DD')}"
 
 mergeListing = (shard, item) ->
-  merged = Q.defer()
-
-  client.get({
-    index: shard
+  client.search({
+    index: 'poe-listing*'
     type: 'listing'
-    id: item.id
+    body:
+      query:
+        term:
+          _id: item.id
   }, (err, res) ->
-    return merged.reject(err) if err? and err?.status isnt 404
+    return log.as.error(err) if err? and err?.status isnt 404
 
     listing = null
     verb = 'index'
     if err?.status is 404
-      listing = parser.listing(item)
-    else if res?._source?
+      listing = parser.new(item)
+    else if res.hits?.hits?.length is 1
       verb = 'update'
-      listing = res._source
-      listing.lastSeen = moment().toDate()
+      raw = res.hits.hits[0]
+      if raw._index isnt shard
+        log.as.debug("taking item from index #{raw._index} and moving it to index #{shard}")
+        buffer.updates.push(client.delete(
+          index: raw._index
+          type: 'listing'
+          id: raw._id
+        ))
+      listing = raw._source
+      parser.existing(listing, item)
 
     header = {}
     header[verb] =
@@ -111,10 +102,7 @@ mergeListing = (shard, item) ->
     if verb is 'update'
       payload = { doc: payload }
     buffer.docs.push(header, payload)
-    merged.resolve()
   )
-
-  merged.promise
 
 orphan = (stashId, itemIds) ->
   client.updateByQuery(
@@ -173,24 +161,7 @@ mergeStashes = (stashes) ->
     buffer.updates.push(orphan(stash.id, itemIds))
 
   Q.all(tasks)
-    .then ->
-      # check to see if we should flush out a batch of documents next
-      return Q() unless buffer.docs.length > config.elastic.batchSize
-
-      flush = buffer.docs
-      orphans = buffer.updates
-      buffer.docs = []
-      buffer.updates = []
-      docCount = flush.length / 2
-      log.as.info("starting bulk index of #{docCount} docs and #{orphans.length} queries")
-      duration = process.hrtime()
-      client.bulk({ body: flush })
-        .then ->
-          duration = process.hrtime(duration)
-          duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-          log.as.info("merged #{docCount} documents @ #{Math.floor(docCount / duration.asSeconds())} docs/sec")
-        .then -> Q.all(orphans)
-        .catch(log.as.error)
+    .then(flushDocs)
 
 logFetch = (changeId, doc) ->
   buffer.docs.push({
@@ -200,16 +171,48 @@ logFetch = (changeId, doc) ->
       _id: changeId
   }, doc)
 
+flushDocs = ->
+  # check to see if we should flush out a batch of documents next
+  return Q() unless buffer.docs.length > config.elastic.batchSize
+
+  flush = buffer.docs
+  orphans = buffer.updates
+  buffer.docs = []
+  buffer.updates = []
+  docCount = flush.length / 2
+  log.as.info("starting bulk index of #{docCount} docs and #{orphans.length} queries")
+  duration = process.hrtime()
+  client.bulk({ body: flush })
+    .then ->
+      duration = process.hrtime(duration)
+      duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
+      log.as.info("merged #{docCount} documents @ #{Math.floor(docCount / duration.asSeconds())} docs/sec")
+    .then -> Q.all(orphans)
+    .catch(log.as.error)
+
 module.exports =
-  updateIndices: createTemplates
+  updateIndices: ->
+    schema = jsonfile.readFileSync("#{__dirname}/../schema.json")
+
+    templates = []
+    tasks = []
+    for shard, info of schema
+      shardName = "poe-#{shard}"
+      templates.push(putTemplate(shardName, info.settings, info.mappings))
+
+      # only create date partitioned indices for stash and listing
+      if shard isnt 'listing' and shard isnt 'stash'
+        tasks.push(createIndex(shardName))
+      else
+        tasks.push(createDatedIndices(shardName, 7))
+
+    Q.allSettled(templates)
+      .then(Q.allSettled(tasks))
   pruneIndices: ->
     tasks = []
     for type in [ 'stash', 'listing' ]
       tasks.push(pruneIndices(type, config.watcher.retention[type]))
     Q.all(tasks)
-  mergeStashes: mergeStashes
   logFetch: logFetch
-  getBufferSize: -> (buffer.docs.length / config.elastic.batchSize)
-  client: client
+  mergeStashes: mergeStashes
   config: config.elastic
-
