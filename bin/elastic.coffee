@@ -68,6 +68,8 @@ getShard = (type, date) ->
   "poe-#{type}-#{date.format('YYYY-MM-DD')}"
 
 mergeListing = (shard, item) ->
+  merged = Q.defer()
+
   client.search({
     index: 'poe-listing*'
     type: 'listing'
@@ -76,7 +78,7 @@ mergeListing = (shard, item) ->
         term:
           _id: item.id
   }, (err, res) ->
-    return log.as.error(err) if err? and err?.status isnt 404
+    return merged.reject(err) if err? and err?.status isnt 404
 
     listing = null
     verb = 'index'
@@ -104,7 +106,10 @@ mergeListing = (shard, item) ->
     if verb is 'update'
       payload = { doc: payload }
     buffer.docs.push(header, payload)
+    merged.resolve()
   )
+
+  merged.promise
 
 orphan = (stashId, itemIds) ->
   client.updateByQuery(
@@ -162,7 +167,7 @@ mergeStashes = (stashes) ->
 
     buffer.updates.push(orphan(stash.id, itemIds))
 
-  Q.all(tasks)
+  Q.allSettled(tasks)
     .then(flushDocs)
 
 logFetch = (changeId, doc) ->
@@ -189,7 +194,7 @@ flushDocs = ->
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       log.as.info("merged #{docCount} documents @ #{Math.floor(docCount / duration.asSeconds())} docs/sec")
-    .then -> Q.all(queries)
+    .then -> Q.allSettled(queries)
     .catch(log.as.error)
 
 module.exports =
@@ -217,4 +222,5 @@ module.exports =
     Q.all(tasks)
   logFetch: logFetch
   mergeStashes: mergeStashes
+  flushDocs: flushDocs
   config: config.elastic

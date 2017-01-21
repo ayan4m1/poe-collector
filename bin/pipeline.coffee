@@ -71,7 +71,6 @@ downloadChange = (changeId) ->
 
   downloaded.promise
 
-
 fetchChange = (changeId) ->
   getSize(cacheDir)
     .then (cacheSize) ->
