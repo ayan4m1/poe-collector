@@ -6,7 +6,7 @@ default:
     interval: 2
     unit: seconds
   fetch:
-    concurrency: 4
+    concurrency: 2
     interval: 5
     unit: seconds
   cache:
