@@ -1,6 +1,4 @@
 default:
-  api:
-    uri: http://api.pathofexile.com/public-stash-tabs
   process:
     concurrency: 2
     interval: 5

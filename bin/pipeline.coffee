@@ -42,9 +42,9 @@ downloadChange = (changeId) ->
   downloaded = Q.defer()
 
   log.as.debug("handling the request to fetch change #{changeId}")
-  duration = process.hrtime(duration)
+  duration = process.hrtime()
   requestPromise(
-    uri: "#{config.watcher.api.uri}?id=#{changeId}"
+    uri: "http://api.pathofexile.com/public-stash-tabs?id=#{changeId}"
     gzip: true
   )
     .then (res) ->
@@ -75,9 +75,9 @@ fetchChange = (changeId) ->
   getSize(cacheDir)
     .then (cacheSize) ->
       cacheMb = Math.round(cacheSize / 1e6)
-      if cacheMb > config.watcher.cache.maxSizeMb
-        log.as.debug("waiting for cache directory to be < " + config.watcher.cache.maxSizeMb + " MB - currently " + cacheMb)
-        return Q.delay(changeId, cacheDelayMs).then(fetchChange)
+      if cacheMb > cacheConfig.size
+        log.as.debug("waiting for cache directory to be < " + cacheConfig.size + " MB - currently " + cacheMb)
+        return Q.delay(changeId, cacheConfig.delay).then(fetchChange)
 
       log.as.debug("adding a request for change #{changeId}")
       downloadLimiter.schedule(downloadChange, changeId)
