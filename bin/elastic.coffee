@@ -20,13 +20,15 @@ client = new elasticsearch.Client(
 )
 
 putTemplate = (name, settings, mappings) ->
-  client.indices.putTemplate
+  log.as.debug("asked to create template #{name}")
+  client.indices.putTemplate(
     create: false
     name: "#{name}*"
     body:
       template: "#{name}*"
       settings: settings
       mappings: mappings
+  ).catch(log.as.error)
 
 createIndex = (name) ->
   client.indices.exists({index: name})
@@ -78,20 +80,20 @@ mergeListing = (shard, item) ->
 
     listing = null
     verb = 'index'
-    if err?.status is 404
+    if res.hits?.hits?.length is 0 or err?.status is 404
       listing = parser.new(item)
     else if res.hits?.hits?.length is 1
       verb = 'update'
       raw = res.hits.hits[0]
       if raw._index isnt shard
-        log.as.debug("taking item from index #{raw._index} and moving it to index #{shard}")
+        log.as.silly("moving #{raw._id} up from #{raw._index}")
         buffer.updates.push(client.delete(
           index: raw._index
           type: 'listing'
           id: raw._id
         ))
       listing = raw._source
-      parser.existing(listing, item)
+      parser.existing(item, listing)
 
     header = {}
     header[verb] =
@@ -176,18 +178,18 @@ flushDocs = ->
   return Q() unless buffer.docs.length > config.elastic.batchSize
 
   flush = buffer.docs
-  orphans = buffer.updates
+  queries = buffer.updates
   buffer.docs = []
   buffer.updates = []
   docCount = flush.length / 2
-  log.as.info("starting bulk index of #{docCount} docs and #{orphans.length} queries")
+  log.as.info("starting bulk index of #{docCount} docs and #{queries.length} queries")
   duration = process.hrtime()
   client.bulk({ body: flush })
     .then ->
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       log.as.info("merged #{docCount} documents @ #{Math.floor(docCount / duration.asSeconds())} docs/sec")
-    .then -> Q.all(orphans)
+    .then -> Q.all(queries)
     .catch(log.as.error)
 
 module.exports =
@@ -207,7 +209,7 @@ module.exports =
         tasks.push(createDatedIndices(shardName, 7))
 
     Q.allSettled(templates)
-      .then(Q.allSettled(tasks))
+      .then -> Q.allSettled(tasks)
   pruneIndices: ->
     tasks = []
     for type in [ 'stash', 'listing' ]

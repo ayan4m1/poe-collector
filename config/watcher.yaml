@@ -1,12 +1,19 @@
 default:
+  api:
+    uri: http://api.pathofexile.com/public-stash-tabs
   process:
-    concurrency: 1
-    interval: 1
+    concurrency: 4
+    interval: 2
     unit: seconds
   fetch:
-    concurrency: 2
-    interval: 8
+    concurrency: 4
+    interval: 5
     unit: seconds
+  cache:
+    maxSizeMb: 50
+    delay:
+      interval: 10
+      unit: seconds
   retention:
     stash:
       interval: 30

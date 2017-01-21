@@ -15,15 +15,17 @@ requestPromise = require 'request-promise-native'
 log = require './logging'
 elastic = require './elastic'
 
-# todo: refactor to config
-baseUrl = "http://api.pathofexile.com/public-stash-tabs"
 cacheDir = "#{__dirname}/../cache"
+cacheConfig =
+  delay: moment.duration(config.watcher.cache.delay.interval, config.watcher.cache.delay.unit).asMilliseconds()
+  size: config.watcher.cache.maxSizeMb
 
 # promisified functions
 readDir = Q.denodeify(fs.readdir)
 readFile = Q.denodeify(jsonfile.readFile)
 writeFile = Q.denodeify(jsonfile.writeFile)
 unlink = Q.denodeify(fs.unlink)
+getSize = Q.denodeify(require('get-folder-size'))
 
 # configurable concurrency level and scheduling interval
 downloadLimiter = new Bottleneck(
@@ -42,20 +44,19 @@ downloadChange = (changeId) ->
   log.as.debug("handling the request to fetch change #{changeId}")
   duration = process.hrtime(duration)
   requestPromise(
-    uri: "#{baseUrl}?id=#{changeId}"
+    uri: "#{config.watcher.api.uri}?id=#{changeId}"
     gzip: true
   )
     .then (res) ->
-      downloaded.resolve()
       data = JSON.parse(res)
+      downloaded.resolve()
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-      fetchTime = duration.asSeconds()
-      sizeKb = res.length / 1e3
+
       elastic.logFetch(changeId, {
         timestamp: moment().toDate()
-        fileSizeKb: sizeKb
-        downloadTimeMs: fetchTime * 1e3
+        fileSizeKb: res.length / 1e3
+        downloadTimeMs: duration.asMilliseconds()
       })
 
       writeFile("#{cacheDir}/#{changeId}", {
@@ -70,34 +71,43 @@ downloadChange = (changeId) ->
 
   downloaded.promise
 
-readChange = (changeId) ->
-  readFile("#{cacheDir}/#{changeId}")
-    .then (data) -> processChange(data)
-    .catch(log.as.error)
 
 fetchChange = (changeId) ->
-  log.as.debug("adding a request for change #{changeId}")
-  downloadLimiter.schedule(downloadChange, changeId)
+  getSize(cacheDir)
+    .then (cacheSize) ->
+      cacheMb = Math.round(cacheSize / 1e6)
+      if cacheMb > config.watcher.cache.maxSizeMb
+        log.as.debug("waiting for cache directory to be < " + config.watcher.cache.maxSizeMb + " MB - currently " + cacheMb)
+        return Q.delay(changeId, cacheDelayMs).then(fetchChange)
+
+      log.as.debug("adding a request for change #{changeId}")
+      downloadLimiter.schedule(downloadChange, changeId)
 
 handleChange = (changeId) ->
   log.as.debug("scheduling the read of #{changeId}")
   processLimiter.schedule(readChange, changeId)
 
+readChange = (changeId) ->
+  readFile("#{cacheDir}/#{changeId}")
+    .then (data) -> processChange(data)
+
 processChange = (data) ->
-  filePath = "#{cacheDir}/#{data.id}"
-  if not data?.id? or data?.error?
-    return unlink(filePath)
-      .then -> touch(filePath)
+  if data?.error?
+    log.as.error("stopped processing due to file error for #{data.id}")
+    return scrubChange(data.id)
 
   log.as.debug("merging data for change #{data.id}")
   duration = process.hrtime()
   elastic.mergeStashes(data.body.stashes)
-    .catch(log.as.error)
     .then ->
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       log.as.info("processed #{data.body.stashes.length} tabs in #{duration.asMilliseconds().toFixed(2)}ms")
-    .then -> unlink(filePath)
+    .then -> scrubChange(data.id)
+
+scrubChange = (changeId) ->
+  filePath = "#{cacheDir}/#{changeId}"
+  unlink(filePath)
     .then -> touch(filePath)
 
 findLatestChange = ->
@@ -118,11 +128,11 @@ watchCache = ->
     depth: 0
     persistent: true
     usePolling: true
-    interval: 250
+    interval: 500
     ignoreInitial: true
     awaitWriteFinish:
-      pollInterval: 250
-      stabilityThreshold: 1000
+      pollInterval: 1000
+      stabilityThreshold: 5000
   })
 
   eventHandler = (file) ->

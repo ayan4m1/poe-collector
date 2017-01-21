@@ -3,9 +3,9 @@
     "settings": {
       "index": {
         "refresh_interval": "3s",
-        "number_of_shards": 1,
-        "number_of_replicas": 0,
-        "requests.cache.enable": true,
+        "number_of_shards": "1",
+        "number_of_replicas": "0",
+        "requests.cache.enable": "true",
         "translog.durability": "async",
         "translog.sync_interval": "15s"
       }
@@ -43,9 +43,9 @@
     "settings": {
       "index": {
         "refresh_interval": "30s",
-        "number_of_shards": 1,
-        "number_of_replicas": 0,
-        "requests.cache.enable": true,
+        "number_of_shards": "1",
+        "number_of_replicas": "0",
+        "requests.cache.enable": "true",
         "translog.durability": "async",
         "translog.sync_interval": "60s"
       },
@@ -110,6 +110,68 @@
           },
           "y": {
             "type": "integer"
+          },
+          "quality": {
+            "type": "integer"
+          },
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "note": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "identified": {
+            "type": "boolean"
+          },
+          "corrupted": {
+            "type": "boolean"
+          },
+          "locked": {
+            "type": "boolean"
+          },
+          "icon": {
+            "type": "text",
+            "index": "not_analyzed"
+          },
+          "iconVersion": {
+            "type": "text",
+            "index": "not_analyzed"
+          },
+          "flavourText": {
+            "type": "text"
+          },
+          "price": {
+            "type": "text",
+            "index": "not_analyzed"
+          },
+          "chaosPrice": {
+            "type": "float"
+          },
+          "stack": {
+            "properties": {
+              "count": {
+                "type": "integer"
+              },
+              "maximum": {
+                "type": "integer"
+              }
+            }
+          },
+          "firstSeen": {
+            "type": "date"
+          },
+          "lastSeen": {
+            "type": "date"
+          },
+          "removed": {
+            "type": "boolean"
           },
           "sockets": {
             "properties": {
@@ -788,11 +850,31 @@
               },
               "crafting": {
                 "properties": {
-                  "openPrefix": {
-                    "type": "boolean"
+                  "prefix": {
+                    "properties": {
+                      "open": {
+                        "type": "integer"
+                      },
+                      "tier": {
+                        "type": "integer"
+                      },
+                      "quality": {
+                        "type": "float"
+                      }
+                    }
                   },
-                  "openSuffix": {
-                    "type": "boolean"
+                  "suffix": {
+                    "properties": {
+                      "open": {
+                        "type": "integer"
+                      },
+                      "tier": {
+                        "type": "integer"
+                      },
+                      "quality": {
+                        "type": "float"
+                      }
+                    }
                   }
                 }
               },
@@ -917,67 +999,28 @@
               }
             }
           },
-          "quality": {
-            "type": "integer"
-          },
-          "width": {
-            "type": "integer"
-          },
-          "height": {
-            "type": "integer"
-          },
-          "note": {
-            "type": "string",
-            "index": "not_analyzed"
-          },
-          "level": {
-            "type": "integer"
-          },
-          "identified": {
-            "type": "boolean"
-          },
-          "corrupted": {
-            "type": "boolean"
-          },
-          "locked": {
-            "type": "boolean"
-          },
-          "icon": {
-            "type": "text",
-            "index": "not_analyzed"
-          },
-          "iconVersion": {
-            "type": "text",
-            "index": "not_analyzed"
-          },
-          "flavourText": {
-            "type": "text"
-          },
-          "price": {
-            "type": "text",
-            "index": "not_analyzed"
-          },
-          "chaosPrice": {
-            "type": "float"
-          },
-          "stack": {
+          "minions": {
             "properties": {
-              "count": {
-                "type": "integer"
+              "damage": {
+                "type": "float"
               },
-              "maximum": {
-                "type": "integer"
+              "life": {
+                "type": "float"
+              },
+              "blockChance": {
+                "type": "float"
+              },
+              "limit": {
+                "properties": {
+                  "skeletons": {
+                    "type": "integer"
+                  },
+                  "zombies": {
+                    "type": "integer"
+                  }
+                }
               }
             }
-          },
-          "firstSeen": {
-            "type": "date"
-          },
-          "lastSeen": {
-            "type": "date"
-          },
-          "removed": {
-            "type": "boolean"
           }
         }
       }
@@ -986,8 +1029,8 @@
   "league": {
     "settings": {
       "index": {
-        "number_of_shards": 1,
-        "number_of_replicas": 0
+        "number_of_shards": "1",
+        "number_of_replicas": "0"
       }
     },
     "mappings": {
