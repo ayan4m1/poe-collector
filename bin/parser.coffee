@@ -29,10 +29,10 @@ regexes =
     flatOffense: /Adds (\d+)( to (\d+))? (Chaos |Elemental |Fire |Physical |Cold |Lightning )?Damage to (Attacks|Spells)/
     block: /([-+]?)(\d*\.?\d+%?)(?: additional| to maximum) (?:Chance to Block|Block Chance)( Spells)?\s*(?:with|while)?\s*(Staves|Shields|Dual Wielding)?/
     reflect: /Reflects (\d+) to (\d+) (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
-    resist: /([-+]?)(\d+%) to (all )?(Lightning|Cold|Fire|Chaos|Elemental) Resistance(s?)/
+    resist: /^(?!Cursed)([-+]?)(\d+%) to (all )?(maximum )?(Lightning|Cold|Fire|Chaos|Elemental) Resistance(s?)/
     attribute: /([-+]?)(\d+) to (all )?(Attributes|Strength|Dexterity|Intelligence)( and (Dexterity|Intelligence))?/
     vitals: /([-+]?)(\d+%?) (increased|reduced|to)(?: maximum)? (Life|Mana|Energy Shield)( Recharge Rate)?/
-    minions: /Minions (deal|have) [+-]?(\d+%) (Chance|increased|to) (Damage|maximum Life|Movement Speed|all Elemental Resistances)/
+    minions: /Minions (deal|have) ([+-])?(\d+%?) (Chance|increased|to) (Damage|maximum Life|Movement Speed|all Elemental Resistances)/
     gemLevel: /\+\d to Level of Socketed (Bow|Chaos|Cold|Elemental|Fire|Lightning|Melee|Minion|Spell)? Gems/
     gemEffect: /Socketed (Curse) Gems .*/
     ailment: /(\d+%) (?: chance)(to|increased) (Shock|Ignite|Freeze)( Duration on Enemies)?/
@@ -113,6 +113,13 @@ modParsers =
 
     # todo: handle pseudos
     operator = modOperators[op]
+    if first?.startsWith('Global Critical Strike')
+      # either Chance or Multiplier
+      bucket = first.split(' ').slice(-1).toLowerCase()
+      result.offense.critical[bucket] = operator(result.offense.critical[bucket])
+    else if first?.startsWith('Critical Strike Chance') and sixth?.trim() is 'for Spells'
+      result.offense.critical.spell.chance = operator(result.offense.critical.spell.chance)
+
     switch second
       when 'Speed'
         switch first
@@ -163,21 +170,42 @@ modParsers =
     #  when 'Physical'
     #  when 'Cold', 'Fire', 'Lightning'
   resist: (mod, result) ->
-    [ fullText, sign, value, all, type ] = mod
+    [ fullText, sign, value, all, maximum, type ] = mod
     return new Error(mod) unless value?
     isPercent = value.indexOf('%') > 0
-    value = parseInt(value.replace('%',''))
+    value = parseFloat(value.replace('%',''))
     if isPercent then value *= 0.01
 
     operator = modOperators.to
     switch type
       when 'Elemental'
-        # todo: do we have an "all" or do we just add each one
-        result.defense.resist.elemental.all = operator(result.defense.resist.elemental.all, value, sign)
+        if all is 'all ' and maximum is 'maximum '
+          bucket = 'maximum'
+          subBucket = 'all'
+        else if all is 'all '
+          bucket = 'elemental'
+          subBucket = 'all'
+        else
+          console.dir(mod)
+          return log.as.error('unexpected Elemental non-all non-max resist...')
+
+        result.defense.resist[bucket][subBucket] = operator(result.defense.resist[bucket][subBucket], value, sign)
       when 'Chaos'
         result.defense.resist.chaos = operator(result.defense.resist.chaos, value, sign)
-      when all is 'all'
-        result.defense.resist.all = operator(result.defense.resist.all, value, sign)
+      when 'Cold', 'Fire', 'Lightning'
+        bucket = maximum?.trim()
+        subBucket = type.trim().toLowerCase()
+        if bucket is 'maximum'
+          result.defense.resist[bucket][subBucket] = operator(result.defense.resist[bucket][subBucket], value, sign)
+        else
+          result.defense.resist.elemental[subBucket] = operator(result.defense.resist.elemental[subBucket], value, sign)
+
+    if all is 'all '
+      result.meta.total.resist.all = operator(result.meta.total.resist.all, value, sign)
+    else if maximum is 'maximum '
+      result.meta.total.resist.maximum = operator(result.meta.total.resist.maximum, value, sign)
+
+    result.meta.total.resist.elemental = operator(result.meta.total.resist.elemental, value, sign)
   attribute: (mod, result) ->
     [ fullText, sign, value, all, first, second ] = mod
     value = parseInt(value)
@@ -211,11 +239,19 @@ modParsers =
         when 'Energy Shield'
           result.defense.shield[bucket] = operator(result.defense.shield[bucket], value, sign)
   gemLevel: (mod, result) ->
-    log.as.silly('no-op gem level bonus parse')
+    [ value, type ] = mod
+    value = parseInt(value)
+    return if isNaN(value)
+    type = type.toLowerCase().trim()
+    result.gemLevel[type] = value
   gemEffect: (mod, result) ->
-    log.as.silly('no-op gem effect parse')
+    [ type ] = mod
   minions: (mod, result) ->
-    log.as.silly('no-op minions parse')
+    [ isDeal, sign, value, op, type ] = mod
+    #if isDeal is 'deal' and type is 'Damage'
+  cursed: (mod, result) ->
+    [ body ] = mod
+    log.as.silly("cursed enemies mod - " + body)
 
 parseMod = (mod, result) ->
   for type, regex of regexes.mods
@@ -469,7 +505,8 @@ parseItem = (item) ->
         openPrefix: false
         openSuffix: false
       total:
-        resistance:
+        resist:
+          maximum: 0
           all: 0
           elemental: 0
         damagePerSecond:
@@ -632,6 +669,11 @@ parseItem = (item) ->
       castSpeed: 0
     defense:
       resist:
+        maximum:
+          all: 0
+          fire: 0
+          cold: 0
+          lightning: 0
         all: 0
         elemental:
           fire: 0
@@ -713,6 +755,9 @@ parseItem = (item) ->
 
   if item.explicitMods?
     Array.prototype.push.apply(mods, item.explicitMods)
+
+  if item.utilityMods?
+    Array.prototype.push.apply(mods, item.utilityMods)
 
   for mod in mods
     parseMod(mod, result)

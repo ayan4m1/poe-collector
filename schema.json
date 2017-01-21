@@ -683,6 +683,22 @@
             "properties": {
               "resist": {
                 "properties": {
+                  "maximum": {
+                    "properties": {
+                      "all": {
+                        "type": "integer"
+                      },
+                      "fire": {
+                        "type": "integer"
+                      },
+                      "cold": {
+                        "type": "integer"
+                      },
+                      "lightning": {
+                        "type": "integer"
+                      }
+                    }
+                  },
                   "elemental": {
                     "properties": {
                       "all": {
@@ -880,8 +896,11 @@
               },
               "total": {
                 "properties": {
-                  "resistance": {
+                  "resist": {
                     "properties": {
+                      "maximum": {
+                        "type": "float"
+                      },
                       "all": {
                         "type": "float"
                       },
