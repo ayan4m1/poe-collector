@@ -168,7 +168,6 @@ mergeStashes = (stashes) ->
 
   queries = buffer.queries
   buffer.queries = []
-
   Q.allSettled(queries)
     .then(bulkDocuments)
     .then(orphanListings)
@@ -208,14 +207,13 @@ orphanListings = ->
 
       log.as.info("orphaned #{orphanCount} documents in #{duration.asMilliseconds().toFixed(2)}ms @ #{Math.floor(orphanCount / duration.asSeconds())} docs/sec")
 
-
 logFetch = (changeId, doc) ->
-  buffer.queries.push({
+  buffer.queries.push(Q([{
     index:
       _index: 'poe-stats'
       _type: 'fetch'
       _id: changeId
-  }, doc)
+  }, doc]))
 
 module.exports =
   updateIndices: ->
