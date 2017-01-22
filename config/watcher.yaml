@@ -8,7 +8,7 @@ default:
     interval: 5
     unit: seconds
   cache:
-    maxSizeMb: 30
+    maxSizeMb: 20
     delay:
       interval: 1
       unit: seconds

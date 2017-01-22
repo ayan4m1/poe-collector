@@ -78,6 +78,7 @@ mergeListing = (shard, item) ->
         term:
           _id: item.id
   }, (err, res) ->
+    console.dir(err?.status) if err?
     return merged.reject(err) if err? and err?.status isnt 404
 
     listing = null
@@ -164,43 +165,49 @@ mergeStashes = (stashes) ->
 
   return Q() unless buffer.queries.length > config.elastic.batchSize
   log.as.info("flushing batch of #{buffer.queries.length} elastic queries")
+
   queries = buffer.queries
   buffer.queries = []
+
   Q.allSettled(queries)
+    .then(bulkDocuments)
+    .then(orphanListings)
+
+bulkDocuments = (results) ->
+  bulk = []
+
+  for result in results
+    if result.state is 'rejected' and result.reason.status isnt 404
+      log.as.error(result.reason)
+      continue
+    continue unless Array.isArray(result.value)
+    Array.prototype.push.apply(bulk, result.value)
+
+  docCount = bulk.length / 2
+  log.as.debug("starting bulk of #{docCount} documents")
+  duration = process.hrtime()
+  client.bulk({ body: bulk })
+    .then ->
+      duration = process.hrtime(duration)
+      bulkTime = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
+      log.as.info("merged #{bulk.length / 2} documents @ #{Math.floor(docCount / bulkTime.asSeconds())} docs/sec")
+
+orphanListings = ->
+  duration = process.hrtime()
+  orphans = buffer.orphans
+  buffer.orphans = []
+  Q.allSettled(orphans)
     .then (results) ->
-      bulk = []
+      duration = process.hrtime(duration)
+      duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
 
+      orphanCount = 0
       for result in results
-        if result.state is 'rejected'
-          log.as.error(result.reason)
-          continue
-        Array.prototype.push.apply(bulk, result.value)
+        continue unless result.state is 'fulfilled' and result.value.updated > 0
+        orphanCount += result.value.updated
 
-      docCount = bulk.length / 2
-      log.as.debug("starting bulk of #{docCount} documents")
-      duration = process.hrtime()
+      log.as.info("orphaned #{orphanCount} documents in #{duration.asMilliseconds().toFixed(2)}ms @ #{Math.floor(orphanCount / duration.asSeconds())} docs/sec")
 
-      client.bulk({ body: bulk })
-        .then ->
-          duration = process.hrtime(duration)
-          bulkTime = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-
-          log.as.info("merged #{bulk.length / 2} documents @ #{Math.floor(docCount / bulkTime.asSeconds())} docs/sec")
-
-          orphans = buffer.orphans
-          buffer.orphans = []
-          Q.allSettled(orphans)
-            .then (results) ->
-              duration = process.hrtime(duration)
-              orphanTime = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-
-              orphanCount = 0
-              for result in results
-                continue unless result.state is 'fulfilled'
-                orphanCount += result.value.updated
-
-              log.as.info("orphaned #{orphanCount} documents in #{orphanTime.asMilliseconds()}ms @ #{Math.floor(orphanCount / orphanTime.asSeconds())} docs/sec")
-        .catch(log.as.error)
 
 logFetch = (changeId, doc) ->
   buffer.queries.push({
