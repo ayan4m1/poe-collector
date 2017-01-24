@@ -1,7 +1,7 @@
 default:
   process:
     concurrency: 2
-    interval: 5
+    interval: 1
     unit: seconds
   fetch:
     concurrency: 2

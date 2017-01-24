@@ -53,12 +53,7 @@ downloadChange = (changeId) ->
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
 
-      elastic.logFetch(changeId, {
-        timestamp: moment().toDate()
-        fileSizeKb: res.length / 1e3
-        downloadTimeMs: duration.asMilliseconds()
-      })
-
+      elastic.logFetch(changeId, res.length / 1e3, downloadTimeMs: duration.asMilliseconds())
       writeFile("#{cacheDir}/#{changeId}", {
         id: changeId
         body: data
@@ -73,6 +68,7 @@ downloadChange = (changeId) ->
 
 fetchChange = (changeId) ->
   getSize(cacheDir)
+    .catch(log.as.error)
     .then (cacheSize) ->
       cacheMb = Math.round(cacheSize / 1e6)
       if cacheMb > cacheConfig.size
@@ -88,21 +84,25 @@ handleChange = (changeId) ->
 
 readChange = (changeId) ->
   readFile("#{cacheDir}/#{changeId}")
-    .then (data) -> processChange(data)
+    .then(processChange)
 
 processChange = (data) ->
+  processed = Q.defer()
+
   if data?.error?
     log.as.error("stopped processing due to file error for #{data.id}")
+    processed.reject(data.error)
     return scrubChange(data.id)
 
   log.as.debug("merging data for change #{data.id}")
-  duration = process.hrtime()
+
   elastic.mergeStashes(data.body.stashes)
+    .catch(processed.reject)
     .then ->
-      duration = process.hrtime(duration)
-      duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-      log.as.info("processed #{data.body.stashes.length} tabs in #{duration.asMilliseconds().toFixed(2)}ms")
-    .then -> scrubChange(data.id)
+      processed.resolve()
+      scrubChange(data.id)
+
+  processed.promise
 
 scrubChange = (changeId) ->
   filePath = "#{cacheDir}/#{changeId}"
@@ -130,8 +130,8 @@ watchCache = ->
     interval: 500
     ignoreInitial: true
     awaitWriteFinish:
-      pollInterval: 1000
-      stabilityThreshold: 5000
+      pollInterval: 500
+      stabilityThreshold: 3000
   })
 
   eventHandler = (file) ->

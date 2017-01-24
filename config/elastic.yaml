@@ -1,7 +1,7 @@
 default:
   host: http://localhost:9200
   logLevel: error
-  batchSize: 20000
+  batchSize: 10000
   timeout:
     interval: 120
     unit: seconds

@@ -9,7 +9,9 @@ log = require './logging'
 parser = require './parser'
 
 buffer =
-  queries: []
+  stashes: []
+  listings: []
+  stats: []
   orphans: []
 
 elasticsearch = require 'elasticsearch'
@@ -67,9 +69,44 @@ getShard = (type, date) ->
   date = date ? moment()
   "poe-#{type}-#{date.format('YYYY-MM-DD')}"
 
-mergeListing = (shard, item) ->
-  merged = Q.defer()
+mergeStash = (shard, stash) ->
+  client.search({
+    index: 'poe-stash*'
+    type: 'stash'
+    body:
+      query:
+        term:
+          _id: stash.id
+  }, (err, res) ->
+    return log.as.error(err) if err? and err?.status isnt 404
 
+    listing = null
+    verb = 'index'
+    if res.hits?.hits?.length is 0 or err?.status is 404
+      listing =
+        id: stash.id
+        name: stash.stash
+        lastSeen: moment().toDate()
+        owner:
+          account: stash.accountName
+          character: stash.lastCharacterName
+    else if res.hits?.hits?.length is 1
+      listing = res.hits.hits[0]._source
+      listing.name = stash.stash
+      listing.lastSeen = moment().toDate()
+
+    header = {}
+    header[verb] =
+      _index: shard
+      _type: 'stash'
+      _id: stash.id
+    payload = listing
+    if verb is 'update'
+      payload = { doc: payload }
+    buffer.stashes.push(header, payload)
+  )
+
+mergeListing = (shard, item) ->
   client.search({
     index: 'poe-listing*'
     type: 'listing'
@@ -78,8 +115,7 @@ mergeListing = (shard, item) ->
         term:
           _id: item.id
   }, (err, res) ->
-    console.dir(err?.status) if err?
-    return merged.reject(err) if err? and err?.status isnt 404
+    return log.as.error(err) if err? and err?.status isnt 404
 
     listing = null
     verb = 'index'
@@ -90,7 +126,7 @@ mergeListing = (shard, item) ->
       raw = res.hits.hits[0]
       if raw._index isnt shard
         log.as.silly("moving #{raw._id} up from #{raw._index}")
-        buffer.queries.push(client.delete(
+        buffer.orphans.push(client.delete(
           index: raw._index
           type: 'listing'
           id: raw._id
@@ -106,10 +142,8 @@ mergeListing = (shard, item) ->
     payload = listing
     if verb is 'update'
       payload = { doc: payload }
-    merged.resolve([header, payload])
+    buffer.listings.push(header, payload)
   )
-
-  merged.promise
 
 orphan = (stashId, itemIds) ->
   client.updateByQuery(
@@ -135,25 +169,12 @@ mergeStashes = (stashes) ->
   shard = getShard('stash')
   listingShard = getShard('listing')
   for stash in stashes
-    buffer.queries.push(Q([{
-      index:
-        _index: shard
-        _type: 'stash'
-        _id: stash.id
-    }, {
-      id: stash.id
-      name: stash.stash
-      lastSeen: moment().toDate()
-      owner:
-        account: stash.accountName
-        character: stash.lastCharacterName
-    }]))
-
+    mergeStash(shard, stash)
     itemIds = []
     for item in stash.items
       item.stash = item.stash ? stash.id
 
-      buffer.queries.push(mergeListing(listingShard, item))
+      mergeListing(listingShard, item)
 
       # build a search term for this item ID so that we can orphan removed items later
       itemIds.push({
@@ -163,24 +184,20 @@ mergeStashes = (stashes) ->
 
     buffer.orphans.push(orphan(stash.id, itemIds))
 
-  return Q() unless buffer.queries.length > config.elastic.batchSize
-  log.as.info("flushing batch of #{buffer.queries.length} elastic queries")
+  return Q() unless buffer.listings.length > config.elastic.batchSize
+  log.as.debug("flushing #{buffer.listings.length} listings across #{buffer.stashes.length} stashes")
 
-  queries = buffer.queries
-  buffer.queries = []
-  Q.allSettled(queries)
-    .then(bulkDocuments)
-    .then(orphanListings)
+  [ listBuf, stashBuf, orphanBuf ] = [ buffer.listings, buffer.stashes, buffer.orphans ]
+  buffer.stashes = []
+  buffer.listings = []
+  buffer.orphans = []
 
-bulkDocuments = (results) ->
-  bulk = []
+  bulkDocuments(stashBuf)
+    .then -> bulkDocuments(listBuf)
+    .then -> orphanListings(orphanBuf)
 
-  for result in results
-    if result.state is 'rejected' and result.reason.status isnt 404
-      log.as.error(result.reason)
-      continue
-    continue unless Array.isArray(result.value)
-    Array.prototype.push.apply(bulk, result.value)
+bulkDocuments = (bulk) ->
+  bulked = Q.defer()
 
   docCount = bulk.length / 2
   log.as.debug("starting bulk of #{docCount} documents")
@@ -190,11 +207,14 @@ bulkDocuments = (results) ->
       duration = process.hrtime(duration)
       bulkTime = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       log.as.info("merged #{bulk.length / 2} documents @ #{Math.floor(docCount / bulkTime.asSeconds())} docs/sec")
+      bulked.resolve()
+    .catch(bulked.reject)
 
-orphanListings = ->
+  bulked.promise
+
+orphanListings = (orphans) ->
   duration = process.hrtime()
-  orphans = buffer.orphans
-  buffer.orphans = []
+
   Q.allSettled(orphans)
     .then (results) ->
       duration = process.hrtime(duration)
@@ -205,15 +225,21 @@ orphanListings = ->
         continue unless result.state is 'fulfilled' and result.value.updated > 0
         orphanCount += result.value.updated
 
+      return unless orphanCount > 0
       log.as.info("orphaned #{orphanCount} documents in #{duration.asMilliseconds().toFixed(2)}ms @ #{Math.floor(orphanCount / duration.asSeconds())} docs/sec")
+    .catch(log.as.error)
 
-logFetch = (changeId, doc) ->
-  buffer.queries.push(Q([{
+logFetch = (changeId, sizeKb, timeMs) ->
+  buffer.stats.push({
     index:
       _index: 'poe-stats'
       _type: 'fetch'
       _id: changeId
-  }, doc]))
+  }, {
+    timestamp: moment().toDate()
+    fileSizeKb: sizeKb
+    downloadTimeMs: timeMs
+  })
 
 module.exports =
   updateIndices: ->
