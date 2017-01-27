@@ -11,7 +11,6 @@ parser = require './parser'
 buffer =
   stashes: []
   listings: []
-  stats: []
   orphans: []
 
 elasticsearch = require 'elasticsearch'
@@ -248,11 +247,10 @@ orphanListings = (orphans) ->
     .catch(log.as.error)
 
 logFetch = (changeId, sizeKb, timeMs) ->
-  buffer.stats.push({
-    index:
-      _index: 'poe-stats'
-      _type: 'fetch'
-      _id: changeId
+  client.index({
+    index: 'poe-stats'
+    type: 'fetch'
+    id: changeId
   }, {
     timestamp: moment().toDate()
     fileSizeKb: sizeKb
