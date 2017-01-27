@@ -1080,9 +1080,6 @@
     "mappings": {
       "fetch": {
         "properties": {
-          "changeId": {
-            "type": "keyword"
-          },
           "fileSizeKb": {
             "type": "float"
           },
