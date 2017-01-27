@@ -22,9 +22,6 @@ cacheConfig =
 
 # promisified functions
 readDir = Q.denodeify(fs.readdir)
-readFile = Q.denodeify(jsonfile.readFile)
-writeFile = Q.denodeify(jsonfile.writeFile)
-unlink = Q.denodeify(fs.unlink)
 getSize = Q.denodeify(require('get-folder-size'))
 
 # configurable concurrency level and scheduling interval
@@ -38,9 +35,7 @@ processLimiter = new Bottleneck(
   moment.duration(config.watcher.process.interval, config.watcher.process.unit).asMilliseconds()
 )
 
-downloadChange = (changeId) ->
-  downloaded = Q.defer()
-
+downloadChange = (changeId, downloaded) ->
   log.as.debug("handling the request to fetch change #{changeId}")
   duration = process.hrtime()
   requestPromise(
@@ -49,24 +44,26 @@ downloadChange = (changeId) ->
   )
     .then (res) ->
       data = JSON.parse(res)
-      downloaded.resolve()
-      duration = process.hrtime(duration)
-      duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-
-      elastic.logFetch(changeId, res.length / 1e3, downloadTimeMs: duration.asMilliseconds())
-      writeFile("#{cacheDir}/#{changeId}", {
+      touch("#{cacheDir}/#{changeId}")
+      downloaded.resolve(
         id: changeId
         body: data
-      })
+      )
 
+      # timing + stats
+      duration = process.hrtime(duration)
+      duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
+      elastic.logFetch(changeId, res.length / 1e3, downloadTimeMs: duration.asMilliseconds())
+
+      # continue on to the next data blob
       return unless data.next_change_id?
       log.as.info("following river to #{data.next_change_id}")
       fetchChange(data.next_change_id)
     .catch(downloaded.reject)
 
-  downloaded.promise
-
 fetchChange = (changeId) ->
+  fetched = Q.defer()
+
   getSize(cacheDir)
     .catch(log.as.error)
     .then (cacheSize) ->
@@ -76,38 +73,17 @@ fetchChange = (changeId) ->
         return Q.delay(changeId, cacheConfig.delay).then(fetchChange)
 
       log.as.debug("adding a request for change #{changeId}")
-      downloadLimiter.schedule(downloadChange, changeId)
+      downloadLimiter.schedule(downloadChange, changeId, fetched)
 
-handleChange = (changeId) ->
-  log.as.debug("scheduling the read of #{changeId}")
-  processLimiter.schedule(readChange, changeId)
-
-readChange = (changeId) ->
-  readFile("#{cacheDir}/#{changeId}")
-    .then(processChange)
+  fetched.promise.then(processChange)
 
 processChange = (data) ->
   processed = Q.defer()
 
-  if data?.error?
-    log.as.error("stopped processing due to file error for #{data.id}")
-    processed.reject(data.error)
-    return scrubChange(data.id)
-
-  log.as.debug("merging data for change #{data.id}")
-
-  elastic.mergeStashes(data.body.stashes)
-    .catch(processed.reject)
-    .then ->
-      processed.resolve()
-      scrubChange(data.id)
+  log.as.debug("process called for #{data.id}")
+  processLimiter.schedule(elastic.mergeStashes, data.body.stashes, processed)
 
   processed.promise
-
-scrubChange = (changeId) ->
-  filePath = "#{cacheDir}/#{changeId}"
-  unlink(filePath)
-    .then -> touch(filePath)
 
 findLatestChange = ->
   readDir(cacheDir)
@@ -120,46 +96,6 @@ findLatestChange = ->
 
       items.pop()
 
-watchCache = ->
-  dir = path.normalize(cacheDir)
-  log.as.debug("registering watch for #{dir}")
-  watcher = chokidar.watch(dir, {
-    depth: 0
-    persistent: true
-    usePolling: true
-    interval: 500
-    ignoreInitial: true
-    awaitWriteFinish:
-      pollInterval: 500
-      stabilityThreshold: 3000
-  })
-
-  eventHandler = (file) ->
-    changeId = path.basename(file)
-    size = fs.statSync(file)?.size
-    return unless size > 0
-    log.as.debug("watcher queued processing for #{changeId}")
-    handleChange(changeId)
-
-  watcher.on('add', eventHandler)
-  watcher.on('change', eventHandler)
-  watcher.on('error', log.as.error)
-
 module.exports =
-  startWatching: watchCache
-  sync: ->
-    readDir(cacheDir)
-      .then (items) ->
-        items = items.filter (v) ->
-          info = fs.statSync("#{cacheDir}/#{v}")
-          info.isFile() and info.size > 0
-
-        tasks = []
-        if items.length > 0
-          tasks.push(handleChange(item)) for item in items
-
-        Q.all(tasks)
-          .catch(log.as.error)
-  next: ->
-    findLatestChange()
-      .then(fetchChange)
+  first: findLatestChange
+  next: fetchChange

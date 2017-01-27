@@ -82,7 +82,7 @@ mergeStash = (shard, stash) ->
 
     listing = null
     verb = 'index'
-    if res.hits?.hits?.length is 0 or err?.status is 404
+    if res.hits?.total is 0 or err?.status is 404
       listing =
         id: stash.id
         name: stash.stash
@@ -90,10 +90,23 @@ mergeStash = (shard, stash) ->
         owner:
           account: stash.accountName
           character: stash.lastCharacterName
-    else if res.hits?.hits?.length is 1
+    else if res.hits?.total >= 1
+      verb = 'update'
       listing = res.hits.hits[0]._source
       listing.name = stash.stash
       listing.lastSeen = moment().toDate()
+      listing.owner.character = stash.lastCharacterName
+      if res.hits.total > 1
+        oldStashes = 0
+        for hitSet in res.hits.hits
+          continue unless hitSet._index isnt shard
+          oldStashes++
+          buffer.orphans.push(client.delete(
+            index: hitSet._index
+            type: 'stash'
+            id: stash.id
+          ))
+        log.as.debug("culled #{oldStashes} old copies of stash #{hitSet._id}")
 
     header = {}
     header[verb] =
@@ -165,12 +178,13 @@ orphan = (stashId, itemIds) ->
           must_not: itemIds
   )
 
-mergeStashes = (stashes) ->
+mergeStashes = (stashes, merged) ->
   shard = getShard('stash')
   listingShard = getShard('listing')
   for stash in stashes
-    mergeStash(shard, stash)
     itemIds = []
+
+    mergeStash(shard, stash)
     for item in stash.items
       item.stash = item.stash ? stash.id
 
@@ -184,17 +198,21 @@ mergeStashes = (stashes) ->
 
     buffer.orphans.push(orphan(stash.id, itemIds))
 
-  return Q() unless buffer.listings.length > config.elastic.batchSize
-  log.as.debug("flushing #{buffer.listings.length} listings across #{buffer.stashes.length} stashes")
+  merged.resolve()
+  return merged.promise unless buffer.listings.length > config.elastic.batchSize
+  log.as.debug("flushing #{buffer.listings.length / 2} listings across #{buffer.stashes.length / 2} stashes")
 
-  [ listBuf, stashBuf, orphanBuf ] = [ buffer.listings, buffer.stashes, buffer.orphans ]
-  buffer.stashes = []
-  buffer.listings = []
-  buffer.orphans = []
+  slicedBuf = buffer
+  buffer =
+    listings: []
+    stashes: []
+    orphans: []
 
-  bulkDocuments(stashBuf)
-    .then -> bulkDocuments(listBuf)
-    .then -> orphanListings(orphanBuf)
+  bulkDocuments(slicedBuf.stashes)
+    .then -> bulkDocuments(slicedBuf.listings)
+    .then -> orphanListings(slicedBuf.orphans)
+
+  merged.promise
 
 bulkDocuments = (bulk) ->
   bulked = Q.defer()
@@ -204,10 +222,10 @@ bulkDocuments = (bulk) ->
   duration = process.hrtime()
   client.bulk({ body: bulk })
     .then ->
+      bulked.resolve()
       duration = process.hrtime(duration)
       bulkTime = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
       log.as.info("merged #{bulk.length / 2} documents @ #{Math.floor(docCount / bulkTime.asSeconds())} docs/sec")
-      bulked.resolve()
     .catch(bulked.reject)
 
   bulked.promise
