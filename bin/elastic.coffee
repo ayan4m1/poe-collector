@@ -4,6 +4,7 @@ Q = require 'q'
 moment = require 'moment'
 process = require 'process'
 jsonfile = require 'jsonfile'
+elasticsearch = require 'elasticsearch'
 
 log = require './logging'
 parser = require './parser'
@@ -13,12 +14,14 @@ buffer =
   listings: []
   orphans: []
 
-elasticsearch = require 'elasticsearch'
-client = new elasticsearch.Client(
-  host: config.elastic.host
-  log: config.elastic.logLevel
-  requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
-)
+createClient = ->
+  new elasticsearch.Client(
+    host: config.elastic.host
+    log: config.elastic.logLevel
+    requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
+  )
+
+client = createClient()
 
 putTemplate = (name, settings, mappings) ->
   log.as.debug("asked to create template #{name}")
@@ -180,6 +183,7 @@ orphan = (stashId, itemIds) ->
 mergeStashes = (stashes, merged) ->
   shard = getShard('stash')
   listingShard = getShard('listing')
+
   for stash in stashes
     itemIds = []
 
@@ -197,19 +201,24 @@ mergeStashes = (stashes, merged) ->
 
     buffer.orphans.push(orphan(stash.id, itemIds))
 
-  merged.resolve()
-  return merged.promise unless buffer.listings.length > config.elastic.batchSize
-  log.as.debug("flushing #{buffer.listings.length / 2} listings across #{buffer.stashes.length / 2} stashes")
+  docCount = buffer.listings.length / 2
+  if docCount < config.elastic.batchSize
+    merged.resolve()
+  else
+    stashCount = buffer.stashes.length / 2
+    log.as.debug("flushing #{docCount} listings across #{stashCount} stashes")
 
-  slicedBuf = buffer
-  buffer =
-    listings: []
-    stashes: []
-    orphans: []
+    slicedBuf = buffer
+    buffer =
+      listings: []
+      stashes: []
+      orphans: []
 
-  bulkDocuments(slicedBuf.stashes)
-    .then -> bulkDocuments(slicedBuf.listings)
-    .then -> orphanListings(slicedBuf.orphans)
+    bulkDocuments(slicedBuf.stashes.concat(slicedBuf.listings))
+      .catch(merged.reject)
+      .then -> orphanListings(slicedBuf.orphans)
+      .catch(merged.reject)
+      .then(merged.resolve)
 
   merged.promise
 
@@ -224,8 +233,12 @@ bulkDocuments = (bulk) ->
       bulked.resolve()
       duration = process.hrtime(duration)
       bulkTime = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-      log.as.info("merged #{bulk.length / 2} documents @ #{Math.floor(docCount / bulkTime.asSeconds())} docs/sec")
-    .catch(bulked.reject)
+      log.as.info("merged #{docCount} documents @ #{Math.floor(docCount / bulkTime.asSeconds())} docs/sec")
+    .catch (err) ->
+      bulked.reject(err)
+      if err.displayName is 'RequestTimeout'
+        log.as.warn('re-creating elastic client due to request timeout!')
+        client = createClient()
 
   bulked.promise
 

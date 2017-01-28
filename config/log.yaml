@@ -1,4 +1,4 @@
 default:
-  level: info
+  level: debug
 production:
-  level: warning
+  level: info

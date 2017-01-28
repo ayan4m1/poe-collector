@@ -9,6 +9,14 @@ default:
     unit: seconds
   retention:
     stash:
+      interval: 7
+      unit: days
+    listing:
+      interval: 2
+      unit: days
+production:
+  retention:
+    stash:
       interval: 30
       unit: days
     listing:
