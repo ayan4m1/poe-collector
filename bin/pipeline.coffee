@@ -16,9 +16,6 @@ log = require './logging'
 elastic = require './elastic'
 
 cacheDir = "#{__dirname}/../cache"
-cacheConfig =
-  delay: moment.duration(config.watcher.cache.delay.interval, config.watcher.cache.delay.unit).asMilliseconds()
-  size: config.watcher.cache.maxSizeMb
 
 # promisified functions
 readDir = Q.denodeify(fs.readdir)
