@@ -22,7 +22,6 @@ cacheConfig =
 
 # promisified functions
 readDir = Q.denodeify(fs.readdir)
-getSize = Q.denodeify(require('get-folder-size'))
 
 # configurable concurrency level and scheduling interval
 downloadLimiter = new Bottleneck(
@@ -53,7 +52,7 @@ downloadChange = (changeId, downloaded) ->
       # timing + stats
       duration = process.hrtime(duration)
       duration = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
-      elastic.logFetch(changeId, res.length / 1e3, downloadTimeMs: duration.asMilliseconds())
+      elastic.logFetch(changeId, res.length / 1e3, duration.asMilliseconds())
 
       # continue on to the next data blob
       return unless data.next_change_id?
@@ -64,16 +63,7 @@ downloadChange = (changeId, downloaded) ->
 fetchChange = (changeId) ->
   fetched = Q.defer()
 
-  getSize(cacheDir)
-    .catch(log.as.error)
-    .then (cacheSize) ->
-      cacheMb = Math.round(cacheSize / 1e6)
-      if cacheMb > cacheConfig.size
-        log.as.debug("waiting for cache directory to be < " + cacheConfig.size + " MB - currently " + cacheMb)
-        return Q.delay(changeId, cacheConfig.delay).then(fetchChange)
-
-      log.as.debug("adding a request for change #{changeId}")
-      downloadLimiter.schedule(downloadChange, changeId, fetched)
+  downloadLimiter.schedule(downloadChange, changeId, fetched)
 
   fetched.promise.then(processChange)
 

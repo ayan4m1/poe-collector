@@ -247,15 +247,14 @@ orphanListings = (orphans) ->
     .catch(log.as.error)
 
 logFetch = (changeId, sizeKb, timeMs) ->
-  client.index({
+  client.index
     index: 'poe-stats'
     type: 'fetch'
     id: changeId
-  }, {
-    timestamp: moment().toDate()
-    fileSizeKb: sizeKb
-    downloadTimeMs: timeMs
-  })
+    body:
+      timestamp: moment().toDate()
+      fileSizeKb: sizeKb
+      downloadTimeMs: timeMs
 
 module.exports =
   updateIndices: ->

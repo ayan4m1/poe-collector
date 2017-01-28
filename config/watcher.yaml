@@ -7,11 +7,6 @@ default:
     concurrency: 2
     interval: 5
     unit: seconds
-  cache:
-    maxSizeMb: 20
-    delay:
-      interval: 1
-      unit: seconds
   retention:
     stash:
       interval: 30
