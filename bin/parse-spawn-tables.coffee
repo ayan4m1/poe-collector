@@ -18,19 +18,15 @@ readFile = Q.denodeify(fs.readFile)
 ignoreTypes = [
   'divination_card'
   'fishing_rod'
-  'focus'
   'gem'
   'large_model'
   'limited_strongbox_benefits'
   'lots_of_life'
-  'low_tier_map'
-  'mid_tier_map'
   'not_dex'
   'not_int'
   'not_str'
   'old_map'
   'secret_area'
-  'top_tier_map'
 ]
 
 getDomain = (val) ->
@@ -147,7 +143,7 @@ Q.spread [
       for stat in mapped.stats
         statExists = gearData[gear.name][stat.name]?
         gearData[gear.name][stat.name] = {
-          text: stat.text.replace(/(Local |Global |Base )/g, '')
+          text: stat.text.replace(/(Local |Global |Base |Additional )/g, '').replace('Damage Resistance', 'Resistance')
           min: Math.abs(stat.min)
           max: Math.abs(stat.max)
         } unless statExists

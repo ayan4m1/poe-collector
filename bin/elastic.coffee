@@ -294,4 +294,5 @@ module.exports =
     Q.all(tasks)
   logFetch: logFetch
   mergeStashes: mergeStashes
+  client: client
   config: config.elastic

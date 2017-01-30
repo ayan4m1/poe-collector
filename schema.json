@@ -127,6 +127,9 @@
           "level": {
             "type": "integer"
           },
+          "tier": {
+            "type": "integer"
+          },
           "identified": {
             "type": "boolean"
           },
@@ -861,6 +864,9 @@
           "meta": {
             "type": "object",
             "properties": {
+              "modQuality": {
+                "type": "float"
+              },
               "level": {
                 "type": "integer"
               },
