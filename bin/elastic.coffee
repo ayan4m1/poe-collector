@@ -214,7 +214,8 @@ mergeStashes = (stashes, merged) ->
       stashes: []
       orphans: []
 
-    bulkDocuments(slicedBuf.stashes.concat(slicedBuf.listings))
+    Array.prototype.push.apply(slicedBuf.listings, slicedBuf.stashes)
+    bulkDocuments(slicedBuf.listings)
       .catch(merged.reject)
       .then -> orphanListings(slicedBuf.orphans)
       .catch(merged.reject)
