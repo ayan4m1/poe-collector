@@ -366,6 +366,7 @@ parseType = (item, result) ->
   result.name = item.name.replace(/(<<set:MS>><<set:M>><<set:S>>|Superior\s+)/g, '')
   result.typeLine = item.typeLine
   result.baseLine = baseTypes[item.typeLine]
+
   # < 4 means Normal, Magic, or Rare item
   if item.frameType < 4
     result.rarity = frame
