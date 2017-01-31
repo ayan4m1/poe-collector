@@ -369,7 +369,7 @@ parseType = (item, result) ->
   # < 4 means Normal, Magic, or Rare item
   if item.frameType < 4
     result.rarity = frame
-    result.fullName = "#{result.name} #{item.typeLine}"
+    result.fullName = "#{result.name} #{item.typeLine}".trim()
     result.itemType =
       switch
         when regexes.type.weapon.test(item.typeLine) then 'Weapon'
@@ -459,6 +459,7 @@ parseItem = (item) ->
       int: 0
       dex: 0
       str: 0
+    tier: 0
     level: 0
     quality: 0
     stack:
@@ -500,6 +501,7 @@ parseItem = (item) ->
       minion: 0
       spell: 0
     meta:
+      modQuality: 0
       level: item.ilvl ? 0
       crafting:
         openPrefix: false
