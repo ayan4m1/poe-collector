@@ -19,6 +19,7 @@ ignoreTypes = [
   'divination_card'
   'fishing_rod'
   'gem'
+  'flask'
   'large_model'
   'limited_strongbox_benefits'
   'lots_of_life'
@@ -27,6 +28,7 @@ ignoreTypes = [
   'not_str'
   'old_map'
   'secret_area'
+  'rare'
 ]
 
 getDomain = (val) ->
@@ -137,16 +139,14 @@ Q.spread [
     for gear in mapped.spawnWeights
       continue if ignoreTypes.indexOf(gear.name) >= 0
       continue unless gear.weight > 0
-      exists = gearData[gear.name]?
-      gearData[gear.name] = {} unless exists
+      gearData[gear.name] = {} unless gearData[gear.name]?
 
       for stat in mapped.stats
-        statExists = gearData[gear.name][stat.name]?
         gearData[gear.name][stat.name] = {
-          text: stat.text.replace(/(Local |Global |Base |Additional )/g, '').replace('Damage Resistance', 'Resistance')
+          text: stat.text.replace('Damage Resistance', 'Resistance')
           min: Math.abs(stat.min)
           max: Math.abs(stat.max)
-        } unless statExists
+        } unless gearData[gear.name][stat.name]?
         info = gearData[gear.name][stat.name]
         if stat.min < 0 and stat.max < 0
           tempMax = stat.max
@@ -158,5 +158,6 @@ Q.spread [
       result.push(mapped)
 
   jsonfile.writeFileSync('gearData.json', gearData)
+  jsonfile.writeFileSync('modData.json', result)
   #log.as.info("parsed #{mods.length} mods")
 .catch(log.as.error)

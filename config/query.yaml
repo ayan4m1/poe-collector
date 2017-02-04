@@ -1,0 +1,37 @@
+default:
+  scoring:
+    sort:
+      - lastSeen:
+          order: 'asc'
+      - firstSeen:
+          order: 'asc'
+    query:
+      bool:
+        must:
+          - match:
+              removed: false
+          - match:
+              league: 'Breach'
+          - match:
+              rarity: 'Rare'
+          - match:
+              itemType: 'Gear'
+        must_not:
+          - exists:
+              field: 'meta.modQuality'
+  unscoring:
+    query:
+      bool:
+        must:
+          - match:
+              removed: false
+          - match:
+              league: 'Breach'
+          - match:
+              rarity: 'Rare'
+          - match:
+              itemType: 'Gear'
+          - range:
+              'meta.modQuality':
+                gt: 0
+

@@ -1,32 +1,32 @@
 {
   "ring": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "additional_all_attributes": {
-      "text": "All Attributes",
+      "text": "Additional All Attributes",
       "min": 1,
       "max": 16
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 15,
       "max": 73
     },
     "base_maximum_energy_shield": {
-      "text": "Maximum Energy Shield",
+      "text": "Base Maximum Energy Shield",
       "min": 1,
       "max": 47
     },
@@ -76,7 +76,7 @@
       "max": 40
     },
     "base_evasion_rating": {
-      "text": "Evasion Rating",
+      "text": "Base Evasion Rating",
       "min": 3,
       "max": 170
     },
@@ -91,7 +91,7 @@
       "max": 40
     },
     "base_item_found_rarity_+%": {
-      "text": "Item Found Rarity +%",
+      "text": "Base Item Found Rarity +%",
       "min": 6,
       "max": 28
     },
@@ -116,22 +116,22 @@
       "max": 69
     },
     "base_fire_damage_resistance_%": {
-      "text": "Fire Resistance %",
+      "text": "Base Fire Resistance %",
       "min": 6,
       "max": 48
     },
     "base_cold_damage_resistance_%": {
-      "text": "Cold Resistance %",
+      "text": "Base Cold Resistance %",
       "min": 6,
       "max": 48
     },
     "base_lightning_damage_resistance_%": {
-      "text": "Lightning Resistance %",
+      "text": "Base Lightning Resistance %",
       "min": 6,
       "max": 48
     },
     "base_chaos_damage_resistance_%": {
-      "text": "Chaos Resistance %",
+      "text": "Base Chaos Resistance %",
       "min": 5,
       "max": 35
     },
@@ -161,12 +161,12 @@
       "max": 12
     },
     "base_life_gained_on_enemy_death": {
-      "text": "Life Gained On Enemy Death",
+      "text": "Base Life Gained On Enemy Death",
       "min": 3,
       "max": 14
     },
     "base_mana_gained_on_enemy_death": {
-      "text": "Mana Gained On Enemy Death",
+      "text": "Base Mana Gained On Enemy Death",
       "min": 1,
       "max": 6
     },
@@ -228,32 +228,32 @@
   },
   "amulet": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "additional_all_attributes": {
-      "text": "All Attributes",
+      "text": "Additional All Attributes",
       "min": 1,
       "max": 32
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 15,
       "max": 73
     },
     "base_maximum_energy_shield": {
-      "text": "Maximum Energy Shield",
+      "text": "Base Maximum Energy Shield",
       "min": 1,
       "max": 51
     },
@@ -308,12 +308,12 @@
       "max": 22
     },
     "evasion_rating_+%": {
-      "text": "Evasion Rating +%",
+      "text": "Global Evasion Rating +%",
       "min": 2,
       "max": 22
     },
     "maximum_energy_shield_+%": {
-      "text": "Maximum Energy Shield +%",
+      "text": "Global Maximum Energy Shield +%",
       "min": 2,
       "max": 22
     },
@@ -333,7 +333,7 @@
       "max": 80
     },
     "base_item_found_rarity_+%": {
-      "text": "Item Found Rarity +%",
+      "text": "Base Item Found Rarity +%",
       "min": 6,
       "max": 28
     },
@@ -358,22 +358,22 @@
       "max": 38
     },
     "base_fire_damage_resistance_%": {
-      "text": "Fire Resistance %",
+      "text": "Base Fire Resistance %",
       "min": 6,
       "max": 48
     },
     "base_cold_damage_resistance_%": {
-      "text": "Cold Resistance %",
+      "text": "Base Cold Resistance %",
       "min": 6,
       "max": 48
     },
     "base_lightning_damage_resistance_%": {
-      "text": "Lightning Resistance %",
+      "text": "Base Lightning Resistance %",
       "min": 6,
       "max": 48
     },
     "base_chaos_damage_resistance_%": {
-      "text": "Chaos Resistance %",
+      "text": "Base Chaos Resistance %",
       "min": 5,
       "max": 35
     },
@@ -383,7 +383,7 @@
       "max": 16
     },
     "base_critical_strike_multiplier_+": {
-      "text": "Critical Strike Multiplier +%",
+      "text": "Base Critical Strike Multiplier +%",
       "min": 8,
       "max": 38
     },
@@ -408,17 +408,17 @@
       "max": 17
     },
     "base_life_gained_on_enemy_death": {
-      "text": "Life Gained On Enemy Death",
+      "text": "Base Life Gained On Enemy Death",
       "min": 3,
       "max": 14
     },
     "base_mana_gained_on_enemy_death": {
-      "text": "Mana Gained On Enemy Death",
+      "text": "Base Mana Gained On Enemy Death",
       "min": 1,
       "max": 6
     },
     "base_movement_velocity_+%": {
-      "text": "Movement Velocity +%",
+      "text": "Base Movement Velocity +%",
       "min": 2,
       "max": 5
     },
@@ -540,17 +540,17 @@
   },
   "belt": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "base_maximum_energy_shield": {
-      "text": "Maximum Energy Shield",
+      "text": "Base Maximum Energy Shield",
       "min": 1,
       "max": 51
     },
     "base_physical_damage_reduction_rating": {
-      "text": "Physical Damage Reduction Rating",
+      "text": "Base Physical Damage Reduction Rating",
       "min": 3,
       "max": 460
     },
@@ -560,37 +560,37 @@
       "max": 42
     },
     "base_stun_threshold_reduction_+%": {
-      "text": "Stun Threshold Reduction +%",
+      "text": "Base Stun Threshold Reduction +%",
       "min": 5,
       "max": 15
     },
     "base_fire_damage_resistance_%": {
-      "text": "Fire Resistance %",
+      "text": "Base Fire Resistance %",
       "min": 6,
       "max": 48
     },
     "base_cold_damage_resistance_%": {
-      "text": "Cold Resistance %",
+      "text": "Base Cold Resistance %",
       "min": 6,
       "max": 48
     },
     "base_lightning_damage_resistance_%": {
-      "text": "Lightning Resistance %",
+      "text": "Base Lightning Resistance %",
       "min": 6,
       "max": 48
     },
     "base_chaos_damage_resistance_%": {
-      "text": "Chaos Resistance %",
+      "text": "Base Chaos Resistance %",
       "min": 5,
       "max": 35
     },
     "base_stun_recovery_+%": {
-      "text": "Stun Recovery +%",
+      "text": "Base Stun Recovery +%",
       "min": 11,
       "max": 28
     },
     "base_stun_duration_+%": {
-      "text": "Stun Duration +%",
+      "text": "Base Stun Duration +%",
       "min": 11,
       "max": 35
     },
@@ -672,185 +672,185 @@
   },
   "str_armour": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "local_physical_damage_reduction_rating_+%": {
-      "text": "Physical Damage Reduction Rating +%",
+      "text": "Local Physical Damage Reduction Rating +%",
       "min": 6,
       "max": 132
     },
     "base_stun_recovery_+%": {
-      "text": "Stun Recovery +%",
+      "text": "Base Stun Recovery +%",
       "min": 6,
       "max": 17
     },
     "local_base_physical_damage_reduction_rating": {
-      "text": "Physical Damage Reduction Rating",
+      "text": "Local Base Physical Damage Reduction Rating",
       "min": 3,
       "max": 400
     }
   },
   "str_dex_armour": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "local_armour_and_evasion_+%": {
-      "text": "Armour And Evasion +%",
+      "text": "Local Armour And Evasion +%",
       "min": 6,
       "max": 136
     },
     "base_stun_recovery_+%": {
-      "text": "Stun Recovery +%",
+      "text": "Base Stun Recovery +%",
       "min": 6,
       "max": 17
     },
     "local_base_evasion_rating": {
-      "text": "Evasion Rating",
+      "text": "Local Base Evasion Rating",
       "min": 3,
       "max": 400
     },
     "local_base_physical_damage_reduction_rating": {
-      "text": "Physical Damage Reduction Rating",
+      "text": "Local Base Physical Damage Reduction Rating",
       "min": 3,
       "max": 400
     }
   },
   "str_int_armour": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 15,
       "max": 73
     },
     "local_energy_shield": {
-      "text": "Energy Shield",
+      "text": "Local Energy Shield",
       "min": 3,
       "max": 145
     },
     "local_armour_and_energy_shield_+%": {
-      "text": "Armour And Energy Shield +%",
+      "text": "Local Armour And Energy Shield +%",
       "min": 6,
       "max": 132
     },
     "base_stun_recovery_+%": {
-      "text": "Stun Recovery +%",
+      "text": "Base Stun Recovery +%",
       "min": 6,
       "max": 17
     },
     "local_base_physical_damage_reduction_rating": {
-      "text": "Physical Damage Reduction Rating",
+      "text": "Local Base Physical Damage Reduction Rating",
       "min": 3,
       "max": 400
     }
   },
   "str_dex_int_armour": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 15,
       "max": 73
     },
     "local_energy_shield": {
-      "text": "Energy Shield",
+      "text": "Local Energy Shield",
       "min": 3,
       "max": 145
     },
     "local_armour_and_evasion_and_energy_shield_+%": {
-      "text": "Armour And Evasion And Energy Shield +%",
+      "text": "Local Armour And Evasion And Energy Shield +%",
       "min": 6,
       "max": 120
     },
     "base_stun_recovery_+%": {
-      "text": "Stun Recovery +%",
+      "text": "Base Stun Recovery +%",
       "min": 6,
       "max": 17
     },
     "local_base_evasion_rating": {
-      "text": "Evasion Rating",
+      "text": "Local Base Evasion Rating",
       "min": 3,
       "max": 400
     },
     "local_base_physical_damage_reduction_rating": {
-      "text": "Physical Damage Reduction Rating",
+      "text": "Local Base Physical Damage Reduction Rating",
       "min": 3,
       "max": 400
     }
   },
   "sword": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "local_minimum_added_fire_damage": {
-      "text": "Minimum Added Fire Damage",
+      "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 91
     },
     "local_maximum_added_fire_damage": {
-      "text": "Maximum Added Fire Damage",
+      "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 160
     },
     "local_minimum_added_cold_damage": {
-      "text": "Minimum Added Cold Damage",
+      "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 75
     },
     "local_maximum_added_cold_damage": {
-      "text": "Maximum Added Cold Damage",
+      "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 131
     },
     "local_minimum_added_lightning_damage": {
-      "text": "Minimum Added Lightning Damage",
+      "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 19
     },
     "local_maximum_added_lightning_damage": {
-      "text": "Maximum Added Lightning Damage",
+      "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 250
     },
     "base_stun_threshold_reduction_+%": {
-      "text": "Stun Threshold Reduction +%",
+      "text": "Base Stun Threshold Reduction +%",
       "min": 5,
       "max": 15
     },
@@ -880,54 +880,54 @@
       "max": 8
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 108
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 185
     }
   },
   "mace": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "local_minimum_added_fire_damage": {
-      "text": "Minimum Added Fire Damage",
+      "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 91
     },
     "local_maximum_added_fire_damage": {
-      "text": "Maximum Added Fire Damage",
+      "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 160
     },
     "local_minimum_added_cold_damage": {
-      "text": "Minimum Added Cold Damage",
+      "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 75
     },
     "local_maximum_added_cold_damage": {
-      "text": "Maximum Added Cold Damage",
+      "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 131
     },
     "local_minimum_added_lightning_damage": {
-      "text": "Minimum Added Lightning Damage",
+      "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 19
     },
     "local_maximum_added_lightning_damage": {
-      "text": "Maximum Added Lightning Damage",
+      "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 250
     },
     "base_stun_threshold_reduction_+%": {
-      "text": "Stun Threshold Reduction +%",
+      "text": "Base Stun Threshold Reduction +%",
       "min": 5,
       "max": 15
     },
@@ -952,59 +952,59 @@
       "max": 8
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 108
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 185
     }
   },
   "sceptre": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 8,
       "max": 73
     },
     "local_minimum_added_fire_damage": {
-      "text": "Minimum Added Fire Damage",
+      "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 61
     },
     "local_maximum_added_fire_damage": {
-      "text": "Maximum Added Fire Damage",
+      "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 106
     },
     "local_minimum_added_cold_damage": {
-      "text": "Minimum Added Cold Damage",
+      "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 50
     },
     "local_maximum_added_cold_damage": {
-      "text": "Maximum Added Cold Damage",
+      "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 87
     },
     "local_minimum_added_lightning_damage": {
-      "text": "Minimum Added Lightning Damage",
+      "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 13
     },
     "local_maximum_added_lightning_damage": {
-      "text": "Maximum Added Lightning Damage",
+      "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 166
     },
@@ -1024,7 +1024,7 @@
       "max": 69
     },
     "base_stun_threshold_reduction_+%": {
-      "text": "Stun Threshold Reduction +%",
+      "text": "Base Stun Threshold Reduction +%",
       "min": 5,
       "max": 15
     },
@@ -1049,17 +1049,17 @@
       "max": 30
     },
     "local_socketed_fire_gem_level_+": {
-      "text": "Socketed Fire Gem Level +",
+      "text": "Local Socketed Fire Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_socketed_cold_gem_level_+": {
-      "text": "Socketed Cold Gem Level +",
+      "text": "Local Socketed Cold Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_socketed_lightning_gem_level_+": {
-      "text": "Socketed Lightning Gem Level +",
+      "text": "Local Socketed Lightning Gem Level +",
       "min": 1,
       "max": 2
     },
@@ -1119,59 +1119,59 @@
       "max": 133
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 72
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 123
     }
   },
   "staff": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 8,
       "max": 73
     },
     "local_minimum_added_fire_damage": {
-      "text": "Minimum Added Fire Damage",
+      "text": "Local Minimum Added Fire Damage",
       "min": 3,
       "max": 91
     },
     "local_maximum_added_fire_damage": {
-      "text": "Maximum Added Fire Damage",
+      "text": "Local Maximum Added Fire Damage",
       "min": 5,
       "max": 160
     },
     "local_minimum_added_cold_damage": {
-      "text": "Minimum Added Cold Damage",
+      "text": "Local Minimum Added Cold Damage",
       "min": 2,
       "max": 75
     },
     "local_maximum_added_cold_damage": {
-      "text": "Maximum Added Cold Damage",
+      "text": "Local Maximum Added Cold Damage",
       "min": 4,
       "max": 131
     },
     "local_minimum_added_lightning_damage": {
-      "text": "Minimum Added Lightning Damage",
+      "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 19
     },
     "local_maximum_added_lightning_damage": {
-      "text": "Maximum Added Lightning Damage",
+      "text": "Local Maximum Added Lightning Damage",
       "min": 9,
       "max": 250
     },
@@ -1191,7 +1191,7 @@
       "max": 69
     },
     "base_stun_threshold_reduction_+%": {
-      "text": "Stun Threshold Reduction +%",
+      "text": "Base Stun Threshold Reduction +%",
       "min": 5,
       "max": 15
     },
@@ -1216,17 +1216,17 @@
       "max": 30
     },
     "local_socketed_fire_gem_level_+": {
-      "text": "Socketed Fire Gem Level +",
+      "text": "Local Socketed Fire Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_socketed_cold_gem_level_+": {
-      "text": "Socketed Cold Gem Level +",
+      "text": "Local Socketed Cold Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_socketed_lightning_gem_level_+": {
-      "text": "Socketed Lightning Gem Level +",
+      "text": "Local Socketed Lightning Gem Level +",
       "min": 1,
       "max": 2
     },
@@ -1311,59 +1311,59 @@
       "max": 200
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 70,
       "max": 108
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 147,
       "max": 185
     }
   },
   "axe": {
     "additional_strength": {
-      "text": "Strength",
+      "text": "Additional Strength",
       "min": 13,
       "max": 55
     },
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "local_minimum_added_fire_damage": {
-      "text": "Minimum Added Fire Damage",
+      "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 91
     },
     "local_maximum_added_fire_damage": {
-      "text": "Maximum Added Fire Damage",
+      "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 160
     },
     "local_minimum_added_cold_damage": {
-      "text": "Minimum Added Cold Damage",
+      "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 75
     },
     "local_maximum_added_cold_damage": {
-      "text": "Maximum Added Cold Damage",
+      "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 131
     },
     "local_minimum_added_lightning_damage": {
-      "text": "Minimum Added Lightning Damage",
+      "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 19
     },
     "local_maximum_added_lightning_damage": {
-      "text": "Maximum Added Lightning Damage",
+      "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 250
     },
     "base_stun_threshold_reduction_+%": {
-      "text": "Stun Threshold Reduction +%",
+      "text": "Base Stun Threshold Reduction +%",
       "min": 5,
       "max": 15
     },
@@ -1388,19 +1388,19 @@
       "max": 8
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 108
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 185
     }
   },
   "gloves": {
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
@@ -1455,7 +1455,7 @@
       "max": 40
     },
     "base_item_found_rarity_+%": {
-      "text": "Item Found Rarity +%",
+      "text": "Base Item Found Rarity +%",
       "min": 6,
       "max": 18
     },
@@ -1475,17 +1475,17 @@
       "max": 2
     },
     "base_life_gained_on_enemy_death": {
-      "text": "Life Gained On Enemy Death",
+      "text": "Base Life Gained On Enemy Death",
       "min": 3,
       "max": 14
     },
     "base_mana_gained_on_enemy_death": {
-      "text": "Mana Gained On Enemy Death",
+      "text": "Base Mana Gained On Enemy Death",
       "min": 1,
       "max": 6
     },
     "local_attribute_requirements_+%": {
-      "text": "Attribute Requirements +%",
+      "text": "Local Attribute Requirements +%",
       "min": 18,
       "max": 32
     },
@@ -1500,7 +1500,7 @@
       "max": 6
     },
     "local_socketed_gem_level_+": {
-      "text": "Socketed Gem Level +",
+      "text": "Local Socketed Gem Level +",
       "min": 1,
       "max": 1
     },
@@ -1837,7 +1837,7 @@
   },
   "quiver": {
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
@@ -1912,47 +1912,47 @@
       "max": 38
     },
     "base_fire_damage_resistance_%": {
-      "text": "Fire Resistance %",
+      "text": "Base Fire Resistance %",
       "min": 6,
       "max": 48
     },
     "base_cold_damage_resistance_%": {
-      "text": "Cold Resistance %",
+      "text": "Base Cold Resistance %",
       "min": 6,
       "max": 48
     },
     "base_lightning_damage_resistance_%": {
-      "text": "Lightning Resistance %",
+      "text": "Base Lightning Resistance %",
       "min": 6,
       "max": 48
     },
     "base_chaos_damage_resistance_%": {
-      "text": "Chaos Resistance %",
+      "text": "Base Chaos Resistance %",
       "min": 5,
       "max": 35
     },
     "base_critical_strike_multiplier_+": {
-      "text": "Critical Strike Multiplier +%",
+      "text": "Base Critical Strike Multiplier +%",
       "min": 8,
       "max": 38
     },
     "base_stun_duration_+%": {
-      "text": "Stun Duration +%",
+      "text": "Base Stun Duration +%",
       "min": 11,
       "max": 35
     },
     "base_projectile_speed_+%": {
-      "text": "Projectile Speed +%",
+      "text": "Base Projectile Speed +%",
       "min": 10,
       "max": 46
     },
     "base_life_gained_on_enemy_death": {
-      "text": "Life Gained On Enemy Death",
+      "text": "Base Life Gained On Enemy Death",
       "min": 3,
       "max": 14
     },
     "base_mana_gained_on_enemy_death": {
-      "text": "Mana Gained On Enemy Death",
+      "text": "Base Mana Gained On Enemy Death",
       "min": 1,
       "max": 6
     },
@@ -2002,7 +2002,7 @@
       "max": 20
     },
     "base_number_of_additional_arrows": {
-      "text": "Arrows",
+      "text": "Additional Arrows",
       "min": 1,
       "max": 1
     },
@@ -2014,106 +2014,106 @@
   },
   "dex_armour": {
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "local_evasion_rating_+%": {
-      "text": "Evasion Rating +%",
+      "text": "Local Evasion Rating +%",
       "min": 6,
       "max": 132
     },
     "base_stun_recovery_+%": {
-      "text": "Stun Recovery +%",
+      "text": "Base Stun Recovery +%",
       "min": 6,
       "max": 17
     },
     "local_base_evasion_rating": {
-      "text": "Evasion Rating",
+      "text": "Local Base Evasion Rating",
       "min": 3,
       "max": 400
     }
   },
   "dex_int_armour": {
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 15,
       "max": 73
     },
     "local_energy_shield": {
-      "text": "Energy Shield",
+      "text": "Local Energy Shield",
       "min": 3,
       "max": 145
     },
     "local_evasion_and_energy_shield_+%": {
-      "text": "Evasion And Energy Shield +%",
+      "text": "Local Evasion And Energy Shield +%",
       "min": 6,
       "max": 132
     },
     "base_stun_recovery_+%": {
-      "text": "Stun Recovery +%",
+      "text": "Base Stun Recovery +%",
       "min": 6,
       "max": 17
     },
     "local_base_evasion_rating": {
-      "text": "Evasion Rating",
+      "text": "Local Base Evasion Rating",
       "min": 3,
       "max": 400
     }
   },
   "bow": {
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "local_minimum_added_fire_damage": {
-      "text": "Minimum Added Fire Damage",
+      "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 61
     },
     "local_maximum_added_fire_damage": {
-      "text": "Maximum Added Fire Damage",
+      "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 106
     },
     "local_minimum_added_cold_damage": {
-      "text": "Minimum Added Cold Damage",
+      "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 50
     },
     "local_maximum_added_cold_damage": {
-      "text": "Maximum Added Cold Damage",
+      "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 87
     },
     "local_minimum_added_lightning_damage": {
-      "text": "Minimum Added Lightning Damage",
+      "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 13
     },
     "local_maximum_added_lightning_damage": {
-      "text": "Maximum Added Lightning Damage",
+      "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 166
     },
     "local_socketed_bow_gem_level_+": {
-      "text": "Socketed Bow Gem Level +",
+      "text": "Local Socketed Bow Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_accuracy_rating": {
-      "text": "Accuracy Rating",
+      "text": "Local Accuracy Rating",
       "min": 321,
       "max": 360
     },
@@ -2123,7 +2123,7 @@
       "max": 1
     },
     "base_number_of_additional_arrows": {
-      "text": "Arrows",
+      "text": "Additional Arrows",
       "min": 1,
       "max": 1
     },
@@ -2148,59 +2148,59 @@
       "max": 8
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 72
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 123
     }
   },
   "claw": {
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 15,
       "max": 73
     },
     "local_minimum_added_fire_damage": {
-      "text": "Minimum Added Fire Damage",
+      "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 61
     },
     "local_maximum_added_fire_damage": {
-      "text": "Maximum Added Fire Damage",
+      "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 106
     },
     "local_minimum_added_cold_damage": {
-      "text": "Minimum Added Cold Damage",
+      "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 50
     },
     "local_maximum_added_cold_damage": {
-      "text": "Maximum Added Cold Damage",
+      "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 87
     },
     "local_minimum_added_lightning_damage": {
-      "text": "Minimum Added Lightning Damage",
+      "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 13
     },
     "local_maximum_added_lightning_damage": {
-      "text": "Maximum Added Lightning Damage",
+      "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 166
     },
@@ -2230,59 +2230,59 @@
       "max": 8
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 72
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 123
     }
   },
   "dagger": {
     "additional_dexterity": {
-      "text": "Dexterity",
+      "text": "Additional Dexterity",
       "min": 8,
       "max": 55
     },
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 8,
       "max": 73
     },
     "local_minimum_added_fire_damage": {
-      "text": "Minimum Added Fire Damage",
+      "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 61
     },
     "local_maximum_added_fire_damage": {
-      "text": "Maximum Added Fire Damage",
+      "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 106
     },
     "local_minimum_added_cold_damage": {
-      "text": "Minimum Added Cold Damage",
+      "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 50
     },
     "local_maximum_added_cold_damage": {
-      "text": "Maximum Added Cold Damage",
+      "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 87
     },
     "local_minimum_added_lightning_damage": {
-      "text": "Minimum Added Lightning Damage",
+      "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 13
     },
     "local_maximum_added_lightning_damage": {
-      "text": "Maximum Added Lightning Damage",
+      "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 166
     },
@@ -2302,17 +2302,17 @@
       "max": 109
     },
     "local_socketed_fire_gem_level_+": {
-      "text": "Socketed Fire Gem Level +",
+      "text": "Local Socketed Fire Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_socketed_cold_gem_level_+": {
-      "text": "Socketed Cold Gem Level +",
+      "text": "Local Socketed Cold Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_socketed_lightning_gem_level_+": {
-      "text": "Socketed Lightning Gem Level +",
+      "text": "Local Socketed Lightning Gem Level +",
       "min": 1,
       "max": 2
     },
@@ -2372,24 +2372,24 @@
       "max": 133
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 72
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 123
     }
   },
   "helmet": {
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "base_item_found_rarity_+%": {
-      "text": "Item Found Rarity +%",
+      "text": "Base Item Found Rarity +%",
       "min": 6,
       "max": 26
     },
@@ -2399,7 +2399,7 @@
       "max": 400
     },
     "local_socketed_minion_gem_level_+": {
-      "text": "Socketed Minion Gem Level +",
+      "text": "Local Socketed Minion Gem Level +",
       "min": 1,
       "max": 2
     },
@@ -2414,7 +2414,7 @@
       "max": 0
     },
     "local_attribute_requirements_+%": {
-      "text": "Attribute Requirements +%",
+      "text": "Local Attribute Requirements +%",
       "min": 18,
       "max": 32
     },
@@ -4416,69 +4416,69 @@
   },
   "int_armour": {
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 15,
       "max": 73
     },
     "local_energy_shield": {
-      "text": "Energy Shield",
+      "text": "Local Energy Shield",
       "min": 3,
       "max": 145
     },
     "local_energy_shield_+%": {
-      "text": "Energy Shield +%",
+      "text": "Local Energy Shield +%",
       "min": 6,
       "max": 132
     },
     "base_stun_recovery_+%": {
-      "text": "Stun Recovery +%",
+      "text": "Base Stun Recovery +%",
       "min": 6,
       "max": 17
     }
   },
   "wand": {
     "additional_intelligence": {
-      "text": "Intelligence",
+      "text": "Additional Intelligence",
       "min": 8,
       "max": 55
     },
     "base_maximum_mana": {
-      "text": "Maximum Mana",
+      "text": "Base Maximum Mana",
       "min": 8,
       "max": 73
     },
     "local_minimum_added_fire_damage": {
-      "text": "Minimum Added Fire Damage",
+      "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 61
     },
     "local_maximum_added_fire_damage": {
-      "text": "Maximum Added Fire Damage",
+      "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 106
     },
     "local_minimum_added_cold_damage": {
-      "text": "Minimum Added Cold Damage",
+      "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 50
     },
     "local_maximum_added_cold_damage": {
-      "text": "Maximum Added Cold Damage",
+      "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 87
     },
     "local_minimum_added_lightning_damage": {
-      "text": "Minimum Added Lightning Damage",
+      "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 13
     },
     "local_maximum_added_lightning_damage": {
-      "text": "Maximum Added Lightning Damage",
+      "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 166
     },
@@ -4518,17 +4518,17 @@
       "max": 30
     },
     "local_socketed_fire_gem_level_+": {
-      "text": "Socketed Fire Gem Level +",
+      "text": "Local Socketed Fire Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_socketed_cold_gem_level_+": {
-      "text": "Socketed Cold Gem Level +",
+      "text": "Local Socketed Cold Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_socketed_lightning_gem_level_+": {
-      "text": "Socketed Lightning Gem Level +",
+      "text": "Local Socketed Lightning Gem Level +",
       "min": 1,
       "max": 2
     },
@@ -4538,7 +4538,7 @@
       "max": 1
     },
     "local_accuracy_rating": {
-      "text": "Accuracy Rating",
+      "text": "Local Accuracy Rating",
       "min": 321,
       "max": 360
     },
@@ -4603,19 +4603,19 @@
       "max": 133
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 72
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 123
     }
   },
   "shield": {
     "base_maximum_life": {
-      "text": "Maximum Life",
+      "text": "Base Maximum Life",
       "min": 100,
       "max": 109
     },
@@ -4625,7 +4625,7 @@
       "max": 16
     },
     "local_socketed_melee_gem_level_+": {
-      "text": "Socketed Melee Gem Level +",
+      "text": "Local Socketed Melee Gem Level +",
       "min": 1,
       "max": 2
     },
@@ -4640,12 +4640,12 @@
       "max": 0
     },
     "local_additional_block_chance_%": {
-      "text": "Block Chance %",
+      "text": "Local Additional Block Chance %",
       "min": 1,
       "max": 6
     },
     "local_attribute_requirements_+%": {
-      "text": "Attribute Requirements +%",
+      "text": "Local Attribute Requirements +%",
       "min": 18,
       "max": 32
     },
@@ -4675,7 +4675,7 @@
       "max": 20
     },
     "local_socketed_gem_level_+": {
-      "text": "Socketed Gem Level +",
+      "text": "Local Socketed Gem Level +",
       "min": 1,
       "max": 1
     },
@@ -4697,7 +4697,7 @@
   },
   "body_armour": {
     "base_maximum_life": {
-      "text": "Maximum Life",
+      "text": "Base Maximum Life",
       "min": 100,
       "max": 119
     },
@@ -4712,7 +4712,7 @@
       "max": 0
     },
     "local_attribute_requirements_+%": {
-      "text": "Attribute Requirements +%",
+      "text": "Local Attribute Requirements +%",
       "min": 18,
       "max": 32
     },
@@ -4747,7 +4747,7 @@
       "max": 1
     },
     "local_socketed_gem_level_+": {
-      "text": "Socketed Gem Level +",
+      "text": "Local Socketed Gem Level +",
       "min": 1,
       "max": 1
     },
@@ -4779,12 +4779,12 @@
   },
   "weapon": {
     "local_physical_damage_+%": {
-      "text": "Physical Damage +%",
+      "text": "Local Physical Damage +%",
       "min": 15,
       "max": 179
     },
     "local_accuracy_rating": {
-      "text": "Accuracy Rating",
+      "text": "Local Accuracy Rating",
       "min": 3,
       "max": 320
     },
@@ -4794,32 +4794,32 @@
       "max": 42
     },
     "local_attack_speed_+%": {
-      "text": "Attack Speed +%",
+      "text": "Local Attack Speed +%",
       "min": 5,
       "max": 27
     },
     "base_fire_damage_resistance_%": {
-      "text": "Fire Resistance %",
+      "text": "Base Fire Resistance %",
       "min": 6,
       "max": 48
     },
     "base_cold_damage_resistance_%": {
-      "text": "Cold Resistance %",
+      "text": "Base Cold Resistance %",
       "min": 6,
       "max": 48
     },
     "base_lightning_damage_resistance_%": {
-      "text": "Lightning Resistance %",
+      "text": "Base Lightning Resistance %",
       "min": 6,
       "max": 48
     },
     "base_chaos_damage_resistance_%": {
-      "text": "Chaos Resistance %",
+      "text": "Base Chaos Resistance %",
       "min": 5,
       "max": 35
     },
     "base_stun_duration_+%": {
-      "text": "Stun Duration +%",
+      "text": "Base Stun Duration +%",
       "min": 11,
       "max": 35
     },
@@ -4829,37 +4829,37 @@
       "max": 5
     },
     "base_life_gained_on_enemy_death": {
-      "text": "Life Gained On Enemy Death",
+      "text": "Base Life Gained On Enemy Death",
       "min": 3,
       "max": 14
     },
     "base_mana_gained_on_enemy_death": {
-      "text": "Mana Gained On Enemy Death",
+      "text": "Base Mana Gained On Enemy Death",
       "min": 1,
       "max": 6
     },
     "local_critical_strike_chance_+%": {
-      "text": "Critical Strike Chance +%",
+      "text": "Local Critical Strike Chance +%",
       "min": 10,
       "max": 38
     },
     "base_critical_strike_multiplier_+": {
-      "text": "Critical Strike Multiplier +%",
+      "text": "Base Critical Strike Multiplier +%",
       "min": 10,
       "max": 38
     },
     "local_socketed_gem_level_+": {
-      "text": "Socketed Gem Level +",
+      "text": "Local Socketed Gem Level +",
       "min": 1,
       "max": 1
     },
     "local_socketed_melee_gem_level_+": {
-      "text": "Socketed Melee Gem Level +",
+      "text": "Local Socketed Melee Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_attribute_requirements_+%": {
-      "text": "Attribute Requirements +%",
+      "text": "Local Attribute Requirements +%",
       "min": 18,
       "max": 32
     },
@@ -4869,7 +4869,7 @@
       "max": 15
     },
     "local_accuracy_rating_+%": {
-      "text": "Accuracy Rating +%",
+      "text": "Local Accuracy Rating +%",
       "min": 5,
       "max": 10
     },
@@ -4909,12 +4909,12 @@
       "max": 5
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 1,
       "max": 11
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 3,
       "max": 23
     },
@@ -4946,12 +4946,12 @@
   },
   "one_hand_weapon": {
     "local_minimum_added_physical_damage": {
-      "text": "Minimum Added Physical Damage",
+      "text": "Local Minimum Added Physical Damage",
       "min": 1,
       "max": 25
     },
     "local_maximum_added_physical_damage": {
-      "text": "Maximum Added Physical Damage",
+      "text": "Local Maximum Added Physical Damage",
       "min": 2,
       "max": 45
     },
@@ -4968,12 +4968,12 @@
   },
   "two_hand_weapon": {
     "local_minimum_added_physical_damage": {
-      "text": "Minimum Added Physical Damage",
+      "text": "Local Minimum Added Physical Damage",
       "min": 2,
       "max": 38
     },
     "local_maximum_added_physical_damage": {
-      "text": "Maximum Added Physical Damage",
+      "text": "Local Maximum Added Physical Damage",
       "min": 4,
       "max": 68
     },
@@ -5015,59 +5015,59 @@
   },
   "rapier": {
     "local_minimum_added_fire_damage": {
-      "text": "Minimum Added Fire Damage",
+      "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 61
     },
     "local_maximum_added_fire_damage": {
-      "text": "Maximum Added Fire Damage",
+      "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 106
     },
     "local_minimum_added_cold_damage": {
-      "text": "Minimum Added Cold Damage",
+      "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 50
     },
     "local_maximum_added_cold_damage": {
-      "text": "Maximum Added Cold Damage",
+      "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 87
     },
     "local_minimum_added_lightning_damage": {
-      "text": "Minimum Added Lightning Damage",
+      "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 13
     },
     "local_maximum_added_lightning_damage": {
-      "text": "Maximum Added Lightning Damage",
+      "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 166
     },
     "local_minimum_added_chaos_damage": {
-      "text": "Minimum Added Chaos Damage",
+      "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 72
     },
     "local_maximum_added_chaos_damage": {
-      "text": "Maximum Added Chaos Damage",
+      "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 123
     }
   },
   "boots": {
     "base_movement_velocity_+%": {
-      "text": "Movement Velocity +%",
+      "text": "Base Movement Velocity +%",
       "min": 2,
       "max": 30
     },
     "base_item_found_rarity_+%": {
-      "text": "Item Found Rarity +%",
+      "text": "Base Item Found Rarity +%",
       "min": 6,
       "max": 18
     },
     "local_attribute_requirements_+%": {
-      "text": "Attribute Requirements +%",
+      "text": "Local Attribute Requirements +%",
       "min": 18,
       "max": 32
     },
@@ -5092,7 +5092,7 @@
       "max": 1
     },
     "local_socketed_gem_level_+": {
-      "text": "Socketed Gem Level +",
+      "text": "Local Socketed Gem Level +",
       "min": 1,
       "max": 1
     },
@@ -5219,17 +5219,17 @@
       "max": 109
     },
     "local_socketed_fire_gem_level_+": {
-      "text": "Socketed Fire Gem Level +",
+      "text": "Local Socketed Fire Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_socketed_cold_gem_level_+": {
-      "text": "Socketed Cold Gem Level +",
+      "text": "Local Socketed Cold Gem Level +",
       "min": 1,
       "max": 2
     },
     "local_socketed_lightning_gem_level_+": {
-      "text": "Socketed Lightning Gem Level +",
+      "text": "Local Socketed Lightning Gem Level +",
       "min": 1,
       "max": 2
     },
@@ -5246,51 +5246,51 @@
   },
   "ranged": {
     "local_attack_speed_+%": {
-      "text": "Attack Speed +%",
+      "text": "Local Attack Speed +%",
       "min": 14,
       "max": 16
     },
     "base_projectile_speed_+%": {
-      "text": "Projectile Speed +%",
+      "text": "Base Projectile Speed +%",
       "min": 10,
       "max": 46
     },
     "number_of_additional_projectiles": {
-      "text": "Projectiles",
+      "text": "Additional Projectiles",
       "min": 2,
       "max": 2
     }
   },
   "armour": {
     "base_fire_damage_resistance_%": {
-      "text": "Fire Resistance %",
+      "text": "Base Fire Resistance %",
       "min": 6,
       "max": 48
     },
     "base_cold_damage_resistance_%": {
-      "text": "Cold Resistance %",
+      "text": "Base Cold Resistance %",
       "min": 6,
       "max": 48
     },
     "base_lightning_damage_resistance_%": {
-      "text": "Lightning Resistance %",
+      "text": "Base Lightning Resistance %",
       "min": 6,
       "max": 48
     },
     "base_chaos_damage_resistance_%": {
-      "text": "Chaos Resistance %",
+      "text": "Base Chaos Resistance %",
       "min": 5,
       "max": 35
     },
     "base_stun_recovery_+%": {
-      "text": "Stun Recovery +%",
+      "text": "Base Stun Recovery +%",
       "min": 11,
       "max": 28
     }
   },
   "utility_flask": {
     "local_flask_recovery_speed_+%": {
-      "text": "Flask Recovery Speed +%",
+      "text": "Local Flask Recovery Speed +%",
       "min": 33,
       "max": 33
     },
@@ -5973,123 +5973,6 @@
       "max": 20
     }
   },
-  "rare": {
-    "explode_on_death_%_main_hand_damage_to_deal_as_fire": {
-      "text": "",
-      "min": 300,
-      "max": 360
-    },
-    "base_monster_will_be_deleted_on_death": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "explode_on_death_%_main_hand_damage_to_deal_as_lightning": {
-      "text": "",
-      "min": 300,
-      "max": 360
-    },
-    "explode_on_death_%_main_hand_damage_to_deal_as_cold": {
-      "text": "",
-      "min": 300,
-      "max": 360
-    },
-    "monster_raises_after_death": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "corpse_cannot_be_destroyed": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "cannot_be_dominated": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "monster_spawns_X_monsters_on_death": {
-      "text": "",
-      "min": 8,
-      "max": 12
-    },
-    "base_corrupt_blood_when_hit_%_average_damage_to_deal_per_minute_per_stack": {
-      "text": "",
-      "min": 375,
-      "max": 375
-    },
-    "monster_drop_additional_unique_items": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "physical_damage_%_to_add_as_random_element": {
-      "text": "",
-      "min": 50,
-      "max": 50
-    },
-    "always_cause_elemental_status_ailment": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "nemesis_transform_on_low_life": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "grant_actor_scale_+%_to_aura_owner_on_death": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "grant_attack_speed_+%_to_aura_owner_on_death": {
-      "text": "",
-      "min": 5,
-      "max": 5
-    },
-    "grant_cast_speed_+%_to_aura_owner_on_death": {
-      "text": "",
-      "min": 5,
-      "max": 5
-    },
-    "grant_damage_reduction_%_to_aura_owner_on_death": {
-      "text": "",
-      "min": 5,
-      "max": 5
-    },
-    "remove_flask_effects_on_hit_%": {
-      "text": "",
-      "min": 100,
-      "max": 100
-    },
-    "remove_charges_on_hit_%": {
-      "text": "",
-      "min": 100,
-      "max": 100
-    },
-    "base_attacks_poison": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "curse_on_hit_%_enfeeble": {
-      "text": "",
-      "min": 100,
-      "max": 100
-    },
-    "curse_on_hit_%_vulnerability": {
-      "text": "",
-      "min": 100,
-      "max": 100
-    },
-    "curse_on_hit_%_temporal_chains": {
-      "text": "",
-      "min": 100,
-      "max": 100
-    }
-  },
   "flask": {
     "chest_drops_additional_utility_flasks": {
       "text": "",
@@ -6099,7 +5982,7 @@
   },
   "jewel": {
     "base_chaos_damage_resistance_%": {
-      "text": "Chaos Resistance %",
+      "text": "Base Chaos Resistance %",
       "min": 1,
       "max": 3
     },

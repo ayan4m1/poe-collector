@@ -303,12 +303,11 @@ parseRange = (range) ->
 
 parseProperty = (prop, result) ->
   switch prop.name
-    when 'One Handed', 'Two Handed'
-      hands = prop.name.match(/([One|Two])/)[0]
-      weaponType = if result.baseLine.endsWith('Wand') then 'Projectile' else 'Melee'
+    when /^(One|Two) Handed (Sword|Axe|Mace)/
+      hands = prop.name.match(/(One|Two)/).pop()
       result.gearType = "#{hands} Handed #{weaponType} Weapon"
-    when 'Bow'
-      result.gearType = 'Bow'
+    when 'Bow', 'Staff', 'Claw', 'Wand'
+      result.gearType = prop.name
     when 'Level'
       result.level = parseInt(prop.values[0][0])
     when 'Quality'
@@ -363,7 +362,7 @@ parseType = (item, result) ->
       when 8 then 'Prophecy'
       else null
 
-  result.name = item.name.replace(/(<<set:MS>><<set:M>><<set:S>>|Superior\s+)/g, '')
+  result.name = item.name.replace(/(<<set:MS>><<set:M>><<set:S>>|Superior\s+)/g, '').trim()
   result.typeLine = item.typeLine
   result.baseLine = baseTypes[item.typeLine]
 

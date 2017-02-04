@@ -1,3 +1,6 @@
+config = require('konfig')()
+
+extend = require 'extend'
 jsonfile = require 'jsonfile'
 
 log = require './logging'
@@ -5,14 +8,64 @@ elastic = require './elastic'
 
 data = jsonfile.readFileSync("#{__dirname}/../gearData.json")
 
+utilityFlasks = [
+  'Quicksilver'
+  'Bismuth'
+  'Stibnite'
+  'Amethyst'
+  'Ruby'
+  'Sapphire'
+  'Topaz'
+  'Silver'
+  'Aquamarine'
+  'Granite'
+  'Jade'
+  'Quartz'
+  'Sulphur'
+  'Basalt'
+]
+
+valueRegex = /([+-])?([0-9\\.]+)%?( to ([+-])?([0-9\\.]+)%?)?/i
 valuate = (source) ->
-  slug = source.match(/([+-])?([0-9\\.]+)%?/i)
+  slug = source.match(valueRegex)
   return 0 unless slug?
-  parseInt(slug[2])
+  if slug[5]?
+    min: parseInt(slug[2])
+    max: parseInt(slug[5])
+  else parseInt(slug[2])
+
+stripRegex = /\s+(to |increase(d)?|more|less|reduced|goes to|found|while you havent|when not|permyriad|of socketed|on enemies)/g
+startRegex = /^(display|base|local|global|self|additional)/gi
+replacements = [
+  ['Spells', 'spell']
+  ['Velocity', 'speed']
+  [/attacks/i, 'attack']
+  ['to return to', 'reflects']
+  [/^adds /i, 'added']
+  [/\+?%$/, 'percent']
+  [/\s\+$/, 'flat']
+  ['Rarity of Items found', 'Item Rarity']
+  ['all Elemental Resistances', 'Resist all Elements']
+  ['Stun and Block', 'Stun Block']
+  ['Elemental Damage with Weapons', 'Weapon Elemental Damage']
+]
 
 tokenize = (source) ->
-  slug = source.replace(/_/g, ' ').replace(/([0-9]+|\+|-|%| to| increased| more| less| reduced| additional|Adds | additional | with| for)/g, '').replace('Spells', 'Spell').toLowerCase()
+  slug = source
+    .replace(/_+/g, ' ')
+    .trim()
+    .toLowerCase()
+    .replace(startRegex, '')
+    .replace(valueRegex, '')
+    .replace(stripRegex, ' ')
+    .trim()
+
+  for replacement in replacements
+    slug = String.prototype.replace.apply(slug, replacement)
+
   tokens = slug.split(' ').filter (v) -> v isnt ''
+  #log.as.debug("#{source} -> #{slug} -> #{tokens}")
+
   tokens
 
 all = (left, right) ->
@@ -20,27 +73,10 @@ all = (left, right) ->
     return false unless right.indexOf(leftOne) >= 0
   true
 
-query =
-  query:
-    bool:
-      must: [
-        match:
-          removed: false
-      ,
-        match:
-          league: 'Breach'
-      ,
-        match:
-          rarity: 'Rare'
-      ]
-      must_not:
-        exists:
-          field: 'meta.modQuality'
-
 scoreHit = (hit) ->
   listing = hit._source
   return unless listing.baseLine?
-  console.log("examining #{listing.fullName} - #{listing.baseLine}")
+  log.as.debug("examining #{listing.fullName} - #{listing.baseLine}")
   key = listing.baseLine.toLowerCase()
   modInfo = null
   if key is 'body'
@@ -55,63 +91,101 @@ scoreHit = (hit) ->
 
     log.as.debug("detected #{listing.fullName} as #{armourType}")
     modInfo = data["#{armourType}_armour"]
-    modInfo[key] = value for key, value in data["body_armour"]
+    extend(modInfo, data['body_armour'])
   else if key is 'map'
     key = if listing.tier > 0 and listing.tier < 6 then 'low_tier_map' else
       if listing.tier <= 10 then 'mid_tier_map' else
       if listing.tier > 10 then 'top_tier_map'
-    log.as.debug("map is #{key}")
+    log.as.debug("map table is #{key}")
     modInfo = data[key]
+  else if key is 'flask'
+    base = listing.baseLine.trim().split(/\s+/g).pop()
+    # todo: figure out the base flask mods
+    modInfo = {}
+    extend(modInfo, data['utility_flask']) if utilityFlasks.indexOf(base) >= 0
+    extend(modInfo, data['critical_utility_flask']) if listing.baseLine.trim() is 'Diamond Flask'
+  else if key is 'mace'
+    modInfo = data['sceptre']
+  else if key is 'shield' and listing.baseLine.endsWith('Spirit Shield')
+    modInfo = data['focus']
+    extend(modInfo, data['shield'])
   else if data[key]?
     modInfo = data[key]
-    # add in weapon or jewel extra classes
   else
-    log.as.warn("could not map #{key}")
+    log.as.warn("could not find mod table for #{key}")
 
   return unless modInfo?
+
+  if ['body', 'boots', 'helmet', 'gloves'].indexOf(key) >= 0
+    extend(modInfo, data['armour'])
+
   totalQuality = 0
   matchedCount = 0
+
   for mod in listing.modifiers
+    value = valuate(mod)
+    continue unless value.max? or value > 0
+
+    pair = if mod.endsWith('Resistances')
+    then mod.match(/(Fire|Lightning|Cold) and (Fire|Lightning|Cold)/)
+    else if mod.indexOf(' and ') > 0 and
+      mod.endsWith('Strength') or mod.endsWith('Dexterity') or mod.endsWith('Intelligence')
+    then mod.match(/(Strength|Dexterity|Intelligence) and (Strength|Dexterity|Intelligence)/)
+
+    log.as.debug(mod)
     tokens = tokenize(mod)
+    tokens.push(pair[1].toLowerCase(), pair[2].toLowerCase()) if pair?
     matchedMod = null
     for cmpKey, cmpVal of modInfo
-      sourceText = if cmpVal.text.trim().length > 0 then cmpVal.text else cmpKey
-      cmpTokens = tokenize(sourceText)
+      cmpTokens = tokenize(cmpKey)
       matches = all(tokens, cmpTokens)
       matchedMod = cmpVal if matches is true
 
-    console.dir(mod)
-    console.dir(matchedMod)
     if matchedMod?
-      log.as.debug("raw input #{mod} matched #{matchedMod.text}")
+      log.as.debug("modifier #{mod} matched #{matchedMod.text}")
       matchedCount++
-      value = valuate(mod)
-      quality = value / matchedMod.max
-      totalQuality += quality
-      log.as.debug("roll of #{value} has quality #{quality.toFixed(4)} from #{matchedMod.min} - #{matchedMod.max}")
+      if value.min? and value.max?
+        quality = (value.min / matchedMod.max) + (value.max / matchedMod.max)
+        display = "#{value.min} to #{value.max}"
+      else
+        quality = value / matchedMod.max
+        display = value
 
-  if matchedCount > 0
-    result = totalQuality / matchedCount
-    log.as.info("overall quality is #{result.toFixed(4)}")
-    elastic.client.update(
-      index: hit._index
-      type: 'listing'
-      id: hit._id
-      body:
-        doc:
-          meta:
-            modQuality: result
-        doc_as_upsert: true
-    , (err, res) ->
-      return log.as.error(err) if err?
-      console.dir(res) if res?
-    )
+      totalQuality += quality
+      log.as.debug("roll of #{display} has quality #{quality.toFixed(4)} from #{matchedMod.min} - #{matchedMod.max}")
+    else
+      log.as.warn("could not match mod for #{mod}, tokenized as #{tokens}")
+
+    if matchedCount > 0
+      result = totalQuality / matchedCount
+      log.as.info("overall quality is #{result.toFixed(4)}")
+      elastic.client.update({
+        index: hit._index
+        type: 'listing'
+        id: hit._id
+        retry_on_conflict: 5
+        body:
+          doc:
+            meta:
+              modQuality: result
+          doc_as_upsert: true
+      }, (err, res) ->
+        return log.as.error(err) if err?
+        commitCount++ if res.result is 'updated'
+      )
+
+hitCount = 0
+commitCount = 0
 
 handleSearch = (err, res) ->
   return log.as.error(err) if err?
 
   scoreHit(hit) for hit in res.hits.hits
-  return unless res.hits.hits.length < res.hits.total
+  hitCount += res.hits.hits.length
+
+  return log.as.info("completed!") unless hitCount < res.hits.total
+  log.as.info("#{((hitCount / res.hits.total) * 100).toFixed(2)}% complete, #{((commitCount / res.hits.total) * 100).toFixed(2)}% committed (#{commitCount} / #{hitCount} of #{res.hits.total})")
+
   elastic.client.scroll({
     scroll: '30s'
     scrollId: res._scroll_id
@@ -120,6 +194,7 @@ handleSearch = (err, res) ->
 elastic.client.search({
   index: 'poe-listing*'
   type: 'listing'
-  body: query
   scroll: '30s'
+  size: 100
+  body: config.query.scoring
 }, handleSearch)
