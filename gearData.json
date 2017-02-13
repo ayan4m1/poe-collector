@@ -20,6 +20,11 @@
       "min": 1,
       "max": 16
     },
+    "base_maximum_life": {
+      "text": "Base Maximum Life",
+      "min": 80,
+      "max": 99
+    },
     "base_maximum_mana": {
       "text": "Base Maximum Mana",
       "min": 15,
@@ -28,17 +33,17 @@
     "base_maximum_energy_shield": {
       "text": "Base Maximum Energy Shield",
       "min": 1,
-      "max": 47
+      "max": 51
     },
     "attack_minimum_added_physical_damage": {
       "text": "Minimum Added Physical Damage",
       "min": 1,
-      "max": 9
+      "max": 15
     },
     "attack_maximum_added_physical_damage": {
       "text": "Maximum Added Physical Damage",
       "min": 2,
-      "max": 15
+      "max": 26
     },
     "attack_minimum_added_fire_damage": {
       "text": "Attack Minimum Added Fire Damage",
@@ -246,6 +251,11 @@
       "text": "Additional All Attributes",
       "min": 1,
       "max": 32
+    },
+    "base_maximum_life": {
+      "text": "Base Maximum Life",
+      "min": 90,
+      "max": 99
     },
     "base_maximum_mana": {
       "text": "Base Maximum Mana",
@@ -879,6 +889,16 @@
       "min": 6,
       "max": 8
     },
+    "sword_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "sword_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
     "local_minimum_added_chaos_damage": {
       "text": "Local Minimum Added Chaos Damage",
       "min": 47,
@@ -931,6 +951,11 @@
       "min": 5,
       "max": 15
     },
+    "block_while_dual_wielding_%": {
+      "text": "Blocking while Dual Wielding",
+      "min": 3,
+      "max": 6
+    },
     "local_display_socketed_gems_get_added_fire_damage_level": {
       "text": "",
       "min": 12,
@@ -950,6 +975,16 @@
       "text": "Attack Speed with Maces",
       "min": 6,
       "max": 8
+    },
+    "mace_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "mace_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
     },
     "local_minimum_added_chaos_damage": {
       "text": "Local Minimum Added Chaos Damage",
@@ -1078,6 +1113,16 @@
       "min": 10,
       "max": 20
     },
+    "block_while_dual_wielding_%": {
+      "text": "Blocking while Dual Wielding",
+      "min": 3,
+      "max": 6
+    },
+    "local_weapon_range_+": {
+      "text": "",
+      "min": 1,
+      "max": 2
+    },
     "local_display_socketed_gems_get_weapon_elemental_damage_level": {
       "text": "",
       "min": 12,
@@ -1182,7 +1227,7 @@
     },
     "base_cast_speed_+%": {
       "text": "Cast Speed +%",
-      "min": 8,
+      "min": 5,
       "max": 38
     },
     "mana_regeneration_rate_+%": {
@@ -1260,6 +1305,11 @@
       "min": 14,
       "max": 16
     },
+    "spell_damage_+%_while_holding_shield": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
     "staff_attack_speed_+%": {
       "text": "Attack Speed with Staves",
       "min": 6,
@@ -1269,6 +1319,21 @@
       "text": "",
       "min": 3,
       "max": 5
+    },
+    "staff_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "staff_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "block_while_dual_wielding_%": {
+      "text": "Blocking while Dual Wielding",
+      "min": 1,
+      "max": 1
     },
     "additional_staff_block_%": {
       "text": "",
@@ -1372,6 +1437,11 @@
       "min": 1,
       "max": 1
     },
+    "block_while_dual_wielding_%": {
+      "text": "Blocking while Dual Wielding",
+      "min": 3,
+      "max": 6
+    },
     "local_display_grants_skill_vulnerability_level": {
       "text": "",
       "min": 10,
@@ -1386,6 +1456,16 @@
       "text": "Attack Speed with Axes",
       "min": 6,
       "max": 8
+    },
+    "axe_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "axe_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
     },
     "local_minimum_added_chaos_damage": {
       "text": "Local Minimum Added Chaos Damage",
@@ -1404,50 +1484,70 @@
       "min": 8,
       "max": 55
     },
+    "base_maximum_life": {
+      "text": "Base Maximum Life",
+      "min": 90,
+      "max": 99
+    },
+    "local_energy_shield": {
+      "text": "Local Energy Shield",
+      "min": 49,
+      "max": 145
+    },
     "attack_minimum_added_physical_damage": {
       "text": "Minimum Added Physical Damage",
       "min": 1,
-      "max": 6
+      "max": 15
     },
     "attack_maximum_added_physical_damage": {
       "text": "Maximum Added Physical Damage",
       "min": 2,
-      "max": 10
+      "max": 26
     },
     "attack_minimum_added_fire_damage": {
       "text": "Attack Minimum Added Fire Damage",
       "min": 1,
-      "max": 10
+      "max": 25
     },
     "attack_maximum_added_fire_damage": {
       "text": "Attack Maximum Added Fire Damage",
       "min": 2,
-      "max": 18
+      "max": 45
     },
     "attack_minimum_added_cold_damage": {
       "text": "Attack Minimum Added Cold Damage",
       "min": 1,
-      "max": 9
+      "max": 22
     },
     "attack_maximum_added_cold_damage": {
       "text": "Attack Maximum Added Cold Damage",
       "min": 2,
-      "max": 16
+      "max": 40
     },
     "attack_minimum_added_lightning_damage": {
       "text": "Attack Minimum Added Lightning Damage",
       "min": 1,
-      "max": 2
+      "max": 7
     },
     "attack_maximum_added_lightning_damage": {
       "text": "Attack Maximum Added Lightning Damage",
       "min": 5,
-      "max": 28
+      "max": 72
     },
     "life_leech_from_physical_attack_damage_permyriad": {
       "text": "",
       "min": 20,
       "max": 40
+    },
+    "local_base_evasion_rating": {
+      "text": "Local Base Evasion Rating",
+      "min": 61,
+      "max": 400
+    },
+    "local_base_physical_damage_reduction_rating": {
+      "text": "Local Base Physical Damage Reduction Rating",
+      "min": 61,
+      "max": 400
     },
     "mana_leech_from_physical_attack_damage_permyriad": {
       "text": "",
@@ -1468,6 +1568,11 @@
       "text": "Accuracy Rating",
       "min": 5,
       "max": 400
+    },
+    "base_stun_recovery_+%": {
+      "text": "Base Stun Recovery +%",
+      "min": 11,
+      "max": 28
     },
     "base_life_gain_per_target": {
       "text": "Life Gained On Hit",
@@ -1844,42 +1949,42 @@
     "attack_minimum_added_physical_damage": {
       "text": "Minimum Added Physical Damage",
       "min": 1,
-      "max": 6
+      "max": 15
     },
     "attack_maximum_added_physical_damage": {
       "text": "Maximum Added Physical Damage",
       "min": 2,
-      "max": 10
+      "max": 26
     },
     "attack_minimum_added_fire_damage": {
       "text": "Attack Minimum Added Fire Damage",
       "min": 1,
-      "max": 10
+      "max": 25
     },
     "attack_maximum_added_fire_damage": {
       "text": "Attack Maximum Added Fire Damage",
       "min": 2,
-      "max": 18
+      "max": 45
     },
     "attack_minimum_added_cold_damage": {
       "text": "Attack Minimum Added Cold Damage",
       "min": 1,
-      "max": 9
+      "max": 22
     },
     "attack_maximum_added_cold_damage": {
       "text": "Attack Maximum Added Cold Damage",
       "min": 2,
-      "max": 16
+      "max": 40
     },
     "attack_minimum_added_lightning_damage": {
       "text": "Attack Minimum Added Lightning Damage",
       "min": 1,
-      "max": 2
+      "max": 7
     },
     "attack_maximum_added_lightning_damage": {
       "text": "Attack Maximum Added Lightning Damage",
       "min": 5,
-      "max": 28
+      "max": 72
     },
     "life_leech_from_physical_attack_damage_permyriad": {
       "text": "",
@@ -1905,6 +2010,11 @@
       "text": "Accuracy Rating",
       "min": 5,
       "max": 400
+    },
+    "base_life_regeneration_rate_per_minute": {
+      "text": "Life Regeneration Rate per Minute",
+      "min": 60,
+      "max": 420
     },
     "critical_strike_chance_+%": {
       "text": "Critical Strike Chance +%",
@@ -2080,32 +2190,37 @@
     "local_minimum_added_fire_damage": {
       "text": "Local Minimum Added Fire Damage",
       "min": 1,
-      "max": 61
+      "max": 91
     },
     "local_maximum_added_fire_damage": {
       "text": "Local Maximum Added Fire Damage",
       "min": 3,
-      "max": 106
+      "max": 160
     },
     "local_minimum_added_cold_damage": {
       "text": "Local Minimum Added Cold Damage",
       "min": 1,
-      "max": 50
+      "max": 75
     },
     "local_maximum_added_cold_damage": {
       "text": "Local Maximum Added Cold Damage",
       "min": 3,
-      "max": 87
+      "max": 131
     },
     "local_minimum_added_lightning_damage": {
       "text": "Local Minimum Added Lightning Damage",
       "min": 1,
-      "max": 13
+      "max": 19
     },
     "local_maximum_added_lightning_damage": {
       "text": "Local Maximum Added Lightning Damage",
       "min": 6,
-      "max": 166
+      "max": 250
+    },
+    "local_socketed_melee_gem_level_+": {
+      "text": "Local Socketed Melee Gem Level +",
+      "min": 1,
+      "max": 2
     },
     "local_socketed_bow_gem_level_+": {
       "text": "Local Socketed Bow Gem Level +",
@@ -2132,6 +2247,11 @@
       "min": 5,
       "max": 10
     },
+    "local_weapon_range_+": {
+      "text": "",
+      "min": 1,
+      "max": 2
+    },
     "local_display_socketed_gems_get_fork_level": {
       "text": "",
       "min": 1,
@@ -2142,20 +2262,75 @@
       "min": 14,
       "max": 16
     },
+    "two_handed_melee_physical_damage_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "melee_damage_+%": {
+      "text": "",
+      "min": 10,
+      "max": 12
+    },
+    "spell_damage_+%_while_holding_shield": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
     "bow_attack_speed_+%": {
       "text": "Attack Speed with Bows",
       "min": 6,
       "max": 8
     },
+    "two_handed_melee_attack_speed_+%": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "melee_physical_damage_+%_while_holding_shield": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "bow_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "bow_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "two_handed_melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 10,
+      "max": 14
+    },
+    "two_handed_melee_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "melee_weapon_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 12,
+      "max": 15
+    },
     "local_minimum_added_chaos_damage": {
       "text": "Local Minimum Added Chaos Damage",
       "min": 47,
-      "max": 72
+      "max": 108
     },
     "local_maximum_added_chaos_damage": {
       "text": "Local Maximum Added Chaos Damage",
       "min": 98,
-      "max": 123
+      "max": 185
     }
   },
   "claw": {
@@ -2228,6 +2403,16 @@
       "text": "Attack Speed with Claws",
       "min": 6,
       "max": 8
+    },
+    "claw_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "claw_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
     },
     "local_minimum_added_chaos_damage": {
       "text": "Local Minimum Added Chaos Damage",
@@ -2341,6 +2526,16 @@
       "min": 6,
       "max": 8
     },
+    "dagger_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "critical_strike_multiplier_with_dagger_+": {
+      "text": "Critical Strike Multiplier",
+      "min": 8,
+      "max": 10
+    },
     "spell_minimum_added_fire_damage": {
       "text": "",
       "min": 1,
@@ -2388,6 +2583,21 @@
       "min": 8,
       "max": 55
     },
+    "local_energy_shield": {
+      "text": "Local Energy Shield",
+      "min": 73,
+      "max": 145
+    },
+    "local_base_evasion_rating": {
+      "text": "Local Base Evasion Rating",
+      "min": 139,
+      "max": 400
+    },
+    "local_base_physical_damage_reduction_rating": {
+      "text": "Local Base Physical Damage Reduction Rating",
+      "min": 139,
+      "max": 400
+    },
     "base_item_found_rarity_+%": {
       "text": "Base Item Found Rarity +%",
       "min": 6,
@@ -2411,7 +2621,7 @@
     "dummy_stat_display_nothing": {
       "text": "",
       "min": 0,
-      "max": 0
+      "max": 4
     },
     "local_attribute_requirements_+%": {
       "text": "Local Attribute Requirements +%",
@@ -2529,6 +2739,11 @@
       "max": 40
     },
     "slam_ancestor_totem_damage_+%": {
+      "text": "",
+      "min": 25,
+      "max": 40
+    },
+    "slash_ancestor_totem_damage_+%": {
       "text": "",
       "min": 25,
       "max": 40
@@ -3127,6 +3342,16 @@
       "text": "",
       "min": 20,
       "max": 30
+    },
+    "slash_ancestor_totem_radius_+%": {
+      "text": "",
+      "min": 8,
+      "max": 12
+    },
+    "slash_ancestor_totem_grant_owner_physical_damage_added_as_fire_+%": {
+      "text": "",
+      "min": 3,
+      "max": 5
     },
     "arctic_armour_buff_effect_+%": {
       "text": "",
@@ -4133,6 +4358,11 @@
       "min": 10,
       "max": 15
     },
+    "shield_charge_damage_per_target_hit_+%": {
+      "text": "",
+      "min": 6,
+      "max": 9
+    },
     "shock_nova_ring_damage_+%": {
       "text": "",
       "min": 40,
@@ -4537,6 +4767,11 @@
       "min": 1,
       "max": 1
     },
+    "local_socketed_melee_gem_level_+": {
+      "text": "Local Socketed Melee Gem Level +",
+      "min": 1,
+      "max": 2
+    },
     "local_accuracy_rating": {
       "text": "Local Accuracy Rating",
       "min": 321,
@@ -4547,10 +4782,25 @@
       "min": 1,
       "max": 1
     },
+    "block_while_dual_wielding_%": {
+      "text": "Blocking while Dual Wielding",
+      "min": 3,
+      "max": 6
+    },
     "pierce_%": {
       "text": "Projectile Pierce chance",
       "min": 4,
       "max": 8
+    },
+    "local_display_socketed_gems_get_melee_splash_level": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "local_weapon_range_+": {
+      "text": "",
+      "min": 1,
+      "max": 2
     },
     "local_display_socketed_gems_get_elemental_proliferation_level": {
       "text": "",
@@ -4567,10 +4817,65 @@
       "min": 14,
       "max": 16
     },
+    "one_handed_melee_physical_damage_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "two_handed_melee_physical_damage_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "melee_damage_+%": {
+      "text": "",
+      "min": 10,
+      "max": 12
+    },
     "wand_attack_speed_+%": {
       "text": "Attack Speed with Wands",
       "min": 6,
       "max": 8
+    },
+    "one_handed_melee_attack_speed_+%": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "melee_physical_damage_+%_while_holding_shield": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "wand_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "wand_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "one_handed_melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 10,
+      "max": 14
+    },
+    "one_handed_melee_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "melee_weapon_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 12,
+      "max": 15
     },
     "spell_minimum_added_fire_damage": {
       "text": "",
@@ -4613,11 +4918,427 @@
       "max": 123
     }
   },
+  "fishing_rod": {
+    "base_maximum_life": {
+      "text": "Base Maximum Life",
+      "min": 3,
+      "max": 99
+    },
+    "base_cast_speed_+%": {
+      "text": "Cast Speed +%",
+      "min": 10,
+      "max": 28
+    },
+    "base_life_regeneration_rate_per_minute": {
+      "text": "Life Regeneration Rate per Minute",
+      "min": 60,
+      "max": 420
+    },
+    "fishing_line_strength_+%": {
+      "text": "",
+      "min": 20,
+      "max": 40
+    },
+    "fishing_pool_consumption_+%": {
+      "text": "",
+      "min": 15,
+      "max": 30
+    },
+    "fishing_lure_type": {
+      "text": "",
+      "min": 1,
+      "max": 3
+    },
+    "fishing_hook_type": {
+      "text": "",
+      "min": 1,
+      "max": 4
+    },
+    "fishing_range_+%": {
+      "text": "",
+      "min": 30,
+      "max": 50
+    },
+    "fish_quantity_+%": {
+      "text": "",
+      "min": 5,
+      "max": 20
+    },
+    "fish_rarity_+%": {
+      "text": "",
+      "min": 5,
+      "max": 40
+    },
+    "base_chaos_damage_resistance_%": {
+      "text": "Base Chaos Resistance %",
+      "min": 2,
+      "max": 4
+    },
+    "can_catch_corrupted_fish": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    }
+  },
+  "weapon": {
+    "base_maximum_life": {
+      "text": "Base Maximum Life",
+      "min": 3,
+      "max": 99
+    },
+    "local_physical_damage_+%": {
+      "text": "Local Physical Damage +%",
+      "min": 15,
+      "max": 179
+    },
+    "local_accuracy_rating": {
+      "text": "Local Accuracy Rating",
+      "min": 3,
+      "max": 360
+    },
+    "weapon_elemental_damage_+%": {
+      "text": "Weapon Elemental Damage +%",
+      "min": 5,
+      "max": 42
+    },
+    "local_attack_speed_+%": {
+      "text": "Local Attack Speed +%",
+      "min": 5,
+      "max": 27
+    },
+    "base_life_regeneration_rate_per_minute": {
+      "text": "Life Regeneration Rate per Minute",
+      "min": 60,
+      "max": 420
+    },
+    "critical_strike_chance_+%": {
+      "text": "Critical Strike Chance +%",
+      "min": 10,
+      "max": 38
+    },
+    "base_fire_damage_resistance_%": {
+      "text": "Base Fire Resistance %",
+      "min": 6,
+      "max": 48
+    },
+    "base_cold_damage_resistance_%": {
+      "text": "Base Cold Resistance %",
+      "min": 6,
+      "max": 48
+    },
+    "base_lightning_damage_resistance_%": {
+      "text": "Base Lightning Resistance %",
+      "min": 6,
+      "max": 48
+    },
+    "base_chaos_damage_resistance_%": {
+      "text": "Base Chaos Resistance %",
+      "min": 2,
+      "max": 35
+    },
+    "base_critical_strike_multiplier_+": {
+      "text": "Base Critical Strike Multiplier +%",
+      "min": 8,
+      "max": 38
+    },
+    "base_stun_duration_+%": {
+      "text": "Base Stun Duration +%",
+      "min": 11,
+      "max": 35
+    },
+    "local_life_gain_per_target": {
+      "text": "",
+      "min": 2,
+      "max": 5
+    },
+    "base_life_gained_on_enemy_death": {
+      "text": "Base Life Gained On Enemy Death",
+      "min": 3,
+      "max": 14
+    },
+    "base_mana_gained_on_enemy_death": {
+      "text": "Base Mana Gained On Enemy Death",
+      "min": 1,
+      "max": 6
+    },
+    "local_critical_strike_chance_+%": {
+      "text": "Local Critical Strike Chance +%",
+      "min": 10,
+      "max": 38
+    },
+    "local_socketed_gem_level_+": {
+      "text": "Local Socketed Gem Level +",
+      "min": 1,
+      "max": 1
+    },
+    "local_socketed_melee_gem_level_+": {
+      "text": "Local Socketed Melee Gem Level +",
+      "min": 1,
+      "max": 2
+    },
+    "local_attribute_requirements_+%": {
+      "text": "Local Attribute Requirements +%",
+      "min": 18,
+      "max": 32
+    },
+    "light_radius_+%": {
+      "text": "Light Radius +%",
+      "min": 5,
+      "max": 15
+    },
+    "local_accuracy_rating_+%": {
+      "text": "Local Accuracy Rating +%",
+      "min": 5,
+      "max": 10
+    },
+    "old_do_not_use_base_life_leech_from_fire_damage_permyriad": {
+      "text": "",
+      "min": 100,
+      "max": 100
+    },
+    "base_life_leech_from_fire_damage_permyriad": {
+      "text": "",
+      "min": 20,
+      "max": 20
+    },
+    "old_do_not_use_base_life_leech_from_cold_damage_permyriad": {
+      "text": "",
+      "min": 100,
+      "max": 100
+    },
+    "base_life_leech_from_cold_damage_permyriad": {
+      "text": "",
+      "min": 20,
+      "max": 20
+    },
+    "old_do_not_use_base_life_leech_from_lightning_damage_permyriad": {
+      "text": "",
+      "min": 100,
+      "max": 100
+    },
+    "base_life_leech_from_lightning_damage_permyriad": {
+      "text": "",
+      "min": 20,
+      "max": 20
+    },
+    "global_hit_causes_monster_flee_%": {
+      "text": "",
+      "min": 5,
+      "max": 5
+    },
+    "local_minimum_added_chaos_damage": {
+      "text": "Local Minimum Added Chaos Damage",
+      "min": 1,
+      "max": 11
+    },
+    "local_maximum_added_chaos_damage": {
+      "text": "Local Maximum Added Chaos Damage",
+      "min": 3,
+      "max": 23
+    },
+    "local_weapon_range_+": {
+      "text": "",
+      "min": 1,
+      "max": 2
+    },
+    "old_do_not_use_local_life_leech_from_physical_damage_%": {
+      "text": "",
+      "min": 1,
+      "max": 6
+    },
+    "local_life_leech_from_physical_damage_permyriad": {
+      "text": "",
+      "min": 20,
+      "max": 120
+    },
+    "old_do_not_use_local_mana_leech_from_physical_damage_%": {
+      "text": "",
+      "min": 1,
+      "max": 2
+    },
+    "local_mana_leech_from_physical_damage_permyriad": {
+      "text": "",
+      "min": 20,
+      "max": 40
+    }
+  },
+  "boots": {
+    "base_maximum_life": {
+      "text": "Base Maximum Life",
+      "min": 90,
+      "max": 99
+    },
+    "local_energy_shield": {
+      "text": "Local Energy Shield",
+      "min": 49,
+      "max": 145
+    },
+    "local_base_evasion_rating": {
+      "text": "Local Base Evasion Rating",
+      "min": 61,
+      "max": 400
+    },
+    "local_base_physical_damage_reduction_rating": {
+      "text": "Local Base Physical Damage Reduction Rating",
+      "min": 61,
+      "max": 400
+    },
+    "base_movement_velocity_+%": {
+      "text": "Base Movement Velocity +%",
+      "min": 2,
+      "max": 30
+    },
+    "base_item_found_rarity_+%": {
+      "text": "Base Item Found Rarity +%",
+      "min": 6,
+      "max": 18
+    },
+    "local_attribute_requirements_+%": {
+      "text": "Local Attribute Requirements +%",
+      "min": 18,
+      "max": 32
+    },
+    "max_frenzy_charges": {
+      "text": "Maximum Frenzy Charges",
+      "min": 1,
+      "max": 1
+    },
+    "local_socketed_vaal_gem_level_+": {
+      "text": "",
+      "min": 1,
+      "max": 2
+    },
+    "base_chance_to_dodge_%": {
+      "text": "",
+      "min": 2,
+      "max": 4
+    },
+    "cannot_be_knocked_back": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "local_socketed_gem_level_+": {
+      "text": "Local Socketed Gem Level +",
+      "min": 1,
+      "max": 1
+    },
+    "local_display_grants_skill_temporal_chains_level": {
+      "text": "",
+      "min": 14,
+      "max": 14
+    },
+    "local_display_grants_skill_haste_level": {
+      "text": "",
+      "min": 14,
+      "max": 14
+    },
+    "enchantment_boots_minimum_added_fire_damage_on_kill_4s": {
+      "text": "",
+      "min": 16,
+      "max": 45
+    },
+    "enchantment_boots_maximum_added_fire_damage_on_kill_4s": {
+      "text": "",
+      "min": 24,
+      "max": 68
+    },
+    "enchantment_boots_life_and_mana_regen_per_minute_%_for_4_seconds_when_hit": {
+      "text": "",
+      "min": 60,
+      "max": 120
+    },
+    "enchantment_boots_mana_costs_when_hit_+%": {
+      "text": "",
+      "min": 10,
+      "max": 18
+    },
+    "enchantment_boots_stun_avoid_%_on_kill": {
+      "text": "",
+      "min": 50,
+      "max": 80
+    },
+    "enchantment_boots_spell_dodge_when_hit_by_spells_%": {
+      "text": "",
+      "min": 5,
+      "max": 8
+    },
+    "enchantment_boots_attack_and_cast_speed_+%_for_4_seconds_on_kill": {
+      "text": "",
+      "min": 8,
+      "max": 16
+    },
+    "enchantment_boots_added_cold_damage_when_hit_minimum": {
+      "text": "",
+      "min": 16,
+      "max": 45
+    },
+    "enchantment_boots_added_cold_damage_when_hit_maximum": {
+      "text": "",
+      "min": 24,
+      "max": 68
+    },
+    "enchantment_boots_minimum_added_lightning_damage_when_you_havent_killed_for_4_seconds": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "enchantment_boots_maximum_added_lightning_damage_when_you_havent_killed_for_4_seconds": {
+      "text": "",
+      "min": 56,
+      "max": 160
+    },
+    "enchantment_boots_life_and_mana_leech_on_kill_permyriad": {
+      "text": "",
+      "min": 40,
+      "max": 60
+    },
+    "enchantment_boots_dodge_chance_when_critically_hit_%": {
+      "text": "",
+      "min": 6,
+      "max": 10
+    },
+    "enchantment_boots_status_ailment_chance_+%_when_havent_crit_for_4_seconds": {
+      "text": "",
+      "min": 6,
+      "max": 10
+    },
+    "enchantment_boots_movement_speed_+%_when_not_hit_for_4_seconds": {
+      "text": "",
+      "min": 6,
+      "max": 10
+    },
+    "enchantment_critical_strike_chance_+%_if_you_havent_crit_for_4_seconds": {
+      "text": "",
+      "min": 60,
+      "max": 120
+    },
+    "enchantment_boots_damage_penetrates_elemental_resistance_%_while_you_havent_killed_for_4_seconds": {
+      "text": "",
+      "min": 6,
+      "max": 10
+    },
+    "enchantment_boots_minimum_added_chaos_damage_for_4_seconds_when_crit_4s": {
+      "text": "",
+      "min": 44,
+      "max": 120
+    },
+    "enchantment_boots_maximum_added_chaos_damage_for_4_seconds_when_crit_4s": {
+      "text": "",
+      "min": 64,
+      "max": 180
+    }
+  },
   "shield": {
     "base_maximum_life": {
       "text": "Base Maximum Life",
       "min": 100,
       "max": 109
+    },
+    "local_energy_shield": {
+      "text": "Local Energy Shield",
+      "min": 136,
+      "max": 145
     },
     "base_resist_all_elements_%": {
       "text": "Resist all Elements",
@@ -4777,171 +5498,36 @@
       "max": 15
     }
   },
-  "weapon": {
-    "local_physical_damage_+%": {
-      "text": "Local Physical Damage +%",
-      "min": 15,
-      "max": 179
-    },
-    "local_accuracy_rating": {
-      "text": "Local Accuracy Rating",
-      "min": 3,
-      "max": 320
-    },
-    "weapon_elemental_damage_+%": {
-      "text": "Weapon Elemental Damage +%",
-      "min": 5,
-      "max": 42
+  "ranged": {
+    "life_leech_from_physical_attack_damage_permyriad": {
+      "text": "",
+      "min": 60,
+      "max": 120
     },
     "local_attack_speed_+%": {
       "text": "Local Attack Speed +%",
-      "min": 5,
+      "min": 14,
       "max": 27
     },
-    "base_fire_damage_resistance_%": {
-      "text": "Base Fire Resistance %",
-      "min": 6,
-      "max": 48
+    "base_projectile_speed_+%": {
+      "text": "Base Projectile Speed +%",
+      "min": 10,
+      "max": 46
     },
-    "base_cold_damage_resistance_%": {
-      "text": "Base Cold Resistance %",
-      "min": 6,
-      "max": 48
-    },
-    "base_lightning_damage_resistance_%": {
-      "text": "Base Lightning Resistance %",
-      "min": 6,
-      "max": 48
-    },
-    "base_chaos_damage_resistance_%": {
-      "text": "Base Chaos Resistance %",
-      "min": 5,
-      "max": 35
-    },
-    "base_stun_duration_+%": {
-      "text": "Base Stun Duration +%",
-      "min": 11,
-      "max": 35
-    },
-    "local_life_gain_per_target": {
-      "text": "",
+    "number_of_additional_projectiles": {
+      "text": "Additional Projectiles",
       "min": 2,
-      "max": 5
-    },
-    "base_life_gained_on_enemy_death": {
-      "text": "Base Life Gained On Enemy Death",
-      "min": 3,
-      "max": 14
-    },
-    "base_mana_gained_on_enemy_death": {
-      "text": "Base Mana Gained On Enemy Death",
-      "min": 1,
-      "max": 6
-    },
-    "local_critical_strike_chance_+%": {
-      "text": "Local Critical Strike Chance +%",
-      "min": 10,
-      "max": 38
-    },
-    "base_critical_strike_multiplier_+": {
-      "text": "Base Critical Strike Multiplier +%",
-      "min": 10,
-      "max": 38
-    },
-    "local_socketed_gem_level_+": {
-      "text": "Local Socketed Gem Level +",
-      "min": 1,
-      "max": 1
-    },
-    "local_socketed_melee_gem_level_+": {
-      "text": "Local Socketed Melee Gem Level +",
-      "min": 1,
-      "max": 2
-    },
-    "local_attribute_requirements_+%": {
-      "text": "Local Attribute Requirements +%",
-      "min": 18,
-      "max": 32
-    },
-    "light_radius_+%": {
-      "text": "Light Radius +%",
-      "min": 5,
-      "max": 15
-    },
-    "local_accuracy_rating_+%": {
-      "text": "Local Accuracy Rating +%",
-      "min": 5,
-      "max": 10
-    },
-    "old_do_not_use_base_life_leech_from_fire_damage_permyriad": {
-      "text": "",
-      "min": 100,
-      "max": 100
-    },
-    "base_life_leech_from_fire_damage_permyriad": {
-      "text": "",
-      "min": 20,
-      "max": 20
-    },
-    "old_do_not_use_base_life_leech_from_cold_damage_permyriad": {
-      "text": "",
-      "min": 100,
-      "max": 100
-    },
-    "base_life_leech_from_cold_damage_permyriad": {
-      "text": "",
-      "min": 20,
-      "max": 20
-    },
-    "old_do_not_use_base_life_leech_from_lightning_damage_permyriad": {
-      "text": "",
-      "min": 100,
-      "max": 100
-    },
-    "base_life_leech_from_lightning_damage_permyriad": {
-      "text": "",
-      "min": 20,
-      "max": 20
-    },
-    "global_hit_causes_monster_flee_%": {
-      "text": "",
-      "min": 5,
-      "max": 5
-    },
-    "local_minimum_added_chaos_damage": {
-      "text": "Local Minimum Added Chaos Damage",
-      "min": 1,
-      "max": 11
-    },
-    "local_maximum_added_chaos_damage": {
-      "text": "Local Maximum Added Chaos Damage",
-      "min": 3,
-      "max": 23
-    },
-    "local_weapon_range_+": {
-      "text": "",
-      "min": 1,
       "max": 2
     },
     "old_do_not_use_local_life_leech_from_physical_damage_%": {
       "text": "",
-      "min": 1,
+      "min": 3,
       "max": 6
     },
     "local_life_leech_from_physical_damage_permyriad": {
       "text": "",
-      "min": 20,
+      "min": 60,
       "max": 120
-    },
-    "old_do_not_use_local_mana_leech_from_physical_damage_%": {
-      "text": "",
-      "min": 1,
-      "max": 2
-    },
-    "local_mana_leech_from_physical_damage_permyriad": {
-      "text": "",
-      "min": 20,
-      "max": 40
     }
   },
   "one_hand_weapon": {
@@ -4955,6 +5541,36 @@
       "min": 2,
       "max": 45
     },
+    "local_minimum_added_fire_damage": {
+      "text": "Local Minimum Added Fire Damage",
+      "min": 3,
+      "max": 91
+    },
+    "local_maximum_added_fire_damage": {
+      "text": "Local Maximum Added Fire Damage",
+      "min": 5,
+      "max": 160
+    },
+    "local_minimum_added_cold_damage": {
+      "text": "Local Minimum Added Cold Damage",
+      "min": 2,
+      "max": 75
+    },
+    "local_maximum_added_cold_damage": {
+      "text": "Local Maximum Added Cold Damage",
+      "min": 4,
+      "max": 131
+    },
+    "local_minimum_added_lightning_damage": {
+      "text": "Local Minimum Added Lightning Damage",
+      "min": 1,
+      "max": 19
+    },
+    "local_maximum_added_lightning_damage": {
+      "text": "Local Maximum Added Lightning Damage",
+      "min": 9,
+      "max": 250
+    },
     "block_while_dual_wielding_%": {
       "text": "Blocking while Dual Wielding",
       "min": 3,
@@ -4964,6 +5580,21 @@
       "text": "",
       "min": 10,
       "max": 10
+    },
+    "local_display_socketed_gems_get_additional_accuracy_level": {
+      "text": "",
+      "min": 12,
+      "max": 12
+    },
+    "local_minimum_added_chaos_damage": {
+      "text": "Local Minimum Added Chaos Damage",
+      "min": 70,
+      "max": 108
+    },
+    "local_maximum_added_chaos_damage": {
+      "text": "Local Maximum Added Chaos Damage",
+      "min": 147,
+      "max": 185
     }
   },
   "two_hand_weapon": {
@@ -4976,6 +5607,36 @@
       "text": "Local Maximum Added Physical Damage",
       "min": 4,
       "max": 68
+    },
+    "local_minimum_added_fire_damage": {
+      "text": "Local Minimum Added Fire Damage",
+      "min": 1,
+      "max": 61
+    },
+    "local_maximum_added_fire_damage": {
+      "text": "Local Maximum Added Fire Damage",
+      "min": 3,
+      "max": 106
+    },
+    "local_minimum_added_cold_damage": {
+      "text": "Local Minimum Added Cold Damage",
+      "min": 1,
+      "max": 50
+    },
+    "local_maximum_added_cold_damage": {
+      "text": "Local Maximum Added Cold Damage",
+      "min": 3,
+      "max": 87
+    },
+    "local_minimum_added_lightning_damage": {
+      "text": "Local Minimum Added Lightning Damage",
+      "min": 1,
+      "max": 13
+    },
+    "local_maximum_added_lightning_damage": {
+      "text": "Local Maximum Added Lightning Damage",
+      "min": 6,
+      "max": 166
     },
     "max_power_charges": {
       "text": "Maximum Power Charges",
@@ -5011,6 +5672,26 @@
       "text": "",
       "min": 20,
       "max": 20
+    },
+    "local_display_socketed_gems_get_added_fire_damage_level": {
+      "text": "",
+      "min": 12,
+      "max": 12
+    },
+    "local_display_socketed_gems_get_multistrike_level": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "local_minimum_added_chaos_damage": {
+      "text": "Local Minimum Added Chaos Damage",
+      "min": 47,
+      "max": 72
+    },
+    "local_maximum_added_chaos_damage": {
+      "text": "Local Maximum Added Chaos Damage",
+      "min": 98,
+      "max": 123
     }
   },
   "rapier": {
@@ -5044,6 +5725,11 @@
       "min": 6,
       "max": 166
     },
+    "local_weapon_range_+": {
+      "text": "",
+      "min": 1,
+      "max": 2
+    },
     "local_minimum_added_chaos_damage": {
       "text": "Local Minimum Added Chaos Damage",
       "min": 47,
@@ -5053,153 +5739,6 @@
       "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 123
-    }
-  },
-  "boots": {
-    "base_movement_velocity_+%": {
-      "text": "Base Movement Velocity +%",
-      "min": 2,
-      "max": 30
-    },
-    "base_item_found_rarity_+%": {
-      "text": "Base Item Found Rarity +%",
-      "min": 6,
-      "max": 18
-    },
-    "local_attribute_requirements_+%": {
-      "text": "Local Attribute Requirements +%",
-      "min": 18,
-      "max": 32
-    },
-    "max_frenzy_charges": {
-      "text": "Maximum Frenzy Charges",
-      "min": 1,
-      "max": 1
-    },
-    "local_socketed_vaal_gem_level_+": {
-      "text": "",
-      "min": 1,
-      "max": 2
-    },
-    "base_chance_to_dodge_%": {
-      "text": "",
-      "min": 2,
-      "max": 4
-    },
-    "cannot_be_knocked_back": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "local_socketed_gem_level_+": {
-      "text": "Local Socketed Gem Level +",
-      "min": 1,
-      "max": 1
-    },
-    "local_display_grants_skill_temporal_chains_level": {
-      "text": "",
-      "min": 14,
-      "max": 14
-    },
-    "local_display_grants_skill_haste_level": {
-      "text": "",
-      "min": 14,
-      "max": 14
-    },
-    "enchantment_boots_minimum_added_fire_damage_on_kill_4s": {
-      "text": "",
-      "min": 16,
-      "max": 45
-    },
-    "enchantment_boots_maximum_added_fire_damage_on_kill_4s": {
-      "text": "",
-      "min": 24,
-      "max": 68
-    },
-    "enchantment_boots_life_and_mana_regen_per_minute_%_for_4_seconds_when_hit": {
-      "text": "",
-      "min": 60,
-      "max": 120
-    },
-    "enchantment_boots_mana_costs_when_hit_+%": {
-      "text": "",
-      "min": 10,
-      "max": 18
-    },
-    "enchantment_boots_stun_avoid_%_on_kill": {
-      "text": "",
-      "min": 50,
-      "max": 80
-    },
-    "enchantment_boots_spell_dodge_when_hit_by_spells_%": {
-      "text": "",
-      "min": 5,
-      "max": 8
-    },
-    "enchantment_boots_attack_and_cast_speed_+%_for_4_seconds_on_kill": {
-      "text": "",
-      "min": 8,
-      "max": 16
-    },
-    "enchantment_boots_added_cold_damage_when_hit_minimum": {
-      "text": "",
-      "min": 16,
-      "max": 45
-    },
-    "enchantment_boots_added_cold_damage_when_hit_maximum": {
-      "text": "",
-      "min": 24,
-      "max": 68
-    },
-    "enchantment_boots_minimum_added_lightning_damage_when_you_havent_killed_for_4_seconds": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "enchantment_boots_maximum_added_lightning_damage_when_you_havent_killed_for_4_seconds": {
-      "text": "",
-      "min": 56,
-      "max": 160
-    },
-    "enchantment_boots_life_and_mana_leech_on_kill_permyriad": {
-      "text": "",
-      "min": 40,
-      "max": 60
-    },
-    "enchantment_boots_dodge_chance_when_critically_hit_%": {
-      "text": "",
-      "min": 6,
-      "max": 10
-    },
-    "enchantment_boots_status_ailment_chance_+%_when_havent_crit_for_4_seconds": {
-      "text": "",
-      "min": 6,
-      "max": 10
-    },
-    "enchantment_boots_movement_speed_+%_when_not_hit_for_4_seconds": {
-      "text": "",
-      "min": 6,
-      "max": 10
-    },
-    "enchantment_critical_strike_chance_+%_if_you_havent_crit_for_4_seconds": {
-      "text": "",
-      "min": 60,
-      "max": 120
-    },
-    "enchantment_boots_damage_penetrates_elemental_resistance_%_while_you_havent_killed_for_4_seconds": {
-      "text": "",
-      "min": 6,
-      "max": 10
-    },
-    "enchantment_boots_minimum_added_chaos_damage_for_4_seconds_when_crit_4s": {
-      "text": "",
-      "min": 44,
-      "max": 120
-    },
-    "enchantment_boots_maximum_added_chaos_damage_for_4_seconds_when_crit_4s": {
-      "text": "",
-      "min": 64,
-      "max": 180
     }
   },
   "focus": {
@@ -5238,27 +5777,15 @@
       "min": 1,
       "max": 1
     },
+    "local_socketed_melee_gem_level_+": {
+      "text": "Local Socketed Melee Gem Level +",
+      "min": 1,
+      "max": 2
+    },
     "base_cast_speed_+%": {
       "text": "Cast Speed +%",
       "min": 4,
       "max": 6
-    }
-  },
-  "ranged": {
-    "local_attack_speed_+%": {
-      "text": "Local Attack Speed +%",
-      "min": 14,
-      "max": 16
-    },
-    "base_projectile_speed_+%": {
-      "text": "Base Projectile Speed +%",
-      "min": 10,
-      "max": 46
-    },
-    "number_of_additional_projectiles": {
-      "text": "Additional Projectiles",
-      "min": 2,
-      "max": 2
     }
   },
   "armour": {
@@ -5288,11 +5815,831 @@
       "max": 28
     }
   },
+  "caster": {
+    "physical_damage_%_to_add_as_fire": {
+      "text": "",
+      "min": 25,
+      "max": 25
+    },
+    "physical_damage_%_to_add_as_cold": {
+      "text": "",
+      "min": 25,
+      "max": 25
+    },
+    "damage_+%": {
+      "text": "All Damage",
+      "min": 25,
+      "max": 25
+    },
+    "life_leech_from_physical_attack_damage_permyriad": {
+      "text": "",
+      "min": 10000,
+      "max": 10000
+    },
+    "attack_speed_+%": {
+      "text": "Attack Speed +%",
+      "min": 40,
+      "max": 40
+    },
+    "accuracy_rating_+%": {
+      "text": "Accuracy Rating +%",
+      "min": 40,
+      "max": 40
+    },
+    "remove_flask_effects_on_hit_%": {
+      "text": "",
+      "min": 100,
+      "max": 100
+    },
+    "remove_charges_on_hit_%": {
+      "text": "",
+      "min": 100,
+      "max": 100
+    },
+    "base_attacks_poison": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    }
+  },
+  "not_str": {
+    "physical_damage_reduction_rating_+%": {
+      "text": "Physical Damage Reduction Rating +%",
+      "min": 14,
+      "max": 40
+    },
+    "base_cannot_be_stunned": {
+      "text": "Cannot be Stunned",
+      "min": 1,
+      "max": 1
+    },
+    "add_endurance_charge_on_skill_hit_%": {
+      "text": "",
+      "min": 50,
+      "max": 50
+    },
+    "physical_mace_damage_+%": {
+      "text": "Mace Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_staff_damage_+%": {
+      "text": "Staff Damage",
+      "min": 14,
+      "max": 16
+    },
+    "trap_damage_+%": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "mine_damage_+%": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "fire_damage_+%": {
+      "text": "Fire Damage +%",
+      "min": 14,
+      "max": 16
+    },
+    "mace_attack_speed_+%": {
+      "text": "Attack Speed with Maces",
+      "min": 6,
+      "max": 8
+    },
+    "staff_attack_speed_+%": {
+      "text": "Attack Speed with Staves",
+      "min": 6,
+      "max": 8
+    },
+    "trap_throwing_speed_+%": {
+      "text": "Trap Throwing Speed increase",
+      "min": 6,
+      "max": 8
+    },
+    "mine_laying_speed_+%": {
+      "text": "Mine Laying Speed increase",
+      "min": 6,
+      "max": 8
+    },
+    "additional_strength": {
+      "text": "Additional Strength",
+      "min": 12,
+      "max": 16
+    },
+    "additional_dexterity_and_intelligence": {
+      "text": "Additional Dexterity And Intelligence",
+      "min": 8,
+      "max": 10
+    },
+    "maximum_life_+%": {
+      "text": "Maximum Life +%",
+      "min": 5,
+      "max": 7
+    },
+    "maximum_mana_+%": {
+      "text": "Maximum Mana +%",
+      "min": 6,
+      "max": 8
+    },
+    "old_do_not_use_life_leech_from_physical_damage_%": {
+      "text": "Life Leech From Physical Damage %",
+      "min": 1,
+      "max": 2
+    },
+    "life_leech_from_physical_attack_damage_permyriad": {
+      "text": "",
+      "min": 20,
+      "max": 40
+    },
+    "base_life_gain_per_target": {
+      "text": "Life Gained On Hit",
+      "min": 2,
+      "max": 3
+    },
+    "mace_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "staff_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "mace_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "staff_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "fire_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "fire_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "base_fire_damage_resistance_%": {
+      "text": "Base Fire Resistance %",
+      "min": 12,
+      "max": 15
+    },
+    "cold_and_lightning_damage_resistance_%": {
+      "text": "Cold And Lightning Resistance %",
+      "min": 10,
+      "max": 12
+    },
+    "base_stun_duration_+%": {
+      "text": "Base Stun Duration +%",
+      "min": 10,
+      "max": 14
+    },
+    "base_stun_recovery_+%": {
+      "text": "Base Stun Recovery +%",
+      "min": 10,
+      "max": 14
+    },
+    "endurance_charge_duration_+%": {
+      "text": "Endurance Charge duration increase",
+      "min": 10,
+      "max": 14
+    },
+    "base_chance_to_ignite_%": {
+      "text": "",
+      "min": 2,
+      "max": 3
+    },
+    "ignite_duration_+%": {
+      "text": "Ignite Duration Increase",
+      "min": 3,
+      "max": 5
+    },
+    "totem_damage_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "totem_life_+%": {
+      "text": "Totem Life increase",
+      "min": 8,
+      "max": 12
+    },
+    "totem_elemental_resistance_%": {
+      "text": "",
+      "min": 6,
+      "max": 10
+    }
+  },
+  "not_int": {
+    "maximum_energy_shield_+%": {
+      "text": "Global Maximum Energy Shield +%",
+      "min": 6,
+      "max": 100
+    },
+    "add_power_charge_on_skill_hit_%": {
+      "text": "",
+      "min": 50,
+      "max": 50
+    },
+    "physical_axe_damage_+%": {
+      "text": "Axe Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_sword_damage_+%": {
+      "text": "Sword Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_wand_damage_+%": {
+      "text": "Wand Damage",
+      "min": 14,
+      "max": 16
+    },
+    "one_handed_melee_physical_damage_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "two_handed_melee_physical_damage_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "physical_damage_while_dual_wielding_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "unarmed_melee_physical_damage_+%": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "melee_damage_+%": {
+      "text": "",
+      "min": 10,
+      "max": 12
+    },
+    "spell_damage_+%": {
+      "text": "Spell Damage +%",
+      "min": 10,
+      "max": 12
+    },
+    "spell_staff_damage_+%": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "spell_damage_+%_while_dual_wielding": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "spell_damage_+%_while_holding_shield": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "minion_damage_+%": {
+      "text": "Minion Damage increase",
+      "min": 14,
+      "max": 16
+    },
+    "lightning_damage_+%": {
+      "text": "Lightning Damage +%",
+      "min": 14,
+      "max": 16
+    },
+    "axe_attack_speed_+%": {
+      "text": "Attack Speed with Axes",
+      "min": 6,
+      "max": 8
+    },
+    "sword_attack_speed_+%": {
+      "text": "Attack Speed with Swords",
+      "min": 6,
+      "max": 8
+    },
+    "wand_attack_speed_+%": {
+      "text": "Attack Speed with Wands",
+      "min": 6,
+      "max": 8
+    },
+    "one_handed_melee_attack_speed_+%": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "two_handed_melee_attack_speed_+%": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "cast_speed_while_dual_wielding_+%": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "attack_speed_+%_while_holding_shield": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "cast_speed_+%_while_holding_shield": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "cast_speed_+%_while_holding_staff": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "unarmed_melee_attack_speed_+%": {
+      "text": "",
+      "min": 6,
+      "max": 8
+    },
+    "base_cast_speed_+%": {
+      "text": "Cast Speed +%",
+      "min": 2,
+      "max": 4
+    },
+    "melee_physical_damage_+%_while_holding_shield": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "cast_speed_for_fire_skills_+%": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "cast_speed_for_cold_skills_+%": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "cast_speed_for_lightning_skills_+%": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "additional_intelligence": {
+      "text": "Additional Intelligence",
+      "min": 12,
+      "max": 16
+    },
+    "additional_strength_and_dexterity": {
+      "text": "Additional Strength And Dexterity",
+      "min": 8,
+      "max": 10
+    },
+    "mana_regeneration_rate_+%": {
+      "text": "Mana Regeneration Rate +%",
+      "min": 12,
+      "max": 15
+    },
+    "energy_shield_gain_per_target": {
+      "text": "",
+      "min": 2,
+      "max": 3
+    },
+    "axe_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "sword_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "wand_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "axe_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "sword_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "wand_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "one_handed_melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "two_handed_melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "critical_strike_chance_while_dual_wielding_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 10,
+      "max": 14
+    },
+    "spell_critical_strike_chance_+%": {
+      "text": "Spell Critical Strike Chance +%",
+      "min": 10,
+      "max": 14
+    },
+    "lightning_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "one_handed_melee_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "two_handed_melee_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "global_critical_strike_multiplier_while_dual_wielding_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "melee_weapon_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 12,
+      "max": 15
+    },
+    "base_spell_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 12,
+      "max": 15
+    },
+    "lightning_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "base_lightning_damage_resistance_%": {
+      "text": "Base Lightning Resistance %",
+      "min": 12,
+      "max": 15
+    },
+    "fire_and_cold_damage_resistance_%": {
+      "text": "Fire And Cold Resistance %",
+      "min": 10,
+      "max": 12
+    },
+    "power_charge_duration_+%": {
+      "text": "Power Charge duration Increase",
+      "min": 10,
+      "max": 14
+    },
+    "base_chance_to_shock_%": {
+      "text": "",
+      "min": 2,
+      "max": 3
+    },
+    "shock_duration_+%": {
+      "text": "Shock Duration Increase",
+      "min": 12,
+      "max": 16
+    },
+    "energy_shield_delay_-%": {
+      "text": "Energy Shield Delay Recovery Increase",
+      "min": 4,
+      "max": 6
+    },
+    "energy_shield_recharge_rate_+%": {
+      "text": "",
+      "min": 6,
+      "max": 8
+    },
+    "minion_block_%": {
+      "text": "",
+      "min": 2,
+      "max": 4
+    },
+    "minion_maximum_life_+%": {
+      "text": "Minion Life Increase",
+      "min": 8,
+      "max": 12
+    },
+    "minion_elemental_resistance_%": {
+      "text": "",
+      "min": 6,
+      "max": 10
+    }
+  },
+  "not_dex": {
+    "evasion_rating_+%": {
+      "text": "Global Evasion Rating +%",
+      "min": 14,
+      "max": 40
+    },
+    "add_frenzy_charge_on_skill_hit_%": {
+      "text": "",
+      "min": 25,
+      "max": 50
+    },
+    "physical_bow_damage_+%": {
+      "text": "Bow Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_claw_damage_+%": {
+      "text": "Claw Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_dagger_damage_+%": {
+      "text": "Dagger Damage",
+      "min": 14,
+      "max": 16
+    },
+    "projectile_damage_+%": {
+      "text": "",
+      "min": 10,
+      "max": 12
+    },
+    "cold_damage_+%": {
+      "text": "Cold Damage +%",
+      "min": 14,
+      "max": 16
+    },
+    "bow_attack_speed_+%": {
+      "text": "Attack Speed with Bows",
+      "min": 6,
+      "max": 8
+    },
+    "claw_attack_speed_+%": {
+      "text": "Attack Speed with Claws",
+      "min": 6,
+      "max": 8
+    },
+    "dagger_attack_speed_+%": {
+      "text": "Attack Speed with Daggers",
+      "min": 6,
+      "max": 8
+    },
+    "base_projectile_speed_+%": {
+      "text": "Base Projectile Speed +%",
+      "min": 6,
+      "max": 8
+    },
+    "additional_dexterity": {
+      "text": "Additional Dexterity",
+      "min": 12,
+      "max": 16
+    },
+    "additional_strength_and_intelligence": {
+      "text": "Additional Strength And Intelligence",
+      "min": 8,
+      "max": 10
+    },
+    "old_do_not_use_mana_leech_from_physical_damage_%": {
+      "text": "Mana Leech From Physical Damage %",
+      "min": 1,
+      "max": 2
+    },
+    "mana_leech_from_physical_attack_damage_permyriad": {
+      "text": "",
+      "min": 20,
+      "max": 40
+    },
+    "mana_gain_per_target": {
+      "text": "Mana gained on Hit",
+      "min": 1,
+      "max": 2
+    },
+    "accuracy_rating_+%": {
+      "text": "Accuracy Rating +%",
+      "min": 6,
+      "max": 14
+    },
+    "critical_strike_chance_+%": {
+      "text": "Critical Strike Chance +%",
+      "min": 6,
+      "max": 10
+    },
+    "bow_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "claw_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "dagger_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "bow_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "claw_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "critical_strike_multiplier_with_dagger_+": {
+      "text": "Critical Strike Multiplier",
+      "min": 8,
+      "max": 10
+    },
+    "cold_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "cold_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "base_cold_damage_resistance_%": {
+      "text": "Base Cold Resistance %",
+      "min": 12,
+      "max": 15
+    },
+    "fire_and_lightning_damage_resistance_%": {
+      "text": "Fire And Lightning Resistance %",
+      "min": 10,
+      "max": 12
+    },
+    "base_frenzy_charge_duration_+%": {
+      "text": "Frenzy Charge duration increase",
+      "min": 10,
+      "max": 14
+    },
+    "additional_staff_block_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "spell_block_with_staff_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "base_chance_to_freeze_%": {
+      "text": "",
+      "min": 2,
+      "max": 3
+    },
+    "freeze_duration_+%": {
+      "text": "Freeze Duration Increase",
+      "min": 12,
+      "max": 16
+    }
+  },
+  "magic": {
+    "physical_damage_+%": {
+      "text": "Physical Damage +%",
+      "min": 30,
+      "max": 50
+    },
+    "attack_speed_+%": {
+      "text": "Attack Speed +%",
+      "min": 35,
+      "max": 35
+    },
+    "base_cast_speed_+%": {
+      "text": "Cast Speed +%",
+      "min": 35,
+      "max": 35
+    },
+    "base_movement_velocity_+%": {
+      "text": "Base Movement Velocity +%",
+      "min": 25,
+      "max": 75
+    },
+    "life_regeneration_rate_per_minute_%": {
+      "text": "",
+      "min": 120,
+      "max": 120
+    },
+    "base_resist_all_elements_%": {
+      "text": "Resist all Elements",
+      "min": 35,
+      "max": 35
+    },
+    "maximum_life_%_to_add_to_maximum_energy_shield": {
+      "text": "",
+      "min": 60,
+      "max": 60
+    },
+    "accuracy_rating_+%": {
+      "text": "Accuracy Rating +%",
+      "min": 45,
+      "max": 45
+    },
+    "critical_strike_chance_+%": {
+      "text": "Critical Strike Chance +%",
+      "min": 75,
+      "max": 75
+    },
+    "physical_damage_taken_%_to_deal_to_attacker": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "elemental_damage_taken_%_to_deal_to_attacker": {
+      "text": "",
+      "min": 20,
+      "max": 20
+    },
+    "cannot_die": {
+      "text": "Cannot Die",
+      "min": 1,
+      "max": 1
+    }
+  },
   "utility_flask": {
     "local_flask_recovery_speed_+%": {
       "text": "Local Flask Recovery Speed +%",
       "min": 33,
-      "max": 33
+      "max": 135
+    },
+    "local_flask_amount_to_recover_+%": {
+      "text": "Local Flask Amount To Recover +%",
+      "min": 25,
+      "max": 66
+    },
+    "local_flask_amount_to_recover_+%_when_on_low_life": {
+      "text": "Local Flask Amount To Recover +% When On Low Life",
+      "min": 100,
+      "max": 100
+    },
+    "local_flask_recover_instantly_when_on_low_life": {
+      "text": "Local Flask Recover Instantly When On Low Life",
+      "min": 1,
+      "max": 1
+    },
+    "local_flask_recovery_amount_%_to_recover_instantly": {
+      "text": "Local Flask Recovery Amount % To Recover Instantly",
+      "min": 50,
+      "max": 50
+    },
+    "local_flask_recovers_instantly": {
+      "text": "Local Flask Recovers Instantly",
+      "min": 1,
+      "max": 1
+    },
+    "local_flask_mana_to_recover_+%": {
+      "text": "Local Flask Mana to Recover +%",
+      "min": 60,
+      "max": 60
+    },
+    "local_flask_removes_%_of_mana_recovery_from_life_on_use": {
+      "text": "",
+      "min": 15,
+      "max": 15
+    },
+    "local_flask_life_to_recover_+%": {
+      "text": "Local Flask Life to Recover +%",
+      "min": 40,
+      "max": 40
+    },
+    "local_flask_removes_%_of_life_recovery_from_mana_on_use": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "local_flask_minion_heal_%": {
+      "text": "Local Flask Minion Heal %",
+      "min": 40,
+      "max": 60
     },
     "local_flask_duration_+%": {
       "text": "",
@@ -5305,28 +6652,211 @@
       "max": 25
     }
   },
+  "life_flask": {
+    "local_flask_mana_to_recover_+%": {
+      "text": "Local Flask Mana to Recover +%",
+      "min": 60,
+      "max": 60
+    },
+    "local_flask_removes_%_of_mana_recovery_from_life_on_use": {
+      "text": "",
+      "min": 15,
+      "max": 15
+    }
+  },
+  "hybrid_flask": {
+    "local_flask_mana_to_recover_+%": {
+      "text": "Local Flask Mana to Recover +%",
+      "min": 60,
+      "max": 60
+    },
+    "local_flask_removes_%_of_mana_recovery_from_life_on_use": {
+      "text": "",
+      "min": 15,
+      "max": 15
+    },
+    "local_flask_life_to_recover_+%": {
+      "text": "Local Flask Life to Recover +%",
+      "min": 40,
+      "max": 40
+    },
+    "local_flask_removes_%_of_life_recovery_from_mana_on_use": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    }
+  },
+  "mana_flask": {
+    "local_flask_life_to_recover_+%": {
+      "text": "Local Flask Life to Recover +%",
+      "min": 40,
+      "max": 40
+    },
+    "local_flask_removes_%_of_life_recovery_from_mana_on_use": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "local_flask_minion_heal_%": {
+      "text": "Local Flask Minion Heal %",
+      "min": 40,
+      "max": 60
+    }
+  },
   "critical_utility_flask": {
+    "local_recharge_on_crit": {
+      "text": "Local Recharge On Crit",
+      "min": 1,
+      "max": 1
+    },
+    "local_recharge_on_crit_%": {
+      "text": "",
+      "min": 20,
+      "max": 20
+    },
     "local_flask_duration_+%": {
       "text": "",
       "min": 30,
       "max": 40
     }
   },
-  "top_tier_map": {
+  "no_effect_flask_mod": {
+    "local_flask_duration_+%": {
+      "text": "",
+      "min": 33,
+      "max": 33
+    },
+    "local_flask_effect_+%": {
+      "text": "",
+      "min": 25,
+      "max": 25
+    }
+  },
+  "old_map": {
     "map_item_drop_quantity_+%": {
       "text": "",
-      "min": 10,
-      "max": 25
+      "min": 0,
+      "max": 30
     },
-    "map_item_drop_rarity_+%": {
-      "text": "",
-      "min": 5,
-      "max": 15
-    },
-    "map_monsters_are_hexproof": {
+    "map_packs_are_totems": {
       "text": "",
       "min": 1,
       "max": 1
+    },
+    "map_non_unique_monsters_spawn_X_monsters_on_death": {
+      "text": "",
+      "min": 2,
+      "max": 2
+    },
+    "map_rare_monsters_have_nemesis_mod": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_spawn_extra_exiles": {
+      "text": "",
+      "min": 2,
+      "max": 2
+    },
+    "map_ignore_rogue_exile_rarity_bias": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_skeletons": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_goatmen": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_sea_witches_and_spawn": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_undead_and_necromancers": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_fire_projectiles": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_animals": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_demons": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_humanoids": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_pack_size_+%": {
+      "text": "",
+      "min": 10,
+      "max": 50
+    },
+    "map_number_of_magic_packs_+%": {
+      "text": "",
+      "min": 20,
+      "max": 50
+    },
+    "map_number_of_rare_packs_+%": {
+      "text": "",
+      "min": 20,
+      "max": 50
+    },
+    "map_additional_number_of_packs_to_choose": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_spawn_two_bosses": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_boss_damage_+%": {
+      "text": "",
+      "min": 30,
+      "max": 30
+    },
+    "map_boss_attack_and_cast_speed_+%": {
+      "text": "",
+      "min": 25,
+      "max": 25
+    },
+    "map_monsters_additional_fire_resistance": {
+      "text": "",
+      "min": 75,
+      "max": 75
+    },
+    "map_monsters_additional_cold_resistance": {
+      "text": "",
+      "min": 75,
+      "max": 75
+    },
+    "map_monsters_additional_lightning_resistance": {
+      "text": "",
+      "min": 75,
+      "max": 75
+    },
+    "map_monsters_additional_physical_damage_reduction": {
+      "text": "",
+      "min": 30,
+      "max": 30
     },
     "map_monsters_cannot_be_stunned": {
       "text": "",
@@ -5336,62 +6866,72 @@
     "map_monsters_life_+%": {
       "text": "",
       "min": 25,
-      "max": 49
-    },
-    "map_monsters_additional_number_of_projecitles": {
-      "text": "",
-      "min": 2,
-      "max": 2
-    },
-    "map_monsters_area_of_effect_+%": {
-      "text": "",
-      "min": 40,
-      "max": 40
-    },
-    "map_monsters_critical_strike_chance_+%": {
-      "text": "",
-      "min": 360,
-      "max": 400
-    },
-    "map_monsters_critical_strike_multiplier_+": {
-      "text": "",
-      "min": 41,
-      "max": 45
-    },
-    "map_monsters_additional_physical_damage_reduction": {
-      "text": "",
-      "min": 40,
-      "max": 40
+      "max": 35
     },
     "map_monsters_damage_+%": {
       "text": "",
       "min": 25,
-      "max": 30
+      "max": 35
+    },
+    "map_monsters_%_physical_damage_to_convert_to_fire": {
+      "text": "",
+      "min": 0,
+      "max": 0
     },
     "map_monsters_%_physical_damage_to_add_as_fire": {
       "text": "",
-      "min": 90,
-      "max": 110
+      "min": 80,
+      "max": 100
+    },
+    "map_monsters_%_physical_damage_to_convert_to_cold": {
+      "text": "",
+      "min": 0,
+      "max": 0
     },
     "map_monsters_%_physical_damage_to_add_as_cold": {
       "text": "",
-      "min": 90,
-      "max": 110
+      "min": 80,
+      "max": 100
+    },
+    "map_monsters_%_physical_damage_to_convert_to_lightning": {
+      "text": "",
+      "min": 0,
+      "max": 0
     },
     "map_monsters_%_physical_damage_to_add_as_lightning": {
       "text": "",
-      "min": 90,
-      "max": 110
+      "min": 80,
+      "max": 100
     },
     "map_monsters_movement_speed_+%": {
       "text": "",
       "min": 25,
-      "max": 30
+      "max": 35
     },
     "map_monsters_attack_speed_+%": {
       "text": "",
-      "min": 35,
-      "max": 45
+      "min": 25,
+      "max": 35
+    },
+    "map_monsters_cast_speed_+%": {
+      "text": "",
+      "min": 25,
+      "max": 35
+    },
+    "map_monsters_gain_x_frenzy_charges_every_20_seconds": {
+      "text": "",
+      "min": 1,
+      "max": 3
+    },
+    "map_monsters_gain_x_endurance_charges_every_20_seconds": {
+      "text": "",
+      "min": 1,
+      "max": 3
+    },
+    "map_monsters_gain_x_power_charges_every_20_seconds": {
+      "text": "",
+      "min": 1,
+      "max": 3
     },
     "map_monsters_reflect_%_physical_damage": {
       "text": "",
@@ -5403,40 +6943,15 @@
       "min": 18,
       "max": 18
     },
-    "map_player_life_and_es_recovery_speed_+%_final": {
+    "map_monsters_additional_number_of_projecitles": {
       "text": "",
-      "min": 60,
-      "max": 60
+      "min": 2,
+      "max": 4
     },
-    "map_pack_size_+%": {
+    "map_monster_skills_chain_X_additional_times": {
       "text": "",
-      "min": 10,
-      "max": 16
-    },
-    "map_base_ground_fire_damage_to_deal_per_minute": {
-      "text": "",
-      "min": 19000,
-      "max": 19000
-    },
-    "map_ground_effect_patches_per_100_tiles": {
-      "text": "",
-      "min": 28,
-      "max": 28
-    },
-    "map_ground_ice": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "map_ground_lightning": {
-      "text": "",
-      "min": 1,
-      "max": 1
-    },
-    "map_base_ground_desecration_damage_to_deal_per_minute": {
-      "text": "",
-      "min": 14000,
-      "max": 14000
+      "min": 2,
+      "max": 2
     },
     "map_player_has_level_X_elemental_weakness": {
       "text": "",
@@ -5458,100 +6973,237 @@
       "min": 15,
       "max": 15
     },
+    "map_player_no_regeneration": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
     "map_players_no_regeneration_including_es": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_player_life_and_es_recovery_speed_+%_final": {
+      "text": "",
+      "min": 50,
+      "max": 50
+    },
+    "map_player_has_blood_magic_keystone": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_player_has_elemental_equilibrium_keystone": {
       "text": "",
       "min": 1,
       "max": 1
     },
     "map_additional_player_maximum_resistances_%": {
       "text": "",
-      "min": 9,
-      "max": 12
+      "min": 15,
+      "max": 25
     },
-    "map_boss_damage_+%": {
+    "map_base_ground_fire_damage_to_deal_per_minute": {
       "text": "",
-      "min": 35,
-      "max": 35
+      "min": 15000,
+      "max": 15000
     },
-    "map_boss_attack_and_cast_speed_+%": {
-      "text": "",
-      "min": 30,
-      "max": 30
-    },
-    "map_boss_maximum_life_+%": {
-      "text": "",
-      "min": 35,
-      "max": 35
-    },
-    "map_boss_area_of_effect_+%": {
-      "text": "",
-      "min": 30,
-      "max": 30
-    },
-    "map_monsters_life_leech_resistance_%": {
-      "text": "",
-      "min": 100,
-      "max": 100
-    },
-    "map_monsters_mana_leech_resistance_%": {
-      "text": "",
-      "min": 100,
-      "max": 100
-    },
-    "map_monsters_avoid_ailments_%": {
-      "text": "",
-      "min": 90,
-      "max": 90
-    },
-    "map_monsters_base_self_critical_strike_multiplier_-%": {
-      "text": "",
-      "min": 36,
-      "max": 40
-    },
-    "map_player_charges_gained_+%": {
-      "text": "",
-      "min": 30,
-      "max": 30
-    },
-    "map_monsters_curse_effect_on_self_+%_final": {
-      "text": "",
-      "min": 75,
-      "max": 75
-    },
-    "map_monsters_%_chance_to_inflict_status_ailments": {
+    "map_ground_effect_patches_per_100_tiles": {
       "text": "",
       "min": 20,
       "max": 20
     },
-    "map_monsters_additional_chaos_resistance": {
+    "map_ground_effect_radius": {
       "text": "",
-      "min": 25,
-      "max": 25
+      "min": 14,
+      "max": 14
     },
-    "map_monsters_additional_elemental_resistance": {
-      "text": "",
-      "min": 40,
-      "max": 40
-    },
-    "map_monsters_avoid_poison_blind_bleed_%": {
-      "text": "",
-      "min": 65,
-      "max": 65
-    },
-    "map_players_block_chance_+%": {
-      "text": "",
-      "min": 40,
-      "max": 40
-    },
-    "map_players_extra_dodge_rolls": {
+    "map_ground_ice": {
       "text": "",
       "min": 1,
       "max": 1
     },
-    "map_players_skill_area_of_effect_+%_final": {
+    "map_ground_lightning": {
       "text": "",
-      "min": 25,
-      "max": 25
+      "min": 1,
+      "max": 1
+    },
+    "map_monsters_are_hexproof": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_base_ground_desecration_damage_to_deal_per_minute": {
+      "text": "",
+      "min": 10000,
+      "max": 10000
+    },
+    "map_monsters_poison_on_hit": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_beyond_chance_%": {
+      "text": "",
+      "min": 13,
+      "max": 13
+    },
+    "map_item_drop_rarity_+%": {
+      "text": "",
+      "min": 3,
+      "max": 8
+    },
+    "map_magic_pack_mod_rules": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_abomination_monsters": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_monsters_movement_speed_cannot_be_reduced_below_base": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_monsters_cannot_be_taunted": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_monsters_always_ignite": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_players_have_point_blank": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    }
+  },
+  "unique_map": {
+    "map_item_drop_quantity_+%": {
+      "text": "",
+      "min": 0,
+      "max": 16
+    },
+    "map_packs_are_skeletons": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_goatmen": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_sea_witches_and_spawn": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_undead_and_necromancers": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_fire_projectiles": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_animals": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_demons": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_packs_are_humanoids": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_additional_number_of_packs_to_choose": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_spawn_two_bosses": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_item_drop_rarity_+%": {
+      "text": "",
+      "min": 3,
+      "max": 8
+    },
+    "map_packs_are_abomination_monsters": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_monsters_movement_speed_cannot_be_reduced_below_base": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_monsters_cannot_be_taunted": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_monsters_always_ignite": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_pack_size_+%": {
+      "text": "",
+      "min": 12,
+      "max": 12
+    },
+    "map_players_have_point_blank": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "local_jewel_effect_base_radius": {
+      "text": "",
+      "min": 55,
+      "max": 55
+    },
+    "map_contains_master": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_mission_id": {
+      "text": "",
+      "min": 7,
+      "max": 7
+    },
+    "map_contains_x_additional_magic_packs_if_magic": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_contains_x_additional_rare_packs_if_rare": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_contains_x_additional_normal_packs_if_normal": {
+      "text": "",
+      "min": 3,
+      "max": 3
     }
   },
   "low_tier_map": {
@@ -5564,6 +7216,11 @@
       "text": "",
       "min": 5,
       "max": 15
+    },
+    "map_monsters_are_hexproof": {
+      "text": "",
+      "min": 1,
+      "max": 1
     },
     "map_monsters_cannot_be_stunned": {
       "text": "",
@@ -5594,6 +7251,21 @@
       "text": "",
       "min": 30,
       "max": 35
+    },
+    "map_monsters_additional_fire_resistance": {
+      "text": "",
+      "min": 40,
+      "max": 40
+    },
+    "map_monsters_additional_cold_resistance": {
+      "text": "",
+      "min": 40,
+      "max": 40
+    },
+    "map_monsters_additional_lightning_resistance": {
+      "text": "",
+      "min": 40,
+      "max": 40
     },
     "map_monsters_additional_physical_damage_reduction": {
       "text": "",
@@ -5629,6 +7301,21 @@
       "text": "",
       "min": 20,
       "max": 25
+    },
+    "map_monsters_gain_x_frenzy_charges_every_20_seconds": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_monsters_gain_x_endurance_charges_every_20_seconds": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_monsters_gain_x_power_charges_every_20_seconds": {
+      "text": "",
+      "min": 1,
+      "max": 1
     },
     "map_monsters_reflect_%_physical_damage": {
       "text": "",
@@ -5750,12 +7437,17 @@
     "map_item_drop_quantity_+%": {
       "text": "",
       "min": 10,
-      "max": 20
+      "max": 25
     },
     "map_item_drop_rarity_+%": {
       "text": "",
       "min": 5,
       "max": 15
+    },
+    "map_monsters_are_hexproof": {
+      "text": "",
+      "min": 1,
+      "max": 1
     },
     "map_monsters_cannot_be_stunned": {
       "text": "",
@@ -5786,6 +7478,21 @@
       "text": "",
       "min": 36,
       "max": 40
+    },
+    "map_monsters_additional_fire_resistance": {
+      "text": "",
+      "min": 60,
+      "max": 60
+    },
+    "map_monsters_additional_cold_resistance": {
+      "text": "",
+      "min": 60,
+      "max": 60
+    },
+    "map_monsters_additional_lightning_resistance": {
+      "text": "",
+      "min": 60,
+      "max": 60
     },
     "map_monsters_additional_physical_damage_reduction": {
       "text": "",
@@ -5821,6 +7528,21 @@
       "text": "",
       "min": 25,
       "max": 35
+    },
+    "map_monsters_gain_x_frenzy_charges_every_20_seconds": {
+      "text": "",
+      "min": 2,
+      "max": 2
+    },
+    "map_monsters_gain_x_endurance_charges_every_20_seconds": {
+      "text": "",
+      "min": 2,
+      "max": 2
+    },
+    "map_monsters_gain_x_power_charges_every_20_seconds": {
+      "text": "",
+      "min": 2,
+      "max": 2
     },
     "map_monsters_reflect_%_physical_damage": {
       "text": "",
@@ -5867,6 +7589,11 @@
       "min": 12000,
       "max": 12000
     },
+    "map_non_unique_monsters_spawn_X_monsters_on_death": {
+      "text": "",
+      "min": 2,
+      "max": 2
+    },
     "map_player_has_level_X_elemental_weakness": {
       "text": "",
       "min": 10,
@@ -5887,7 +7614,22 @@
       "min": 10,
       "max": 10
     },
+    "map_player_has_level_X_punishment": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "map_player_no_regeneration": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
     "map_players_no_regeneration_including_es": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_player_has_blood_magic_keystone": {
       "text": "",
       "min": 1,
       "max": 1
@@ -5973,18 +7715,365 @@
       "max": 20
     }
   },
-  "flask": {
-    "chest_drops_additional_utility_flasks": {
+  "top_tier_map": {
+    "map_item_drop_quantity_+%": {
+      "text": "",
+      "min": 10,
+      "max": 25
+    },
+    "map_item_drop_rarity_+%": {
+      "text": "",
+      "min": 5,
+      "max": 15
+    },
+    "map_monsters_are_hexproof": {
       "text": "",
       "min": 1,
+      "max": 1
+    },
+    "map_monsters_cannot_be_stunned": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_monsters_life_+%": {
+      "text": "",
+      "min": 25,
+      "max": 49
+    },
+    "map_monsters_additional_number_of_projecitles": {
+      "text": "",
+      "min": 2,
+      "max": 2
+    },
+    "map_monsters_area_of_effect_+%": {
+      "text": "",
+      "min": 40,
+      "max": 40
+    },
+    "map_monsters_critical_strike_chance_+%": {
+      "text": "",
+      "min": 360,
+      "max": 400
+    },
+    "map_monsters_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 41,
+      "max": 45
+    },
+    "map_monsters_additional_fire_resistance": {
+      "text": "",
+      "min": 80,
+      "max": 80
+    },
+    "map_monsters_additional_cold_resistance": {
+      "text": "",
+      "min": 80,
+      "max": 80
+    },
+    "map_monsters_additional_lightning_resistance": {
+      "text": "",
+      "min": 80,
+      "max": 80
+    },
+    "map_monsters_additional_physical_damage_reduction": {
+      "text": "",
+      "min": 40,
+      "max": 40
+    },
+    "map_monsters_damage_+%": {
+      "text": "",
+      "min": 25,
+      "max": 30
+    },
+    "map_monsters_%_physical_damage_to_add_as_fire": {
+      "text": "",
+      "min": 90,
+      "max": 110
+    },
+    "map_monsters_%_physical_damage_to_add_as_cold": {
+      "text": "",
+      "min": 90,
+      "max": 110
+    },
+    "map_monsters_%_physical_damage_to_add_as_lightning": {
+      "text": "",
+      "min": 90,
+      "max": 110
+    },
+    "map_monsters_movement_speed_+%": {
+      "text": "",
+      "min": 25,
+      "max": 30
+    },
+    "map_monsters_attack_speed_+%": {
+      "text": "",
+      "min": 35,
+      "max": 45
+    },
+    "map_monsters_gain_x_frenzy_charges_every_20_seconds": {
+      "text": "",
+      "min": 3,
       "max": 3
+    },
+    "map_monsters_gain_x_endurance_charges_every_20_seconds": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_monsters_gain_x_power_charges_every_20_seconds": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_monsters_reflect_%_physical_damage": {
+      "text": "",
+      "min": 18,
+      "max": 18
+    },
+    "map_monsters_reflect_%_elemental_damage": {
+      "text": "",
+      "min": 18,
+      "max": 18
+    },
+    "map_player_life_and_es_recovery_speed_+%_final": {
+      "text": "",
+      "min": 60,
+      "max": 60
+    },
+    "map_pack_size_+%": {
+      "text": "",
+      "min": 10,
+      "max": 16
+    },
+    "map_base_ground_fire_damage_to_deal_per_minute": {
+      "text": "",
+      "min": 19000,
+      "max": 19000
+    },
+    "map_ground_effect_patches_per_100_tiles": {
+      "text": "",
+      "min": 28,
+      "max": 28
+    },
+    "map_ground_ice": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_ground_lightning": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_base_ground_desecration_damage_to_deal_per_minute": {
+      "text": "",
+      "min": 14000,
+      "max": 14000
+    },
+    "map_non_unique_monsters_spawn_X_monsters_on_death": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_player_has_level_X_elemental_weakness": {
+      "text": "",
+      "min": 15,
+      "max": 15
+    },
+    "map_player_has_level_X_vulnerability": {
+      "text": "",
+      "min": 15,
+      "max": 15
+    },
+    "map_player_has_level_X_enfeeble": {
+      "text": "",
+      "min": 15,
+      "max": 15
+    },
+    "map_player_has_level_X_temporal_chains": {
+      "text": "",
+      "min": 15,
+      "max": 15
+    },
+    "map_player_has_level_X_punishment": {
+      "text": "",
+      "min": 15,
+      "max": 15
+    },
+    "map_player_no_regeneration": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_players_no_regeneration_including_es": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_player_has_blood_magic_keystone": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_additional_player_maximum_resistances_%": {
+      "text": "",
+      "min": 9,
+      "max": 12
+    },
+    "map_boss_damage_+%": {
+      "text": "",
+      "min": 35,
+      "max": 35
+    },
+    "map_boss_attack_and_cast_speed_+%": {
+      "text": "",
+      "min": 30,
+      "max": 30
+    },
+    "map_boss_maximum_life_+%": {
+      "text": "",
+      "min": 35,
+      "max": 35
+    },
+    "map_boss_area_of_effect_+%": {
+      "text": "",
+      "min": 30,
+      "max": 30
+    },
+    "map_monsters_life_leech_resistance_%": {
+      "text": "",
+      "min": 100,
+      "max": 100
+    },
+    "map_monsters_mana_leech_resistance_%": {
+      "text": "",
+      "min": 100,
+      "max": 100
+    },
+    "map_monsters_avoid_ailments_%": {
+      "text": "",
+      "min": 90,
+      "max": 90
+    },
+    "map_monsters_base_self_critical_strike_multiplier_-%": {
+      "text": "",
+      "min": 36,
+      "max": 40
+    },
+    "map_player_charges_gained_+%": {
+      "text": "",
+      "min": 30,
+      "max": 30
+    },
+    "map_monsters_curse_effect_on_self_+%_final": {
+      "text": "",
+      "min": 75,
+      "max": 75
+    },
+    "map_monsters_%_chance_to_inflict_status_ailments": {
+      "text": "",
+      "min": 20,
+      "max": 20
+    },
+    "map_monsters_additional_chaos_resistance": {
+      "text": "",
+      "min": 25,
+      "max": 25
+    },
+    "map_monsters_additional_elemental_resistance": {
+      "text": "",
+      "min": 40,
+      "max": 40
+    },
+    "map_monsters_avoid_poison_blind_bleed_%": {
+      "text": "",
+      "min": 65,
+      "max": 65
+    },
+    "map_players_block_chance_+%": {
+      "text": "",
+      "min": 40,
+      "max": 40
+    },
+    "map_players_extra_dodge_rolls": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_players_skill_area_of_effect_+%_final": {
+      "text": "",
+      "min": 25,
+      "max": 25
+    }
+  },
+  "no_boss": {
+    "map_item_drop_quantity_+%": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "map_item_drop_rarity_+%": {
+      "text": "",
+      "min": 5,
+      "max": 5
+    },
+    "map_boss_damage_+%": {
+      "text": "",
+      "min": 25,
+      "max": 35
+    },
+    "map_boss_attack_and_cast_speed_+%": {
+      "text": "",
+      "min": 20,
+      "max": 30
+    },
+    "map_boss_maximum_life_+%": {
+      "text": "",
+      "min": 25,
+      "max": 35
+    },
+    "map_boss_area_of_effect_+%": {
+      "text": "",
+      "min": 20,
+      "max": 30
+    },
+    "local_jewel_effect_base_radius": {
+      "text": "",
+      "min": 55,
+      "max": 55
+    },
+    "map_boss_dropped_unique_items_+": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_boss_drops_corrupted_items": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_boss_dropped_item_quantity_+%": {
+      "text": "",
+      "min": 20,
+      "max": 20
+    },
+    "map_boss_accompanied_by_bodyguards": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_on_complete_drop_x_additional_maps": {
+      "text": "",
+      "min": 1,
+      "max": 1
     }
   },
   "jewel": {
     "base_chaos_damage_resistance_%": {
       "text": "Base Chaos Resistance %",
       "min": 1,
-      "max": 3
+      "max": 4
     },
     "base_actor_scale_+%": {
       "text": "",
@@ -6060,6 +8149,806 @@
       "text": "",
       "min": 1,
       "max": 1
+    }
+  },
+  "specific_weapon": {
+    "physical_mace_damage_+%": {
+      "text": "Mace Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_axe_damage_+%": {
+      "text": "Axe Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_sword_damage_+%": {
+      "text": "Sword Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_bow_damage_+%": {
+      "text": "Bow Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_claw_damage_+%": {
+      "text": "Claw Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_dagger_damage_+%": {
+      "text": "Dagger Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_wand_damage_+%": {
+      "text": "Wand Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_staff_damage_+%": {
+      "text": "Staff Damage",
+      "min": 14,
+      "max": 16
+    },
+    "spell_staff_damage_+%": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "mace_attack_speed_+%": {
+      "text": "Attack Speed with Maces",
+      "min": 6,
+      "max": 8
+    },
+    "axe_attack_speed_+%": {
+      "text": "Attack Speed with Axes",
+      "min": 6,
+      "max": 8
+    },
+    "sword_attack_speed_+%": {
+      "text": "Attack Speed with Swords",
+      "min": 6,
+      "max": 8
+    },
+    "bow_attack_speed_+%": {
+      "text": "Attack Speed with Bows",
+      "min": 6,
+      "max": 8
+    },
+    "claw_attack_speed_+%": {
+      "text": "Attack Speed with Claws",
+      "min": 6,
+      "max": 8
+    },
+    "dagger_attack_speed_+%": {
+      "text": "Attack Speed with Daggers",
+      "min": 6,
+      "max": 8
+    },
+    "wand_attack_speed_+%": {
+      "text": "Attack Speed with Wands",
+      "min": 6,
+      "max": 8
+    },
+    "staff_attack_speed_+%": {
+      "text": "Attack Speed with Staves",
+      "min": 6,
+      "max": 8
+    },
+    "cast_speed_+%_while_holding_staff": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "mace_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "axe_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "sword_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "bow_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "claw_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "dagger_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "wand_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "staff_critical_strike_chance_+%": {
+      "text": "",
+      "min": 12,
+      "max": 16
+    },
+    "mace_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "axe_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "sword_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "bow_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "claw_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "critical_strike_multiplier_with_dagger_+": {
+      "text": "Critical Strike Multiplier",
+      "min": 8,
+      "max": 10
+    },
+    "wand_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "staff_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 8,
+      "max": 10
+    },
+    "additional_staff_block_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "spell_block_with_staff_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    }
+  },
+  "one_handed_mod": {
+    "physical_bow_damage_+%": {
+      "text": "Bow Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_staff_damage_+%": {
+      "text": "Staff Damage",
+      "min": 14,
+      "max": 16
+    },
+    "two_handed_melee_physical_damage_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "spell_staff_damage_+%": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "bow_attack_speed_+%": {
+      "text": "Attack Speed with Bows",
+      "min": 6,
+      "max": 8
+    },
+    "staff_attack_speed_+%": {
+      "text": "Attack Speed with Staves",
+      "min": 6,
+      "max": 8
+    },
+    "two_handed_melee_attack_speed_+%": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "cast_speed_+%_while_holding_staff": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "two_handed_melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "two_handed_melee_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "additional_staff_block_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "spell_block_with_staff_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    }
+  },
+  "melee_mod": {
+    "physical_bow_damage_+%": {
+      "text": "Bow Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_wand_damage_+%": {
+      "text": "Wand Damage",
+      "min": 14,
+      "max": 16
+    },
+    "bow_attack_speed_+%": {
+      "text": "Attack Speed with Bows",
+      "min": 6,
+      "max": 8
+    },
+    "wand_attack_speed_+%": {
+      "text": "Attack Speed with Wands",
+      "min": 6,
+      "max": 8
+    }
+  },
+  "dual_wielding_mod": {
+    "physical_bow_damage_+%": {
+      "text": "Bow Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_staff_damage_+%": {
+      "text": "Staff Damage",
+      "min": 14,
+      "max": 16
+    },
+    "two_handed_melee_physical_damage_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "spell_staff_damage_+%": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "spell_damage_+%_while_holding_shield": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "bow_attack_speed_+%": {
+      "text": "Attack Speed with Bows",
+      "min": 6,
+      "max": 8
+    },
+    "staff_attack_speed_+%": {
+      "text": "Attack Speed with Staves",
+      "min": 6,
+      "max": 8
+    },
+    "two_handed_melee_attack_speed_+%": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "attack_speed_+%_while_holding_shield": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "cast_speed_+%_while_holding_shield": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "cast_speed_+%_while_holding_staff": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "melee_physical_damage_+%_while_holding_shield": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "two_handed_melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "two_handed_melee_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "shield_block_%": {
+      "text": "Shield Block Chance",
+      "min": 1,
+      "max": 1
+    },
+    "additional_staff_block_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "shield_spell_block_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "spell_block_with_staff_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    }
+  },
+  "shield_mod": {
+    "physical_bow_damage_+%": {
+      "text": "Bow Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_staff_damage_+%": {
+      "text": "Staff Damage",
+      "min": 14,
+      "max": 16
+    },
+    "two_handed_melee_physical_damage_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "physical_damage_while_dual_wielding_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "spell_staff_damage_+%": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "spell_damage_+%_while_dual_wielding": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "bow_attack_speed_+%": {
+      "text": "Attack Speed with Bows",
+      "min": 6,
+      "max": 8
+    },
+    "staff_attack_speed_+%": {
+      "text": "Attack Speed with Staves",
+      "min": 6,
+      "max": 8
+    },
+    "two_handed_melee_attack_speed_+%": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "attack_speed_while_dual_wielding_+%": {
+      "text": "Attack Speed while Dual Wielding",
+      "min": 4,
+      "max": 6
+    },
+    "cast_speed_while_dual_wielding_+%": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "cast_speed_+%_while_holding_staff": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "two_handed_melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "critical_strike_chance_while_dual_wielding_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "two_handed_melee_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "global_critical_strike_multiplier_while_dual_wielding_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "block_while_dual_wielding_%": {
+      "text": "Blocking while Dual Wielding",
+      "min": 1,
+      "max": 1
+    },
+    "additional_staff_block_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "spell_block_while_dual_wielding_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "spell_block_with_staff_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    }
+  },
+  "two_handed_mod": {
+    "physical_claw_damage_+%": {
+      "text": "Claw Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_dagger_damage_+%": {
+      "text": "Dagger Damage",
+      "min": 14,
+      "max": 16
+    },
+    "physical_wand_damage_+%": {
+      "text": "Wand Damage",
+      "min": 14,
+      "max": 16
+    },
+    "one_handed_melee_physical_damage_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "physical_damage_while_dual_wielding_+%": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "spell_damage_+%_while_dual_wielding": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "spell_damage_+%_while_holding_shield": {
+      "text": "",
+      "min": 14,
+      "max": 16
+    },
+    "claw_attack_speed_+%": {
+      "text": "Attack Speed with Claws",
+      "min": 6,
+      "max": 8
+    },
+    "dagger_attack_speed_+%": {
+      "text": "Attack Speed with Daggers",
+      "min": 6,
+      "max": 8
+    },
+    "wand_attack_speed_+%": {
+      "text": "Attack Speed with Wands",
+      "min": 6,
+      "max": 8
+    },
+    "one_handed_melee_attack_speed_+%": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "attack_speed_while_dual_wielding_+%": {
+      "text": "Attack Speed while Dual Wielding",
+      "min": 4,
+      "max": 6
+    },
+    "cast_speed_while_dual_wielding_+%": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "attack_speed_+%_while_holding_shield": {
+      "text": "",
+      "min": 4,
+      "max": 6
+    },
+    "cast_speed_+%_while_holding_shield": {
+      "text": "",
+      "min": 3,
+      "max": 5
+    },
+    "melee_physical_damage_+%_while_holding_shield": {
+      "text": "",
+      "min": 12,
+      "max": 14
+    },
+    "one_handed_melee_critical_strike_chance_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "critical_strike_chance_while_dual_wielding_+%": {
+      "text": "",
+      "min": 14,
+      "max": 18
+    },
+    "one_handed_melee_critical_strike_multiplier_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "global_critical_strike_multiplier_while_dual_wielding_+": {
+      "text": "",
+      "min": 15,
+      "max": 18
+    },
+    "block_while_dual_wielding_%": {
+      "text": "Blocking while Dual Wielding",
+      "min": 1,
+      "max": 1
+    },
+    "shield_block_%": {
+      "text": "Shield Block Chance",
+      "min": 1,
+      "max": 1
+    },
+    "spell_block_while_dual_wielding_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "shield_spell_block_%": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    }
+  },
+  "no_monster_packs": {
+    "local_jewel_effect_base_radius": {
+      "text": "",
+      "min": 55,
+      "max": 55
+    },
+    "map_nemesis_dropped_items_+": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_contains_additional_packs_of_fire_monsters": {
+      "text": "",
+      "min": 8,
+      "max": 8
+    },
+    "map_players_and_monsters_fire_damage_taken_+%": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "map_contains_additional_packs_of_cold_monsters": {
+      "text": "",
+      "min": 8,
+      "max": 8
+    },
+    "map_players_and_monsters_cold_damage_taken_+%": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "map_contains_additional_packs_of_lightning_monsters": {
+      "text": "",
+      "min": 8,
+      "max": 8
+    },
+    "map_players_and_monsters_lightning_damage_taken_+%": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "map_contains_additional_packs_of_physical_monsters": {
+      "text": "",
+      "min": 8,
+      "max": 8
+    },
+    "map_players_and_monsters_physical_damage_taken_+%": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "map_contains_additional_packs_of_chaos_monsters": {
+      "text": "",
+      "min": 8,
+      "max": 8
+    },
+    "map_players_and_monsters_chaos_damage_taken_+%": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "map_magic_pack_size_+%": {
+      "text": "",
+      "min": 30,
+      "max": 30
+    },
+    "map_rogue_exiles_damage_+%": {
+      "text": "",
+      "min": 20,
+      "max": 20
+    },
+    "map_rogue_exiles_maximum_life_+%": {
+      "text": "",
+      "min": 20,
+      "max": 20
+    },
+    "map_rogue_exiles_drop_x_additional_jewels": {
+      "text": "",
+      "min": 2,
+      "max": 2
+    },
+    "map_contains_x_additional_magic_packs_if_magic": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_contains_x_additional_rare_packs_if_rare": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_contains_x_additional_normal_packs_if_normal": {
+      "text": "",
+      "min": 3,
+      "max": 3
+    },
+    "map_contains_x_additional_packs_on_their_own_team": {
+      "text": "",
+      "min": 12,
+      "max": 12
+    },
+    "map_contains_x_additional_packs_that_convert_on_death": {
+      "text": "",
+      "min": 8,
+      "max": 8
+    }
+  },
+  "hall_of_grandmasters": {
+    "local_jewel_effect_base_radius": {
+      "text": "",
+      "min": 55,
+      "max": 55
+    },
+    "map_num_extra_invasion_bosses": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_unique_monsters_drop_corrupted_items": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_strongbox_monsters_item_quantity_+%": {
+      "text": "",
+      "min": 500,
+      "max": 500
+    },
+    "map_strongbox_monsters_attack_speed_+%": {
+      "text": "",
+      "min": 25,
+      "max": 25
+    },
+    "map_strongbox_monsters_movement_velocity_+%": {
+      "text": "",
+      "min": 25,
+      "max": 25
+    }
+  },
+  "vaults_of_atziri": {
+    "local_jewel_effect_base_radius": {
+      "text": "",
+      "min": 55,
+      "max": 55
+    },
+    "map_unique_monsters_drop_corrupted_items": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_damage_while_stationary_+%": {
+      "text": "",
+      "min": 100,
+      "max": 100
+    },
+    "map_damage_taken_while_stationary_+%": {
+      "text": "",
+      "min": 10,
+      "max": 10
+    },
+    "map_players_and_monsters_have_onslaught_if_hit_recently": {
+      "text": "",
+      "min": 4000,
+      "max": 4000
+    },
+    "map_monster_and_player_onslaught_effect_+%": {
+      "text": "",
+      "min": 100,
+      "max": 100
+    },
+    "map_monster_curse_effect_on_self_+%": {
+      "text": "",
+      "min": 20,
+      "max": 20
+    },
+    "map_player_curse_effect_on_self_+%": {
+      "text": "",
+      "min": 60,
+      "max": 60
+    }
+  },
+  "no_strongboxes": {
+    "local_jewel_effect_base_radius": {
+      "text": "",
+      "min": 55,
+      "max": 55
+    },
+    "map_strongboxes_are_corrupted": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_num_extra_strongboxes": {
+      "text": "",
+      "min": 1,
+      "max": 1
+    },
+    "map_strongboxes_minimum_rarity": {
+      "text": "",
+      "min": 2,
+      "max": 2
+    },
+    "map_strongbox_monsters_item_quantity_+%": {
+      "text": "",
+      "min": 500,
+      "max": 500
+    },
+    "map_strongbox_monsters_attack_speed_+%": {
+      "text": "",
+      "min": 25,
+      "max": 25
+    },
+    "map_strongbox_monsters_movement_velocity_+%": {
+      "text": "",
+      "min": 25,
+      "max": 25
     }
   }
 }

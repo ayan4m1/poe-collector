@@ -79,6 +79,7 @@ scoreHit = (hit) ->
   log.as.debug("examining #{listing.fullName} - #{listing.baseLine}")
   key = listing.baseLine.toLowerCase()
   modInfo = null
+
   if key is 'body'
     armourType = switch
       when listing.defense.armour.flat > 0 and listing.defense.evasion.flat > 0 and listing.defense.shield.flat > 0 then 'str_dex_int'
@@ -99,16 +100,49 @@ scoreHit = (hit) ->
     log.as.debug("map table is #{key}")
     modInfo = data[key]
   else if key is 'flask'
-    base = listing.baseLine.trim().split(/\s+/g).pop()
-    # todo: figure out the base flask mods
+    tokens = listing.baseLine.trim().split(/\s+/g)
     modInfo = {}
-    extend(modInfo, data['utility_flask']) if utilityFlasks.indexOf(base) >= 0
+    # handles Life Mana and Hybrid (they have sizes as a first token)
+    if tokens[1]?
+      extend(modInfo, data["#{tokens[1].toLowerCase()}_flask"])
+
+    # handles special flasks by baseLine
+    extend(modInfo, data['utility_flask']) if utilityFlasks.indexOf(tokens[0]) >= 0
     extend(modInfo, data['critical_utility_flask']) if listing.baseLine.trim() is 'Diamond Flask'
-  else if key is 'mace'
-    modInfo = data['sceptre']
+  else if key is 'jewel'
+    modInfo = data['jewel']
+    type = switch listing.baseLine.substr(0, listing.baseLine.indexOf(' '))
+      when 'Crimson' then 'str'
+      when 'Cobalt' then 'int'
+      when 'Viridian' then 'dex'
+      else null
+
+    if type?
+      # this is how they handle jewel mods...
+      extend(modInfo, data["#{type}jewel"])
+      if type is 'str'
+        extend(modInfo, data['not_dex'])
+        extend(modInfo, data['not_int'])
+      else if type is 'dex'
+        extend(modInfo, data['not_int'])
+        extend(modInfo, data['not_str'])
+      else if type is 'int'
+        extend(modInfo, data['not_str'])
+        extend(modInfo, data['not_dex'])
+  else if key is 'mace' and listing.baseLine.endsWith('Sceptre')
+    modInfo = data['weapon']
+    extend(modInfo, data['sceptre'])
   else if key is 'shield' and listing.baseLine.endsWith('Spirit Shield')
-    modInfo = data['focus']
-    extend(modInfo, data['shield'])
+    modInfo = data['shield']
+    extend(modInfo, data['focus'])
+  else if key is 'sword' and
+    ((listing.baseLine.endsWith('Rapier') or listing.baseLine.endsWith('Foil')) or
+    (['Courtesan Sword', 'Dragoon Sword', 'Rusted Spike', 'Estoc', 'Pecoraro'].indexOf(listing.baseLine) >= 0))
+    modInfo = data['sword']
+    extend(modInfo, data['rapier'])
+  else if key is 'bow' or key is 'quiver'
+    modInfo = data[key]
+    extend(modInfo, data['ranged'])
   else if data[key]?
     modInfo = data[key]
   else
@@ -116,8 +150,29 @@ scoreHit = (hit) ->
 
   return unless modInfo?
 
+  # exception for Magic quality gear, need to BREAK here
+  if listing.rarity is 'Magic'
+    extend(modInfo, data['magic'])
+
+  # add armour-specific tags
+  # todo: do shields belong?
   if ['body', 'boots', 'helmet', 'gloves'].indexOf(key) >= 0
     extend(modInfo, data['armour'])
+
+  # add weapon-specific tags
+  if ['wand', 'claw', 'dagger'].indexOf(key) >= 0
+    extend(modInfo, data['one_hand_weapon'])
+  else if key is 'staff'
+    extend(modInfo, data['two_hand_weapon'])
+  else if ['axe', 'mace', 'sword'].indexOf(key) >= 0
+    area = listing.width * listing.height
+    type = switch area
+      when 3, 4, 6 then 'one'
+      when 8 then 'two'
+
+    extend(modInfo, data["#{type}_hand_weapon"])
+
+  # todo: what is "caster"
 
   totalQuality = 0
   matchedCount = 0
