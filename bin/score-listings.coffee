@@ -242,14 +242,14 @@ handleSearch = (err, res) ->
   log.as.info("#{((hitCount / res.hits.total) * 100).toFixed(2)}% complete, #{((commitCount / res.hits.total) * 100).toFixed(2)}% committed (#{commitCount} / #{hitCount} of #{res.hits.total})")
 
   elastic.client.scroll({
-    scroll: '30s'
+    scroll: '1m'
     scrollId: res._scroll_id
   }, handleSearch)
 
 elastic.client.search({
   index: 'poe-listing*'
   type: 'listing'
-  scroll: '30s'
+  scroll: '1m'
   size: 100
   body: config.query.scoring
 }, handleSearch)
