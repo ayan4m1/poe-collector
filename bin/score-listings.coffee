@@ -37,7 +37,7 @@ valuate = (source) ->
 stripRegex = /\s+(to |increase(d)?|more|less|reduced|goes to|found|while you havent|when not|permyriad|of socketed|on enemies)/g
 startRegex = /^(display|base|local|global|self|additional)/gi
 replacements = [
-  ['Spells', 'spell']
+  [/ spells$/i, ' spell']
   ['Velocity', 'speed']
   [/attacks/i, 'attack']
   ['to return to', 'reflects']
@@ -135,9 +135,10 @@ scoreHit = (hit) ->
   else if key is 'shield' and listing.baseLine.endsWith('Spirit Shield')
     modInfo = data['shield']
     extend(modInfo, data['focus'])
-  else if key is 'sword' and
-    ((listing.baseLine.endsWith('Rapier') or listing.baseLine.endsWith('Foil')) or
-    (['Courtesan Sword', 'Dragoon Sword', 'Rusted Spike', 'Estoc', 'Pecoraro'].indexOf(listing.baseLine) >= 0))
+  else if key is 'sword' and (
+    (listing.baseLine.endsWith('Rapier') or listing.baseLine.endsWith('Foil')) or
+    ['Courtesan Sword', 'Dragoon Sword', 'Rusted Spike', 'Estoc', 'Pecoraro'].indexOf(listing.baseLine) >= 0
+  )
     modInfo = data['sword']
     extend(modInfo, data['rapier'])
   else if key is 'bow' or key is 'quiver'
@@ -211,23 +212,23 @@ scoreHit = (hit) ->
     else
       log.as.warn("could not match mod for #{mod}, tokenized as #{tokens}")
 
-    if matchedCount > 0
-      result = totalQuality / matchedCount
-      log.as.info("overall quality is #{result.toFixed(4)}")
-      elastic.client.update({
-        index: hit._index
-        type: 'listing'
-        id: hit._id
-        retry_on_conflict: 5
-        body:
-          doc:
-            meta:
-              modQuality: result
-          doc_as_upsert: true
-      }, (err, res) ->
-        return log.as.error(err) if err?
-        commitCount++ if res.result is 'updated'
-      )
+    return log.as.info("ignoring #{listing.id} as it has no mods...") unless matchedCount > 0
+    result = totalQuality / matchedCount
+    log.as.info("overall quality is #{result.toFixed(4)}")
+    elastic.client.update({
+      index: hit._index
+      type: 'listing'
+      id: hit._id
+      body:
+        script: "ctx._source.meta.modQuality = #{result}"
+        upsert:
+          meta:
+            modQuality: 0
+    }, (err, res) ->
+      return log.as.error(err) if err?
+      if res.result is 'updated'
+        commitCount++
+    )
 
 hitCount = 0
 commitCount = 0
@@ -235,6 +236,7 @@ commitCount = 0
 handleSearch = (err, res) ->
   return log.as.error(err) if err?
 
+  log.as.info("processing #{res.hits.hits.length} hits")
   scoreHit(hit) for hit in res.hits.hits
   hitCount += res.hits.hits.length
 

@@ -16,9 +16,8 @@ default:
               rarity: 'Rare'
           - match:
               itemType: 'Gear'
-        must_not:
-          - exists:
-              field: 'meta.modQuality'
+          - match:
+              'meta.modQuality': 0
   unscoring:
     query:
       bool:
