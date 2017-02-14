@@ -110,6 +110,9 @@ ignoreTypes = [
   'flask'
   'gem'
   'limited_strongbox_benefits'
+  'no_monster_packs'
+  'vaults_of_atziri'
+  'hall_of_grandmasters'
 ]
 
 getDomain = (val) ->
