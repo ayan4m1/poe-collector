@@ -25,17 +25,20 @@ handleSearch = (err, res) ->
 
   unscoreHit(hit) for hit in res.hits.hits
   hitCount += res.hits.hits.length
-  return log.as.info("completed!") unless hitCount < res.hits.total
+
   log.as.info("#{((hitCount / res.hits.total) * 100).toFixed(2)}% complete, #{((commitCount / res.hits.total) * 100).toFixed(2)}% committed (#{commitCount} / #{hitCount} of #{res.hits.total})")
+  return log.as.info("completed!") unless hitCount < res.hits.total
+
   elastic.client.scroll({
-    scroll: '30s'
+    scroll: '5m'
     scrollId: res._scroll_id
   }, handleSearch)
 
 elastic.client.search({
   index: 'poe-listing*'
   type: 'listing'
-  scroll: '30s'
+  scroll: '5m'
   size: 100
   body: config.query.unscoring
+  _source: false
 }, handleSearch)

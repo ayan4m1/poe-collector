@@ -181,7 +181,6 @@ Q.spread [
       domain: getDomain(mod.Domain)
       generation: getGeneration(mod.GenerationType)
       stats: []
-      tags: []
       spawnWeights: []
 
     #groups[mapped.domain] = [] unless groups[mapped.domain]?
@@ -200,24 +199,39 @@ Q.spread [
         min: parseInt(mod[minKey])
         max: parseInt(mod[maxKey])
 
-    continue unless mod.SpawnWeightTagsKeys?.length > 0
+    continue unless mod.SpawnWeightTagsKeys?.length > 2 and
+    ['Gear', 'Master', 'Jewel'].indexOf(mapped.domain) >= 0
 
     tagKeys = mod.SpawnWeightTagsKeys.replace(arrayRegex, '').split(',')
     tagWeights = mod.SpawnWeightValues.replace(arrayRegex, '').split(',')
-    tagKeys = tagKeys.filter (v) -> parseInt(v.trim()) > 0
 
-    mapped.tags = tagKeys.filter (v, i) -> parseInt(tagWeights[i].trim()) is 0
-    mapped.tags = mapped.tags.map (v) ->
-      tagData[v.trim()]?.name ? 'Unknown'
+    # "or" here means if parsing failed
+    clean = (v) -> parseInt(v.trim())
+    tagKeys = tagKeys.map(clean)
+    tagWeights = tagWeights.map(clean)
 
-    mapped.spawnWeights = tagKeys.map (v, i) ->
-      id = parseInt(v.trim())
+    # figure out what the net product of the weights is
+    tags =
+      can: []
+      cannot: []
 
-      {
-        id: id
-        name: tagData[id]
-        weight: parseInt(tagWeights[i].trim())
-      }
+    # now we walk the keys and add to appropriate bucket
+    # use a range of values (tags 2-32) to represent the "default" tag
+    defaultKeys = [ 2 ... 32 ]
+    for i in [ 0 .. tagKeys.length - 1 ]
+      key = if tagWeights[i] > 0 then 'can' else 'cannot'
+
+      if tagKeys[i] is 0
+        Array.prototype.push.apply(tags[key], defaultKeys)
+      else
+        tags[key].push(tagKeys[i])
+
+    tags.net = tags.can.filter (v) -> tags.cannot.indexOf(v) is -1
+
+    mapped.spawnWeights = tags.net.map (v) -> {
+      id: v
+      name: tagData[v]
+    }
 
     for gear in mapped.spawnWeights
       continue if ignoreTypes.indexOf(gear.name) >= 0
@@ -225,15 +239,20 @@ Q.spread [
 
       for stat in mapped.stats
         gearData[gear.name][stat.name] = {
+          id: mapped.group
           text: stat.text.replace('Damage Resistance', 'Resistance')
           min: Math.abs(stat.min)
           max: Math.abs(stat.max)
         } unless gearData[gear.name][stat.name]?
         info = gearData[gear.name][stat.name]
+
+        # if the raw values are negative, then the larger one is worse
         if stat.min < 0 and stat.max < 0
           tempMax = stat.max
           stat.max = Math.abs(stat.min)
           stat.min = Math.abs(tempMax)
+
+        # finally, do our bound stretching
         gearData[gear.name][stat.name].min = Math.min(info.min, stat.min)
         gearData[gear.name][stat.name].max = Math.max(info.max, stat.max)
 

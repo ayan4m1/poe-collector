@@ -1,5 +1,6 @@
 config = require('konfig')()
 
+process = require 'process'
 extend = require 'extend'
 jsonfile = require 'jsonfile'
 
@@ -34,24 +35,38 @@ valuate = (source) ->
     max: parseInt(slug[5])
   else parseInt(slug[2])
 
-stripRegex = /\s+(to |increase(d)?|more|less|reduced|goes to|found|while you havent|when not|permyriad|of socketed|on enemies)/g
-startRegex = /^(display|base|local|global|self|additional)/gi
+###
 replacements = [
-  [/ spells$/i, ' spell']
-  ['Velocity', 'speed']
+  ['Minions have', 'minion']
+  ['Staves', 'staff']
+  ['while holding a', 'while holding']
+  ['Movement Speed', 'movement velocity']
   [/attacks/i, 'attack']
   ['to return to', 'reflects']
   [/^adds /i, 'added']
   [/\+?%$/, 'percent']
   [/\s\+$/, 'flat']
-  ['Rarity of Items found', 'Item Rarity']
-  ['all Elemental Resistances', 'Resist all Elements']
-  ['Stun and Block', 'Stun Block']
-  ['Elemental Damage with Weapons', 'Weapon Elemental Damage']
+  ['Rarity of Items found', 'item found rarity']
+  ['all Elemental Resistances', 'resist all elements']
+  ['Stun and Block', 'stun block']
+  ['Elemental Damage with Weapons', 'weapon elemental damage']
+  ['Damage over Time', 'chaos damage']
+  [/Resistances$/, 'resistance']
+  [/(Fire|Cold|Lightning) and (Fire|Cold|Lightning)/, '']
+  [/\s+(with|while wielding a)\s+(One Handed Melee|Two Handed Melee\s)?(Mace|Staff|Claw|Dagger|Wand|Axe|Sword|Weapon|Spell|Stave)s?/, '$2 $3']
+  [/(Block Chance|Chance to Block)/, 'block']
+  [/for each Enemy hit by your (Attack|Spell)s/, '$1']
+  [/Cast Speed with (Cold|Fire|Lightning) Skills/, '$1']
+  ['Chaos Resistance', 'chaos damage resistance percent']
 ]
 
 tokenize = (source) ->
   slug = source
+
+  for replacement in replacements
+    slug = String.prototype.replace.apply(slug, replacement)
+
+  slug = slug
     .replace(/_+/g, ' ')
     .trim()
     .toLowerCase()
@@ -60,13 +75,24 @@ tokenize = (source) ->
     .replace(stripRegex, ' ')
     .trim()
 
-  for replacement in replacements
-    slug = String.prototype.replace.apply(slug, replacement)
-
   tokens = slug.split(' ').filter (v) -> v isnt ''
   #log.as.debug("#{source} -> #{slug} -> #{tokens}")
 
-  tokens
+  tokens###
+
+startRegex = /^(display|base|self|additional)/gi
+stripRegex = /\s+(to |goes to|while you havent|when not|of socketed|on enemies|for )/gi
+
+tokenize = (source) ->
+  slug = source
+    .replace(/_+/g, ' ')
+    .trim()
+    .toLowerCase()
+    .replace(startRegex, '')
+    .replace(valueRegex, '')
+    .replace(stripRegex, '')
+
+  slug.split(' ').filter (v) -> v.trim() isnt ''
 
 all = (left, right) ->
   for leftOne in left
@@ -111,7 +137,7 @@ scoreHit = (hit) ->
     extend(modInfo, data['critical_utility_flask']) if listing.baseLine.trim() is 'Diamond Flask'
   else if key is 'jewel'
     modInfo = data['jewel']
-    type = switch listing.baseLine.substr(0, listing.baseLine.indexOf(' '))
+    type = switch listing.typeLine.substr(0, listing.typeLine.indexOf(' '))
       when 'Crimson' then 'str'
       when 'Cobalt' then 'int'
       when 'Viridian' then 'dex'
@@ -184,11 +210,10 @@ scoreHit = (hit) ->
 
     pair = if mod.endsWith('Resistances')
     then mod.match(/(Fire|Lightning|Cold) and (Fire|Lightning|Cold)/)
-    else if mod.indexOf(' and ') > 0 and
-      mod.endsWith('Strength') or mod.endsWith('Dexterity') or mod.endsWith('Intelligence')
+    else if mod.indexOf(' and ') > 0 and mod.endsWith('Strength') or mod.endsWith('Dexterity') or mod.endsWith('Intelligence')
     then mod.match(/(Strength|Dexterity|Intelligence) and (Strength|Dexterity|Intelligence)/)
 
-    log.as.debug(mod)
+    log.as.silly(mod)
     tokens = tokenize(mod)
     tokens.push(pair[1].toLowerCase(), pair[2].toLowerCase()) if pair?
     matchedMod = null
@@ -198,7 +223,7 @@ scoreHit = (hit) ->
       matchedMod = cmpVal if matches is true
 
     if matchedMod?
-      log.as.debug("modifier #{mod} matched #{matchedMod.text}")
+      log.as.silly("modifier #{mod} matched #{matchedMod.text}")
       matchedCount++
       if value.min? and value.max?
         quality = (value.min / matchedMod.max) + (value.max / matchedMod.max)
@@ -208,41 +233,56 @@ scoreHit = (hit) ->
         display = value
 
       totalQuality += quality
-      log.as.debug("roll of #{display} has quality #{quality.toFixed(4)} from #{matchedMod.min} - #{matchedMod.max}")
+      log.as.debug("#{mod} -> #{matchedMod.id} has quality #{quality.toFixed(4)} from #{matchedMod.min} - #{matchedMod.max}")
     else
       log.as.warn("could not match mod for #{mod}, tokenized as #{tokens}")
 
     return log.as.info("ignoring #{listing.id} as it has no mods...") unless matchedCount > 0
-    result = totalQuality / matchedCount
-    log.as.info("overall quality is #{result.toFixed(4)}")
-    elastic.client.update({
-      index: hit._index
-      type: 'listing'
-      id: hit._id
-      body:
-        script: "ctx._source.meta.modQuality = #{result}"
-        upsert:
-          meta:
-            modQuality: 0
-    }, (err, res) ->
-      return log.as.error(err) if err?
-      if res.result is 'updated'
-        commitCount++
-    )
 
+  result = totalQuality / matchedCount
+  log.as.info("overall quality is #{result.toFixed(4)}")
+  bodies.push({
+    update:
+      _index: hit._index
+      _type: 'listing'
+      _id: hit._id
+  }, {
+    script: "ctx._source.meta.modQuality = #{result}"
+    upsert:
+      meta:
+        modQuality: 0
+  })
+
+bodies = []
 hitCount = 0
 commitCount = 0
+totalHits = 0
 
 handleSearch = (err, res) ->
   return log.as.error(err) if err?
 
-  log.as.info("processing #{res.hits.hits.length} hits")
+  totalHits = res.hits.total if res.hits.total?
+
+  log.as.info("processing #{res.hits.hits.length} hits") unless res.hits.hits.length is 0
   scoreHit(hit) for hit in res.hits.hits
-  hitCount += res.hits.hits.length
+  hitCount += res.hits.hits.length if res.hits.hits?
 
-  return log.as.info("completed!") unless hitCount < res.hits.total
-  log.as.info("#{((hitCount / res.hits.total) * 100).toFixed(2)}% complete, #{((commitCount / res.hits.total) * 100).toFixed(2)}% committed (#{commitCount} / #{hitCount} of #{res.hits.total})")
+  if bodies.length > Math.min(totalHits, 1000) * 2
+    docs = bodies.slice()
+    bodies.length = 0
+    elastic.client.bulk({
+      body: docs
+    }, (err) ->
+      return log.as.error(err) if err?
+      commitCount += (docs.length / 2)
+      if commitCount >= totalHits and totalHits isnt 0
+        log.as.info("flushed all updates")
+        process.exit(0)
+    )
+  else
+    log.as.info("#{((hitCount / totalHits) * 100).toFixed(2)}% complete, #{((commitCount / totalHits) * 100).toFixed(2)}% committed (#{commitCount} / #{hitCount} of #{totalHits})")
 
+  return log.as.info("completed walk of results!") unless res._scroll_id?
   elastic.client.scroll({
     scroll: '1m'
     scrollId: res._scroll_id
