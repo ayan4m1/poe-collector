@@ -99,10 +99,9 @@ all = (left, right) ->
     return false unless right.indexOf(leftOne) >= 0
   true
 
-scoreHit = (hit) ->
-  listing = hit._source
-  return unless listing.baseLine?
-  log.as.debug("examining #{listing.fullName} - #{listing.baseLine}")
+# parse the item information to determine which mods it is
+# able to receive
+findEligibleMods = (listing) ->
   key = listing.baseLine.toLowerCase()
   modInfo = null
 
@@ -175,8 +174,6 @@ scoreHit = (hit) ->
   else
     log.as.warn("could not find mod table for #{key}")
 
-  return unless modInfo?
-
   # exception for Magic quality gear, need to BREAK here
   if listing.rarity is 'Magic'
     extend(modInfo, data['magic'])
@@ -201,14 +198,24 @@ scoreHit = (hit) ->
 
   # todo: what is "caster"
 
+  modInfo
+
+scoreHit = (hit) ->
+  listing = hit._source
+  return unless listing.baseLine?
+  log.as.debug("examining #{listing.fullName} - #{listing.baseLine}")
+  mods = findEligibleMods(listing)
+  return unless mods?
+
   totalQuality = 0
   matchedCount = 0
+  matchedGroups = []
 
   for mod in listing.modifiers
     value = valuate(mod)
     continue unless value.max? or value > 0
 
-    pair = if mod.endsWith('Resistances')
+    ###pair = if mod.endsWith('Resistances')
     then mod.match(/(Fire|Lightning|Cold) and (Fire|Lightning|Cold)/)
     else if mod.indexOf(' and ') > 0 and mod.endsWith('Strength') or mod.endsWith('Dexterity') or mod.endsWith('Intelligence')
     then mod.match(/(Strength|Dexterity|Intelligence) and (Strength|Dexterity|Intelligence)/)
@@ -216,28 +223,29 @@ scoreHit = (hit) ->
     log.as.silly(mod)
     tokens = tokenize(mod)
     tokens.push(pair[1].toLowerCase(), pair[2].toLowerCase()) if pair?
-    matchedMod = null
+    match = null
     for cmpKey, cmpVal of modInfo
       cmpTokens = tokenize(cmpKey)
       matches = all(tokens, cmpTokens)
-      matchedMod = cmpVal if matches is true
+      match = cmpVal if matches is true and matchedGroups.indexOf(mod.id) is -1###
 
-    if matchedMod?
-      log.as.silly("modifier #{mod} matched #{matchedMod.text}")
+
+
+    if match?
+      log.as.silly("modifier #{mod} matched #{match.text}")
+      matchedGroups.push(mod.id)
       matchedCount++
       if value.min? and value.max?
-        quality = (value.min / matchedMod.max) + (value.max / matchedMod.max)
+        quality = (value.min / match.max) + (value.max / match.max)
         display = "#{value.min} to #{value.max}"
-      else
-        quality = value / matchedMod.max
+        else
+        quality = value / match.max
         display = value
 
       totalQuality += quality
-      log.as.debug("#{mod} -> #{matchedMod.id} has quality #{quality.toFixed(4)} from #{matchedMod.min} - #{matchedMod.max}")
+      log.as.debug("#{mod} -> #{match.id} has quality #{quality.toFixed(4)} from #{match.min} - #{match.max}")
     else
       log.as.warn("could not match mod for #{mod}, tokenized as #{tokens}")
-
-    return log.as.info("ignoring #{listing.id} as it has no mods...") unless matchedCount > 0
 
   result = totalQuality / matchedCount
   log.as.info("overall quality is #{result.toFixed(4)}")

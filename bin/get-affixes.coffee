@@ -24,38 +24,53 @@ process = ($) ->
       stats: [
         names[0]
       ]
-      values: [
+      values:
         min: parseInt(vals[0])
         max: parseInt(vals[1])
-      ]
 
     if names.length is 2 and vals.length is 4
       affix.stats.push(names[1])
-      affix.values.push
+      affix.values =
         min: parseInt(vals[2])
         max: parseInt(vals[3])
 
     affixes[type].push affix
 
-Q.spread [
+Q.spread([
   request("#{baseUrl}/prefixmod")
   request("#{baseUrl}/suffixmod")
-], (prefixes, suffixes) ->
-  $pre = cheerio.load prefixes
-  $post = cheerio.load suffixes
+],
+  (prefixes, suffixes) ->
+    $pre = cheerio.load prefixes
+    $post = cheerio.load suffixes
 
-  process($pre)
-  process($post)
+    process($pre)
+    process($post)
 
-  jsonfile.writeFileSync('affixes.json', affixes)
+    jsonfile.writeFileSync('affixes.json', affixes)
 
-  bucket = []
+    bucket = {}
+    list = {
+      prefix: []
+      suffix: []
+    }
 
-  for gear, mods of affixes
-    for mod in mods
-      for stat in mod.stats
-        name = stat.replace('Local ', '').replace('Minimum ', '').replace('Maximum', '').trim()
-        if bucket.indexOf(name) < 0
-          bucket.push(name)
+    for gear, mods of affixes
+      for mod in mods
+        for stat in mod.stats
+          name = stat.replace('Local ', '').replace('Minimum ', '').replace('Maximum', '').replace('Global ').replace('Permyriad', '').trim().replace(/\s{2,}/, ' ')
+          bucket[name] = if bucket[name]? then {
+            min: Math.min(bucket[name].min, mod.values[0].min)
+            max: Math.max(bucket[name].max, mod.values[0].max)
+          } else mod.values[0]
 
-  jsonfile.writeFileSync('stats.json', bucket)
+    for key of bucket
+      console.log("#{key},#{bucket[key].min},#{bucket[key].max}")
+
+    jsonfile.writeFileSync('affix-ranges.json', bucket)
+
+    list.prefix.sort(String.prototype.localeCompare)
+    list.suffix.sort(String.prototype.localeCompare)
+
+    jsonfile.writeFileSync('affix-names.json', list)
+).catch(console.error)
