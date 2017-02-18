@@ -78,26 +78,24 @@ tokenize = (source) ->
   tokens = slug.split(' ').filter (v) -> v isnt ''
   #log.as.debug("#{source} -> #{slug} -> #{tokens}")
 
-  tokens###
+  tokens
 
 startRegex = /^(display|base|self|additional)/gi
-stripRegex = /\s+(to |goes to|while you havent|when not|of socketed|on enemies|for )/gi
+stripRegex = /\s+(to |goes to|while you havent|when not|of socketed|on enemies|for )/gi###
 
-tokenize = (source) ->
+###tokenize = (source) ->
   slug = source
     .replace(/_+/g, ' ')
     .trim()
     .toLowerCase()
-    .replace(startRegex, '')
     .replace(valueRegex, '')
-    .replace(stripRegex, '')
 
   slug.split(' ').filter (v) -> v.trim() isnt ''
 
 all = (left, right) ->
   for leftOne in left
     return false unless right.indexOf(leftOne) >= 0
-  true
+  true###
 
 # parse the item information to determine which mods it is
 # able to receive
@@ -207,15 +205,15 @@ scoreHit = (hit) ->
   mods = findEligibleMods(listing)
   return unless mods?
 
-  totalQuality = 0
-  matchedCount = 0
-  matchedGroups = []
+  #if listing.
+
+  ###matchedGroups = []
 
   for mod in listing.modifiers
     value = valuate(mod)
     continue unless value.max? or value > 0
 
-    ###pair = if mod.endsWith('Resistances')
+    pair = if mod.endsWith('Resistances')
     then mod.match(/(Fire|Lightning|Cold) and (Fire|Lightning|Cold)/)
     else if mod.indexOf(' and ') > 0 and mod.endsWith('Strength') or mod.endsWith('Dexterity') or mod.endsWith('Intelligence')
     then mod.match(/(Strength|Dexterity|Intelligence) and (Strength|Dexterity|Intelligence)/)
@@ -229,23 +227,21 @@ scoreHit = (hit) ->
       matches = all(tokens, cmpTokens)
       match = cmpVal if matches is true and matchedGroups.indexOf(mod.id) is -1###
 
+  ###if match?
+    log.as.silly("modifier #{mod} matched #{match.text}")
+    matchedGroups.push(mod.id)
+    matchedCount++
+    if value.min? and value.max?
+      quality = (value.min / match.max) + (value.max / match.max)
+      display = "#{value.min} to #{value.max}"
+      else
+      quality = value / match.max
+      display = value
 
-
-    if match?
-      log.as.silly("modifier #{mod} matched #{match.text}")
-      matchedGroups.push(mod.id)
-      matchedCount++
-      if value.min? and value.max?
-        quality = (value.min / match.max) + (value.max / match.max)
-        display = "#{value.min} to #{value.max}"
-        else
-        quality = value / match.max
-        display = value
-
-      totalQuality += quality
-      log.as.debug("#{mod} -> #{match.id} has quality #{quality.toFixed(4)} from #{match.min} - #{match.max}")
-    else
-      log.as.warn("could not match mod for #{mod}, tokenized as #{tokens}")
+    totalQuality += quality
+    log.as.debug("#{mod} -> #{match.id} has quality #{quality.toFixed(4)} from #{match.min} - #{match.max}")
+  else
+    log.as.warn("could not match mod for #{mod}, tokenized as #{tokens}")###
 
   result = totalQuality / matchedCount
   log.as.info("overall quality is #{result.toFixed(4)}")

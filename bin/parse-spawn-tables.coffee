@@ -240,6 +240,7 @@ Q.spread [
       for stat in mapped.stats
         gearData[gear.name][stat.name] = {
           id: mapped.group
+          domain: mapped.domain
           text: stat.text.replace('Damage Resistance', 'Resistance')
           min: Math.abs(stat.min)
           max: Math.abs(stat.max)

@@ -1,0 +1,2 @@
+synaptic = require 'synaptic'
+
