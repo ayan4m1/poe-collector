@@ -54,7 +54,9 @@ modParsers =
     result.offense.damage.penetration[bucket] += value
   flaskAilment: (mod, result) ->
     [ type ] = mod
-    log.as.silly('no-op flask ailment parse')
+    if mod.indexOf(' and ') >= 0
+      console.dir(mod)
+    result.flask.removeAilment[type] = true
   ailment: (mod, result) ->
     [ value, op, type, duration ] = mod
     bucket = type.toLowerCase()
@@ -93,7 +95,6 @@ modParsers =
       max: parseInt(max)
     return if isNaN(range.min) or isNaN(range.max)
 
-    # todo: handle pseudos
     switch type
       when 'Elemental'
         result.offense.damage.elemental.all.flat.min += range.min
@@ -111,7 +112,6 @@ modParsers =
     value = parseInt(value.replace('%', ''))
     if isPercent then value *= 0.01
 
-    # todo: handle pseudos
     operator = modOperators[op]
     if first?.startsWith('Global Critical Strike')
       # either Chance or Multiplier
@@ -247,20 +247,29 @@ modParsers =
   gemEffect: (mod, result) ->
     [ type ] = mod
   minions: (mod, result) ->
-    [ isDeal, sign, value, op, type ] = mod
-    #if isDeal is 'deal' and type is 'Damage'
+    [ verb, sign, value, op, type ] = mod
+    operator = modOperators[op]
+    if verb is 'Deal'
+      result.minions.damage = operator(result.minions.damage, value, sign)
+    else
+      switch type
+        when 'maximum Life'
+          result.minions.life = operator(result.minions.life)
   cursed: (mod, result) ->
     [ body ] = mod
     log.as.silly("cursed enemies mod - " + body)
 
 parseMod = (mod, result) ->
+  foundMatch = false
   for type, regex of regexes.mods
     matchData = mod.match(regex)
     continue unless matchData?
+    foundMatch = true
     return unless modParsers[type]?
     modParsers[type](matchData, result)
     break
 
+  log.as.error(mod) unless matchData?
   result.modifiers.push(mod)
 
 parseDamageType = (id) ->
@@ -509,10 +518,11 @@ parseItem = (item) ->
       total:
         resist:
           maximum: 0
-          all: 0
+          chaos: 0
           elemental: 0
         damagePerSecond:
           all: 0
+          chaos: 0
           physical: 0
           elemental: 0
     flask:
@@ -677,6 +687,7 @@ parseItem = (item) ->
           cold: 0
           lightning: 0
         all: 0
+        chaos: 0
         elemental:
           fire: 0
           cold: 0
@@ -695,33 +706,25 @@ parseItem = (item) ->
       blockChance:
         weapons: 0
         spells: 0
-        whileDualWielding: 0
+        dualWielding: 0
+        staff: 0
       stunRecovery: 0
       physicalDamageReduction: 0
       onLowLife:
         prevent:
           stun: false
       prevent:
-        ailment:
-          chill: false
-          freeze: false
-          shock: false
-          ignite: false
+        chill: false
+        freeze: false
+        shock: false
+        ignite: false
         stun: false
-      minion:
-        blockChance: 0
-        resist:
-          elemental:
-            all: 0
-      totem:
-        resist:
-          elemental:
-            all: 0
-      onRecentBlock:
-        armour: 0
-      onTrap:
-        shield: 0
-        frenzyCharge: 0
+    minions:
+      life: 0
+      damage: 0
+      movementSpeed: 0
+      blockChance: 0
+      allResists: 0
     price: []
     chaosPrice: 0
     removed: false
@@ -764,6 +767,35 @@ parseItem = (item) ->
   for mod in mods
     parseMod(mod, result)
 
+  # handle pseudos
+  damage = result.offense.damage
+  defense = result.defense
+  averageDps = (damage) -> ((damage.min + damage.max) / 2.0) * (1 + damage.percent)
+
+  totals =
+    armour: defense.armour.flat * (1 + defense.armour.percent)
+    evasion: defense.evasion.flat * (1 + defense.armour.percent)
+    shield: defense.shield.flat * (1 + defense.shield.percent)
+    resist:
+      all: 0
+      chaos: defense.resist.chaoe
+      elemental: defense.resist.all +
+        defense.resist.fire +
+        defense.resist.cold +
+        defense.resist.lightning
+    damagePerSecond:
+      physical: averageDps(damage.physical)
+      chaos: averageDps(damage.chaos)
+      elemental: averageDps(damage.elemental.all) + averageDps(damage.elemental.cold) + averageDps(damage.elemental.lightning) + averageDps(damage.elemental.fire)
+      all: 0
+
+  totals.resist.all = totals.resist.chaos + totals.resist.elemental
+  totals.damagePerSecond.all = totals.damagePerSecond.physical +
+    total.damagePerSecond.chaos +
+    totals.damagePerSecond.elemental
+
+  result.meta.total.resist.elemental = totals.resistance
+  result.meta.total.damagePerSecond = totals.damagePerSecond
   result
 
 updateListing = (item, result) ->

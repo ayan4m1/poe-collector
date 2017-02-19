@@ -1,9 +1,13 @@
 Q = require 'q'
 fs = require 'fs'
+gauss = require 'gauss'
+moment = require 'moment'
 parse = require 'csv-parse'
 jsonfile = require 'jsonfile'
 
 log = require './logging'
+
+gameVersion = '2.6.2d'
 
 dataFiles =
   mod: 'Mods.csv'
@@ -126,7 +130,8 @@ getDomain = (val) ->
     when 10 then 'Master'
     when 11 then 'Jewel'
     when 12 then 'Sextant'
-    else 'Unknown'
+    else
+      'Unknown'
 
 getGeneration = (val) ->
   switch parseInt(val)
@@ -140,7 +145,8 @@ getGeneration = (val) ->
     when 8 then 'Tempest'
     when 9 then 'Talisman'
     when 10 then 'Enchantment'
-    else 'Unknown'
+    else
+      'Unknown'
 
 handleFile = (name) ->
   readFile("#{__dirname}/../data/#{name}")
@@ -151,6 +157,7 @@ handleFile = (name) ->
       })
 
 gearData = {}
+tierData = {}
 
 arrayRegex = /[\[\]]/g
 Q.spread [
@@ -200,7 +207,12 @@ Q.spread [
         max: parseInt(mod[maxKey])
 
     continue unless mod.SpawnWeightTagsKeys?.length > 2 and
-    ['Gear', 'Master', 'Jewel'].indexOf(mapped.domain) >= 0
+    [
+      'Gear'
+      'Flask'
+      'Master'
+      'Jewel'
+    ].indexOf(mapped.domain) >= 0
 
     tagKeys = mod.SpawnWeightTagsKeys.replace(arrayRegex, '').split(',')
     tagWeights = mod.SpawnWeightValues.replace(arrayRegex, '').split(',')
@@ -235,31 +247,47 @@ Q.spread [
 
     for gear in mapped.spawnWeights
       continue if ignoreTypes.indexOf(gear.name) >= 0
-      gearData[gear.name] = {} unless gearData[gear.name]?
+      gearData[gear.name] = [] unless gearData[gear.name]?
 
       for stat in mapped.stats
-        gearData[gear.name][stat.name] = {
+        gearData[gear.name].push(stat.name) unless gearData[gear.name].indexOf(stat.name) >= 0
+        tierData[stat.name] = {
           id: mapped.group
+          generation: mapped.generation
           domain: mapped.domain
           text: stat.text.replace('Damage Resistance', 'Resistance')
-          min: Math.abs(stat.min)
-          max: Math.abs(stat.max)
-        } unless gearData[gear.name][stat.name]?
-        info = gearData[gear.name][stat.name]
+          min: null
+          max: null
+          ideal: null
+          tiers: []
+        } unless tierData[stat.name]?
 
-        # if the raw values are negative, then the larger one is worse
-        if stat.min < 0 and stat.max < 0
-          tempMax = stat.max
-          stat.max = Math.abs(stat.min)
-          stat.min = Math.abs(tempMax)
+        tierData[stat.name].min = Math.min(tierData[stat.name].min ? stat.min, stat.min)
+        tierData[stat.name].max = Math.max(tierData[stat.name].max ? stat.max, stat.max)
 
-        # finally, do our bound stretching
-        gearData[gear.name][stat.name].min = Math.min(info.min, stat.min)
-        gearData[gear.name][stat.name].max = Math.max(info.max, stat.max)
+        tierData[stat.name].tiers.push({
+          level: stat.level
+          min: stat.min
+          max: stat.max
+        }) unless tierData[stat.name].tiers.findIndex((v) -> v.level is stat.level) >= 0
 
-      result.push(mapped)
+        ntile = new gauss.Vector(tierData[stat.name].tiers.map (v) -> v.max)
+        vals =
+          quarter: ntile.percentile(0.25)
+          half: ntile.percentile(0.5)
+          ninety: ntile.percentile(0.9)
+          ninetyNine: ntile.percentile(0.99)
+        tierData[stat.name].ideal = vals
 
-  jsonfile.writeFileSync('gearData.json', gearData)
+    result.push(mapped)
+
+
+  jsonfile.writeFileSync('gearData.json', {
+    createdAt: moment().toISOString()
+    gameVersion: gameVersion
+    types: gearData
+    stats: tierData
+  })
   jsonfile.writeFileSync('modData.json', result)
-  #log.as.info("parsed #{mods.length} mods")
-.catch(log.as.error)
+#log.as.info("parsed #{mods.length} mods")
+  .catch(log.as.error)

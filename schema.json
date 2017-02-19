@@ -825,39 +825,6 @@
                     }
                   }
                 }
-              },
-              "minion": {
-                "properties": {
-                  "blockChance": {
-                    "type": "float"
-                  },
-                  "resist": {
-                    "properties": {
-                      "elemental": {
-                        "properties": {
-                          "all": {
-                            "type": "float"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "totem": {
-                "properties": {
-                  "resist": {
-                    "properties": {
-                      "elemental": {
-                        "properties": {
-                          "all": {
-                            "type": "float"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
               }
             }
           },
@@ -905,9 +872,25 @@
                   "resist": {
                     "properties": {
                       "maximum": {
-                        "type": "float"
+                        "properties": {
+                          "all": {
+                            "type": "float"
+                          },
+                          "cold": {
+                            "type": "float"
+                          },
+                          "fire": {
+                            "type": "float"
+                          },
+                          "lightning": {
+                            "type" : "float"
+                          }
+                        }
                       },
                       "all": {
+                        "type": "float"
+                      },
+                      "chaos": {
                         "type": "float"
                       },
                       "elemental": {
@@ -918,6 +901,9 @@
                   "damagePerSecond": {
                     "properties": {
                       "all": {
+                        "type": "integer"
+                      },
+                      "chaos": {
                         "type": "integer"
                       },
                       "physical": {
@@ -1035,15 +1021,11 @@
               "blockChance": {
                 "type": "float"
               },
-              "limit": {
-                "properties": {
-                  "skeletons": {
-                    "type": "integer"
-                  },
-                  "zombies": {
-                    "type": "integer"
-                  }
-                }
+              "movementSpeed": {
+                "type": "float"
+              },
+              "allResists": {
+                "type": "float"
               }
             }
           }
