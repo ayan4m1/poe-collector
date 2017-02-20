@@ -7,10 +7,9 @@ jsonfile = require 'jsonfile'
 
 currency = require './currency'
 elastic = require './elastic'
-timing = require './timing'
 log = require './logging'
 
-baseTypes = jsonfile.readFileSync("#{__dirname}/../itemTypes.json")
+baseTypes = jsonfile.readFileSync("#{__dirname}/../data/BaseTypes.json")
 
 regexes =
   price:
@@ -84,6 +83,13 @@ modParsers =
         result.defense.evasion[bucket] = operator(result.defense.evasion[bucket], value, sign)
       when 'Armour and Evasion Rating'
         result.defense.armour[bucket] = operator(result.defense.armour[bucket], value, sign)
+        result.defense.evasion[bucket] = operator(result.defense.evasion[bucket], value, sign)
+      when 'Armour and Energy Shield'
+        result.defense.armour[bucket] = operator(result.defense.armour[bucket], value, sign)
+        result.defense.shield[bucket] = operator(result.defense.shield[bucket], value, sign)
+      when 'Armour, Evasion and Energy Shield'
+        result.defense.armour[bucket] = operator(result.defense.armour[bucket], value, sign)
+        result.defense.shield[bucket] = operator(result.defense.shield[bucket], value, sign)
         result.defense.evasion[bucket] = operator(result.defense.evasion[bucket], value, sign)
       when 'Stun and Block Recovery'
         result.defense.stunRecovery = operator(result.defense.stunRecovery, value, sign)
@@ -434,6 +440,39 @@ parseSockets = (item, result) ->
 
   result.sockets = sockets
 
+parsePseudos = (mod, result) ->
+  damage = result.offense.damage
+  defense = result.defense
+  averageDps = (damage) -> ((damage.min + damage.max) / 2.0) * (1 + damage.percent)
+
+  totals =
+    armour: defense.armour.flat * (1 + defense.armour.percent)
+    evasion: defense.evasion.flat * (1 + defense.armour.percent)
+    shield: defense.shield.flat * (1 + defense.shield.percent)
+    resist:
+      maximum: defense.resist.maximum.all +
+        defense.resist.maximum.fire +
+        defense.resist.maximum.cold +
+        defense.resist.maximum.lightning
+      elemental: defense.resist.elemental.all +
+        defense.resist.elemental.fire +
+        defense.resist.elemental.cold +
+        defense.resist.elemental.lightning
+    damagePerSecond:
+      physical: averageDps(damage.physical)
+      chaos: averageDps(damage.chaos)
+      elemental: averageDps(damage.elemental.all) + averageDps(damage.elemental.cold) + averageDps(damage.elemental.lightning) + averageDps(damage.elemental.fire)
+      all: 0
+
+  totals.damagePerSecond.all = totals.damagePerSecond.physical +
+    totals.damagePerSecond.chaos +
+    totals.damagePerSecond.elemental
+
+  result.meta.total.resist = totals.resist
+  result.meta.total.damagePerSecond = totals.damagePerSecond
+
+  result
+
 parseItem = (item) ->
   timestamp = moment().toDate()
   result =
@@ -456,7 +495,6 @@ parseItem = (item) ->
     icon: null
     iconVersion: null
     note: item.note
-    locked: item.lockedToCharacter
     identified: item.identified
     corrupted: item.corrupted
     verified: item.verified
@@ -518,7 +556,6 @@ parseItem = (item) ->
       total:
         resist:
           maximum: 0
-          chaos: 0
           elemental: 0
         damagePerSecond:
           all: 0
@@ -558,16 +595,9 @@ parseItem = (item) ->
         life: 0
         mana: 0
         damage: 0
-        frenzyCharge: false
       onHit:
         life: 0
         mana: 0
-        frenzyCharge: false
-      onIgnite:
-        frenzyCharge: false
-      onCrit:
-        bleed: false
-        poison: false
       perTarget:
         life: 0
         shield: 0
@@ -581,8 +611,6 @@ parseItem = (item) ->
       critical:
         chance: 0
         multiplier: 0
-        perPowerCharge:
-          chance: 0
         elemental:
           chance: 0
           multiplier: 0
@@ -682,12 +710,10 @@ parseItem = (item) ->
     defense:
       resist:
         maximum:
-          all: 0
           fire: 0
           cold: 0
           lightning: 0
-        all: 0
-        chaos: 0
+          chaos: 0
         elemental:
           fire: 0
           cold: 0
@@ -767,35 +793,8 @@ parseItem = (item) ->
   for mod in mods
     parseMod(mod, result)
 
-  # handle pseudos
-  damage = result.offense.damage
-  defense = result.defense
-  averageDps = (damage) -> ((damage.min + damage.max) / 2.0) * (1 + damage.percent)
+  parsePseudos(mod, result)
 
-  totals =
-    armour: defense.armour.flat * (1 + defense.armour.percent)
-    evasion: defense.evasion.flat * (1 + defense.armour.percent)
-    shield: defense.shield.flat * (1 + defense.shield.percent)
-    resist:
-      all: 0
-      chaos: defense.resist.chaoe
-      elemental: defense.resist.all +
-        defense.resist.fire +
-        defense.resist.cold +
-        defense.resist.lightning
-    damagePerSecond:
-      physical: averageDps(damage.physical)
-      chaos: averageDps(damage.chaos)
-      elemental: averageDps(damage.elemental.all) + averageDps(damage.elemental.cold) + averageDps(damage.elemental.lightning) + averageDps(damage.elemental.fire)
-      all: 0
-
-  totals.resist.all = totals.resist.chaos + totals.resist.elemental
-  totals.damagePerSecond.all = totals.damagePerSecond.physical +
-    total.damagePerSecond.chaos +
-    totals.damagePerSecond.elemental
-
-  result.meta.total.resist.elemental = totals.resistance
-  result.meta.total.damagePerSecond = totals.damagePerSecond
   result
 
 updateListing = (item, result) ->
