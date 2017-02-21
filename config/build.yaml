@@ -1,4 +1,5 @@
 default:
+  gameVersion: 2.5.3
   minify: false
   watchInterval: 10 # seconds
 production:

@@ -1,0 +1,4 @@
+default:
+  idealPercentile: 50
+production:
+  idealPercentile: 95

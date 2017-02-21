@@ -1,6 +1,5 @@
 {
-  "createdAt": "2017-02-19T21:29:22.492Z",
-  "gameVersion": "2.6.2d",
+  "createdAt": "2017-02-21T05:23:35.014Z",
   "types": {
     "str_armour": [
       "additional_strength",
@@ -3977,61 +3976,61 @@
       "text": "Additional Strength",
       "min": 12,
       "max": 55,
-      "ideal": 54,
+      "ideal": 51,
       "tiers": [
         {
           "level": 11,
           "min": 13,
           "max": 17,
-          "ideal": 16
+          "ideal": 13
         },
         {
           "level": 22,
           "min": 18,
           "max": 22,
-          "ideal": 21
+          "ideal": 18
         },
         {
           "level": 33,
           "min": 23,
           "max": 27,
-          "ideal": 26
+          "ideal": 23
         },
         {
           "level": 44,
           "min": 28,
           "max": 32,
-          "ideal": 31
+          "ideal": 28
         },
         {
           "level": 55,
           "min": 33,
           "max": 37,
-          "ideal": 36
+          "ideal": 33
         },
         {
           "level": 66,
           "min": 38,
           "max": 42,
-          "ideal": 41
+          "ideal": 38
         },
         {
           "level": 74,
           "min": 43,
           "max": 50,
-          "ideal": 48
+          "ideal": 43
         },
         {
           "level": 82,
           "min": 51,
           "max": 55,
-          "ideal": 54
+          "ideal": 51
         },
         {
           "level": 1,
           "min": 12,
           "max": 16,
-          "ideal": 15
+          "ideal": 12
         }
       ]
     },
@@ -4042,61 +4041,61 @@
       "text": "Additional Dexterity",
       "min": 8,
       "max": 55,
-      "ideal": 54,
+      "ideal": 51,
       "tiers": [
         {
           "level": 1,
           "min": 8,
           "max": 12,
-          "ideal": 11
+          "ideal": 8
         },
         {
           "level": 11,
           "min": 13,
           "max": 17,
-          "ideal": 16
+          "ideal": 13
         },
         {
           "level": 22,
           "min": 18,
           "max": 22,
-          "ideal": 21
+          "ideal": 18
         },
         {
           "level": 33,
           "min": 23,
           "max": 27,
-          "ideal": 26
+          "ideal": 23
         },
         {
           "level": 44,
           "min": 28,
           "max": 32,
-          "ideal": 31
+          "ideal": 28
         },
         {
           "level": 55,
           "min": 33,
           "max": 37,
-          "ideal": 36
+          "ideal": 33
         },
         {
           "level": 66,
           "min": 38,
           "max": 42,
-          "ideal": 41
+          "ideal": 38
         },
         {
           "level": 74,
           "min": 43,
           "max": 50,
-          "ideal": 48
+          "ideal": 43
         },
         {
           "level": 82,
           "min": 51,
           "max": 55,
-          "ideal": 15
+          "ideal": 12
         }
       ]
     },
@@ -4107,61 +4106,61 @@
       "text": "Additional Intelligence",
       "min": 8,
       "max": 55,
-      "ideal": 54,
+      "ideal": 51,
       "tiers": [
         {
           "level": 1,
           "min": 8,
           "max": 12,
-          "ideal": 11
+          "ideal": 8
         },
         {
           "level": 11,
           "min": 13,
           "max": 17,
-          "ideal": 16
+          "ideal": 13
         },
         {
           "level": 22,
           "min": 18,
           "max": 22,
-          "ideal": 21
+          "ideal": 18
         },
         {
           "level": 33,
           "min": 23,
           "max": 27,
-          "ideal": 26
+          "ideal": 23
         },
         {
           "level": 44,
           "min": 28,
           "max": 32,
-          "ideal": 31
+          "ideal": 28
         },
         {
           "level": 55,
           "min": 33,
           "max": 37,
-          "ideal": 36
+          "ideal": 33
         },
         {
           "level": 66,
           "min": 38,
           "max": 42,
-          "ideal": 41
+          "ideal": 38
         },
         {
           "level": 74,
           "min": 43,
           "max": 50,
-          "ideal": 48
+          "ideal": 43
         },
         {
           "level": 82,
           "min": 51,
           "max": 55,
-          "ideal": 15
+          "ideal": 12
         }
       ]
     },
@@ -4172,73 +4171,73 @@
       "text": "Base Maximum Life",
       "min": 3,
       "max": 109,
-      "ideal": 106,
+      "ideal": 100,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 9,
-          "ideal": 7
+          "ideal": 3
         },
         {
           "level": 5,
           "min": 10,
           "max": 19,
-          "ideal": 16
+          "ideal": 10
         },
         {
           "level": 11,
           "min": 20,
           "max": 29,
-          "ideal": 26
+          "ideal": 20
         },
         {
           "level": 18,
           "min": 30,
           "max": 39,
-          "ideal": 36
+          "ideal": 30
         },
         {
           "level": 24,
           "min": 40,
           "max": 49,
-          "ideal": 46
+          "ideal": 40
         },
         {
           "level": 30,
           "min": 50,
           "max": 59,
-          "ideal": 56
+          "ideal": 50
         },
         {
           "level": 36,
           "min": 60,
           "max": 69,
-          "ideal": 66
+          "ideal": 60
         },
         {
           "level": 44,
           "min": 70,
           "max": 79,
-          "ideal": 76
+          "ideal": 70
         },
         {
           "level": 54,
           "min": 80,
           "max": 89,
-          "ideal": 86
+          "ideal": 80
         },
         {
           "level": 64,
           "min": 90,
           "max": 99,
-          "ideal": 96
+          "ideal": 90
         },
         {
           "level": 73,
           "min": 100,
           "max": 109,
-          "ideal": 106
+          "ideal": 100
         }
       ]
     },
@@ -4249,103 +4248,103 @@
       "text": "Base Maximum Mana",
       "min": 8,
       "max": 73,
-      "ideal": 72,
+      "ideal": 69,
       "tiers": [
         {
           "level": 1,
           "min": 15,
           "max": 19,
-          "ideal": 18
+          "ideal": 15
         },
         {
           "level": 11,
           "min": 20,
           "max": 24,
-          "ideal": 23
+          "ideal": 20
         },
         {
           "level": 17,
           "min": 25,
           "max": 29,
-          "ideal": 28
+          "ideal": 25
         },
         {
           "level": 23,
           "min": 30,
           "max": 34,
-          "ideal": 33
+          "ideal": 30
         },
         {
           "level": 29,
           "min": 35,
           "max": 39,
-          "ideal": 38
+          "ideal": 35
         },
         {
           "level": 35,
           "min": 40,
           "max": 44,
-          "ideal": 43
+          "ideal": 40
         },
         {
           "level": 42,
           "min": 45,
           "max": 49,
-          "ideal": 48
+          "ideal": 45
         },
         {
           "level": 51,
           "min": 50,
           "max": 54,
-          "ideal": 53
+          "ideal": 50
         },
         {
           "level": 60,
           "min": 55,
           "max": 59,
-          "ideal": 58
+          "ideal": 55
         },
         {
           "level": 69,
           "min": 60,
           "max": 64,
-          "ideal": 63
+          "ideal": 60
         },
         {
           "level": 75,
           "min": 65,
           "max": 68,
-          "ideal": 67
+          "ideal": 65
         },
         {
           "level": 81,
           "min": 69,
           "max": 73,
-          "ideal": 72
+          "ideal": 69
         },
         {
           "level": 2,
           "min": 8,
           "max": 10,
-          "ideal": 18
+          "ideal": 17
         },
         {
           "level": 46,
           "min": 20,
           "max": 22,
-          "ideal": 21
+          "ideal": 20
         },
         {
           "level": 58,
           "min": 23,
           "max": 25,
-          "ideal": 24
+          "ideal": 23
         },
         {
           "level": 80,
           "min": 26,
           "max": 28,
-          "ideal": 27
+          "ideal": 26
         }
       ]
     },
@@ -4356,73 +4355,73 @@
       "text": "Local Energy Shield",
       "min": 3,
       "max": 145,
-      "ideal": 142,
+      "ideal": 136,
       "tiers": [
         {
           "level": 3,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         },
         {
           "level": 11,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         },
         {
           "level": 17,
           "min": 9,
           "max": 12,
-          "ideal": 11
+          "ideal": 9
         },
         {
           "level": 23,
           "min": 13,
           "max": 15,
-          "ideal": 14
+          "ideal": 13
         },
         {
           "level": 29,
           "min": 16,
           "max": 19,
-          "ideal": 18
+          "ideal": 16
         },
         {
           "level": 35,
           "min": 20,
           "max": 29,
-          "ideal": 26
+          "ideal": 20
         },
         {
           "level": 43,
           "min": 30,
           "max": 48,
-          "ideal": 43
+          "ideal": 30
         },
         {
           "level": 51,
           "min": 49,
           "max": 72,
-          "ideal": 66
+          "ideal": 49
         },
         {
           "level": 60,
           "min": 73,
           "max": 106,
-          "ideal": 97
+          "ideal": 73
         },
         {
           "level": 69,
           "min": 107,
           "max": 135,
-          "ideal": 128
+          "ideal": 107
         },
         {
           "level": 75,
           "min": 136,
           "max": 145,
-          "ideal": 142
+          "ideal": 136
         }
       ]
     },
@@ -4433,7 +4432,7 @@
       "text": "Local Minimum Added Physical Damage",
       "min": 1,
       "max": 38,
-      "ideal": 35,
+      "ideal": 29,
       "tiers": [
         {
           "level": 2,
@@ -4451,43 +4450,43 @@
           "level": 21,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         },
         {
           "level": 29,
           "min": 7,
           "max": 10,
-          "ideal": 9
+          "ideal": 7
         },
         {
           "level": 36,
           "min": 9,
           "max": 12,
-          "ideal": 11
+          "ideal": 9
         },
         {
           "level": 46,
           "min": 12,
           "max": 16,
-          "ideal": 15
+          "ideal": 12
         },
         {
           "level": 54,
           "min": 13,
           "max": 18,
-          "ideal": 16
+          "ideal": 13
         },
         {
           "level": 65,
           "min": 16,
           "max": 22,
-          "ideal": 20
+          "ideal": 16
         },
         {
           "level": 77,
           "min": 19,
           "max": 25,
-          "ideal": 35
+          "ideal": 29
         }
       ]
     },
@@ -4498,7 +4497,7 @@
       "text": "Local Maximum Added Physical Damage",
       "min": 2,
       "max": 68,
-      "ideal": 65,
+      "ideal": 58,
       "tiers": [
         {
           "level": 2,
@@ -4516,43 +4515,43 @@
           "level": 21,
           "min": 12,
           "max": 14,
-          "ideal": 13
+          "ideal": 12
         },
         {
           "level": 29,
           "min": 15,
           "max": 18,
-          "ideal": 17
+          "ideal": 15
         },
         {
           "level": 36,
           "min": 19,
           "max": 22,
-          "ideal": 21
+          "ideal": 19
         },
         {
           "level": 46,
           "min": 24,
           "max": 28,
-          "ideal": 27
+          "ideal": 24
         },
         {
           "level": 54,
           "min": 27,
           "max": 32,
-          "ideal": 30
+          "ideal": 27
         },
         {
           "level": 65,
           "min": 33,
           "max": 38,
-          "ideal": 36
+          "ideal": 33
         },
         {
           "level": 77,
           "min": 38,
           "max": 45,
-          "ideal": 65
+          "ideal": 58
         }
       ]
     },
@@ -4563,55 +4562,55 @@
       "text": "Local Energy Shield +%",
       "min": 6,
       "max": 132,
-      "ideal": 129,
+      "ideal": 121,
       "tiers": [
         {
           "level": 3,
           "min": 11,
           "max": 28,
-          "ideal": 23
+          "ideal": 11
         },
         {
           "level": 18,
           "min": 29,
           "max": 46,
-          "ideal": 41
+          "ideal": 29
         },
         {
           "level": 30,
           "min": 47,
           "max": 64,
-          "ideal": 59
+          "ideal": 47
         },
         {
           "level": 44,
           "min": 65,
           "max": 82,
-          "ideal": 77
+          "ideal": 65
         },
         {
           "level": 60,
           "min": 83,
           "max": 100,
-          "ideal": 95
+          "ideal": 83
         },
         {
           "level": 72,
           "min": 101,
           "max": 120,
-          "ideal": 115
+          "ideal": 101
         },
         {
           "level": 84,
           "min": 121,
           "max": 132,
-          "ideal": 48
+          "ideal": 42
         },
         {
           "level": 78,
           "min": 51,
           "max": 56,
-          "ideal": 54
+          "ideal": 51
         }
       ]
     },
@@ -4622,61 +4621,61 @@
       "text": "Local Physical Damage Reduction Rating +%",
       "min": 6,
       "max": 132,
-      "ideal": 129,
+      "ideal": 121,
       "tiers": [
         {
           "level": 3,
           "min": 11,
           "max": 28,
-          "ideal": 23
+          "ideal": 11
         },
         {
           "level": 17,
           "min": 29,
           "max": 46,
-          "ideal": 41
+          "ideal": 29
         },
         {
           "level": 29,
           "min": 47,
           "max": 64,
-          "ideal": 59
+          "ideal": 47
         },
         {
           "level": 42,
           "min": 65,
           "max": 82,
-          "ideal": 77
+          "ideal": 65
         },
         {
           "level": 60,
           "min": 83,
           "max": 100,
-          "ideal": 95
+          "ideal": 83
         },
         {
           "level": 72,
           "min": 101,
           "max": 120,
-          "ideal": 115
+          "ideal": 101
         },
         {
           "level": 84,
           "min": 121,
           "max": 132,
-          "ideal": 129
+          "ideal": 121
         },
         {
           "level": 1,
           "min": 6,
           "max": 14,
-          "ideal": 48
+          "ideal": 42
         },
         {
           "level": 78,
           "min": 51,
           "max": 56,
-          "ideal": 54
+          "ideal": 51
         }
       ]
     },
@@ -4687,61 +4686,61 @@
       "text": "Local Evasion Rating +%",
       "min": 6,
       "max": 132,
-      "ideal": 129,
+      "ideal": 121,
       "tiers": [
         {
           "level": 3,
           "min": 11,
           "max": 28,
-          "ideal": 23
+          "ideal": 11
         },
         {
           "level": 19,
           "min": 29,
           "max": 46,
-          "ideal": 41
+          "ideal": 29
         },
         {
           "level": 30,
           "min": 47,
           "max": 64,
-          "ideal": 59
+          "ideal": 47
         },
         {
           "level": 44,
           "min": 65,
           "max": 82,
-          "ideal": 77
+          "ideal": 65
         },
         {
           "level": 60,
           "min": 83,
           "max": 100,
-          "ideal": 95
+          "ideal": 83
         },
         {
           "level": 72,
           "min": 101,
           "max": 120,
-          "ideal": 115
+          "ideal": 101
         },
         {
           "level": 84,
           "min": 121,
           "max": 132,
-          "ideal": 129
+          "ideal": 121
         },
         {
           "level": 2,
           "min": 6,
           "max": 14,
-          "ideal": 48
+          "ideal": 42
         },
         {
           "level": 78,
           "min": 51,
           "max": 56,
-          "ideal": 54
+          "ideal": 51
         }
       ]
     },
@@ -4752,61 +4751,61 @@
       "text": "Local Armour And Energy Shield +%",
       "min": 6,
       "max": 132,
-      "ideal": 129,
+      "ideal": 121,
       "tiers": [
         {
           "level": 3,
           "min": 11,
           "max": 28,
-          "ideal": 23
+          "ideal": 11
         },
         {
           "level": 19,
           "min": 29,
           "max": 46,
-          "ideal": 41
+          "ideal": 29
         },
         {
           "level": 30,
           "min": 47,
           "max": 64,
-          "ideal": 59
+          "ideal": 47
         },
         {
           "level": 44,
           "min": 65,
           "max": 82,
-          "ideal": 77
+          "ideal": 65
         },
         {
           "level": 60,
           "min": 83,
           "max": 100,
-          "ideal": 95
+          "ideal": 83
         },
         {
           "level": 72,
           "min": 101,
           "max": 120,
-          "ideal": 115
+          "ideal": 101
         },
         {
           "level": 84,
           "min": 121,
           "max": 132,
-          "ideal": 129
+          "ideal": 121
         },
         {
           "level": 2,
           "min": 6,
           "max": 14,
-          "ideal": 48
+          "ideal": 42
         },
         {
           "level": 78,
           "min": 51,
           "max": 56,
-          "ideal": 54
+          "ideal": 51
         }
       ]
     },
@@ -4817,61 +4816,61 @@
       "text": "Local Armour And Evasion +%",
       "min": 6,
       "max": 136,
-      "ideal": 132,
+      "ideal": 121,
       "tiers": [
         {
           "level": 3,
           "min": 11,
           "max": 28,
-          "ideal": 23
+          "ideal": 11
         },
         {
           "level": 19,
           "min": 29,
           "max": 46,
-          "ideal": 41
+          "ideal": 29
         },
         {
           "level": 30,
           "min": 47,
           "max": 64,
-          "ideal": 59
+          "ideal": 47
         },
         {
           "level": 44,
           "min": 65,
           "max": 82,
-          "ideal": 77
+          "ideal": 65
         },
         {
           "level": 60,
           "min": 83,
           "max": 100,
-          "ideal": 95
+          "ideal": 83
         },
         {
           "level": 72,
           "min": 101,
           "max": 120,
-          "ideal": 115
+          "ideal": 101
         },
         {
           "level": 84,
           "min": 121,
           "max": 136,
-          "ideal": 132
+          "ideal": 121
         },
         {
           "level": 2,
           "min": 6,
           "max": 14,
-          "ideal": 48
+          "ideal": 42
         },
         {
           "level": 78,
           "min": 51,
           "max": 56,
-          "ideal": 54
+          "ideal": 51
         }
       ]
     },
@@ -4882,61 +4881,61 @@
       "text": "Local Evasion And Energy Shield +%",
       "min": 6,
       "max": 132,
-      "ideal": 129,
+      "ideal": 121,
       "tiers": [
         {
           "level": 3,
           "min": 11,
           "max": 28,
-          "ideal": 23
+          "ideal": 11
         },
         {
           "level": 19,
           "min": 29,
           "max": 46,
-          "ideal": 41
+          "ideal": 29
         },
         {
           "level": 30,
           "min": 47,
           "max": 64,
-          "ideal": 59
+          "ideal": 47
         },
         {
           "level": 44,
           "min": 65,
           "max": 82,
-          "ideal": 77
+          "ideal": 65
         },
         {
           "level": 60,
           "min": 83,
           "max": 100,
-          "ideal": 95
+          "ideal": 83
         },
         {
           "level": 72,
           "min": 101,
           "max": 120,
-          "ideal": 115
+          "ideal": 101
         },
         {
           "level": 84,
           "min": 121,
           "max": 132,
-          "ideal": 129
+          "ideal": 121
         },
         {
           "level": 2,
           "min": 6,
           "max": 14,
-          "ideal": 48
+          "ideal": 42
         },
         {
           "level": 78,
           "min": 51,
           "max": 56,
-          "ideal": 54
+          "ideal": 51
         }
       ]
     },
@@ -4947,55 +4946,55 @@
       "text": "Local Armour And Evasion And Energy Shield +%",
       "min": 6,
       "max": 120,
-      "ideal": 115,
+      "ideal": 101,
       "tiers": [
         {
           "level": 3,
           "min": 11,
           "max": 28,
-          "ideal": 23
+          "ideal": 11
         },
         {
           "level": 19,
           "min": 29,
           "max": 46,
-          "ideal": 41
+          "ideal": 29
         },
         {
           "level": 30,
           "min": 47,
           "max": 64,
-          "ideal": 59
+          "ideal": 47
         },
         {
           "level": 44,
           "min": 65,
           "max": 82,
-          "ideal": 77
+          "ideal": 65
         },
         {
           "level": 60,
           "min": 83,
           "max": 100,
-          "ideal": 95
+          "ideal": 83
         },
         {
           "level": 72,
           "min": 101,
           "max": 120,
-          "ideal": 115
+          "ideal": 101
         },
         {
           "level": 2,
           "min": 6,
           "max": 14,
-          "ideal": 48
+          "ideal": 42
         },
         {
           "level": 78,
           "min": 51,
           "max": 56,
-          "ideal": 54
+          "ideal": 51
         }
       ]
     },
@@ -5078,7 +5077,7 @@
           "level": 19,
           "min": 8,
           "max": 9,
-          "ideal": 13
+          "ideal": 10
         }
       ]
     },
@@ -5089,7 +5088,7 @@
       "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 61,
-      "ideal": 57,
+      "ideal": 45,
       "tiers": [
         {
           "level": 1,
@@ -5101,49 +5100,49 @@
           "level": 11,
           "min": 8,
           "max": 10,
-          "ideal": 9
+          "ideal": 8
         },
         {
           "level": 18,
           "min": 12,
           "max": 16,
-          "ideal": 15
+          "ideal": 12
         },
         {
           "level": 26,
           "min": 17,
           "max": 22,
-          "ideal": 20
+          "ideal": 17
         },
         {
           "level": 33,
           "min": 21,
           "max": 28,
-          "ideal": 26
+          "ideal": 21
         },
         {
           "level": 42,
           "min": 26,
           "max": 35,
-          "ideal": 32
+          "ideal": 26
         },
         {
           "level": 51,
           "min": 32,
           "max": 42,
-          "ideal": 39
+          "ideal": 32
         },
         {
           "level": 62,
           "min": 38,
           "max": 51,
-          "ideal": 47
+          "ideal": 38
         },
         {
           "level": 74,
           "min": 45,
           "max": 61,
-          "ideal": 57
+          "ideal": 45
         }
       ]
     },
@@ -5154,7 +5153,7 @@
       "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 106,
-      "ideal": 102,
+      "ideal": 91,
       "tiers": [
         {
           "level": 1,
@@ -5166,49 +5165,49 @@
           "level": 11,
           "min": 15,
           "max": 18,
-          "ideal": 17
+          "ideal": 15
         },
         {
           "level": 18,
           "min": 24,
           "max": 28,
-          "ideal": 27
+          "ideal": 24
         },
         {
           "level": 26,
           "min": 33,
           "max": 39,
-          "ideal": 37
+          "ideal": 33
         },
         {
           "level": 33,
           "min": 42,
           "max": 49,
-          "ideal": 47
+          "ideal": 42
         },
         {
           "level": 42,
           "min": 53,
           "max": 61,
-          "ideal": 59
+          "ideal": 53
         },
         {
           "level": 51,
           "min": 63,
           "max": 74,
-          "ideal": 71
+          "ideal": 63
         },
         {
           "level": 62,
           "min": 77,
           "max": 89,
-          "ideal": 86
+          "ideal": 77
         },
         {
           "level": 74,
           "min": 91,
           "max": 106,
-          "ideal": 102
+          "ideal": 91
         }
       ]
     },
@@ -5219,7 +5218,7 @@
       "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 50,
-      "ideal": 46,
+      "ideal": 37,
       "tiers": [
         {
           "level": 2,
@@ -5231,49 +5230,49 @@
           "level": 12,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         },
         {
           "level": 19,
           "min": 10,
           "max": 13,
-          "ideal": 12
+          "ideal": 10
         },
         {
           "level": 27,
           "min": 14,
           "max": 18,
-          "ideal": 17
+          "ideal": 14
         },
         {
           "level": 34,
           "min": 17,
           "max": 23,
-          "ideal": 21
+          "ideal": 17
         },
         {
           "level": 43,
           "min": 22,
           "max": 29,
-          "ideal": 27
+          "ideal": 22
         },
         {
           "level": 52,
           "min": 26,
           "max": 35,
-          "ideal": 32
+          "ideal": 26
         },
         {
           "level": 63,
           "min": 31,
           "max": 42,
-          "ideal": 39
+          "ideal": 31
         },
         {
           "level": 75,
           "min": 37,
           "max": 50,
-          "ideal": 46
+          "ideal": 37
         }
       ]
     },
@@ -5284,7 +5283,7 @@
       "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 87,
-      "ideal": 83,
+      "ideal": 74,
       "tiers": [
         {
           "level": 2,
@@ -5296,49 +5295,49 @@
           "level": 12,
           "min": 13,
           "max": 15,
-          "ideal": 14
+          "ideal": 13
         },
         {
           "level": 19,
           "min": 19,
           "max": 23,
-          "ideal": 22
+          "ideal": 19
         },
         {
           "level": 27,
           "min": 27,
           "max": 32,
-          "ideal": 30
+          "ideal": 27
         },
         {
           "level": 34,
           "min": 34,
           "max": 40,
-          "ideal": 38
+          "ideal": 34
         },
         {
           "level": 43,
           "min": 43,
           "max": 50,
-          "ideal": 48
+          "ideal": 43
         },
         {
           "level": 52,
           "min": 52,
           "max": 60,
-          "ideal": 58
+          "ideal": 52
         },
         {
           "level": 63,
           "min": 63,
           "max": 73,
-          "ideal": 70
+          "ideal": 63
         },
         {
           "level": 75,
           "min": 74,
           "max": 87,
-          "ideal": 83
+          "ideal": 74
         }
       ]
     },
@@ -5349,7 +5348,7 @@
       "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 13,
-      "ideal": 10,
+      "ideal": 4,
       "tiers": [
         {
           "level": 3,
@@ -5367,43 +5366,43 @@
           "level": 19,
           "min": 1,
           "max": 3,
-          "ideal": 2
+          "ideal": 1
         },
         {
           "level": 31,
           "min": 2,
           "max": 5,
-          "ideal": 4
+          "ideal": 2
         },
         {
           "level": 34,
           "min": 2,
           "max": 6,
-          "ideal": 5
+          "ideal": 2
         },
         {
           "level": 42,
           "min": 2,
           "max": 7,
-          "ideal": 5
+          "ideal": 2
         },
         {
           "level": 51,
           "min": 3,
           "max": 9,
-          "ideal": 7
+          "ideal": 3
         },
         {
           "level": 63,
           "min": 4,
           "max": 11,
-          "ideal": 9
+          "ideal": 4
         },
         {
           "level": 74,
           "min": 4,
           "max": 13,
-          "ideal": 10
+          "ideal": 4
         }
       ]
     },
@@ -5414,7 +5413,7 @@
       "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 166,
-      "ideal": 164,
+      "ideal": 158,
       "tiers": [
         {
           "level": 3,
@@ -5432,43 +5431,43 @@
           "level": 19,
           "min": 41,
           "max": 43,
-          "ideal": 42
+          "ideal": 41
         },
         {
           "level": 31,
           "min": 58,
           "max": 61,
-          "ideal": 60
+          "ideal": 58
         },
         {
           "level": 34,
           "min": 72,
           "max": 76,
-          "ideal": 75
+          "ideal": 72
         },
         {
           "level": 42,
           "min": 91,
           "max": 96,
-          "ideal": 94
+          "ideal": 91
         },
         {
           "level": 51,
           "min": 110,
           "max": 116,
-          "ideal": 114
+          "ideal": 110
         },
         {
           "level": 63,
           "min": 133,
           "max": 140,
-          "ideal": 138
+          "ideal": 133
         },
         {
           "level": 74,
           "min": 158,
           "max": 166,
-          "ideal": 164
+          "ideal": 158
         }
       ]
     },
@@ -5479,43 +5478,43 @@
       "text": "Local Base Evasion Rating",
       "min": 3,
       "max": 400,
-      "ideal": 380,
+      "ideal": 323,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 10,
-          "ideal": 8
+          "ideal": 3
         },
         {
           "level": 18,
           "min": 11,
           "max": 35,
-          "ideal": 29
+          "ideal": 11
         },
         {
           "level": 29,
           "min": 36,
           "max": 60,
-          "ideal": 54
+          "ideal": 36
         },
         {
           "level": 42,
           "min": 61,
           "max": 138,
-          "ideal": 118
+          "ideal": 61
         },
         {
           "level": 56,
           "min": 139,
           "max": 322,
-          "ideal": 276
+          "ideal": 139
         },
         {
           "level": 70,
           "min": 323,
           "max": 400,
-          "ideal": 380
+          "ideal": 323
         }
       ]
     },
@@ -5526,43 +5525,43 @@
       "text": "Local Base Physical Damage Reduction Rating",
       "min": 3,
       "max": 400,
-      "ideal": 380,
+      "ideal": 323,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 10,
-          "ideal": 8
+          "ideal": 3
         },
         {
           "level": 18,
           "min": 11,
           "max": 35,
-          "ideal": 29
+          "ideal": 11
         },
         {
           "level": 30,
           "min": 36,
           "max": 60,
-          "ideal": 54
+          "ideal": 36
         },
         {
           "level": 46,
           "min": 61,
           "max": 138,
-          "ideal": 118
+          "ideal": 61
         },
         {
           "level": 59,
           "min": 139,
           "max": 322,
-          "ideal": 276
+          "ideal": 139
         },
         {
           "level": 73,
           "min": 323,
           "max": 400,
-          "ideal": 380
+          "ideal": 323
         }
       ]
     },
@@ -5573,67 +5572,67 @@
       "text": "Spell Damage +%",
       "min": 5,
       "max": 79,
-      "ideal": 78,
+      "ideal": 75,
       "tiers": [
         {
           "level": 2,
           "min": 10,
           "max": 19,
-          "ideal": 16
+          "ideal": 10
         },
         {
           "level": 11,
           "min": 20,
           "max": 29,
-          "ideal": 26
+          "ideal": 20
         },
         {
           "level": 23,
           "min": 30,
           "max": 39,
-          "ideal": 36
+          "ideal": 30
         },
         {
           "level": 35,
           "min": 40,
           "max": 49,
-          "ideal": 46
+          "ideal": 40
         },
         {
           "level": 46,
           "min": 50,
           "max": 59,
-          "ideal": 56
+          "ideal": 50
         },
         {
           "level": 58,
           "min": 60,
           "max": 69,
-          "ideal": 66
+          "ideal": 60
         },
         {
           "level": 64,
           "min": 70,
           "max": 74,
-          "ideal": 73
+          "ideal": 70
         },
         {
           "level": 84,
           "min": 75,
           "max": 79,
-          "ideal": 33
+          "ideal": 30
         },
         {
           "level": 80,
           "min": 35,
           "max": 39,
-          "ideal": 38
+          "ideal": 35
         },
         {
           "level": 1,
           "min": 10,
           "max": 12,
-          "ideal": 11
+          "ideal": 10
         }
       ]
     },
@@ -5644,61 +5643,61 @@
       "text": "Cast Speed +%",
       "min": 2,
       "max": 28,
-      "ideal": 27,
+      "ideal": 24,
       "tiers": [
         {
           "level": 2,
           "min": 5,
           "max": 7,
-          "ideal": 6
+          "ideal": 5
         },
         {
           "level": 15,
           "min": 8,
           "max": 10,
-          "ideal": 9
+          "ideal": 8
         },
         {
           "level": 30,
           "min": 11,
           "max": 13,
-          "ideal": 12
+          "ideal": 11
         },
         {
           "level": 40,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         },
         {
           "level": 55,
           "min": 17,
           "max": 19,
-          "ideal": 18
+          "ideal": 17
         },
         {
           "level": 72,
           "min": 20,
           "max": 22,
-          "ideal": 21
+          "ideal": 20
         },
         {
           "level": 83,
           "min": 23,
           "max": 25,
-          "ideal": 24
+          "ideal": 23
         },
         {
           "level": 10,
           "min": 24,
           "max": 28,
-          "ideal": 27
+          "ideal": 24
         },
         {
           "level": 1,
           "min": 4,
           "max": 6,
-          "ideal": 3
+          "ideal": 2
         }
       ]
     },
@@ -5709,13 +5708,13 @@
       "text": "Local Attack Speed +%",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 30,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -5726,43 +5725,43 @@
       "text": "Life Regeneration Rate per Minute",
       "min": 60,
       "max": 420,
-      "ideal": 405,
+      "ideal": 361,
       "tiers": [
         {
           "level": 1,
           "min": 60,
           "max": 120,
-          "ideal": 105
+          "ideal": 60
         },
         {
           "level": 18,
           "min": 121,
           "max": 180,
-          "ideal": 165
+          "ideal": 121
         },
         {
           "level": 30,
           "min": 181,
           "max": 240,
-          "ideal": 225
+          "ideal": 181
         },
         {
           "level": 44,
           "min": 241,
           "max": 300,
-          "ideal": 285
+          "ideal": 241
         },
         {
           "level": 59,
           "min": 301,
           "max": 360,
-          "ideal": 345
+          "ideal": 301
         },
         {
           "level": 78,
           "min": 361,
           "max": 420,
-          "ideal": 405
+          "ideal": 361
         }
       ]
     },
@@ -5773,49 +5772,49 @@
       "text": "Mana Regeneration Rate +%",
       "min": 10,
       "max": 69,
-      "ideal": 66,
+      "ideal": 60,
       "tiers": [
         {
           "level": 2,
           "min": 10,
           "max": 19,
-          "ideal": 16
+          "ideal": 10
         },
         {
           "level": 18,
           "min": 20,
           "max": 29,
-          "ideal": 26
+          "ideal": 20
         },
         {
           "level": 29,
           "min": 30,
           "max": 39,
-          "ideal": 36
+          "ideal": 30
         },
         {
           "level": 42,
           "min": 40,
           "max": 49,
-          "ideal": 46
+          "ideal": 40
         },
         {
           "level": 55,
           "min": 50,
           "max": 59,
-          "ideal": 56
+          "ideal": 50
         },
         {
           "level": 79,
           "min": 60,
           "max": 69,
-          "ideal": 66
+          "ideal": 60
         },
         {
           "level": 1,
           "min": 12,
           "max": 15,
-          "ideal": 14
+          "ideal": 12
         }
       ]
     },
@@ -5832,7 +5831,7 @@
           "level": 5,
           "min": 5,
           "max": 7,
-          "ideal": 6
+          "ideal": 5
         },
         {
           "level": 20,
@@ -5873,25 +5872,25 @@
           "level": 12,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         },
         {
           "level": 24,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         },
         {
           "level": 36,
           "min": 9,
           "max": 11,
-          "ideal": 10
+          "ideal": 9
         },
         {
           "level": 48,
           "min": 12,
           "max": 14,
-          "ideal": 13
+          "ideal": 12
         },
         {
           "level": 60,
@@ -5903,7 +5902,7 @@
           "level": 1,
           "min": 8,
           "max": 10,
-          "ideal": 9
+          "ideal": 8
         }
       ]
     },
@@ -5914,49 +5913,49 @@
       "text": "Spell Critical Strike Chance +%",
       "min": 10,
       "max": 109,
-      "ideal": 106,
+      "ideal": 100,
       "tiers": [
         {
           "level": 11,
           "min": 10,
           "max": 19,
-          "ideal": 16
+          "ideal": 10
         },
         {
           "level": 21,
           "min": 20,
           "max": 39,
-          "ideal": 34
+          "ideal": 20
         },
         {
           "level": 28,
           "min": 40,
           "max": 59,
-          "ideal": 54
+          "ideal": 40
         },
         {
           "level": 41,
           "min": 60,
           "max": 79,
-          "ideal": 74
+          "ideal": 60
         },
         {
           "level": 59,
           "min": 80,
           "max": 99,
-          "ideal": 94
+          "ideal": 80
         },
         {
           "level": 76,
           "min": 100,
           "max": 109,
-          "ideal": 106
+          "ideal": 100
         },
         {
           "level": 1,
           "min": 10,
           "max": 14,
-          "ideal": 13
+          "ideal": 10
         }
       ]
     },
@@ -5967,43 +5966,43 @@
       "text": "Base Projectile Speed +%",
       "min": 6,
       "max": 46,
-      "ideal": 45,
+      "ideal": 42,
       "tiers": [
         {
           "level": 14,
           "min": 10,
           "max": 17,
-          "ideal": 15
+          "ideal": 10
         },
         {
           "level": 27,
           "min": 18,
           "max": 25,
-          "ideal": 23
+          "ideal": 18
         },
         {
           "level": 41,
           "min": 26,
           "max": 33,
-          "ideal": 31
+          "ideal": 26
         },
         {
           "level": 55,
           "min": 34,
           "max": 41,
-          "ideal": 39
+          "ideal": 34
         },
         {
           "level": 82,
           "min": 42,
           "max": 46,
-          "ideal": 45
+          "ideal": 42
         },
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -6014,49 +6013,49 @@
       "text": "Fire Damage +%",
       "min": 3,
       "max": 30,
-      "ideal": 29,
+      "ideal": 27,
       "tiers": [
         {
           "level": 8,
           "min": 3,
           "max": 7,
-          "ideal": 6
+          "ideal": 3
         },
         {
           "level": 22,
           "min": 8,
           "max": 12,
-          "ideal": 11
+          "ideal": 8
         },
         {
           "level": 36,
           "min": 13,
           "max": 17,
-          "ideal": 16
+          "ideal": 13
         },
         {
           "level": 50,
           "min": 18,
           "max": 22,
-          "ideal": 21
+          "ideal": 18
         },
         {
           "level": 64,
           "min": 23,
           "max": 26,
-          "ideal": 25
+          "ideal": 23
         },
         {
           "level": 76,
           "min": 27,
           "max": 30,
-          "ideal": 29
+          "ideal": 27
         },
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -6067,49 +6066,49 @@
       "text": "Cold Damage +%",
       "min": 3,
       "max": 30,
-      "ideal": 29,
+      "ideal": 27,
       "tiers": [
         {
           "level": 12,
           "min": 3,
           "max": 7,
-          "ideal": 6
+          "ideal": 3
         },
         {
           "level": 24,
           "min": 8,
           "max": 12,
-          "ideal": 11
+          "ideal": 8
         },
         {
           "level": 36,
           "min": 13,
           "max": 17,
-          "ideal": 16
+          "ideal": 13
         },
         {
           "level": 50,
           "min": 18,
           "max": 22,
-          "ideal": 21
+          "ideal": 18
         },
         {
           "level": 64,
           "min": 23,
           "max": 26,
-          "ideal": 25
+          "ideal": 23
         },
         {
           "level": 76,
           "min": 27,
           "max": 30,
-          "ideal": 29
+          "ideal": 27
         },
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -6120,49 +6119,49 @@
       "text": "Lightning Damage +%",
       "min": 3,
       "max": 30,
-      "ideal": 29,
+      "ideal": 27,
       "tiers": [
         {
           "level": 10,
           "min": 3,
           "max": 7,
-          "ideal": 6
+          "ideal": 3
         },
         {
           "level": 23,
           "min": 8,
           "max": 12,
-          "ideal": 11
+          "ideal": 8
         },
         {
           "level": 36,
           "min": 13,
           "max": 17,
-          "ideal": 16
+          "ideal": 13
         },
         {
           "level": 50,
           "min": 18,
           "max": 22,
-          "ideal": 21
+          "ideal": 18
         },
         {
           "level": 64,
           "min": 23,
           "max": 26,
-          "ideal": 25
+          "ideal": 23
         },
         {
           "level": 76,
           "min": 27,
           "max": 30,
-          "ideal": 29
+          "ideal": 27
         },
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -6435,13 +6434,13 @@
       "text": "Local Extra Charges",
       "min": 10,
       "max": 20,
-      "ideal": 17,
+      "ideal": 10,
       "tiers": [
         {
           "level": 2,
           "min": 10,
           "max": 20,
-          "ideal": 17
+          "ideal": 10
         }
       ]
     },
@@ -6452,13 +6451,13 @@
       "text": "Local Charges Added +%",
       "min": 20,
       "max": 40,
-      "ideal": 35,
+      "ideal": 20,
       "tiers": [
         {
           "level": 3,
           "min": 20,
           "max": 40,
-          "ideal": 35
+          "ideal": 20
         }
       ]
     },
@@ -6469,13 +6468,13 @@
       "text": "Local Flask Armour +% While Healing",
       "min": 60,
       "max": 100,
-      "ideal": 90,
+      "ideal": 60,
       "tiers": [
         {
           "level": 6,
           "min": 60,
           "max": 100,
-          "ideal": 90
+          "ideal": 60
         }
       ]
     },
@@ -6486,13 +6485,13 @@
       "text": "Local Flask Evasion +% While Healing",
       "min": 60,
       "max": 100,
-      "ideal": 90,
+      "ideal": 60,
       "tiers": [
         {
           "level": 8,
           "min": 60,
           "max": 100,
-          "ideal": 90
+          "ideal": 60
         }
       ]
     },
@@ -6503,13 +6502,13 @@
       "text": "Local Flask Movement Speed +% While Healing",
       "min": 20,
       "max": 30,
-      "ideal": 27,
+      "ideal": 20,
       "tiers": [
         {
           "level": 5,
           "min": 20,
           "max": 30,
-          "ideal": 27
+          "ideal": 20
         }
       ]
     },
@@ -6520,13 +6519,13 @@
       "text": "Local Flask Stun Recovery +% While Healing",
       "min": 40,
       "max": 60,
-      "ideal": 55,
+      "ideal": 40,
       "tiers": [
         {
           "level": 1,
           "min": 40,
           "max": 60,
-          "ideal": 55
+          "ideal": 40
         }
       ]
     },
@@ -6537,13 +6536,13 @@
       "text": "Local Flask Resistances +% While Healing",
       "min": 20,
       "max": 30,
-      "ideal": 27,
+      "ideal": 20,
       "tiers": [
         {
           "level": 1,
           "min": 20,
           "max": 30,
-          "ideal": 27
+          "ideal": 20
         }
       ]
     },
@@ -6622,13 +6621,13 @@
       "text": "Local Flask Minion Heal %",
       "min": 40,
       "max": 60,
-      "ideal": 55,
+      "ideal": 40,
       "tiers": [
         {
           "level": 10,
           "min": 40,
           "max": 60,
-          "ideal": 55
+          "ideal": 40
         }
       ]
     },
@@ -6690,13 +6689,13 @@
       "text": "",
       "min": -33,
       "max": 40,
-      "ideal": 37,
+      "ideal": 30,
       "tiers": [
         {
           "level": 20,
           "min": -33,
           "max": -33,
-          "ideal": 37
+          "ideal": 30
         }
       ]
     },
@@ -6724,13 +6723,13 @@
       "text": "",
       "min": -25,
       "max": -20,
-      "ideal": -22,
+      "ideal": -25,
       "tiers": [
         {
           "level": 14,
           "min": -25,
           "max": -20,
-          "ideal": -22
+          "ideal": -25
         }
       ]
     },
@@ -6850,31 +6849,31 @@
       "text": "",
       "min": 1,
       "max": 50,
-      "ideal": 43,
+      "ideal": 25,
       "tiers": [
         {
           "level": 1,
           "min": 1,
           "max": 4,
-          "ideal": 3
+          "ideal": 1
         },
         {
           "level": 10,
           "min": 5,
           "max": 10,
-          "ideal": 8
+          "ideal": 5
         },
         {
           "level": 20,
           "min": 11,
           "max": 24,
-          "ideal": 20
+          "ideal": 11
         },
         {
           "level": 35,
           "min": 25,
           "max": 50,
-          "ideal": 43
+          "ideal": 25
         }
       ]
     },
@@ -6920,19 +6919,19 @@
       "text": "Local Additional Block Chance %",
       "min": 1,
       "max": 6,
-      "ideal": 5,
+      "ideal": 4,
       "tiers": [
         {
           "level": 10,
           "min": 1,
           "max": 3,
-          "ideal": 2
+          "ideal": 1
         },
         {
           "level": 58,
           "min": 4,
           "max": 6,
-          "ideal": 5
+          "ideal": 4
         }
       ]
     },
@@ -6983,13 +6982,13 @@
       "text": "",
       "min": 20,
       "max": 40,
-      "ideal": 35,
+      "ideal": 20,
       "tiers": [
         {
           "level": 1,
           "min": 20,
           "max": 40,
-          "ideal": 35
+          "ideal": 20
         }
       ]
     },
@@ -7000,13 +6999,13 @@
       "text": "",
       "min": -30,
       "max": -15,
-      "ideal": -19,
+      "ideal": -30,
       "tiers": [
         {
           "level": 1,
           "min": -30,
           "max": -15,
-          "ideal": -19
+          "ideal": -30
         }
       ]
     },
@@ -7017,13 +7016,13 @@
       "text": "",
       "min": 1,
       "max": 3,
-      "ideal": 2,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
           "max": 3,
-          "ideal": 2
+          "ideal": 1
         }
       ]
     },
@@ -7034,13 +7033,13 @@
       "text": "",
       "min": 1,
       "max": 4,
-      "ideal": 3,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
           "max": 4,
-          "ideal": 3
+          "ideal": 1
         }
       ]
     },
@@ -7051,13 +7050,13 @@
       "text": "",
       "min": 30,
       "max": 50,
-      "ideal": 45,
+      "ideal": 30,
       "tiers": [
         {
           "level": 1,
           "min": 30,
           "max": 50,
-          "ideal": 45
+          "ideal": 30
         }
       ]
     },
@@ -7068,13 +7067,13 @@
       "text": "",
       "min": 5,
       "max": 20,
-      "ideal": 18,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
           "min": 15,
           "max": 20,
-          "ideal": 8
+          "ideal": 5
         }
       ]
     },
@@ -7085,13 +7084,13 @@
       "text": "",
       "min": 5,
       "max": 40,
-      "ideal": 36,
+      "ideal": 25,
       "tiers": [
         {
           "level": 1,
           "min": 25,
           "max": 40,
-          "ideal": 8
+          "ideal": 5
         }
       ]
     },
@@ -7136,25 +7135,25 @@
       "text": "",
       "min": -24,
       "max": -5,
-      "ideal": -7,
+      "ideal": -10,
       "tiers": [
         {
           "level": 1,
           "min": -10,
           "max": -5,
-          "ideal": -7
+          "ideal": -10
         },
         {
           "level": 30,
           "min": -16,
           "max": -11,
-          "ideal": -13
+          "ideal": -16
         },
         {
           "level": 60,
           "min": -24,
           "max": -17,
-          "ideal": -19
+          "ideal": -24
         }
       ]
     },
@@ -7267,13 +7266,13 @@
       "text": "",
       "min": 2,
       "max": 4,
-      "ideal": 3,
+      "ideal": 2,
       "tiers": [
         {
           "level": 1,
           "min": 2,
           "max": 4,
-          "ideal": 3
+          "ideal": 2
         }
       ]
     },
@@ -7284,13 +7283,13 @@
       "text": "",
       "min": 3,
       "max": 6,
-      "ideal": 5,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 6,
-          "ideal": 5
+          "ideal": 3
         }
       ]
     },
@@ -7301,13 +7300,13 @@
       "text": "Ignite Avoidance",
       "min": 10,
       "max": 20,
-      "ideal": 17,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 20,
-          "ideal": 17
+          "ideal": 10
         }
       ]
     },
@@ -7318,13 +7317,13 @@
       "text": "Base Chaos Resistance %",
       "min": 1,
       "max": 13,
-      "ideal": 11,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
           "min": 2,
           "max": 4,
-          "ideal": 11
+          "ideal": 7
         }
       ]
     },
@@ -7352,13 +7351,13 @@
       "text": "",
       "min": 10,
       "max": 20,
-      "ideal": 17,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 20,
-          "ideal": 17
+          "ideal": 10
         }
       ]
     },
@@ -7369,13 +7368,13 @@
       "text": "",
       "min": 10,
       "max": 20,
-      "ideal": 17,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 20,
-          "ideal": 17
+          "ideal": 10
         }
       ]
     },
@@ -7386,13 +7385,13 @@
       "text": "",
       "min": 10,
       "max": 20,
-      "ideal": 17,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 20,
-          "ideal": 17
+          "ideal": 10
         }
       ]
     },
@@ -7403,13 +7402,13 @@
       "text": "Blocking while Dual Wielding",
       "min": 1,
       "max": 6,
-      "ideal": 5,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 6,
-          "ideal": 5
+          "ideal": 3
         }
       ]
     },
@@ -7556,13 +7555,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -7573,13 +7572,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -7590,13 +7589,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -7607,13 +7606,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -7624,13 +7623,13 @@
       "text": "",
       "min": 3,
       "max": 7,
-      "ideal": 6,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 7,
-          "ideal": 6
+          "ideal": 3
         }
       ]
     },
@@ -7675,13 +7674,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -7692,13 +7691,13 @@
       "text": "",
       "min": 20,
       "max": 30,
-      "ideal": 27,
+      "ideal": 20,
       "tiers": [
         {
           "level": 1,
           "min": 20,
           "max": 30,
-          "ideal": 27
+          "ideal": 20
         }
       ]
     },
@@ -7709,13 +7708,13 @@
       "text": "",
       "min": 5,
       "max": 10,
-      "ideal": 8,
+      "ideal": 5,
       "tiers": [
         {
           "level": 1,
           "min": 5,
           "max": 10,
-          "ideal": 8
+          "ideal": 5
         }
       ]
     },
@@ -7794,13 +7793,13 @@
       "text": "Mace Damage",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -7811,13 +7810,13 @@
       "text": "Bow Damage",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -7828,13 +7827,13 @@
       "text": "Claw Damage",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -7845,13 +7844,13 @@
       "text": "Dagger Damage",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -7862,13 +7861,13 @@
       "text": "Wand Damage",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -7879,13 +7878,13 @@
       "text": "Staff Damage",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -7896,13 +7895,13 @@
       "text": "",
       "min": 10,
       "max": 12,
-      "ideal": 11,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 12,
-          "ideal": 11
+          "ideal": 10
         }
       ]
     },
@@ -7913,13 +7912,13 @@
       "text": "",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -7930,13 +7929,13 @@
       "text": "",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -7947,13 +7946,13 @@
       "text": "",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -7964,13 +7963,13 @@
       "text": "All Damage",
       "min": 8,
       "max": 10,
-      "ideal": 9,
+      "ideal": 8,
       "tiers": [
         {
           "level": 1,
           "min": 8,
           "max": 10,
-          "ideal": 9
+          "ideal": 8
         }
       ]
     },
@@ -7981,13 +7980,13 @@
       "text": "Minion Damage increase",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -7998,13 +7997,13 @@
       "text": "Physical Damage +%",
       "min": 14,
       "max": 16,
-      "ideal": 15,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16,
-          "ideal": 15
+          "ideal": 14
         }
       ]
     },
@@ -8015,13 +8014,13 @@
       "text": "",
       "min": 10,
       "max": 12,
-      "ideal": 11,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 12,
-          "ideal": 11
+          "ideal": 10
         }
       ]
     },
@@ -8032,13 +8031,13 @@
       "text": "Chaos Damage +%",
       "min": 9,
       "max": 13,
-      "ideal": 12,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
           "min": 9,
           "max": 13,
-          "ideal": 12
+          "ideal": 9
         }
       ]
     },
@@ -8049,13 +8048,13 @@
       "text": "",
       "min": 10,
       "max": 12,
-      "ideal": 11,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 12,
-          "ideal": 11
+          "ideal": 10
         }
       ]
     },
@@ -8066,13 +8065,13 @@
       "text": "Attack Speed with Maces",
       "min": 6,
       "max": 8,
-      "ideal": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -8083,13 +8082,13 @@
       "text": "Attack Speed with Bows",
       "min": 6,
       "max": 8,
-      "ideal": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -8100,13 +8099,13 @@
       "text": "Attack Speed with Claws",
       "min": 6,
       "max": 8,
-      "ideal": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -8117,13 +8116,13 @@
       "text": "Attack Speed with Daggers",
       "min": 6,
       "max": 8,
-      "ideal": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -8134,13 +8133,13 @@
       "text": "Attack Speed with Wands",
       "min": 6,
       "max": 8,
-      "ideal": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -8151,13 +8150,13 @@
       "text": "Attack Speed with Staves",
       "min": 6,
       "max": 8,
-      "ideal": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -8168,13 +8167,13 @@
       "text": "Attack Speed while Dual Wielding",
       "min": 4,
       "max": 6,
-      "ideal": 5,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
           "min": 4,
           "max": 6,
-          "ideal": 5
+          "ideal": 4
         }
       ]
     },
@@ -8185,13 +8184,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -8202,13 +8201,13 @@
       "text": "",
       "min": 4,
       "max": 6,
-      "ideal": 5,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
           "min": 4,
           "max": 6,
-          "ideal": 5
+          "ideal": 4
         }
       ]
     },
@@ -8219,13 +8218,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -8236,13 +8235,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -8253,13 +8252,13 @@
       "text": "Attack Speed +%",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -8270,13 +8269,13 @@
       "text": "",
       "min": 2,
       "max": 4,
-      "ideal": 3,
+      "ideal": 2,
       "tiers": [
         {
           "level": 1,
           "min": 2,
           "max": 4,
-          "ideal": 3
+          "ideal": 2
         }
       ]
     },
@@ -8287,13 +8286,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -8304,13 +8303,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -8321,13 +8320,13 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -8338,13 +8337,13 @@
       "text": "Additional Strength And Dexterity",
       "min": 8,
       "max": 10,
-      "ideal": 9,
+      "ideal": 8,
       "tiers": [
         {
           "level": 1,
           "min": 8,
           "max": 10,
-          "ideal": 9
+          "ideal": 8
         }
       ]
     },
@@ -8355,13 +8354,13 @@
       "text": "Additional Strength And Intelligence",
       "min": 8,
       "max": 10,
-      "ideal": 9,
+      "ideal": 8,
       "tiers": [
         {
           "level": 1,
           "min": 8,
           "max": 10,
-          "ideal": 9
+          "ideal": 8
         }
       ]
     },
@@ -8372,13 +8371,13 @@
       "text": "Additional Dexterity And Intelligence",
       "min": 8,
       "max": 10,
-      "ideal": 9,
+      "ideal": 8,
       "tiers": [
         {
           "level": 1,
           "min": 8,
           "max": 10,
-          "ideal": 9
+          "ideal": 8
         }
       ]
     },
@@ -8389,13 +8388,13 @@
       "text": "Additional All Attributes",
       "min": 6,
       "max": 8,
-      "ideal": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -8406,13 +8405,13 @@
       "text": "Maximum Life +%",
       "min": 5,
       "max": 7,
-      "ideal": 6,
+      "ideal": 5,
       "tiers": [
         {
           "level": 1,
           "min": 5,
           "max": 7,
-          "ideal": 6
+          "ideal": 5
         }
       ]
     },
@@ -8423,13 +8422,13 @@
       "text": "Maximum Mana +%",
       "min": 6,
       "max": 8,
-      "ideal": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -8440,13 +8439,13 @@
       "text": "Global Maximum Energy Shield +%",
       "min": 6,
       "max": 8,
-      "ideal": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -8474,13 +8473,13 @@
       "text": "",
       "min": 20,
       "max": 40,
-      "ideal": 35,
+      "ideal": 20,
       "tiers": [
         {
           "level": 1,
           "min": 20,
           "max": 40,
-          "ideal": 35
+          "ideal": 20
         }
       ]
     },
@@ -8508,13 +8507,13 @@
       "text": "",
       "min": 20,
       "max": 40,
-      "ideal": 35,
+      "ideal": 20,
       "tiers": [
         {
           "level": 1,
           "min": 20,
           "max": 40,
-          "ideal": 35
+          "ideal": 20
         }
       ]
     },
@@ -8576,13 +8575,13 @@
       "text": "Physical Damage Reduction Rating +%",
       "min": 14,
       "max": 18,
-      "ideal": 17,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 18,
-          "ideal": 17
+          "ideal": 14
         }
       ]
     },
@@ -8593,13 +8592,13 @@
       "text": "Global Evasion Rating +%",
       "min": 14,
       "max": 18,
-      "ideal": 17,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 18,
-          "ideal": 17
+          "ideal": 14
         }
       ]
     },
@@ -8610,13 +8609,13 @@
       "text": "Base Item Found Rarity +%",
       "min": 4,
       "max": 6,
-      "ideal": 5,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
           "min": 4,
           "max": 6,
-          "ideal": 5
+          "ideal": 4
         }
       ]
     },
@@ -8627,13 +8626,13 @@
       "text": "Accuracy Rating +%",
       "min": 6,
       "max": 14,
-      "ideal": 13,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 14,
-          "ideal": 9
+          "ideal": 6
         }
       ]
     },
@@ -8644,13 +8643,13 @@
       "text": "Critical Strike Chance +%",
       "min": 6,
       "max": 12,
-      "ideal": 11,
+      "ideal": 8,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 10,
-          "ideal": 11
+          "ideal": 8
         }
       ]
     },
@@ -8661,13 +8660,13 @@
       "text": "Base Critical Strike Multiplier +%",
       "min": 9,
       "max": 12,
-      "ideal": 11,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
           "min": 9,
           "max": 12,
-          "ideal": 11
+          "ideal": 9
         }
       ]
     },
@@ -8678,13 +8677,13 @@
       "text": "",
       "min": 14,
       "max": 18,
-      "ideal": 17,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 18,
-          "ideal": 17
+          "ideal": 14
         }
       ]
     },
@@ -8695,13 +8694,13 @@
       "text": "",
       "min": 14,
       "max": 18,
-      "ideal": 17,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 18,
-          "ideal": 17
+          "ideal": 14
         }
       ]
     },
@@ -8712,13 +8711,13 @@
       "text": "",
       "min": 14,
       "max": 18,
-      "ideal": 17,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 18,
-          "ideal": 17
+          "ideal": 14
         }
       ]
     },
@@ -8729,13 +8728,13 @@
       "text": "",
       "min": 10,
       "max": 14,
-      "ideal": 13,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 14,
-          "ideal": 13
+          "ideal": 10
         }
       ]
     },
@@ -8746,13 +8745,13 @@
       "text": "",
       "min": 12,
       "max": 15,
-      "ideal": 14,
+      "ideal": 12,
       "tiers": [
         {
           "level": 1,
           "min": 12,
           "max": 15,
-          "ideal": 14
+          "ideal": 12
         }
       ]
     },
@@ -8763,13 +8762,13 @@
       "text": "",
       "min": 15,
       "max": 18,
-      "ideal": 17,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
           "min": 15,
           "max": 18,
-          "ideal": 17
+          "ideal": 15
         }
       ]
     },
@@ -8780,13 +8779,13 @@
       "text": "",
       "min": 15,
       "max": 18,
-      "ideal": 17,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
           "min": 15,
           "max": 18,
-          "ideal": 17
+          "ideal": 15
         }
       ]
     },
@@ -8797,13 +8796,13 @@
       "text": "",
       "min": 15,
       "max": 18,
-      "ideal": 17,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
           "min": 15,
           "max": 18,
-          "ideal": 17
+          "ideal": 15
         }
       ]
     },
@@ -8814,13 +8813,13 @@
       "text": "",
       "min": 12,
       "max": 15,
-      "ideal": 14,
+      "ideal": 12,
       "tiers": [
         {
           "level": 1,
           "min": 12,
           "max": 15,
-          "ideal": 14
+          "ideal": 12
         }
       ]
     },
@@ -8831,13 +8830,13 @@
       "text": "Base Fire Resistance %",
       "min": 12,
       "max": 15,
-      "ideal": 14,
+      "ideal": 12,
       "tiers": [
         {
           "level": 1,
           "min": 12,
           "max": 15,
-          "ideal": 14
+          "ideal": 12
         }
       ]
     },
@@ -8848,13 +8847,13 @@
       "text": "Base Cold Resistance %",
       "min": 12,
       "max": 15,
-      "ideal": 14,
+      "ideal": 12,
       "tiers": [
         {
           "level": 1,
           "min": 12,
           "max": 15,
-          "ideal": 14
+          "ideal": 12
         }
       ]
     },
@@ -8865,13 +8864,13 @@
       "text": "Base Lightning Resistance %",
       "min": 12,
       "max": 15,
-      "ideal": 14,
+      "ideal": 12,
       "tiers": [
         {
           "level": 1,
           "min": 12,
           "max": 15,
-          "ideal": 14
+          "ideal": 12
         }
       ]
     },
@@ -8882,13 +8881,13 @@
       "text": "Fire And Cold Resistance %",
       "min": 10,
       "max": 12,
-      "ideal": 11,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 12,
-          "ideal": 11
+          "ideal": 10
         }
       ]
     },
@@ -8899,13 +8898,13 @@
       "text": "Fire And Lightning Resistance %",
       "min": 10,
       "max": 12,
-      "ideal": 11,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 12,
-          "ideal": 11
+          "ideal": 10
         }
       ]
     },
@@ -8916,13 +8915,13 @@
       "text": "Cold And Lightning Resistance %",
       "min": 10,
       "max": 12,
-      "ideal": 11,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 12,
-          "ideal": 11
+          "ideal": 10
         }
       ]
     },
@@ -8933,13 +8932,13 @@
       "text": "Base Stun Duration +%",
       "min": 10,
       "max": 14,
-      "ideal": 13,
+      "ideal": 10,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 14,
-          "ideal": 13
+          "ideal": 10
         }
       ]
     },
@@ -8950,13 +8949,13 @@
       "text": "Mana Cost Reduction",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -8967,13 +8966,13 @@
       "text": "",
       "min": 4,
       "max": 6,
-      "ideal": 5,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
           "min": 4,
           "max": 6,
-          "ideal": 5
+          "ideal": 4
         }
       ]
     },
@@ -9052,13 +9051,13 @@
       "text": "Freeze Duration Increase",
       "min": 12,
       "max": 16,
-      "ideal": 15,
+      "ideal": 12,
       "tiers": [
         {
           "level": 1,
           "min": 12,
           "max": 16,
-          "ideal": 15
+          "ideal": 12
         }
       ]
     },
@@ -9086,13 +9085,13 @@
       "text": "Shock Duration Increase",
       "min": 12,
       "max": 16,
-      "ideal": 15,
+      "ideal": 12,
       "tiers": [
         {
           "level": 1,
           "min": 12,
           "max": 16,
-          "ideal": 15
+          "ideal": 12
         }
       ]
     },
@@ -9120,13 +9119,13 @@
       "text": "Ignite Duration Increase",
       "min": 3,
       "max": 5,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5,
-          "ideal": 4
+          "ideal": 3
         }
       ]
     },
@@ -9137,13 +9136,13 @@
       "text": "Energy Shield Delay Recovery Increase",
       "min": 4,
       "max": 6,
-      "ideal": 5,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
           "min": 4,
           "max": 6,
-          "ideal": 5
+          "ideal": 4
         }
       ]
     },
@@ -9154,13 +9153,13 @@
       "text": "",
       "min": 6,
       "max": 8,
-      "ideal": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         }
       ]
     },
@@ -9171,13 +9170,13 @@
       "text": "",
       "min": 2,
       "max": 4,
-      "ideal": 3,
+      "ideal": 2,
       "tiers": [
         {
           "level": 1,
           "min": 2,
           "max": 4,
-          "ideal": 3
+          "ideal": 2
         }
       ]
     },
@@ -9188,13 +9187,13 @@
       "text": "Minion Life Increase",
       "min": 8,
       "max": 12,
-      "ideal": 11,
+      "ideal": 8,
       "tiers": [
         {
           "level": 1,
           "min": 8,
           "max": 12,
-          "ideal": 11
+          "ideal": 8
         }
       ]
     },
@@ -9205,13 +9204,13 @@
       "text": "",
       "min": 6,
       "max": 10,
-      "ideal": 9,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 10,
-          "ideal": 9
+          "ideal": 6
         }
       ]
     },
@@ -9222,13 +9221,13 @@
       "text": "",
       "min": 12,
       "max": 16,
-      "ideal": 15,
+      "ideal": 12,
       "tiers": [
         {
           "level": 1,
           "min": 12,
           "max": 16,
-          "ideal": 15
+          "ideal": 12
         }
       ]
     },
@@ -9239,13 +9238,13 @@
       "text": "Totem Life increase",
       "min": 8,
       "max": 12,
-      "ideal": 11,
+      "ideal": 8,
       "tiers": [
         {
           "level": 1,
           "min": 8,
           "max": 12,
-          "ideal": 11
+          "ideal": 8
         }
       ]
     },
@@ -9256,13 +9255,13 @@
       "text": "",
       "min": 6,
       "max": 10,
-      "ideal": 9,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 10,
-          "ideal": 9
+          "ideal": 6
         }
       ]
     },
@@ -9273,7 +9272,7 @@
       "text": "",
       "min": 1,
       "max": 49,
-      "ideal": 45,
+      "ideal": 36,
       "tiers": [
         {
           "level": 1,
@@ -9285,49 +9284,49 @@
           "level": 11,
           "min": 6,
           "max": 8,
-          "ideal": 7
+          "ideal": 6
         },
         {
           "level": 18,
           "min": 10,
           "max": 13,
-          "ideal": 12
+          "ideal": 10
         },
         {
           "level": 26,
           "min": 13,
           "max": 18,
-          "ideal": 16
+          "ideal": 13
         },
         {
           "level": 33,
           "min": 17,
           "max": 22,
-          "ideal": 20
+          "ideal": 17
         },
         {
           "level": 42,
           "min": 21,
           "max": 28,
-          "ideal": 26
+          "ideal": 21
         },
         {
           "level": 51,
           "min": 25,
           "max": 34,
-          "ideal": 31
+          "ideal": 25
         },
         {
           "level": 62,
           "min": 31,
           "max": 41,
-          "ideal": 38
+          "ideal": 31
         },
         {
           "level": 74,
           "min": 36,
           "max": 49,
-          "ideal": 45
+          "ideal": 36
         }
       ]
     },
@@ -9338,7 +9337,7 @@
       "text": "",
       "min": 3,
       "max": 85,
-      "ideal": 82,
+      "ideal": 73,
       "tiers": [
         {
           "level": 1,
@@ -9350,49 +9349,49 @@
           "level": 11,
           "min": 12,
           "max": 14,
-          "ideal": 13
+          "ideal": 12
         },
         {
           "level": 18,
           "min": 19,
           "max": 22,
-          "ideal": 21
+          "ideal": 19
         },
         {
           "level": 26,
           "min": 27,
           "max": 31,
-          "ideal": 30
+          "ideal": 27
         },
         {
           "level": 33,
           "min": 33,
           "max": 39,
-          "ideal": 37
+          "ideal": 33
         },
         {
           "level": 42,
           "min": 42,
           "max": 49,
-          "ideal": 47
+          "ideal": 42
         },
         {
           "level": 51,
           "min": 51,
           "max": 59,
-          "ideal": 57
+          "ideal": 51
         },
         {
           "level": 62,
           "min": 61,
           "max": 71,
-          "ideal": 68
+          "ideal": 61
         },
         {
           "level": 74,
           "min": 73,
           "max": 85,
-          "ideal": 82
+          "ideal": 73
         }
       ]
     },
@@ -9403,7 +9402,7 @@
       "text": "",
       "min": 1,
       "max": 40,
-      "ideal": 37,
+      "ideal": 30,
       "tiers": [
         {
           "level": 1,
@@ -9415,49 +9414,49 @@
           "level": 11,
           "min": 5,
           "max": 7,
-          "ideal": 6
+          "ideal": 5
         },
         {
           "level": 18,
           "min": 8,
           "max": 10,
-          "ideal": 9
+          "ideal": 8
         },
         {
           "level": 26,
           "min": 11,
           "max": 15,
-          "ideal": 14
+          "ideal": 11
         },
         {
           "level": 33,
           "min": 14,
           "max": 18,
-          "ideal": 17
+          "ideal": 14
         },
         {
           "level": 42,
           "min": 17,
           "max": 23,
-          "ideal": 21
+          "ideal": 17
         },
         {
           "level": 51,
           "min": 21,
           "max": 28,
-          "ideal": 26
+          "ideal": 21
         },
         {
           "level": 62,
           "min": 25,
           "max": 33,
-          "ideal": 31
+          "ideal": 25
         },
         {
           "level": 74,
           "min": 30,
           "max": 40,
-          "ideal": 37
+          "ideal": 30
         }
       ]
     },
@@ -9468,7 +9467,7 @@
       "text": "",
       "min": 2,
       "max": 69,
-      "ideal": 66,
+      "ideal": 60,
       "tiers": [
         {
           "level": 1,
@@ -9480,49 +9479,49 @@
           "level": 11,
           "min": 10,
           "max": 12,
-          "ideal": 11
+          "ideal": 10
         },
         {
           "level": 18,
           "min": 16,
           "max": 18,
-          "ideal": 17
+          "ideal": 16
         },
         {
           "level": 26,
           "min": 22,
           "max": 25,
-          "ideal": 24
+          "ideal": 22
         },
         {
           "level": 33,
           "min": 27,
           "max": 32,
-          "ideal": 30
+          "ideal": 27
         },
         {
           "level": 42,
           "min": 34,
           "max": 40,
-          "ideal": 38
+          "ideal": 34
         },
         {
           "level": 51,
           "min": 41,
           "max": 48,
-          "ideal": 46
+          "ideal": 41
         },
         {
           "level": 62,
           "min": 50,
           "max": 58,
-          "ideal": 56
+          "ideal": 50
         },
         {
           "level": 74,
           "min": 60,
           "max": 69,
-          "ideal": 66
+          "ideal": 60
         }
       ]
     },
@@ -9533,7 +9532,7 @@
       "text": "",
       "min": 1,
       "max": 10,
-      "ideal": 8,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
@@ -9551,43 +9550,43 @@
           "level": 18,
           "min": 1,
           "max": 3,
-          "ideal": 2
+          "ideal": 1
         },
         {
           "level": 26,
           "min": 1,
           "max": 4,
-          "ideal": 3
+          "ideal": 1
         },
         {
           "level": 33,
           "min": 2,
           "max": 5,
-          "ideal": 4
+          "ideal": 2
         },
         {
           "level": 42,
           "min": 2,
           "max": 6,
-          "ideal": 5
+          "ideal": 2
         },
         {
           "level": 51,
           "min": 2,
           "max": 7,
-          "ideal": 5
+          "ideal": 2
         },
         {
           "level": 62,
           "min": 3,
           "max": 9,
-          "ideal": 7
+          "ideal": 3
         },
         {
           "level": 74,
           "min": 3,
           "max": 10,
-          "ideal": 8
+          "ideal": 3
         }
       ]
     },
@@ -9598,7 +9597,7 @@
       "text": "",
       "min": 4,
       "max": 133,
-      "ideal": 131,
+      "ideal": 126,
       "tiers": [
         {
           "level": 1,
@@ -9616,43 +9615,43 @@
           "level": 18,
           "min": 33,
           "max": 35,
-          "ideal": 34
+          "ideal": 33
         },
         {
           "level": 26,
           "min": 46,
           "max": 49,
-          "ideal": 48
+          "ideal": 46
         },
         {
           "level": 33,
           "min": 58,
           "max": 61,
-          "ideal": 60
+          "ideal": 58
         },
         {
           "level": 42,
           "min": 73,
           "max": 77,
-          "ideal": 76
+          "ideal": 73
         },
         {
           "level": 51,
           "min": 88,
           "max": 93,
-          "ideal": 91
+          "ideal": 88
         },
         {
           "level": 62,
           "min": 106,
           "max": 112,
-          "ideal": 110
+          "ideal": 106
         },
         {
           "level": 74,
           "min": 126,
           "max": 133,
-          "ideal": 131
+          "ideal": 126
         }
       ]
     },
@@ -9663,13 +9662,13 @@
       "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 72,
-      "ideal": 65,
+      "ideal": 47,
       "tiers": [
         {
           "level": 83,
           "min": 47,
           "max": 72,
-          "ideal": 65
+          "ideal": 47
         }
       ]
     },
@@ -9680,13 +9679,13 @@
       "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 123,
-      "ideal": 116,
+      "ideal": 98,
       "tiers": [
         {
           "level": 83,
           "min": 98,
           "max": 123,
-          "ideal": 116
+          "ideal": 98
         }
       ]
     }

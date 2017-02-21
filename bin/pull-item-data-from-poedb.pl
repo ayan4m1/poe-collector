@@ -69,8 +69,11 @@ foreach my $line (@content) {
   }
 }
 
+my $jsonpath = "data/BaseTypes.json";
 my $jsonout = JSON::XS->new->utf8->pretty->canonical->encode(\%types);
-print $jsonout;
+open(my $jsonh, '>', $jsonpath);
+print $jsonh $jsonout;
+close $jsonh;
 
 exit;
 

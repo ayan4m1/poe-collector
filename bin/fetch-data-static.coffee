@@ -1,3 +1,5 @@
+config = require('konfig')()
+
 Q = require 'q'
 fs = require 'fs'
 gauss = require 'gauss'
@@ -7,12 +9,6 @@ parse = require 'csv-parse'
 jsonfile = require 'jsonfile'
 
 log = require './logging'
-
-# associated PoE game version
-gameVersion = '2.6.2d'
-
-# ideal rolls will be of this percentile
-idealPercentile = 0.75
 
 # this encompasses all "equipment"
 defaultKeys = [ 2 ... 32 ]
@@ -30,105 +26,7 @@ readFile = Q.denodeify(fs.readFile)
 writeJson = Q.denodeify(jsonfile.writeFile)
 
 # tags that we do not care about
-ignoreTypes = [
-  'not_for_sale'
-  'humanoid'
-  'mammal_beast'
-  'reptile_beast'
-  'skeleton'
-  'zombie'
-  'ghost'
-  'earth_elemental'
-  'water_elemental'
-  'demon'
-  'necromancer_raisable'
-  'lots_of_life'
-  'indoors_area'
-  'beach'
-  'dungeon'
-  'cave'
-  'forest'
-  'swamp'
-  'mountain'
-  'temple'
-  'urban'
-  'human'
-  'beast'
-  'undead'
-  'construct'
-  'insect'
-  'undying'
-  'goatman'
-  'shore'
-  'darkshore'
-  'inland'
-  'prison'
-  'church'
-  'sins'
-  'axis'
-  'cavern'
-  'southernforest'
-  'southernforest2'
-  'forestdark'
-  'weavers'
-  'inca'
-  'city1'
-  'city2'
-  'city3'
-  'crematorium'
-  'catacombs'
-  'solaris'
-  'docks'
-  'barracks'
-  'lunaris'
-  'gardens'
-  'library'
-  'atziri1'
-  'atziri2'
-  'drops_no_mods'
-  'drops_no_sockets'
-  'drops_no_rares'
-  'drops_no_quality'
-  'drops_not_dupeable'
-  'no_caster_mods'
-  'no_attack_mods'
-  'red_blood'
-  'ghost_blood'
-  'insect_blood'
-  'mud_blood'
-  'noblood'
-  'water'
-  'bones'
-  'unusable_corpse'
-  'undeletable_corpse'
-  'hidden_monster'
-  'devourer'
-  'rare_minion'
-  'large_model'
-  'secret_area'
-  'divination_card'
-  'currency'
-  'no_divine'
-  'act_boss_area'
-  'no_tempests'
-  'rare'
-  'breach_map'
-  'breach_commander'
-  'no_echo'
-  'no_shroud_walker'
-  'cannot_be_twinned'
-  'no_bloodlines'
-  'area_with_water'
-  'uses_suicide_explode'
-  'cannot_be_monolith'
-  'no_zana_quests'
-  'flask'
-  'gem'
-  'limited_strongbox_benefits'
-  'no_monster_packs'
-  'vaults_of_atziri'
-  'hall_of_grandmasters'
-]
+ignoreTypes = jsonfile.readFileSync("#{__dirname}/../data/IgnoredMods.json")
 
 getDomain = (val) ->
   switch parseInt(val)
@@ -171,7 +69,7 @@ handleFile = (name) ->
 dumpResults = (name, data) ->
   result = extend({
     createdAt: moment().toISOString()
-    gameVersion: gameVersion
+    gameVersion: config.build.gameVersion
   }, data)
 
   writeJson("#{__dirname}/../data/#{name}.json", result, {
@@ -295,7 +193,7 @@ Q.spread [
         }) unless tiers.tiers.findIndex((v) -> v.level is stat.level) >= 0
 
         continue if stat.min is stat.max
-        ideal = new gauss.Vector([ stat.min ... stat.max ]).percentile(idealPercentile)
+        ideal = new gauss.Vector([ stat.min ... stat.max ]).percentile(config.neural.idealPercentile)
         tiers.tiers[tiers.tiers.length - 1].ideal = ideal
         tiers.ideal = Math.max(tiers.ideal ? ideal, ideal)
 

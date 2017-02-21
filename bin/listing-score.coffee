@@ -8,23 +8,7 @@ log = require './logging'
 elastic = require './elastic'
 
 data = jsonfile.readFileSync("#{__dirname}/../data/Gear.json")
-
-utilityFlasks = [
-  'Quicksilver'
-  'Bismuth'
-  'Stibnite'
-  'Amethyst'
-  'Ruby'
-  'Sapphire'
-  'Topaz'
-  'Silver'
-  'Aquamarine'
-  'Granite'
-  'Jade'
-  'Quartz'
-  'Sulphur'
-  'Basalt'
-]
+utilityFlasks = jsonfile.readFileSync("#{__dirname}/../data/Gear.json")
 
 valueRegex = /([+-])?([0-9\\.]+)%?( to ([+-])?([0-9\\.]+)%?)?/i
 valuate = (source) ->
