@@ -20,13 +20,14 @@ dataFiles =
   gemTag: 'GemTags.csv'
   tag: 'Tags.csv'
   stat: 'Stats.csv'
+  ignoredTypes: 'IgnoredMods.json'
 
 parseCsv = Q.denodeify(parse)
 readFile = Q.denodeify(fs.readFile)
+readJson = Q.denodeify(jsonfile.readFile)
 writeJson = Q.denodeify(jsonfile.writeFile)
 
-# tags that we do not care about
-ignoreTypes = jsonfile.readFileSync("#{__dirname}/../data/IgnoredMods.json")
+arrayRegex = /[\[\]]/g
 
 getDomain = (val) ->
   switch parseInt(val)
@@ -57,8 +58,16 @@ getGeneration = (val) ->
     else
       'Unknown'
 
-handleFile = (name) ->
-  readFile("#{__dirname}/../data/#{name}")
+dataFilePath = (name) -> "#{__dirname}/../data/#{name}"
+
+parseJson = (name) ->
+  readJson(dataFilePath(name))
+    .then (data) ->
+      console.dir(data)
+    .catch(log.as.error)
+
+parseCsv = (name) ->
+  readFile(dataFilePath(name))
     .then (raw) ->
       parseCsv(raw, {
         from: 2
@@ -79,13 +88,14 @@ dumpResults = (name, data) ->
 gearData = {}
 tierData = {}
 
-arrayRegex = /[\[\]]/g
+
 Q.spread [
-  handleFile(dataFiles.mod)
-  handleFile(dataFiles.modType)
-  handleFile(dataFiles.tag)
-  handleFile(dataFiles.stat)
-], (mods, modTypes, tags, stats) ->
+  parseCsv(dataFiles.mod)
+  parseCsv(dataFiles.modType)
+  parseCsv(dataFiles.tag)
+  parseCsv(dataFiles.stat)
+  parseJson(dataFiles.ignoredTypes)
+], (mods, modTypes, tags, stats, ignoredTypes) ->
   result = []
 
   tagData = tags.reduce((accum, curr) ->
@@ -165,7 +175,7 @@ Q.spread [
     }
 
     for gear in mapped.spawnWeights
-      continue if ignoreTypes.indexOf(gear.name) >= 0
+      continue if ignoredTypes.indexOf(gear.name) >= 0
       gearData[gear.name] = [] unless gearData[gear.name]?
 
       for stat in mapped.stats

@@ -19,6 +19,7 @@ createClient = ->
     host: config.elastic.host
     log: config.elastic.logLevel
     requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
+    suggestCompression: true
   )
 
 client = createClient()
