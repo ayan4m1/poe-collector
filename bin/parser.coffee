@@ -28,7 +28,7 @@ regexes =
     flatOffense: /Adds (\d+)( to (\d+))? (Chaos |Elemental |Fire |Physical |Cold |Lightning )?Damage to (Attacks|Spells)/
     block: /([-+]?)(\d*\.?\d+%?)(?: additional| to maximum) (?:Chance to Block|Block Chance)( Spells)?\s*(?:with|while)?\s*(Staves|Shields|Dual Wielding)?/
     reflect: /Reflects (\d+) to (\d+) (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
-    resist: /^(?!Cursed)([-+]?)(\d+%) to (all )?(maximum )?(Lightning|Cold|Fire|Chaos|Elemental) Resistance(s?)/
+    resist: /^([-+]?)(\d+%) to (all )?(maximum )?(Lightning|Cold|Fire|Chaos|Elemental) Resistance(s?)/
     attribute: /([-+]?)(\d+) to (all )?(Attributes|Strength|Dexterity|Intelligence)( and (Dexterity|Intelligence))?/
     vitals: /([-+]?)(\d+%?) (increased|reduced|to)(?: maximum)? (Life|Mana|Energy Shield)( Recharge Rate)?/
     minions: /Minions (deal|have) ([+-])?(\d+%?) (Chance|increased|to) (Damage|maximum Life|Movement Speed|all Elemental Resistances)/
@@ -531,10 +531,8 @@ parseItem = (item) ->
         mana:
           flat: 0
           percent: 0
-      attributeRequirementReduction: 0
       manaCostReduction: 0
       movementSpeed: 0
-      lightRadius: 0
       itemRarity: 0
       itemQuantity: 0
     gemLevel:
@@ -569,38 +567,12 @@ parseItem = (item) ->
       recovery:
         amount: 0
         speed: 0
-      onCrit:
-        charges: 0
-      onUse:
-        removeSouls: 0
-        armour: 0
-      during:
-        damage:
-          all: 0
-          lightning: 0
-        reverseKnockback: false
-        stunImmunity: 0
-        itemQuantity: 0
-        itemRarity: 0
-        lightRadius: 0
-        soulEater: false
-        block: 0
       removeAilment:
         bleeding: 0
         burning: 0
         freezeAndChill: 0
         shock: 0
     offense:
-      onKill:
-        life: 0
-        mana: 0
-        damage: 0
-      onHit:
-        life: 0
-        mana: 0
-      perTarget:
-        life: 0
-        shield: 0
       leech:
         life:
           flat: 0
@@ -641,8 +613,6 @@ parseItem = (item) ->
             fire: 0
             cold: 0
             lightning: 0
-        melee: 0
-        perCurse: 0
         penetration:
           fire: 0
           cold: 0
@@ -678,10 +648,6 @@ parseItem = (item) ->
             min: 0
             max: 0
           percent: 0
-        against:
-          nearby: 0
-          blinded: 0
-          rares: 0
         conversion:
           cold:
             fire: 0
@@ -694,10 +660,6 @@ parseItem = (item) ->
             cold: 0
             fire: 0
             lightning: 0
-      stun:
-        duration: 0
-        thresholdReduction: 0
-      knockbackChance: 0
       pierceChance: 0
       projectileSpeed: 0
       accuracyRating:
@@ -729,28 +691,6 @@ parseItem = (item) ->
         recharge: 0
         flat: 0
         percent: 0
-      blockChance:
-        weapons: 0
-        spells: 0
-        dualWielding: 0
-        staff: 0
-      stunRecovery: 0
-      physicalDamageReduction: 0
-      onLowLife:
-        prevent:
-          stun: false
-      prevent:
-        chill: false
-        freeze: false
-        shock: false
-        ignite: false
-        stun: false
-    minions:
-      life: 0
-      damage: 0
-      movementSpeed: 0
-      blockChance: 0
-      allResists: 0
     price: []
     chaosPrice: 0
     removed: false

@@ -19,19 +19,19 @@ cacheDir = "#{__dirname}/../cache"
 
 # promisified functions
 readDir = Q.denodeify(fs.readdir)
+readJson = Q.denodeify(jsonfile.readFile)
+writeJson = Q.denodeify(jsonfile.writeFile)
 
-# configurable concurrency level and scheduling interval
+# prevent GGG from killing our requests
 downloadLimiter = new Bottleneck(
   config.watcher.fetch.concurrency,
   moment.duration(config.watcher.fetch.interval, config.watcher.fetch.unit).asMilliseconds()
 )
 
-processLimiter = new Bottleneck(
-  config.watcher.process.concurrency,
-  moment.duration(config.watcher.process.interval, config.watcher.process.unit).asMilliseconds()
-)
+fetchChange = (changeId) ->
+  downloadLimiter.schedule(downloadChange, changeId)
 
-downloadChange = (changeId, downloaded) ->
+downloadChange = (changeId) ->
   log.as.debug("handling the request to fetch change #{changeId}")
   duration = process.hrtime()
   requestPromise(
@@ -40,11 +40,7 @@ downloadChange = (changeId, downloaded) ->
   )
     .then (res) ->
       data = JSON.parse(res)
-      touch("#{cacheDir}/#{changeId}")
-      downloaded.resolve(
-        id: changeId
-        body: data
-      )
+      writeJson("#{cacheDir}/#{changeId}", data)
 
       # timing + stats
       duration = process.hrtime(duration)
@@ -55,28 +51,19 @@ downloadChange = (changeId, downloaded) ->
       return unless data.next_change_id?
       log.as.info("following river to #{data.next_change_id}")
       fetchChange(data.next_change_id)
-    .catch(downloaded.reject)
-
-fetchChange = (changeId) ->
-  fetched = Q.defer()
-
-  downloadLimiter.schedule(downloadChange, changeId, fetched)
-
-  fetched.promise.then(processChange)
+    .catch(log.as.error)
 
 processChange = (data) ->
-  processed = Q.defer()
-
   log.as.debug("process called for #{data.id}")
-  processLimiter.schedule(elastic.mergeStashes, data.body.stashes, processed)
-
-  processed.promise
+  elastic.mergeStashes(data.body.stashes)
 
 findLatestChange = ->
   readDir(cacheDir)
     .then (items) ->
       items = items.filter (v) ->
-        fs.statSync("#{cacheDir}/#{v}").isFile()
+        stats = fs.statSync("#{cacheDir}/#{v}")
+        processChange(v) unless stats.size is 0
+        stats.isFile()
 
       items.sort (a, b) ->
         fs.statSync("#{cacheDir}/#{a}").mtime.getTime() - fs.statSync("#{cacheDir}/#{b}").mtime.getTime()
@@ -84,5 +71,4 @@ findLatestChange = ->
       items.pop()
 
 module.exports =
-  first: findLatestChange
-  next: fetchChange
+  next: fetchChange(findLatestChange())

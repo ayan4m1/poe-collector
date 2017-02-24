@@ -14,19 +14,26 @@ buffer =
   listings: []
   orphans: []
 
+elastic =
+  client: createClient()
+  config: config.elastic
+  schema: jsonfile.readFileSync("#{__dirname}/../schema.json")
+  updateIndices: updateIndices
+  pruneIndices: pruneIndices
+  mergeStashes: mergeStashes
+  logFetch: logFetch
+
 createClient = ->
   new elasticsearch.Client(
-    host: config.elastic.host
-    log: config.elastic.logLevel
-    requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
+    host: elastic.config.host
+    log: elastic.config.logLevel
+    requestTimeout: moment.duration(elastic.config.timeout.interval, elastic.config.timeout.unit).asMilliseconds()
     suggestCompression: true
   )
 
-client = createClient()
-
 putTemplate = (name, settings, mappings) ->
   log.as.debug("asked to create template #{name}")
-  client.indices.putTemplate(
+  elastic.client.indices.putTemplate(
     create: false
     name: "#{name}*"
     body:
@@ -36,18 +43,18 @@ putTemplate = (name, settings, mappings) ->
   ).catch(log.as.error)
 
 createIndex = (name) ->
-  client.indices.exists({index: name})
+  elastic.client.indices.exists({index: name})
     .then (exists) ->
       return if exists
       log.as.info("creating index #{name}")
-      client.indices.create({index: name})
+      elastic.client.indices.create({index: name})
 
 createDatedIndices = (baseName, dayCount) ->
   tasks = createIndex("#{baseName}-#{moment().add(day, 'day').format('YYYY-MM-DD')}") for day in [ -1 ... dayCount ]
   Q.all(tasks)
 
 pruneIndices = (baseName, retention) ->
-  client.cat.indices(
+  elastic.client.cat.indices(
     index: "poe-#{baseName}*"
     format: 'json'
     bytes: 'm'
@@ -64,9 +71,31 @@ pruneIndices = (baseName, retention) ->
           log.as.info("keeping #{info.index} with size #{info['store.size']} MB")
 
       return Q(toRemove) unless toRemove.length > 0
-      client.indices.delete({ index: toRemove })
+      elastic.client.indices.delete({ index: toRemove })
         .then ->
           log.as.info("finished pruning #{toRemove.length} old indices")
+
+updateIndices = ->
+  templates = []
+  tasks = []
+  for shard, info of schema
+    shardName = "poe-#{shard}"
+    templates.push(putTemplate(shardName, info.settings, info.mappings))
+
+    # only create date partitioned indices for stash and listing
+    if shard isnt 'listing' and shard isnt 'stash'
+      tasks.push(createIndex(shardName))
+    else
+      tasks.push(createDatedIndices(shardName, 7))
+
+  Q.allSettled(templates)
+    .then -> Q.allSettled(tasks)
+
+pruneIndices = ->
+  tasks = []
+  for type in [ 'stash', 'listing' ]
+    tasks.push(pruneIndices(type, config.watcher.retention[type]))
+  Q.all(tasks)
 
 getShard = (type, date) ->
   date = date ? moment()
@@ -161,27 +190,8 @@ mergeListing = (shard, item) ->
     buffer.listings.push(header, payload)
   )
 
-orphan = (stashId, itemIds) ->
-  client.updateByQuery(
-    index: 'poe-listing*'
-    type: 'listing'
-    body:
-      script:
-        lang: 'painless'
-        inline: 'ctx._source.removed=true;ctx._source.lastSeen=ctx._now;'
-      query:
-        bool:
-          must: [{
-            term:
-              stash: stashId
-          }, {
-            term:
-              removed: false
-          }]
-          must_not: itemIds
-  )
-
-mergeStashes = (stashes, merged) ->
+mergeStashes = (stashes) ->
+  merged = Q.defer()
   shard = getShard('stash')
   listingShard = getShard('listing')
 
@@ -200,27 +210,24 @@ mergeStashes = (stashes, merged) ->
           id: item.id
       })
 
-    buffer.orphans.push(orphan(stash.id, itemIds))
+    buffer.orphans.push(orphanListing(stash.id, itemIds))
 
   docCount = buffer.listings.length / 2
-  if docCount < config.elastic.batchSize
-    merged.resolve()
-  else
+  if docCount > elastic.config.batchSize
     stashCount = buffer.stashes.length / 2
     log.as.debug("flushing #{docCount} listings across #{stashCount} stashes")
 
     slicedBuf = buffer
-    buffer =
-      listings: []
-      stashes: []
-      orphans: []
+    buffer.listings.length = buffer.stashes.length = buffer.orphans.length = 0;
 
     Array.prototype.push.apply(slicedBuf.listings, slicedBuf.stashes)
     bulkDocuments(slicedBuf.listings)
       .catch(merged.reject)
       .then -> orphanListings(slicedBuf.orphans)
       .catch(merged.reject)
-      .then(merged.resolve)
+      .then ->
+        slicedBuf.length = 0
+        merged.resolve()
 
   merged.promise
 
@@ -230,7 +237,7 @@ bulkDocuments = (bulk) ->
   docCount = bulk.length / 2
   log.as.debug("starting bulk of #{docCount} documents")
   duration = process.hrtime()
-  client.bulk({ body: bulk })
+  elastic.client.bulk({ body: bulk })
     .then ->
       bulked.resolve()
       duration = process.hrtime(duration)
@@ -240,7 +247,7 @@ bulkDocuments = (bulk) ->
       bulked.reject(err)
       if err.displayName is 'RequestTimeout'
         log.as.warn('re-creating elastic client due to request timeout!')
-        client = createClient()
+        elastic.client = createClient()
 
   bulked.promise
 
@@ -261,8 +268,28 @@ orphanListings = (orphans) ->
       log.as.info("orphaned #{orphanCount} documents in #{duration.asMilliseconds().toFixed(2)}ms @ #{Math.floor(orphanCount / duration.asSeconds())} docs/sec")
     .catch(log.as.error)
 
+orphanListing = (stashId, itemIds) ->
+  elastic.client.updateByQuery(
+    index: 'poe-listing*'
+    type: 'listing'
+    body:
+      script:
+        lang: 'painless'
+        inline: 'ctx._source.removed=true;ctx._source.lastSeen=ctx._now;'
+      query:
+        bool:
+          must: [{
+            term:
+              stash: stashId
+          }, {
+            term:
+              removed: false
+          }]
+          must_not: itemIds
+  )
+
 logFetch = (changeId, sizeKb, timeMs) ->
-  client.index
+  elastic.client.index
     index: 'poe-stats'
     type: 'fetch'
     id: changeId
@@ -271,30 +298,4 @@ logFetch = (changeId, sizeKb, timeMs) ->
       fileSizeKb: sizeKb
       downloadTimeMs: timeMs
 
-module.exports =
-  updateIndices: ->
-    schema = jsonfile.readFileSync("#{__dirname}/../schema.json")
-
-    templates = []
-    tasks = []
-    for shard, info of schema
-      shardName = "poe-#{shard}"
-      templates.push(putTemplate(shardName, info.settings, info.mappings))
-
-      # only create date partitioned indices for stash and listing
-      if shard isnt 'listing' and shard isnt 'stash'
-        tasks.push(createIndex(shardName))
-      else
-        tasks.push(createDatedIndices(shardName, 7))
-
-    Q.allSettled(templates)
-      .then -> Q.allSettled(tasks)
-  pruneIndices: ->
-    tasks = []
-    for type in [ 'stash', 'listing' ]
-      tasks.push(pruneIndices(type, config.watcher.retention[type]))
-    Q.all(tasks)
-  logFetch: logFetch
-  mergeStashes: mergeStashes
-  client: client
-  config: config.elastic
+module.exports = elastic

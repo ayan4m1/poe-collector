@@ -261,9 +261,6 @@
                   }
                 }
               },
-              "attributeRequirementReduction": {
-                "type": "float"
-              },
               "manaCostReduction": {
                 "type": "float"
               },
@@ -317,9 +314,6 @@
                   },
                   "movementSpeed": {
                     "type": "float"
-                  },
-                  "lightRadius": {
-                    "type": "float"
                   }
                 }
               }
@@ -327,39 +321,6 @@
           },
           "offense": {
             "properties": {
-              "onHit": {
-                "properties": {
-                  "life": {
-                    "type": "integer"
-                  },
-                  "mana": {
-                    "type": "integer"
-                  }
-                }
-              },
-              "onKill": {
-                "properties": {
-                  "life": {
-                    "type": "integer"
-                  },
-                  "mana": {
-                    "type": "integer"
-                  },
-                  "damage": {
-                    "type": "integer"
-                  }
-                }
-              },
-              "onCrit": {
-                "properties": {
-                  "bleed": {
-                    "type": "boolean"
-                  },
-                  "poison": {
-                    "type": "boolean"
-                  }
-                }
-              },
               "leech": {
                 "properties": {
                   "life": {
@@ -381,16 +342,6 @@
                         "type": "float"
                       }
                     }
-                  }
-                }
-              },
-              "perTarget": {
-                "properties": {
-                  "life": {
-                    "type": "integer"
-                  },
-                  "shield": {
-                    "type": "integer"
                   }
                 }
               },
@@ -604,16 +555,6 @@
                   }
                 }
               },
-              "stun": {
-                "properties": {
-                  "duration": {
-                    "type": "float"
-                  },
-                  "thresholdReduction": {
-                    "type": "float"
-                  }
-                }
-              },
               "penetration": {
                 "properties": {
                   "fire": {
@@ -648,9 +589,6 @@
               },
               "meleeRange": {
                 "type": "integer"
-              },
-              "knockbackChance": {
-                "type": "float"
               },
               "pierceChance": {
                 "type": "float"
@@ -723,55 +661,6 @@
                   },
                   "percent": {
                     "type": "float"
-                  }
-                }
-              },
-              "blockChance": {
-                "properties": {
-                  "weapons": {
-                    "type": "float"
-                  },
-                  "spells": {
-                    "type": "float"
-                  },
-                  "whileDualWielding": {
-                    "type": "float"
-                  }
-                }
-              },
-              "stunRecovery": {
-                "type": "float"
-              },
-              "physicalDamageReduction": {
-                "type": "float"
-              },
-              "onLowLife": {
-                "properties": {
-                  "prevent": {
-                    "properties": {
-                      "stun": {
-                        "type": "boolean"
-                      }
-                    }
-                  }
-                }
-              },
-              "prevent": {
-                "properties": {
-                  "chill": {
-                    "type": "boolean"
-                  },
-                  "freeze": {
-                    "type": "boolean"
-                  },
-                  "shock": {
-                    "type": "boolean"
-                  },
-                  "ignite": {
-                    "type": "boolean"
-                  },
-                  "stun": {
-                    "type": "boolean"
                   }
                 }
               }
@@ -857,58 +746,6 @@
                 }
               }
             },
-            "onCrit": {
-              "properties": {
-                "gainCharges": {
-                  "type": "integer"
-                }
-              }
-            },
-            "onUse": {
-              "properties": {
-                "removeSouls": {
-                  "type": "integer"
-                },
-                "armour": {
-                  "type": "integer"
-                }
-              }
-            },
-            "during": {
-              "properties": {
-                "damage": {
-                  "properties": {
-                    "all": {
-                      "type": "float"
-                    },
-                    "lightning": {
-                      "type": "float"
-                    }
-                  }
-                },
-                "reverseKnockback": {
-                  "type": "boolean"
-                },
-                "stunImmunity": {
-                  "type": "float"
-                },
-                "itemQuantity": {
-                  "type": "float"
-                },
-                "itemRarity": {
-                  "type": "float"
-                },
-                "lightRadius": {
-                  "type": "float"
-                },
-                "soulEater": {
-                  "type": "boolean"
-                },
-                "block": {
-                  "type": "integer"
-                }
-              }
-            },
             "removeAilment": {
               "properties": {
                 "burning": {
@@ -924,25 +761,6 @@
                   "type": "boolean"
                 }
               }
-            }
-          }
-        },
-        "minions": {
-          "properties": {
-            "damage": {
-              "type": "float"
-            },
-            "life": {
-              "type": "float"
-            },
-            "blockChance": {
-              "type": "float"
-            },
-            "movementSpeed": {
-              "type": "float"
-            },
-            "allResists": {
-              "type": "float"
             }
           }
         }
