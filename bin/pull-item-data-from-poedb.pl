@@ -11,16 +11,18 @@
 
 use strict;
 use warnings;
-use LWP::UserAgent;
-use HTML::Tree;
+
+use Cwd;
 use Encode;
 use JSON::XS;
+use HTML::Tree;
+use LWP::UserAgent;
 
-# Grab the list of item types from:
+# Grab the list of item types from poedb.tw
 my $baseurl = "http://poedb.tw/us/item.php";
 
 # Results stored here
-my %types = {};
+my %types = ();
 
 # Hash of types to convert - the key is the poedb title, the value is the baseItemType we will use
 $types{"Claws"} = "Claw";
@@ -69,9 +71,10 @@ foreach my $line (@content) {
   }
 }
 
-my $jsonpath = "data/BaseTypes.json";
+my $cwd = cwd();
+my $jsonpath = "${cwd}/../data/BaseTypes.json";
 my $jsonout = JSON::XS->new->utf8->pretty->canonical->encode(\%types);
-open(my $jsonh, '>', $jsonpath);
+open(my $jsonh, '>', $jsonpath) or die("can't write to BaseTypes.json: $!");
 print $jsonh $jsonout;
 close $jsonh;
 
@@ -80,16 +83,12 @@ exit;
 # == Subroutines =====================
 
 sub GetURL {
-
   my $url = $_[0];
 
   my $ua = LWP::UserAgent->new;
   my $can_accept = HTTP::Message::decodable;
   my $response = $ua->get("$url",'Accept-Encoding' => $can_accept);
   my $content = $response->decoded_content;
-  #my $htmltree = HTML::Tree->new();
-  #$htmltree->parse($content);
-  #my $clean = $htmltree->as_HTML;
 
   return($content);
 }
