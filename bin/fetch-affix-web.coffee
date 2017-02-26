@@ -3,6 +3,8 @@ cheerio = require 'cheerio'
 request = require 'request-promise-native'
 jsonfile = require 'jsonfile'
 
+log = require './logging'
+
 baseUrl = 'https://www.pathofexile.com/item-data'
 
 affixes = {}
@@ -65,7 +67,7 @@ Q.spread([
           } else mod.values[0]
 
     for key of bucket
-      console.log("#{key},#{bucket[key].min},#{bucket[key].max}")
+      log.as.info("#{key},#{bucket[key].min},#{bucket[key].max}")
 
     jsonfile.writeFileSync('affix-ranges.json', bucket)
 
@@ -73,4 +75,4 @@ Q.spread([
     list.suffix.sort(String.prototype.localeCompare)
 
     jsonfile.writeFileSync('affix-names.json', list)
-).catch(console.error)
+).catch(log.as.error)

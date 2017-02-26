@@ -1,5 +1,9 @@
+'use strict'
+
 # pull in yaml in conf/
 config = require('konfig')()
+
+log = require './logging'
 
 # basic app setup
 express = require 'express'
@@ -12,7 +16,7 @@ app.use require('compression')() if config.web.compress
 path = require 'path'
 root = path.resolve "#{__dirname}/../www"
 
-console.log "web root at #{root}"
+log.as.info "web root at #{root}"
 
 # pre-handle static requests
 app.use express.static(root)
@@ -32,4 +36,4 @@ app.all '/*', (req, res) ->
   res.redirect('/index.html')
 
 app.listen config.web.port
-console.log "listening on port #{config.web.port}"
+log.as.info "web server listening on port #{config.web.port}"
