@@ -11,6 +11,8 @@ log = require './logging'
 
 baseTypes = jsonfile.readFileSync("#{__dirname}/../data/BaseTypes.json")
 
+slug = (input) -> input.trim().toLowerCase()
+
 regexes =
   price:
     note: /\~(b\/o|price|c\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/
@@ -23,20 +25,33 @@ regexes =
     flask: /^Right click to drink/
     jewel: /^Place into an allocated Jewel Socket/
   mods:
+    damage: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced|more|less)\s+(Chaos|Cold|Fire|Lightning|Burning|Spell|Projectile|Elemental|Area|Melee)?\s*Damage/
     defense: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced) (Armour and Evasion Rating|Armour|Evasion Rating|Stun and Block Recovery)/
-    offense: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less) (Cold |Fire |Lightning )?(Global Critical Strike Multiplier|Global Critical Strike Chance|Burning|Spell|Cast|Attack|Projectile|Movement|Elemental|Physical|Mine|Trap|Totem) (Throwing|Laying)?\s*(Damage|Speed|Life)( with Weapons| for Spells)?/
-    flatOffense: /Adds (\d+)( to (\d+))? (Chaos |Elemental |Fire |Physical |Cold |Lightning )?Damage to (Attacks|Spells)/
-    block: /([-+]?)(\d*\.?\d+%?)(?: additional| to maximum) (?:Chance to Block|Block Chance)( Spells)?\s*(?:with|while)?\s*(Staves|Shields|Dual Wielding)?/
-    reflect: /Reflects (\d+) to (\d+) (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
-    resist: /^([-+]?)(\d+%) to (all )?(maximum )?(Lightning|Cold|Fire|Chaos|Elemental) Resistance(s?)/
+    offense: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced|more|less) (Cast|Attack|Movement|Physical|Mine|Trap|Totem|Accuracy Rating|Projectile)\s*(and Cast|Throwing|Laying|Speed)?\s*(with Weapons|for Spells)?/
+    block: /([-+]?)(\d*\.?\d+%?)(?: additional| to maximum)? (?:Chance to Block|Block Chance)( Spells)?\s*(?:with|while)?\s*(Staves|Shields|Dual Wielding)?/
+    flatOffense: /Adds (\d+)( to (\d+))? (Chaos |Elemental |Fire |Physical |Cold |Lightning )?Damage(?: to (Attacks|Spells))?/
+    reflect: /Reflects (\d+)( to (\d+))? (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
+    resist: /([-+]?)(\d+%) to (all )?(maximum )?(Lightning|Cold|Fire|Chaos|Elemental)(and (Lightning|Cold|Fire))? Resistance(s?)/
+    dualResist: /([-+]?)(\d+%) to (Fire|Cold|Lightning) and (Fire|Cold|Lightning) Resistances/
     attribute: /([-+]?)(\d+) to (all )?(Attributes|Strength|Dexterity|Intelligence)( and (Dexterity|Intelligence))?/
-    vitals: /([-+]?)(\d+%?) (increased|reduced|to)(?: maximum)? (Life|Mana|Energy Shield)( Recharge Rate)?/
-    minions: /Minions (deal|have) ([+-])?(\d+%?) (Chance|increased|to) (Damage|maximum Life|Movement Speed|all Elemental Resistances)/
-    gemLevel: /\+\d to Level of Socketed (Bow|Chaos|Cold|Elemental|Fire|Lightning|Melee|Minion|Spell)? Gems/
-    gemEffect: /Socketed (Curse) Gems .*/
-    ailment: /(\d+%) (?: chance)(to|increased) (Shock|Ignite|Freeze)( Duration on Enemies)?/
+    vitals: /([-+]?)(\d+%?) (increased|reduced|to)(?: maximum)? (Life|Mana|Energy Shield|Light Radius)( Recharge Rate)?/
+    gemLevel: /\+\d to Level of Socketed (Aura|Bow|Chaos|Cold|Elemental|Fire|Lightning|Melee|Minion|Strength|Support|Vaal|Spell)?\s*Gems/
+    ailment: /(\d+%) (?:chance )?(to|increased) (Shock|Ignite|Freeze)( Duration on Enemies)?/
     resistPen: /Penetrates (\d+%) (Cold|Lightning|Fire|Chaos) Resistance/
+    flaskUtility: /([-+]?)(\d+%) (increased|reduced) Flask (effect|Charges) (duration|gained|used)/
+    flaskUtilityChance: /([-+]?)(\d+%) chance to (Avoid being)\s+(Chilled|Frozen) during (?:Flask)? effect/
     flaskAilment: /Removes (Bleeding|Burning|Curses|Freeze and Chill|Shock) on use/
+    conversion: /([\d+%?]) of (Physical|Lightning|Cold) Damage Converted to (Fire) Damage/
+    loot: /([\d+%]) increased (Rarity|Quantity) of Items found/
+    recovery: /([-+]?)(\d*\.?\d+%?) (Life|Mana) (Regenerated per Second|gained on Kill)/
+    critical: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less|to)(\s+Global)?\s+Critical Strike (Chance|Multiplier)\s*(?:while|with|for)?\s*(Dual Wielding|Fire|Cold|Lightning|Elemental|Spells)?/
+    ailmentPrevent: /^Cannot be (Ignited|Frozen|Knocked Back|Poisoned)/
+    leechPermyriad: /(\d*\.?\d+%?) of (Cold|Fire|Lightning|Physical Attack) Damage Leeched as (Life|Mana)/
+    leechFlat: /([-+]?)(\d*\.?\d+) (Life|Mana|Energy Shield) gained for each Enemy hit by (?:your )?(Attacks|Spells)/
+    stunOffense: /([-+]?)(\d*\.?\d+%?) (increased|reduced) (Enemy Stun Threshold|Stun Duration on Enemies)/
+    regen: /(\d*\.?\d+) (Life|Mana) Regenerated per second/
+    breach: /Properties are doubled while in a Breach/
+    attrReqs: /(\d+) reduced Attribute Requirements/
 
 modOperators =
   increased: (a, b) -> a * (b + 1.0)
@@ -46,24 +61,133 @@ modOperators =
   to: (a, b, sign) -> if sign is '+' then modOperators.more(a, b) else modOperators.less(a, b)
 
 modParsers =
+  dualResist: (mod, result) ->
+    [ fullText, sign, value, first, second ] = mod
+    buckets = [ slug(first), slug(second) ]
+    result.defense.resist.elemental[buckets[0]] = modOperators.more(result.defense.resist.elemental[buckets[0]], value, sign)
+    result.defense.resist.elemental[buckets[1]] = modOperators.more(result.defense.resist.elemental[buckets[1]], value, sign)
+  attrReqs: (mod, result) ->
+    [ fullText, value ] = mod
+    result.stats.reduced.attributeRequirements = modOperators.reduced(result.stats.reduced.attributeRequirements, value)
+  stunOffense: (mod, result) ->
+    # todo: this
+  leechPermyriad: (mod, result) ->
+    [ fullText, value, subType, type ] = mod
+    subType = 'physical' if subType is 'Physical Attack'
+    value = parseFloat(value.replace('%', '') / 100.0)
+    bucket = slug(type)
+    subBucket = slug(subType)
+    result.offense.leech[bucket][subBucket] = modOperators.more(result.offense.leech[bucket][subBucket], value)
+  leechFlat: (mod, result) ->
+    [ fullText, sign, value, type, subType ] = mod
+    type = 'shield' if type is 'Energy Shield'
+    bucket = slug(type)
+    result.offense.onHit[bucket] = modOperators.more(result.offense.leech[bucket], value)
+  leech: (mod, result) ->
+    [ fullText, sign, value, source, type ] = mod
+    bucket = slug(type)
+    floatVal = parseFloat(value)
+    switch source
+      when 'Cold', 'Fire', 'Lightning'
+        subBucket = slug(source)
+        result.offense.leech.elemental[subBucket][bucket] = modOperators.more(result.offense.leech.elemental[subBucket][bucket], value, sign)
+      when 'Physical Attack'
+        result.offense.leech[bucket] = modOperators.more(result.offense.leech[bucket], floatVal, sign)
+  regen: (mod, result) ->
+    [ fullText, value, type ] = mod
+    bucket = slug(type)
+    floatVal = parseFloat(value)
+    result.stats.regen[bucket].percent = modOperators.more(result.stats.regen[bucket].percent, floatVal)
+  breach: (mod, result) ->
+    result.stats.breach = true
+  ailmentPrevent: (mod, result) ->
+    [ fullText, type ] = mod
+    bucket = slug(type)
+    if type is 'Knocked Back'
+      bucket = 'knockedBack'
+    result.defense.prevent[bucket] = true
+  critical: (mod, result) ->
+    [ fullText, sign, value, op, global, type, subBucket ] = mod
+
+    bucket = slug(type)
+    operator = modOperators[op]
+
+    if subBucket is 'Dual Wielding'
+      result.offense.critical.dualWielding[bucket] = operator(result.offense.critical.dualWielding[bucket])
+      return
+
+    if global is 'Global'
+      result.offense.critical.global[bucket] = operator(result.offense.critical.global[bucket], value)
+
+    if subBucket is 'Spells'
+      result.offense.critical.spell[bucket] = operator(result.offense.critical.spell[bucket], value)
+  recovery: (mod, result) ->
+    [ fullText, sign, value, first, second ] = mod
+    bucket = slug(first)
+    if second is 'gained on Kill'
+      result.offense.onKill[bucket] = modOperators.increased(result.offense.onKill[bucket])
+    else
+      result.offense.stats.regen[bucket] = modOperators.to(result.offense.stats.regen[bucket], value, sign)
+  flaskUtilityChance: (mod, result) ->
+    [ fullText, sign, value, type ] = mod
+  flaskUtility: (mod, result) ->
+    [ fullText, sign, value, op, type, verb ] = mod
+    operator = modOperators[op]
+    bucket = slug(type)
+    switch bucket
+      when 'effect'
+        result.flask.effect = operator(result.flask.effect, value, sign)
+      when 'charges'
+        result.flask.chargesUsed = operator(result.flask.chargesUsed, value, sign)
+  damage: (mod, result) ->
+    [ fullText, sign, value, op, type ] = mod
+    operator = modOperators[op]
+    switch type
+      when 'Cold', 'Fire', 'Lightning'
+        bucket = slug(type)
+        result.offense.damage.elemental[bucket] = operator(result.offense.damage.elemental[bucket], value)
+      when 'Chaos'
+        result.offense.damage.chaos.percent = operator(result.offense.damage.chaos.percent, value)
+      when 'Projectile'
+        result.offense.damage.projectile = operator(result.offense.damage.projectile, value)
+      when 'Spell'
+        result.offense.damage.spell.all = operator(result.offense.damage.spell.all, value)
+      when 'Elemental'
+        result.offense.damage.elemental.percent = operator(result.offense.damage.elemental.percent, value)
+      when 'Physical'
+        result.offense.damage.physical.percent = operator(result.offense.damage.physical.percent, value)
+      when 'Area'
+        result.offense.damage.areaOfEffect = operator(result.offense.damage.areaOfEffect, value)
+      when 'Melee'
+        # todo: what counts as melee?
+        result.offense.damage.physical.percent = operator(result.offense.damage.physical.percent, value)
+        #  result.offense.damage.physical.min = operator(result.offense.damage.physical.min, value)
+        #  result.offense.damage.physical.max = operator(result.offense.damage.physical.max, value)
+  loot: (mod, result) ->
+    [ fullText, value, type ] = mod
+    bucket = slug(type)
+    result.stats.item[bucket] = modOperators.increased(result.stats.item[bucket], value)
+  conversion: (mod, result) ->
+    # todo: this
+    log.as.info('no-op damage conversion')
   resistPen: (mod, result) ->
-    [ value, type ] = mod
-    bucket = type.toLowerCase()
+    [ fullText, value, type ] = mod
+    bucket = slug(type)
     value = parseInt(value.replace('%', '')) * 0.01
     result.offense.damage.penetration[bucket] += value
   flaskAilment: (mod, result) ->
-    [ type ] = mod
+    [ fullText, type ] = mod
     if mod.indexOf(' and ') >= 0
       console.dir(mod)
     result.flask.removeAilment[type] = true
   ailment: (mod, result) ->
-    [ value, op, type, duration ] = mod
-    bucket = type.toLowerCase()
+    [ fullText, value, op, type, duration ] = mod
+    bucket = slug(type)
     subBucket = if duration is ' Duration on Enemies' then 'duration' else 'chance'
     isPercent = value.indexOf('%') > 0
     value = parseInt(value.replace('%', ''))
     if isPercent then value *= 0.01
-    # "to" verb is always positive here, so hardcode sign
+    # "to" verb is always positive here, so hard-code sign
     operator = modOperators[op]
     result.offense.ailment[bucket][subBucket] = operator(result.offense.ailment[bucket][subBucket], value, '+')
   defense: (mod, result) ->
@@ -95,7 +219,7 @@ modParsers =
         result.defense.stunRecovery = operator(result.defense.stunRecovery, value, sign)
   flatOffense: (mod, result) ->
     [ fullText, min, bogus, max, type, target ] = mod
-    type = type.trim()
+    bucket = slug(type)
     range =
       min: parseInt(min)
       max: parseInt(max)
@@ -106,50 +230,36 @@ modParsers =
         result.offense.damage.elemental.all.flat.min += range.min
         result.offense.damage.elemental.all.flat.max += range.max
       when 'Cold', 'Lightning', 'Fire'
-        result.offense.damage.elemental[type.toLowerCase()].flat.min += range.min
-        result.offense.damage.elemental[type.toLowerCase()].flat.max += range.max
+        result.offense.damage.elemental[bucket].flat.min += range.min
+        result.offense.damage.elemental[bucket].flat.max += range.max
       when 'Physical', 'Chaos'
-        result.offense.damage[type.toLowerCase()].flat.min += range.min
-        result.offense.damage[type.toLowerCase()].flat.max += range.max
+        result.offense.damage[bucket].flat.min += range.min
+        result.offense.damage[bucket].flat.max += range.max
   offense: (mod, result) ->
-    [ fullText, sign, value, op, first, second, third, fourth, fifth, sixth ] = mod
+    [ fullText, sign, value, op, first, second, third, fourth] = mod
     return new Error(mod) unless value?
     isPercent = value.indexOf('%')
     value = parseInt(value.replace('%', ''))
     if isPercent then value *= 0.01
 
     operator = modOperators[op]
-    if first?.startsWith('Global Critical Strike')
-      # either Chance or Multiplier
-      bucket = first.split(' ').slice(-1).toLowerCase()
-      result.offense.critical[bucket] = operator(result.offense.critical[bucket])
-    else if first?.startsWith('Critical Strike Chance') and sixth?.trim() is 'for Spells'
-      result.offense.critical.spell.chance = operator(result.offense.critical.spell.chance)
 
-    switch second
-      when 'Speed'
-        switch first
-          when 'Attack'
-            result.offense.attackSpeed = operator(result.offense.attackSpeed, value)
-          when 'Cast'
-            result.offense.castSpeed = operator(result.offense.castSpeed, value)
-          when 'Projectile'
-            result.offense.projectileSpeed = operator(result.offense.projectileSpeed, value)
-          when 'Movement'
-            result.stats.movementSpeed = operator(result.stats.movementSpeed, value)
-      when 'Damage'
-        switch first
-          when 'Projectile'
-            result.offense.damage.projectile = operator(result.offense.damage.projectile, value)
-          when 'Spell'
-            result.offense.damage.spell.all = operator(result.offense.damage.spell.all, value)
-          #when 'Melee Physical'
-          #  result.offense.damage.physical.min = operator(result.offense.damage.physical.min, value)
-          #  result.offense.damage.physical.max = operator(result.offense.damage.physical.max, value)
-          when 'Elemental'
-            result.offense.damage.elemental.percent = operator(result.offense.damage.elemental.percent)
-          when 'Physical'
-            result.offense.damage.physical.percent = operator(result.offense.damage.physical.percent)
+    if first is 'Accuracy Rating'
+      bucket = if isPercent then 'percent' else 'flat'
+      result.offense.accuracyRating[bucket] = operator(result.offense.accuracyRating[bucket], value, sign)
+
+    return unless third is 'Speed'
+    switch first
+      when 'Attack'
+        result.offense.attackSpeed = operator(result.offense.attackSpeed, value)
+        if second is 'and Cast'
+          result.offense.castSpeed = operator(result.offense.castSpeed, value)
+      when 'Cast'
+        result.offense.castSpeed = operator(result.offense.castSpeed, value)
+      when 'Projectile'
+        result.offense.projectileSpeed = operator(result.offense.projectileSpeed, value)
+      when 'Movement'
+        result.stats.movementSpeed = operator(result.stats.movementSpeed, value)
   block: (mod, result) ->
     [ fullText, sign, value, spell, weapon ] = mod
     return new Error(mod) unless value?
@@ -161,17 +271,18 @@ modParsers =
     if spell?
       result.defense.blockChance.spells += value
     else if weapon is 'Dual Wielding'
-      result.defense.blockChance.whileDualWielding += value
+      result.defense.blockChance.dualWielding += value
     else
       # todo: break this out into the types
       result.defense.blockChance.weapons += value
   reflect: (mod, result) ->
-    [ fullText, min, max, type, melee, block ] = mod
+    [ fullText, min, bogus, max, type, melee, block ] = mod
     range =
       min: parseInt(min)
       max: parseInt(max)
     return if isNaN(range.min) or isNaN(range.max)
 
+    # todo: work this out
     #switch type
     #  when 'Physical'
     #  when 'Cold', 'Fire', 'Lightning'
@@ -192,7 +303,6 @@ modParsers =
           bucket = 'elemental'
           subBucket = 'all'
         else
-          console.dir(mod)
           return log.as.error('unexpected Elemental non-all non-max resist...')
 
         result.defense.resist[bucket][subBucket] = operator(result.defense.resist[bucket][subBucket], value, sign)
@@ -200,7 +310,7 @@ modParsers =
         result.defense.resist.chaos = operator(result.defense.resist.chaos, value, sign)
       when 'Cold', 'Fire', 'Lightning'
         bucket = maximum?.trim()
-        subBucket = type.trim().toLowerCase()
+        subBucket = slug(type)
         if bucket is 'maximum'
           result.defense.resist[bucket][subBucket] = operator(result.defense.resist[bucket][subBucket], value, sign)
         else
@@ -244,26 +354,15 @@ modParsers =
           result.stats.mana[bucket] = operator(result.stats.mana[bucket], value, sign)
         when 'Energy Shield'
           result.defense.shield[bucket] = operator(result.defense.shield[bucket], value, sign)
+        when 'Light Radius'
+          result.stats.reduced.inverseLightRadius = operator(result.stats.reduced.inverselightRadius, value, sign)
   gemLevel: (mod, result) ->
     [ value, type ] = mod
     value = parseInt(value)
     return if isNaN(value)
-    type = type.toLowerCase().trim()
-    result.gemLevel[type] = value
-  gemEffect: (mod, result) ->
-    [ type ] = mod
-  minions: (mod, result) ->
-    [ verb, sign, value, op, type ] = mod
-    operator = modOperators[op]
-    if verb is 'Deal'
-      result.minions.damage = operator(result.minions.damage, value, sign)
-    else
-      switch type
-        when 'maximum Life'
-          result.minions.life = operator(result.minions.life)
-  cursed: (mod, result) ->
-    [ body ] = mod
-    log.as.silly("cursed enemies mod - " + body)
+    type = type ? 'all'
+    bucket = slug(type)
+    result.gemLevel[bucket] = value
 
 parseMod = (mod, result) ->
   foundMatch = false
@@ -275,7 +374,8 @@ parseMod = (mod, result) ->
     modParsers[type](matchData, result)
     break
 
-  log.as.error(mod) unless matchData?
+  #log.as.warn("N #{mod}") unless matchData?
+  #log.as.info("Y #{mod}") if matchData?
   result.modifiers.push(mod)
 
 parseDamageType = (id) ->
@@ -349,7 +449,7 @@ parseProperty = (prop, result) ->
       for type, range of damage
         result.offense.damage.elemental[type].flat = range
     when 'Critical Strike Chance'
-      result.offense.critical.chance = parseFloat(prop.values[0][0].replace('%', ''))
+      result.offense.critical.chance = parseFloat(prop.values[0][0].replace('%', '')) / 100.0
     when 'Attacks per Second'
       result.offense.attacksPerSecond = parseFloat(prop.values[0][0])
     when 'Weapon Range'
@@ -531,20 +631,30 @@ parseItem = (item) ->
         mana:
           flat: 0
           percent: 0
-      manaCostReduction: 0
+      reduced:
+        attributeRequirements: 0
+        manaCost: 0
+        inverseLightRadius: 0
       movementSpeed: 0
-      itemRarity: 0
-      itemQuantity: 0
+      item:
+        rarity: 0
+        quantity: 0
     gemLevel:
+      all: 0
+      aura: 0
       bow: 0
       chaos: 0
       cold: 0
+      curse: 0
+      elemental: 0
       fire: 0
-      any: 0
       lightning: 0
       melee: 0
       minion: 0
+      strength: 0
       spell: 0
+      support: 0
+      vaal: 0
     meta:
       modQuality: 0
       level: item.ilvl ? 0
@@ -562,27 +672,48 @@ parseItem = (item) ->
           elemental: 0
     flask:
       charges: 0
-      chargedUsed: 0
+      effect: 0
+      chargesUsed: 0
       duration: 0
       recovery:
         amount: 0
         speed: 0
       removeAilment:
-        bleeding: 0
-        burning: 0
-        freezeAndChill: 0
-        shock: 0
+        bleeding: false
+        burning: false
+        freezeAndChill: false
+        shock: false
     offense:
       leech:
         life:
-          flat: 0
           percent: 0
+          elemental:
+            cold: 0
+            fire: 0
+            lightning: 0
         mana:
-          flat: 0
           percent: 0
+          elemental:
+            cold: 0
+            fire: 0
+            lightning: 0
+      onHit:
+        life: 0
+        mana: 0
+        shield: 0
+      onKill:
+        life: 0
+        mana: 0
+      onCrit:
+        life: 0
+        mana: 0
+      perTarget:
+        life: 0
+        shield: 0
       critical:
-        chance: 0
-        multiplier: 0
+        global:
+          chance: 0
+          multiplier: 0
         elemental:
           chance: 0
           multiplier: 0
@@ -590,6 +721,9 @@ parseItem = (item) ->
           chance: 0
           multiplier: 0
         melee:
+          chance: 0
+          multiplier: 0
+        dualWielding:
           chance: 0
           multiplier: 0
       ailment:
@@ -607,6 +741,7 @@ parseItem = (item) ->
           flat: 0
           percent: 0
         projectile: 0
+        areaOfEffect: 0
         spell:
           all: 0
           elemental:
@@ -670,6 +805,10 @@ parseItem = (item) ->
       attackSpeed: 0
       castSpeed: 0
     defense:
+      blockChance:
+        spells: 0
+        weapons: 0
+        dualWielding: 0
       resist:
         maximum:
           fire: 0
@@ -691,6 +830,11 @@ parseItem = (item) ->
         recharge: 0
         flat: 0
         percent: 0
+      prevent:
+        knockedBack: false
+        frozen: false
+        poisoned: false
+        ignited: false
     price: []
     chaosPrice: 0
     removed: false
@@ -708,6 +852,10 @@ parseItem = (item) ->
 
   parseType(item, result)
   parseCurrency(item, result)
+
+  # don't bother parsing mods for non-gear (yet)
+  if item.frameType >= 4
+    return result
 
   if item.sockets?
     parseSockets(item, result)

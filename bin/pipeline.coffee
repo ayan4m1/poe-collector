@@ -16,11 +16,15 @@ log = require './logging'
 elastic = require './elastic'
 
 cacheDir = "#{__dirname}/../cache"
+apiUrl = 'http://api.pathofexile.com/public-stash-tabs'
+latestChangeUrl = 'http://poeninja.azureedge.net/api/Data/GetStats'
+
 
 # promisified functions
 readDir = Q.denodeify(fs.readdir)
 readJson = Q.denodeify(jsonfile.readFile)
 writeJson = Q.denodeify(jsonfile.writeFile)
+removeFile = Q.denodeify(fs.unlink)
 
 # prevent GGG from killing our requests
 downloadLimiter = new Bottleneck(
@@ -35,12 +39,15 @@ downloadChange = (changeId) ->
   log.as.debug("handling the request to fetch change #{changeId}")
   duration = process.hrtime()
   requestPromise(
-    uri: "http://api.pathofexile.com/public-stash-tabs?id=#{changeId}"
+    uri: "#{apiUrl}?id=#{changeId}"
     gzip: true
   )
     .then (res) ->
       data = JSON.parse(res)
-      writeJson("#{cacheDir}/#{changeId}", data)
+      writeJson("#{cacheDir}/#{changeId}",
+        id: changeId
+        body: data
+      )
 
       # timing + stats
       duration = process.hrtime(duration)
@@ -53,22 +60,47 @@ downloadChange = (changeId) ->
       fetchChange(data.next_change_id)
     .catch(log.as.error)
 
-processChange = (data) ->
-  log.as.debug("process called for #{data.id}")
-  elastic.mergeStashes(data.body.stashes)
+processChange = (changeId) ->
+  readJson("#{cacheDir}/#{changeId}")
+    .then (data) ->
+      log.as.debug("process called for #{data.id}")
+      elastic.mergeStashes(data.body.stashes)
+        .then -> removeFile(changeId)
+        .then -> touch(changeId)
+        .catch(log.as.error)
+    .catch(log.as.error)
 
 findLatestChange = ->
+  found = Q.defer()
+
   readDir(cacheDir)
     .then (items) ->
       items = items.filter (v) ->
         stats = fs.statSync("#{cacheDir}/#{v}")
-        processChange(v) unless stats.size is 0
+        processChange(v) if stats.size > 0
         stats.isFile()
 
       items.sort (a, b) ->
         fs.statSync("#{cacheDir}/#{a}").mtime.getTime() - fs.statSync("#{cacheDir}/#{b}").mtime.getTime()
 
-      items.pop()
+      result = items.pop()
+      if result?
+        return found.resolve(result)
+
+      fetchLatestChangeId()
+        .then (changeId) -> found.resolve(changeId)
+        .catch(found.reject)
+
+  found.promise
+
+fetchLatestChangeId = ->
+  log.as.info('empty cache dir, looking for latest change ID')
+  requestPromise({ uri: latestChangeUrl })
+  .then (res) ->
+    stats = JSON.parse(res)
+    stats.nextChangeId
 
 module.exports =
-  next: fetchChange(findLatestChange())
+  latest: fetchLatestChangeId
+  first: findLatestChange
+  next: fetchChange

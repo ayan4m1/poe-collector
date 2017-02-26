@@ -1,7 +1,9 @@
 default:
-  host: http://phreak.space:9200
+  host: http://localhost:9200
   logLevel: error
   batchSize: 10000
   timeout:
     interval: 120
     unit: seconds
+production:
+  host: http://phreak.space:9200

@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports =
   regexes:
     bauble: /(Glassblower)?'?s?Bauble/i

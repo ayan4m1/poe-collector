@@ -1,33 +1,25 @@
-config = require('konfig')()
-request = require 'request-promise-native'
-elastic = require 'elasticsearch'
+moment = require 'moment'
+requestPromise = require 'request-promise-native'
 
 log = require './logging'
+elastic = require './elastic'
 
-# this gets us current leagues in a more compact form
-baseUrl = 'http://api.pathofexile.com/leagues?type=main&compact=1'
+requestPromise({
+  uri: 'http://api.pathofexile.com/leagues?type=main&compact=1'
+})
+  .then (data) ->
+    leagues = JSON.parse(data)
+    return log.as.error("invalid response from server:\r\n\r\n#{data}") unless leagues?
+    log.as.info("[league] parsed #{leagues.count} active leagues")
 
-client = new elastic.Client(
-  host: config.watcher.elastic.hostname
-  log: config.watcher.elastic.logLevel
-)
-
-request(baseUrl)
-.then((data) ->
-  leagues = JSON.parse(data)
-  log.as.info("[league] parsed #{leagues.count}")
-
-  for league in leagues
-    log.as.debug("[league] processing update for #{league.id}")
-    client.index(
-      index: config.watcher.elastic.leagueShard
-      type: 'league'
-      body: league
-    , (err, resp) ->
-      log.as.error(err) if err?
-      log.as.debug(resp) if resp?
-    )
-).catch(log.as.error)
-.done(() ->
-  log.as.info('[league] completed league update')
-)
+    for league in leagues
+      log.as.debug("[league] updating #{league.id}")
+      elastic.client.index(
+        index: 'poe-league'
+        type: 'league'
+        body: league
+      , (err, resp) ->
+        log.as.error(err) if err?
+        log.as.warn(resp) if resp.failed > 0
+      )
+  .catch(log.as.error)

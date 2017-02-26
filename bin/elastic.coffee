@@ -1,3 +1,5 @@
+'use strict'
+
 config = require('konfig')()
 
 Q = require 'q'
@@ -9,25 +11,11 @@ elasticsearch = require 'elasticsearch'
 log = require './logging'
 parser = require './parser'
 
-buffer =
-  stashes: []
-  listings: []
-  orphans: []
-
-elastic =
-  client: createClient()
-  config: config.elastic
-  schema: jsonfile.readFileSync("#{__dirname}/../schema.json")
-  updateIndices: updateIndices
-  pruneIndices: pruneIndices
-  mergeStashes: mergeStashes
-  logFetch: logFetch
-
 createClient = ->
   new elasticsearch.Client(
-    host: elastic.config.host
-    log: elastic.config.logLevel
-    requestTimeout: moment.duration(elastic.config.timeout.interval, elastic.config.timeout.unit).asMilliseconds()
+    host: config.elastic.host
+    log: config.elastic.logLevel
+    requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
     suggestCompression: true
   )
 
@@ -78,7 +66,7 @@ pruneIndices = (baseName, retention) ->
 updateIndices = ->
   templates = []
   tasks = []
-  for shard, info of schema
+  for shard, info of elastic.schema
     shardName = "poe-#{shard}"
     templates.push(putTemplate(shardName, info.settings, info.mappings))
 
@@ -91,7 +79,7 @@ updateIndices = ->
   Q.allSettled(templates)
     .then -> Q.allSettled(tasks)
 
-pruneIndices = ->
+pruneAllIndices = ->
   tasks = []
   for type in [ 'stash', 'listing' ]
     tasks.push(pruneIndices(type, config.watcher.retention[type]))
@@ -102,7 +90,7 @@ getShard = (type, date) ->
   "poe-#{type}-#{date.format('YYYY-MM-DD')}"
 
 mergeStash = (shard, stash) ->
-  client.search({
+  elastic.client.search({
     index: 'poe-stash*'
     type: 'stash'
     body:
@@ -133,7 +121,7 @@ mergeStash = (shard, stash) ->
         for hitSet in res.hits.hits
           continue unless hitSet._index isnt shard
           oldStashes++
-          buffer.orphans.push(client.delete(
+          buffer.orphans.push(elastic.client.delete(
             index: hitSet._index
             type: 'stash'
             id: stash.id
@@ -152,7 +140,7 @@ mergeStash = (shard, stash) ->
   )
 
 mergeListing = (shard, item) ->
-  client.search({
+  elastic.client.search({
     index: 'poe-listing*'
     type: 'listing'
     body:
@@ -213,7 +201,7 @@ mergeStashes = (stashes) ->
     buffer.orphans.push(orphanListing(stash.id, itemIds))
 
   docCount = buffer.listings.length / 2
-  if docCount > elastic.config.batchSize
+  if docCount > config.elastic.batchSize
     stashCount = buffer.stashes.length / 2
     log.as.debug("flushing #{docCount} listings across #{stashCount} stashes")
 
@@ -297,5 +285,36 @@ logFetch = (changeId, sizeKb, timeMs) ->
       timestamp: moment().toDate()
       fileSizeKb: sizeKb
       downloadTimeMs: timeMs
+
+createTemplates = ->
+  schema = jsonfile.readFileSync("#{__dirname}/../schema.json")
+  for name, template of schema
+    log.as.info("creating index template for #{name}*")
+    elastic.client.indices.putTemplate(name,
+      body: template
+    )
+
+dropTemplate = (name) ->
+  Q.denodeify(elastic.client.indices.deleteTemplate(name))
+
+dropTemplates = (templates) ->
+  tasks = []
+  tasks.push(dropTemplate(template)) for template in templates
+  Q.all(tasks)
+
+buffer =
+  stashes: []
+  listings: []
+  orphans: []
+
+elastic =
+  client: createClient()
+  config: config.elastic
+  dropTemplates: dropTemplates
+  createTemplates: createTemplates
+  updateIndices: updateIndices
+  pruneIndices: pruneAllIndices
+  mergeStashes: mergeStashes
+  logFetch: logFetch
 
 module.exports = elastic
