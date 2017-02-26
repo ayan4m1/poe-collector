@@ -840,6 +840,7 @@ parseItem = (item) ->
     removed: false
     firstSeen: timestamp
     lastSeen: null
+    lastParsed: timestamp
     flavourText: ""
 
   if item.icon?
