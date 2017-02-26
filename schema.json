@@ -280,6 +280,7 @@
                 }
               },
               "reduced": {
+                "type": "object",
                 "properties": {
                   "manaCost": {
                     "type": "float"
@@ -344,9 +345,7 @@
                 }
               },
               "movementSpeed": {
-                "properties": {
-                  "type": "float"
-                }
+                "type": "float"
               }
             }
           },
@@ -888,173 +887,179 @@
                 }
               }
             }
-          }
-        },
-        "meta": {
-          "type": "object",
-          "properties": {
-            "modQuality": {
-              "type": "float"
-            },
-            "level": {
-              "type": "integer"
-            },
-            "crafting": {
-              "properties": {
-                "openPrefix": {
-                  "type": "boolean"
-                },
-                "openSuffix": {
-                  "type": "boolean"
-                }
-              }
-            },
-            "total": {
-              "properties": {
-                "resist": {
-                  "properties": {
-                    "maximum": {
-                      "type": "float"
-                    },
-                    "all": {
-                      "type": "float"
-                    },
-                    "chaos": {
-                      "type": "float"
-                    },
-                    "elemental": {
-                      "type": "float"
-                    }
+          },
+          "meta": {
+            "properties": {
+              "quality": {
+                "type": "float"
+              },
+              "level": {
+                "type": "integer"
+              },
+              "crafting": {
+                "type": "object",
+                "properties": {
+                  "openPrefix": {
+                    "type": "boolean"
+                  },
+                  "openSuffix": {
+                    "type": "boolean"
                   }
-                },
-                "damagePerSecond": {
-                  "properties": {
-                    "all": {
-                      "type": "integer"
-                    },
-                    "chaos": {
-                      "type": "integer"
-                    },
-                    "physical": {
-                      "type": "integer"
-                    },
-                    "elemental": {
-                      "type": "integer"
+                }
+              },
+              "total": {
+                "type": "object",
+                "properties": {
+                  "resist": {
+                    "properties": {
+                      "maximum": {
+                        "type": "float"
+                      },
+                      "all": {
+                        "type": "float"
+                      },
+                      "chaos": {
+                        "type": "float"
+                      },
+                      "elemental": {
+                        "type": "float"
+                      }
+                    }
+                  },
+                  "damagePerSecond": {
+                    "properties": {
+                      "all": {
+                        "type": "integer"
+                      },
+                      "chaos": {
+                        "type": "integer"
+                      },
+                      "physical": {
+                        "type": "integer"
+                      },
+                      "elemental": {
+                        "type": "integer"
+                      }
                     }
                   }
                 }
               }
             }
-          }
-        },
-        "flask": {
-          "type": "object",
-          "properties": {
-            "charges": {
-              "type": "integer"
-            },
-            "chargesUsedReduction": {
-              "type": "float"
-            },
-            "duration": {
-              "type": "float"
-            },
-            "recovery": {
-              "properties": {
-                "amount": {
-                  "type": "integer"
-                },
-                "speed": {
-                  "type": "float"
-                }
-              }
-            },
-            "onCrit": {
-              "properties": {
-                "gainCharges": {
-                  "type": "integer"
-                }
-              }
-            },
-            "onUse": {
-              "properties": {
-                "removeSouls": {
-                  "type": "integer"
-                },
-                "armour": {
-                  "type": "integer"
-                }
-              }
-            },
-            "during": {
-              "properties": {
-                "damage": {
-                  "properties": {
-                    "all": {
-                      "type": "float"
-                    },
-                    "lightning": {
-                      "type": "float"
-                    }
+          },
+          "flask": {
+            "type": "object",
+            "properties": {
+              "charges": {
+                "type": "integer"
+              },
+              "chargesUsedReduction": {
+                "type": "float"
+              },
+              "duration": {
+                "type": "float"
+              },
+              "recovery": {
+                "properties": {
+                  "amount": {
+                    "type": "integer"
+                  },
+                  "speed": {
+                    "type": "float"
                   }
-                },
-                "reverseKnockback": {
-                  "type": "boolean"
-                },
-                "stunImmunity": {
-                  "type": "float"
-                },
-                "itemQuantity": {
-                  "type": "float"
-                },
-                "itemRarity": {
-                  "type": "float"
-                },
-                "lightRadius": {
-                  "type": "float"
-                },
-                "soulEater": {
-                  "type": "boolean"
-                },
-                "block": {
-                  "type": "integer"
                 }
-              }
-            },
-            "removeAilment": {
-              "properties": {
-                "burning": {
-                  "type": "boolean"
-                },
-                "bleeding": {
-                  "type": "boolean"
-                },
-                "shock": {
-                  "type": "boolean"
-                },
-                "freezeAndChill": {
-                  "type": "boolean"
+              },
+              "onCrit": {
+                "properties": {
+                  "gainCharges": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "onUse": {
+                "properties": {
+                  "removeSouls": {
+                    "type": "integer"
+                  },
+                  "armour": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "during": {
+                "properties": {
+                  "damage": {
+                    "properties": {
+                      "all": {
+                        "type": "float"
+                      },
+                      "lightning": {
+                        "type": "float"
+                      }
+                    }
+                  },
+                  "reverseKnockback": {
+                    "type": "boolean"
+                  },
+                  "stunImmunity": {
+                    "type": "float"
+                  },
+                  "item": {
+                    "properties": {
+                      "quantity": {
+                        "type": "float"
+                      },
+                      "rarity": {
+                        "type": "float"
+                      }
+                    }
+                  },
+                  "lightRadius": {
+                    "type": "float"
+                  },
+                  "soulEater": {
+                    "type": "boolean"
+                  },
+                  "block": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "removeAilment": {
+                "properties": {
+                  "burning": {
+                    "type": "boolean"
+                  },
+                  "bleeding": {
+                    "type": "boolean"
+                  },
+                  "shock": {
+                    "type": "boolean"
+                  },
+                  "freezeAndChill": {
+                    "type": "boolean"
+                  }
                 }
               }
             }
-          }
-        },
-        "minions": {
-          "properties": {
-            "damage": {
-              "type": "float"
-            },
-            "life": {
-              "type": "float"
-            },
-            "blockChance": {
-              "type": "float"
-            },
-            "movementSpeed": {
-              "type": "float"
-            },
-            "allResists": {
-              "type": "float"
+          },
+          "minions": {
+            "type": "object",
+            "properties": {
+              "damage": {
+                "type": "float"
+              },
+              "life": {
+                "type": "float"
+              },
+              "blockChance": {
+                "type": "float"
+              },
+              "movementSpeed": {
+                "type": "float"
+              },
+              "allResists": {
+                "type": "float"
+              }
             }
           }
         }

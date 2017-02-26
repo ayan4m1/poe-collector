@@ -678,6 +678,15 @@ parseItem = (item) ->
       recovery:
         amount: 0
         speed: 0
+      during:
+        damage:
+          all: 0
+          lightning: 0
+        reverseKnockback: false
+        stunImmunity: false
+        soulEater: false
+        lightRadius: 0
+        block: 0
       removeAilment:
         bleeding: false
         burning: false
@@ -835,6 +844,12 @@ parseItem = (item) ->
         frozen: false
         poisoned: false
         ignited: false
+    minions:
+      damage: 0
+      life: 0
+      blockChance: 0
+      movementSpeed: 0
+      allResists: 0
     price: []
     chaosPrice: 0
     removed: false

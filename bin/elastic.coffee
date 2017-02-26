@@ -64,9 +64,10 @@ pruneIndices = (baseName, retention) ->
           log.as.info("finished pruning #{toRemove.length} old indices")
 
 updateIndices = ->
+  schema = jsonfile.readFileSync("#{__dirname}/../schema.json")
   templates = []
   tasks = []
-  for shard, info of elastic.schema
+  for shard, info of schema
     shardName = "poe-#{shard}"
     templates.push(putTemplate(shardName, info.settings, info.mappings))
 
@@ -74,7 +75,8 @@ updateIndices = ->
     if shard isnt 'listing' and shard isnt 'stash'
       tasks.push(createIndex(shardName))
     else
-      tasks.push(createDatedIndices(shardName, 7))
+      numDays = moment.duration(config.watcher.retention[shard].interval, config.watcher.retention[shard].unit).asDays()
+      tasks.push(createDatedIndices(shardName, numDays))
 
   Q.allSettled(templates)
     .then -> Q.allSettled(tasks)
@@ -287,7 +289,6 @@ logFetch = (changeId, sizeKb, timeMs) ->
       downloadTimeMs: timeMs
 
 createTemplates = ->
-  schema = jsonfile.readFileSync("#{__dirname}/../schema.json")
   for name, template of schema
     log.as.info("creating index template for #{name}*")
     elastic.client.indices.putTemplate(name,
