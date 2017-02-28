@@ -64,10 +64,9 @@ pruneIndices = (baseName, retention) ->
           log.as.info("finished pruning #{toRemove.length} old indices")
 
 updateIndices = ->
-  schema = jsonfile.readFileSync("#{__dirname}/../schema.json")
   templates = []
   tasks = []
-  for shard, info of schema
+  for shard, info of elastic.schema
     shardName = "poe-#{shard}"
     templates.push(putTemplate(shardName, info.settings, info.mappings))
 
@@ -161,7 +160,7 @@ mergeListing = (shard, item) ->
       raw = res.hits.hits[0]
       if raw._index isnt shard
         log.as.silly("moving #{raw._id} up from #{raw._index}")
-        buffer.orphans.push(client.delete(
+        buffer.orphans.push(elastic.client.delete(
           index: raw._index
           type: 'listing'
           id: raw._id
@@ -293,7 +292,7 @@ logFetch = (changeId, sizeKb, timeMs) ->
       downloadTimeMs: timeMs
 
 createTemplates = ->
-  for name, template of schema
+  for name, template of elastic.schema
     log.as.info("creating index template for #{name}*")
     elastic.client.indices.putTemplate(name,
       body: template
@@ -315,6 +314,7 @@ buffer =
 elastic =
   client: createClient()
   config: config.elastic
+  schema: jsonfile.readFileSync("#{__dirname}/../schema.json")
   dropTemplates: dropTemplates
   createTemplates: createTemplates
   updateIndices: updateIndices

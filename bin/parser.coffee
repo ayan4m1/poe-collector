@@ -56,8 +56,8 @@ regexes =
 modOperators =
   increased: (a, b) -> a * (b + 1.0)
   reduced: (a, b) -> a * (1.0 - b)
-  less: (a, b) -> a - b
-  more: (a, b) -> a + b
+  less: (a, b) -> a ? 0 - b ? 0
+  more: (a, b) -> a ? 0 + b ? 0
   to: (a, b, sign) -> if sign is '+' then modOperators.more(a, b) else modOperators.less(a, b)
 
 modParsers =
@@ -179,7 +179,8 @@ modParsers =
     [ fullText, type ] = mod
     if mod.indexOf(' and ') >= 0
       console.dir(mod)
-    result.flask.removeAilment[type] = true
+    bucket = slug(type)
+    result.flask.removeAilment[bucket] = true
   ailment: (mod, result) ->
     [ fullText, value, op, type, duration ] = mod
     bucket = slug(type)
@@ -317,11 +318,11 @@ modParsers =
           result.defense.resist.elemental[subBucket] = operator(result.defense.resist.elemental[subBucket], value, sign)
 
     if all is 'all '
-      result.meta.total.resist.all = operator(result.meta.total.resist.all, value, sign)
+      result.pseudo.resist.all = operator(result.pseudo.resist.all, value, sign)
     else if maximum is 'maximum '
-      result.meta.total.resist.maximum = operator(result.meta.total.resist.maximum, value, sign)
+      result.pseudo.resist.maximum = operator(result.pseudo.resist.maximum, value, sign)
 
-    result.meta.total.resist.elemental = operator(result.meta.total.resist.elemental, value, sign)
+    result.pseudo.resist.elemental = operator(result.pseudo.resist.elemental, value, sign)
   attribute: (mod, result) ->
     [ fullText, sign, value, all, first, second ] = mod
     value = parseInt(value)
@@ -461,7 +462,10 @@ parseProperty = (prop, result) ->
         maximum: stackInfo[1]
     when 'Map Tier'
       result.tier = parseInt(prop.values[0][0])
-  null
+
+  return null
+
+stripSetText = (input) -> input.replace(/(<<set:MS>><<set:M>><<set:S>>|Superior\s+)/g, '').trim()
 
 parseType = (item, result) ->
   frame =
@@ -477,14 +481,14 @@ parseType = (item, result) ->
       when 8 then 'Prophecy'
       else null
 
-  result.name = item.name.replace(/(<<set:MS>><<set:M>><<set:S>>|Superior\s+)/g, '').trim()
-  result.typeLine = item.typeLine
+  result.name = stripSetText(item.name)
+  result.typeLine = stripSetText(item.typeLine)
   result.baseLine = baseTypes[item.typeLine]
 
   # < 4 means Normal, Magic, or Rare item
   if item.frameType < 4
     result.rarity = frame
-    result.fullName = "#{result.name} #{item.typeLine}".trim()
+    result.fullName = stripSetText("#{result.name} #{item.typeLine}")
     result.itemType =
       switch
         when regexes.type.weapon.test(item.typeLine) then 'Weapon'
@@ -500,8 +504,11 @@ parseType = (item, result) ->
     result.itemType = 'Unknown'
 
   switch result.itemType
+    # todo: handle jewelry
     when 'Weapon', 'Armour', 'Accessory'
       result.gearType = item.typeLine.split(' ')[-1]
+
+  return null
 
 parseRequirements = (item, result) ->
   for req in item.requirements
@@ -511,6 +518,8 @@ parseRequirements = (item, result) ->
 
     parsed.name = parsed.name.substring(0, 3) if ['Intelligence', 'Strength', 'Dexterity'].indexOf(parsed.name) > 0
     result.requirements[parsed.name.toLowerCase()] = parsed.value
+
+  return null
 
 parseSockets = (item, result) ->
   sockets = {
@@ -540,6 +549,8 @@ parseSockets = (item, result) ->
 
   result.sockets = sockets
 
+  return null
+
 parsePseudos = (mod, result) ->
   damage = result.offense.damage
   defense = result.defense
@@ -566,7 +577,7 @@ parsePseudos = (mod, result) ->
       elemental: averageDps(damage.elemental.all) + averageDps(damage.elemental.cold) + averageDps(damage.elemental.lightning) + averageDps(damage.elemental.fire)
       all: 0
 
-  totals.resist.all =  defense.resist.elemental.all +
+  totals.resist.all = defense.resist.elemental.all +
     defense.resist.elemental.fire +
     defense.resist.elemental.cold +
     defense.resist.elemental.lightning +
@@ -575,9 +586,9 @@ parsePseudos = (mod, result) ->
     totals.damagePerSecond.chaos +
     totals.damagePerSecond.elemental
 
-  result.meta.total = totals
+  result.pseudo = totals
 
-  result
+  return null
 
 parseItem = (item) ->
   timestamp = moment().toDate()
@@ -661,23 +672,22 @@ parseItem = (item) ->
       spell: 0
       support: 0
       vaal: 0
+    pseudo:
+      resist:
+        maximum: 0
+        all: 0
+        chaos: 0
+        elemental: 0
+      damagePerSecond:
+        all: 0
+        chaos: 0
+        physical: 0
+        elemental: 0
     meta:
-      modQuality: 0
+      quality: 0
       level: item.ilvl ? 0
-      crafting:
-        openPrefix: false
-        openSuffix: false
-      total:
-        resist:
-          maximum: 0
-          all: 0
-          chaos: 0
-          elemental: 0
-        damagePerSecond:
-          all: 0
-          chaos: 0
-          physical: 0
-          elemental: 0
+      prefix: false
+      suffix: false
     flask:
       charges: 0
       effect: 0
@@ -860,10 +870,10 @@ parseItem = (item) ->
       allResists: 0
     price: []
     chaosPrice: 0
-    removed: false
-    firstSeen: timestamp
     lastSeen: null
+    firstSeen: timestamp
     lastParsed: timestamp
+    removed: false
     flavourText: ""
 
   if item.icon?

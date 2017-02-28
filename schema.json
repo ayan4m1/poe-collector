@@ -895,49 +895,45 @@
               "level": {
                 "type": "integer"
               },
-              "crafting": {
+              "prefix": {
+                "type": "boolean"
+              },
+              "suffix": {
+                "type": "boolean"
+              }
+            }
+          },
+          "pseudo": {
+            "properties": {
+              "resist": {
                 "properties": {
-                  "openPrefix": {
-                    "type": "boolean"
+                  "maximum": {
+                    "type": "float"
                   },
-                  "openSuffix": {
-                    "type": "boolean"
+                  "all": {
+                    "type": "float"
+                  },
+                  "chaos": {
+                    "type": "float"
+                  },
+                  "elemental": {
+                    "type": "float"
                   }
                 }
               },
-              "total": {
+              "damagePerSecond": {
                 "properties": {
-                  "resist": {
-                    "properties": {
-                      "maximum": {
-                        "type": "float"
-                      },
-                      "all": {
-                        "type": "float"
-                      },
-                      "chaos": {
-                        "type": "float"
-                      },
-                      "elemental": {
-                        "type": "float"
-                      }
-                    }
+                  "all": {
+                    "type": "integer"
                   },
-                  "damagePerSecond": {
-                    "properties": {
-                      "all": {
-                        "type": "integer"
-                      },
-                      "chaos": {
-                        "type": "integer"
-                      },
-                      "physical": {
-                        "type": "integer"
-                      },
-                      "elemental": {
-                        "type": "integer"
-                      }
-                    }
+                  "chaos": {
+                    "type": "integer"
+                  },
+                  "physical": {
+                    "type": "integer"
+                  },
+                  "elemental": {
+                    "type": "integer"
                   }
                 }
               }
