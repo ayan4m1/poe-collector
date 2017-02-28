@@ -5,7 +5,6 @@ Primus = require 'primus'
 delayed = require 'delayed'
 moment = require 'moment'
 
-timing = require './timing'
 elastic = require './elastic'
 log = require './logging'
 
@@ -39,26 +38,25 @@ notifier.on 'connection', (spark) ->
 process = ->
   log.as.info('starting processing')
 
-  processTime = timing.time ->
-    log.as.info("searching for #{hosts.length} connected clients")
-    for host in hosts
-      searches = []
-      for query in host.queries
-        searches.push
-          index: elastic.config.dataShard
-          type: 'listing'
-        searches.push(query)
+  duration = process.hrtime()
+  log.as.info("searching for #{hosts.length} connected clients")
+  for host in hosts
+    searches = []
+    for query in host.queries
+      searches.push
+        index: elastic.config.dataShard
+        type: 'listing'
+      searches.push(query)
 
-      elastic.client.msearch
-        body: searches
-      , (err, res) =>
-        return log.as.error(err) if err?
-        for doc in res.responses
-          if doc.hits?.total > 0
-            log.as.info("query for host #{host.spark.address} got a hit")
-            console.dir(doc)
+    elastic.client.msearch
+      body: searches
+    , (err, res) =>
+      return log.as.error(err) if err?
+      for doc in res.responses
+        if doc.hits?.total > 0
+          log.as.info("query for host #{host.spark.address} got a hit")
+          console.dir(doc)
 
-  log.as.info("host queue exhausted in #{processTime.asMilliseconds().toFixed(2)}ms")
   return null
 
 processLoop = ->
