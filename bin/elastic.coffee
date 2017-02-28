@@ -186,6 +186,8 @@ mergeStashes = (stashes) ->
   listingShard = getShard('listing')
 
   for stash in stashes
+    # skip currency tabs
+    continue unless stash.stashType is 'PremiumStash'
     itemIds = []
 
     mergeStash(shard, stash)
@@ -207,17 +209,19 @@ mergeStashes = (stashes) ->
     stashCount = buffer.stashes.length / 2
     log.as.debug("flushing #{docCount} listings across #{stashCount} stashes")
 
-    slicedBuf = buffer
-    buffer.listings.length = buffer.stashes.length = buffer.orphans.length = 0;
+    slicedBuf = buffer.listings.slice()
+    slicedOrphans = buffer.orphans.slice()
+    Array.prototype.push.apply(slicedBuf, slicedBuf.stashes)
+    buffer.listings.length = buffer.stashes.length = buffer.orphans.length = 0
 
-    Array.prototype.push.apply(slicedBuf.listings, slicedBuf.stashes)
-    bulkDocuments(slicedBuf.listings)
+    bulkDocuments(slicedBuf)
       .catch(merged.reject)
-      .then -> orphanListings(slicedBuf.orphans)
+      .then -> orphanListings(slicedOrphans)
       .catch(merged.reject)
-      .then ->
-        slicedBuf.length = 0
-        merged.resolve()
+      .then(merged.resolve)
+  else
+    log.as.debug("bulk cache #{Math.floor((docCount / parseFloat(config.elastic.batchSize)) * 100.0).toFixed(2)}% full")
+    merged.resolve()
 
   merged.promise
 

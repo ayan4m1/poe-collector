@@ -280,7 +280,6 @@
                 }
               },
               "reduced": {
-                "type": "object",
                 "properties": {
                   "manaCost": {
                     "type": "float"
@@ -897,7 +896,6 @@
                 "type": "integer"
               },
               "crafting": {
-                "type": "object",
                 "properties": {
                   "openPrefix": {
                     "type": "boolean"
@@ -908,7 +906,6 @@
                 }
               },
               "total": {
-                "type": "object",
                 "properties": {
                   "resist": {
                     "properties": {

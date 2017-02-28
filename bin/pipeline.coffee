@@ -19,12 +19,10 @@ cacheDir = "#{__dirname}/../cache"
 apiUrl = 'http://api.pathofexile.com/public-stash-tabs'
 latestChangeUrl = 'http://poeninja.azureedge.net/api/Data/GetStats'
 
-
 # promisified functions
 readDir = Q.denodeify(fs.readdir)
 readJson = Q.denodeify(jsonfile.readFile)
-writeJson = Q.denodeify(jsonfile.writeFile)
-removeFile = Q.denodeify(fs.unlink)
+truncateFile = Q.denodeify(fs.truncate)
 
 # prevent GGG from killing our requests
 downloadLimiter = new Bottleneck(
@@ -36,6 +34,8 @@ fetchChange = (changeId) ->
   downloadLimiter.schedule(downloadChange, changeId)
 
 downloadChange = (changeId) ->
+  downloading = Q.defer()
+
   log.as.debug("handling the request to fetch change #{changeId}")
   duration = process.hrtime()
   requestPromise(
@@ -44,9 +44,13 @@ downloadChange = (changeId) ->
   )
     .then (res) ->
       data = JSON.parse(res)
-      writeJson("#{cacheDir}/#{changeId}",
+      jsonfile.writeFile("#{cacheDir}/#{changeId}", {
         id: changeId
         body: data
+      }, (err) ->
+        return downloading.reject(err) if err?
+        downloading.resolve()
+        processChange(changeId)
       )
 
       # timing + stats
@@ -55,19 +59,21 @@ downloadChange = (changeId) ->
       elastic.logFetch(changeId, res.length / 1e3, duration.asMilliseconds())
 
       # continue on to the next data blob
-      return unless data.next_change_id?
+      return downloading.promise unless data.next_change_id?
       log.as.info("following river to #{data.next_change_id}")
       fetchChange(data.next_change_id)
     .catch(log.as.error)
 
+  downloading.promise
+
 processChange = (changeId) ->
-  readJson("#{cacheDir}/#{changeId}")
+  path = "#{cacheDir}/#{changeId}"
+  readJson(path)
     .then (data) ->
       log.as.debug("process called for #{data.id}")
       elastic.mergeStashes(data.body.stashes)
-        .then -> removeFile(changeId)
-        .then -> touch(changeId)
         .catch(log.as.error)
+        .then -> truncateFile(path)
     .catch(log.as.error)
 
 findLatestChange = ->

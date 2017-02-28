@@ -77,12 +77,12 @@ modParsers =
     value = parseFloat(value.replace('%', '') / 100.0)
     bucket = slug(type)
     subBucket = slug(subType)
-    result.offense.leech[bucket][subBucket] = modOperators.more(result.offense.leech[bucket][subBucket], value)
+    result.offense.leech[bucket][subBucket] = modOperators.increased(result.offense.leech[bucket][subBucket], value)
   leechFlat: (mod, result) ->
     [ fullText, sign, value, type, subType ] = mod
     type = 'shield' if type is 'Energy Shield'
     bucket = slug(type)
-    result.offense.onHit[bucket] = modOperators.more(result.offense.leech[bucket], value)
+    result.offense.onHit[bucket] = modOperators.increased(result.offense.leech[bucket], value)
   leech: (mod, result) ->
     [ fullText, sign, value, source, type ] = mod
     bucket = slug(type)
@@ -550,10 +550,12 @@ parsePseudos = (mod, result) ->
     evasion: defense.evasion.flat * (1 + defense.armour.percent)
     shield: defense.shield.flat * (1 + defense.shield.percent)
     resist:
+      all: 0
       maximum: defense.resist.maximum.all +
         defense.resist.maximum.fire +
         defense.resist.maximum.cold +
         defense.resist.maximum.lightning
+      chaos: defense.resist.chaos
       elemental: defense.resist.elemental.all +
         defense.resist.elemental.fire +
         defense.resist.elemental.cold +
@@ -564,12 +566,16 @@ parsePseudos = (mod, result) ->
       elemental: averageDps(damage.elemental.all) + averageDps(damage.elemental.cold) + averageDps(damage.elemental.lightning) + averageDps(damage.elemental.fire)
       all: 0
 
+  totals.resist.all =  defense.resist.elemental.all +
+    defense.resist.elemental.fire +
+    defense.resist.elemental.cold +
+    defense.resist.elemental.lightning +
+    defense.resist.chaos
   totals.damagePerSecond.all = totals.damagePerSecond.physical +
     totals.damagePerSecond.chaos +
     totals.damagePerSecond.elemental
 
-  result.meta.total.resist = totals.resist
-  result.meta.total.damagePerSecond = totals.damagePerSecond
+  result.meta.total = totals
 
   result
 
@@ -664,6 +670,8 @@ parseItem = (item) ->
       total:
         resist:
           maximum: 0
+          all: 0
+          chaos: 0
           elemental: 0
         damagePerSecond:
           all: 0
