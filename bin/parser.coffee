@@ -41,14 +41,14 @@ regexes =
     flaskUtility: /([-+]?)(\d+%) (increased|reduced) Flask (effect|Charges) (duration|gained|used)/
     flaskUtilityChance: /([-+]?)(\d+%) chance to (Avoid being)\s+(Chilled|Frozen) during (?:Flask)? effect/
     flaskAilment: /Removes (Bleeding|Burning|Curses|Freeze and Chill|Shock) on use/
-    conversion: /([\d+%?]) of (Physical|Lightning|Cold) Damage Converted to (Fire) Damage/
+    conversion: /(\d+%) of (Physical|Lightning|Cold|Fire) Damage Converted to (Lightning|Cold|Fire|Chaos) Damage/
     loot: /([\d+%]) increased (Rarity|Quantity) of Items found/
     recovery: /([-+]?)(\d*\.?\d+%?) (Life|Mana) (Regenerated per Second|gained on Kill)/
     critical: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less|to)(\s+Global)?\s+Critical Strike (Chance|Multiplier)\s*(?:while|with|for)?\s*(Dual Wielding|Fire|Cold|Lightning|Elemental|Spells)?/
     ailmentPrevent: /^Cannot be (Ignited|Frozen|Knocked Back|Poisoned)/
     leechPermyriad: /(\d*\.?\d+%?) of (Cold|Fire|Lightning|Physical Attack) Damage Leeched as (Life|Mana)/
     leechFlat: /([-+]?)(\d*\.?\d+) (Life|Mana|Energy Shield) gained for each Enemy hit by (?:your )?(Attacks|Spells)/
-    stunOffense: /([-+]?)(\d*\.?\d+%?) (increased|reduced) (Enemy Stun Threshold|Stun Duration on Enemies)/
+    stunOffense: /([-+]?)(\d*\.?\d+%?) (increased|reduced) (Enemy Stun Threshold|Stun Duration on Enemies)( while using a Flask)?/
     regen: /(\d*\.?\d+) (Life|Mana) Regenerated per second/
     breach: /Properties are doubled while in a Breach/
     attrReqs: /(\d+) reduced Attribute Requirements/
@@ -70,8 +70,10 @@ modParsers =
     [ fullText, value ] = mod
     result.stats.reduced.attributeRequirements = modOperators.reduced(result.stats.reduced.attributeRequirements, value)
   stunOffense: (mod, result) ->
-    # todo: this
-    console.dir(mod)
+    [ fullText, percent, value, op, type, flask ] = mod
+    log.as.silly('no-op stun offense')
+    #when 'Enemy Stun Threshold'
+    #when 'Stun Duration on Enemies'
   leechPermyriad: (mod, result) ->
     [ fullText, value, subType, type ] = mod
     subType = 'physical' if subType is 'Physical Attack'
@@ -169,8 +171,8 @@ modParsers =
     bucket = slug(type)
     result.stats.item[bucket] = modOperators.increased(result.stats.item[bucket], value)
   conversion: (mod, result) ->
-    # todo: this
-    console.dir(mod)
+    [ fullText, value, sourceType, destType ] = mod
+    log.as.silly('no-op damage conversion')
   resistPen: (mod, result) ->
     [ fullText, value, type ] = mod
     bucket = slug(type)
@@ -565,7 +567,7 @@ parsePseudos = (mod, result) ->
     evasion: defense.evasion.flat * (1 + defense.armour.percent)
     shield: defense.shield.flat * (1 + defense.shield.percent)
     resist:
-      all: 0
+      all: 0.0
       maximum: defense.resist.maximum.all +
         defense.resist.maximum.fire +
         defense.resist.maximum.cold +
@@ -579,13 +581,14 @@ parsePseudos = (mod, result) ->
       physical: averageDps(damage.physical)
       chaos: averageDps(damage.chaos)
       elemental: averageDps(damage.elemental.all) + averageDps(damage.elemental.cold) + averageDps(damage.elemental.lightning) + averageDps(damage.elemental.fire)
-      all: 0
+      all: 0.0
 
   totals.resist.all = defense.resist.elemental.all +
     defense.resist.elemental.fire +
     defense.resist.elemental.cold +
     defense.resist.elemental.lightning +
     defense.resist.chaos
+
   totals.damagePerSecond.all = totals.damagePerSecond.physical +
     totals.damagePerSecond.chaos +
     totals.damagePerSecond.elemental
@@ -642,14 +645,245 @@ parseItem = (item) ->
     attributes: []
     modifiers: []
     sockets: []
-    offense: {}
-    defense: {}
-    stats: {}
     meta:
       quality: 0
       level: item.ilvl ? 0
       prefix: false
       suffix: false
+    stats:
+      attribute:
+        all: 0
+        str: 0
+        dex: 0
+        int: 0
+      life:
+        flat: 0
+        percent: 0.0
+      mana:
+        flat: 0
+        percent: 0.0
+      regen:
+        life:
+          flat: 0
+          percent: 0.0
+        mana:
+          flat: 0
+          percent: 0.0
+      reduced:
+        attributeRequirements: 0.0
+        manaCost: 0.0
+        inverseLightRadius: 0.0
+      movementSpeed: 0.0
+      item:
+        rarity: 0.0
+        quantity: 0.0
+    pseudo:
+      resist:
+        maximum: 0.0
+        all: 0.0
+        chaos: 0.0
+        elemental: 0.0
+      damagePerSecond:
+        all: 0.0
+        chaos: 0.0
+        physical: 0.0
+        elemental: 0.0
+    gemLevel:
+      all: 0
+      aura: 0
+      bow: 0
+      chaos: 0
+      cold: 0
+      curse: 0
+      elemental: 0
+      fire: 0
+      lightning: 0
+      melee: 0
+      minion: 0
+      strength: 0
+      spell: 0
+      support: 0
+      vaal: 0
+    flask:
+      charges: 0.0
+      effect: 0.0
+      chargesUsed: 0
+      duration: 0.0
+      recovery:
+        amount: 0
+        speed: 0.0
+      during:
+        damage:
+          all: 0
+          lightning: 0
+        reverseKnockback: false
+        stunImmunity: false
+        soulEater: false
+        lightRadius: 0.0
+        block: 0.0
+      removeAilment:
+        bleeding: false
+        burning: false
+        freezeAndChill: false
+        shock: false
+    offense:
+      leech:
+        life:
+          percent: 0.0
+          elemental:
+            cold: 0
+            fire: 0
+            lightning: 0
+        mana:
+          percent: 0.0
+          elemental:
+            cold: 0
+            fire: 0
+            lightning: 0
+      onHit:
+        life: 0
+        mana: 0
+        shield: 0
+      onKill:
+        life: 0
+        mana: 0
+      onCrit:
+        life: 0
+        mana: 0
+      perTarget:
+        life: 0
+        shield: 0
+      critical:
+        global:
+          chance: 0
+          multiplier: 0
+        elemental:
+          chance: 0
+          multiplier: 0
+        spell:
+          chance: 0
+          multiplier: 0
+        melee:
+          chance: 0
+          multiplier: 0
+        dualWielding:
+          chance: 0
+          multiplier: 0
+      ailment:
+        freeze:
+          chance: 0
+          duration: 0
+        shock:
+          chance: 0
+          duration: 0
+        ignite:
+          chance: 0
+          duration: 0
+      damage:
+        all:
+          flat: 0
+          percent: 0
+        projectile: 0
+        areaOfEffect: 0
+        spell:
+          all: 0
+          elemental:
+            fire: 0
+            cold: 0
+            lightning: 0
+        penetration:
+          fire: 0
+          cold: 0
+          lightning: 0
+        elemental:
+          all:
+            flat:
+              min: 0
+              max: 0
+            percent: 0
+          fire:
+            flat:
+              min: 0
+              max: 0
+            percent: 0
+          cold:
+            flat:
+              min: 0
+              max: 0
+            percent: 0
+          lightning:
+            flat:
+              min: 0
+              max: 0
+            percent: 0
+        chaos:
+          flat:
+            min: 0
+            max: 0
+          percent: 0
+        physical:
+          flat:
+            min: 0
+            max: 0
+          percent: 0
+        conversion:
+          cold:
+            fire: 0
+          fire:
+            chaos: 0
+          lightning:
+            chaos: 0
+            cold: 0
+          physical:
+            cold: 0
+            fire: 0
+            lightning: 0
+      pierceChance: 0
+      projectileSpeed: 0
+      accuracyRating:
+        flat: 0
+        percent: 0
+      attacksPerSecond: 0
+      meleeRange: 0
+      attackSpeed: 0
+      castSpeed: 0
+    defense:
+      blockChance:
+        spells: 0
+        weapons: 0
+        dualWielding: 0
+      resist:
+        maximum:
+          fire: 0
+          cold: 0
+          lightning: 0
+          chaos: 0
+        elemental:
+          fire: 0
+          cold: 0
+          lightning: 0
+        chaos: 0
+      armour:
+        flat: 0
+        percent: 0
+      evasion:
+        flat: 0
+        percent: 0
+      shield:
+        recharge: 0
+        flat: 0
+        percent: 0
+      prevent:
+        knockedBack: false
+        frozen: false
+        poisoned: false
+        ignited: false
+    minions:
+      damage: 0
+      life: 0
+      blockChance: 0
+      movementSpeed: 0
+      allResists: 0
 
   if item.icon?
     iconHash = qs.parse(item.icon.substring(item.icon.indexOf('?')))
@@ -663,7 +897,7 @@ parseItem = (item) ->
   parseCurrency(item, result)
 
   # don't bother parsing mods for non-gear (yet)
-  ###if item.frameType >= 4
+  if item.frameType >= 4
     return result
 
   if item.sockets?
@@ -690,7 +924,7 @@ parseItem = (item) ->
   for mod in mods
     parseMod(mod, result)
 
-  parsePseudos(mod, result)###
+  parsePseudos(mod, result)
 
   result
 
