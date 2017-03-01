@@ -71,6 +71,7 @@ modParsers =
     result.stats.reduced.attributeRequirements = modOperators.reduced(result.stats.reduced.attributeRequirements, value)
   stunOffense: (mod, result) ->
     # todo: this
+    console.dir(mod)
   leechPermyriad: (mod, result) ->
     [ fullText, value, subType, type ] = mod
     subType = 'physical' if subType is 'Physical Attack'
@@ -169,7 +170,7 @@ modParsers =
     result.stats.item[bucket] = modOperators.increased(result.stats.item[bucket], value)
   conversion: (mod, result) ->
     # todo: this
-    log.as.info('no-op damage conversion')
+    console.dir(mod)
   resistPen: (mod, result) ->
     [ fullText, value, type ] = mod
     bucket = slug(type)
@@ -389,25 +390,27 @@ parseDamageType = (id) ->
     else return 'Unknown'
 
 parseCurrency = (item, result) ->
-  result.price =
+  raw =
     if item.note? then item.note.match(regexes.price.note)
     else if item.stashName? then item.stashName.match(regexes.price.name)
 
-  return unless result.price?.length > 0
+  return unless raw?.length > 0
   factor = 0
   quantity = 0
-  result.price.shift()
-  for term in result.price
+  raw.shift()
+  for term in raw
     continue if term is 'price' or term is 'b/o'
-    if isNaN(parseInt(term))
+    if isNaN(parseFloat(term))
       for key, regex of currency.regexes
         if regex.test(term)
           factor = currency.values[key]
           break
-    else quantity = parseInt(term)
+    else quantity = parseFloat(term)
 
   return unless factor > 0 and quantity > 0
-  result.chaosPrice = factor * quantity
+  result.price =
+    raw: raw
+    chaos: factor * quantity
 
 parseRange = (range) ->
   results = range.match(/(\d+)-(\d+)/)
@@ -465,7 +468,8 @@ parseProperty = (prop, result) ->
 
   return null
 
-stripSetText = (input) -> input.replace(/(<<set:MS>><<set:M>><<set:S>>|Superior\s+)/g, '').trim()
+stripSetText = (input) ->
+  input.replace(/(<<set:MS>><<set:M>><<set:S>>|Superior\s+)/g, '').trim()
 
 parseType = (item, result) ->
   frame =
@@ -516,8 +520,8 @@ parseRequirements = (item, result) ->
       name: req.name
       value: parseInt(req.values[0][0])
 
-    parsed.name = parsed.name.substring(0, 3) if ['Intelligence', 'Strength', 'Dexterity'].indexOf(parsed.name) > 0
-    result.requirements[parsed.name.toLowerCase()] = parsed.value
+    parsed.name = parsed.name.substring(0, 3).toLowerCase() if ['Intelligence', 'Strength', 'Dexterity'].indexOf(parsed.name) > 0
+    result.requirements[parsed.name] = parsed.value
 
   return null
 
@@ -595,11 +599,13 @@ parseItem = (item) ->
   result =
     id: item.id
     league: item.league
-    stash: item.stash
-    x: item.x
-    y: item.y
-    width: item.w
-    height: item.h
+    stash:
+      id: item.stash
+      x: item.x
+      y: item.y
+    size:
+      width: item.w
+      height: item.h
     # the name of the item, scrub the oddball prefix
     name: null
     # the full name (e.g. Rare affixes)
@@ -614,267 +620,36 @@ parseItem = (item) ->
     note: item.note
     identified: item.identified
     corrupted: item.corrupted
-    verified: item.verified
-    attributes: []
-    modifiers: []
-    sockets: []
     requirements:
       level: 0
       int: 0
       dex: 0
       str: 0
-    tier: 0
-    level: 0
+    tier: null
+    level: null
     quality: 0
     stack:
-      count: 0
-      maximum: 0
-    stats:
-      attribute:
-        all: 0
-        str: 0
-        dex: 0
-        int: 0
-      life:
-        flat: 0
-        percent: 0
-      mana:
-        flat: 0
-        percent: 0
-      regen:
-        life:
-          flat: 0
-          percent: 0
-        mana:
-          flat: 0
-          percent: 0
-      reduced:
-        attributeRequirements: 0
-        manaCost: 0
-        inverseLightRadius: 0
-      movementSpeed: 0
-      item:
-        rarity: 0
-        quantity: 0
-    gemLevel:
-      all: 0
-      aura: 0
-      bow: 0
-      chaos: 0
-      cold: 0
-      curse: 0
-      elemental: 0
-      fire: 0
-      lightning: 0
-      melee: 0
-      minion: 0
-      strength: 0
-      spell: 0
-      support: 0
-      vaal: 0
-    pseudo:
-      resist:
-        maximum: 0
-        all: 0
-        chaos: 0
-        elemental: 0
-      damagePerSecond:
-        all: 0
-        chaos: 0
-        physical: 0
-        elemental: 0
+      count: null
+      maximum: null
+    price:
+      raw: []
+      chaos: null
+    lastSeen: null
+    firstSeen: timestamp
+    lastParsed: timestamp
+    removed: false
+    flavourText: null
+    attributes: []
+    modifiers: []
+    sockets: []
+    offense: {}
+    defense: {}
+    stats: {}
     meta:
       quality: 0
       level: item.ilvl ? 0
       prefix: false
       suffix: false
-    flask:
-      charges: 0
-      effect: 0
-      chargesUsed: 0
-      duration: 0
-      recovery:
-        amount: 0
-        speed: 0
-      during:
-        damage:
-          all: 0
-          lightning: 0
-        reverseKnockback: false
-        stunImmunity: false
-        soulEater: false
-        lightRadius: 0
-        block: 0
-      removeAilment:
-        bleeding: false
-        burning: false
-        freezeAndChill: false
-        shock: false
-    offense:
-      leech:
-        life:
-          percent: 0
-          elemental:
-            cold: 0
-            fire: 0
-            lightning: 0
-        mana:
-          percent: 0
-          elemental:
-            cold: 0
-            fire: 0
-            lightning: 0
-      onHit:
-        life: 0
-        mana: 0
-        shield: 0
-      onKill:
-        life: 0
-        mana: 0
-      onCrit:
-        life: 0
-        mana: 0
-      perTarget:
-        life: 0
-        shield: 0
-      critical:
-        global:
-          chance: 0
-          multiplier: 0
-        elemental:
-          chance: 0
-          multiplier: 0
-        spell:
-          chance: 0
-          multiplier: 0
-        melee:
-          chance: 0
-          multiplier: 0
-        dualWielding:
-          chance: 0
-          multiplier: 0
-      ailment:
-        freeze:
-          chance: 0
-          duration: 0
-        shock:
-          chance: 0
-          duration: 0
-        ignite:
-          chance: 0
-          duration: 0
-      damage:
-        all:
-          flat: 0
-          percent: 0
-        projectile: 0
-        areaOfEffect: 0
-        spell:
-          all: 0
-          elemental:
-            fire: 0
-            cold: 0
-            lightning: 0
-        penetration:
-          fire: 0
-          cold: 0
-          lightning: 0
-        elemental:
-          all:
-            flat:
-              min: 0
-              max: 0
-            percent: 0
-          fire:
-            flat:
-              min: 0
-              max: 0
-            percent: 0
-          cold:
-            flat:
-              min: 0
-              max: 0
-            percent: 0
-          lightning:
-            flat:
-              min: 0
-              max: 0
-            percent: 0
-        chaos:
-          flat:
-            min: 0
-            max: 0
-          percent: 0
-        physical:
-          flat:
-            min: 0
-            max: 0
-          percent: 0
-        conversion:
-          cold:
-            fire: 0
-          fire:
-            chaos: 0
-          lightning:
-            chaos: 0
-            cold: 0
-          physical:
-            cold: 0
-            fire: 0
-            lightning: 0
-      pierceChance: 0
-      projectileSpeed: 0
-      accuracyRating:
-        flat: 0
-        percent: 0
-      attacksPerSecond: 0
-      meleeRange: 0
-      attackSpeed: 0
-      castSpeed: 0
-    defense:
-      blockChance:
-        spells: 0
-        weapons: 0
-        dualWielding: 0
-      resist:
-        maximum:
-          fire: 0
-          cold: 0
-          lightning: 0
-          chaos: 0
-        elemental:
-          fire: 0
-          cold: 0
-          lightning: 0
-        chaos: 0
-      armour:
-        flat: 0
-        percent: 0
-      evasion:
-        flat: 0
-        percent: 0
-      shield:
-        recharge: 0
-        flat: 0
-        percent: 0
-      prevent:
-        knockedBack: false
-        frozen: false
-        poisoned: false
-        ignited: false
-    minions:
-      damage: 0
-      life: 0
-      blockChance: 0
-      movementSpeed: 0
-      allResists: 0
-    price: []
-    chaosPrice: 0
-    lastSeen: null
-    firstSeen: timestamp
-    lastParsed: timestamp
-    removed: false
-    flavourText: ""
 
   if item.icon?
     iconHash = qs.parse(item.icon.substring(item.icon.indexOf('?')))
@@ -888,7 +663,7 @@ parseItem = (item) ->
   parseCurrency(item, result)
 
   # don't bother parsing mods for non-gear (yet)
-  if item.frameType >= 4
+  ###if item.frameType >= 4
     return result
 
   if item.sockets?
@@ -915,7 +690,7 @@ parseItem = (item) ->
   for mod in mods
     parseMod(mod, result)
 
-  parsePseudos(mod, result)
+  parsePseudos(mod, result)###
 
   result
 

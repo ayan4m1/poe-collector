@@ -11,6 +11,8 @@ elasticsearch = require 'elasticsearch'
 log = require './logging'
 parser = require './parser'
 
+pendingQueries = 0
+
 createClient = ->
   new elasticsearch.Client(
     host: config.elastic.host
@@ -140,43 +142,49 @@ mergeStash = (shard, stash) ->
     buffer.stashes.push(header, payload)
   )
 
-mergeListing = (shard, item) ->
+appendPayload = (verb, shard, listing) ->
+  pendingQueries++
+  header = {}
+  header[verb] =
+    _index: shard
+    _type: 'listing'
+    _id: listing.id
+  payload = listing
+  if verb is 'update'
+    payload = { doc: payload }
+
+  buffer.listings.push(header, payload)
+
+mergeListings = (shard, items) ->
+  ids = Object.keys(items)
   elastic.client.search({
     index: 'poe-listing*'
     type: 'listing'
+    size: ids.length
     body:
       query:
-        term:
-          _id: item.id
+        ids:
+          values: ids
   }, (err, res) ->
     return log.as.error(err) if err? and err?.status isnt 404
 
-    listing = null
-    verb = 'index'
-    if res.hits?.hits?.length is 0 or err?.status is 404
-      listing = parser.new(item)
-    else if res.hits?.hits?.length is 1
-      verb = 'update'
-      raw = res.hits.hits[0]
-      if raw._index isnt shard
-        log.as.silly("moving #{raw._id} up from #{raw._index}")
-        buffer.orphans.push(elastic.client.delete(
-          index: raw._index
-          type: 'listing'
-          id: raw._id
-        ))
-      listing = raw._source
-      parser.existing(item, listing)
+    if res.hits?.total > 0
+      log.as.silly("#{ids.length} item listings queried, #{res.hits.hits.length} returned")
+      for hit in res.hits.hits
+        listing = hit._source
+        parser.existing(hit, listing)
+        appendPayload('update', shard, listing)
+        if hit._index isnt shard
+          log.as.silly("moving #{hit._id} up from #{hit._index}")
+          buffer.orphans.push(elastic.client.delete(
+            index: hit._index
+            type: 'listing'
+            id: hit._id
+          ))
+        delete items[hit._id]
 
-    header = {}
-    header[verb] =
-      _index: shard
-      _type: 'listing'
-      _id: item.id
-    payload = listing
-    if verb is 'update'
-      payload = { doc: payload }
-    buffer.listings.push(header, payload)
+    for id, val of items
+      appendPayload('index', shard, parser.new(val))
   )
 
 mergeStashes = (stashes) ->
@@ -187,21 +195,25 @@ mergeStashes = (stashes) ->
   for stash in stashes
     # skip currency tabs
     continue unless stash.stashType is 'PremiumStash'
-    itemIds = []
+    items = {}
+    ids = []
 
     mergeStash(shard, stash)
     for item in stash.items
+      # associate the item in a hash with id keys
       item.stash = item.stash ? stash.id
-
-      mergeListing(listingShard, item)
+      items[item.id] = item
 
       # build a search term for this item ID so that we can orphan removed items later
-      itemIds.push({
+      ids.push({
         term:
           id: item.id
       })
 
-    buffer.orphans.push(orphanListing(stash.id, itemIds))
+    # search and upsert all items in this tab
+    # todo: convert to flushed buffer
+    mergeListings(listingShard, items)
+    buffer.orphans.push(orphanListing(stash.id, ids))
 
   docCount = buffer.listings.length / 2
   if docCount > config.elastic.batchSize
@@ -219,7 +231,8 @@ mergeStashes = (stashes) ->
       .catch(merged.reject)
       .then(merged.resolve)
   else
-    log.as.debug("bulk cache #{Math.floor((docCount / parseFloat(config.elastic.batchSize)) * 100.0).toFixed(2)}% full")
+    cacheFill = docCount / parseFloat(config.elastic.batchSize)
+    log.as.debug("cache is #{(cacheFill * 100.0).toFixed(2)}% full with #{pendingQueries} pending queries")
     merged.resolve()
 
   merged.promise
@@ -232,6 +245,7 @@ bulkDocuments = (bulk) ->
   duration = process.hrtime()
   elastic.client.bulk({ body: bulk })
     .then ->
+      pendingQueries -= docCount
       bulked.resolve()
       duration = process.hrtime(duration)
       bulkTime = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
