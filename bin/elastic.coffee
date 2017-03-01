@@ -11,7 +11,7 @@ elasticsearch = require 'elasticsearch'
 log = require './logging'
 parser = require './parser'
 
-pendingQueries = 0
+#pendingQueries = 0
 
 createClient = ->
   new elasticsearch.Client(
@@ -143,7 +143,7 @@ mergeStash = (shard, stash) ->
   )
 
 appendPayload = (verb, shard, listing) ->
-  pendingQueries++
+  #pendingQueries++
   header = {}
   header[verb] =
     _index: shard
@@ -156,6 +156,7 @@ appendPayload = (verb, shard, listing) ->
   buffer.listings.push(header, payload)
 
 mergeListings = (shard, items) ->
+  merged = Q.defer()
   ids = Object.keys(items)
   elastic.client.search({
     index: 'poe-listing*'
@@ -166,7 +167,7 @@ mergeListings = (shard, items) ->
         ids:
           values: ids
   }, (err, res) ->
-    return log.as.error(err) if err? and err?.status isnt 404
+    return merged.reject(err) if err? and err?.status isnt 404
 
     if res.hits?.total > 0
       log.as.silly("#{ids.length} item listings queried, #{res.hits.hits.length} returned")
@@ -185,7 +186,11 @@ mergeListings = (shard, items) ->
 
     for id, val of items
       appendPayload('index', shard, parser.new(val))
+
+    merged.resolve()
   )
+
+  merged.promise
 
 mergeStashes = (stashes) ->
   merged = Q.defer()
@@ -210,30 +215,30 @@ mergeStashes = (stashes) ->
           id: item.id
       })
 
+    buffer.orphans.push(orphanListing(stash.id, ids))
     # search and upsert all items in this tab
     # todo: convert to flushed buffer
     mergeListings(listingShard, items)
-    buffer.orphans.push(orphanListing(stash.id, ids))
+      .then ->
+        docCount = buffer.listings.length / 2
+        if docCount > config.elastic.batchSize
+          stashCount = buffer.stashes.length / 2
+          log.as.debug("flushing #{docCount} listings across #{stashCount} stashes")
 
-  docCount = buffer.listings.length / 2
-  if docCount > config.elastic.batchSize
-    stashCount = buffer.stashes.length / 2
-    log.as.debug("flushing #{docCount} listings across #{stashCount} stashes")
+          slicedBuf = buffer.listings.slice()
+          slicedOrphans = buffer.orphans.slice()
+          Array.prototype.push.apply(slicedBuf, slicedBuf.stashes)
+          buffer.listings.length = buffer.stashes.length = buffer.orphans.length = 0
 
-    slicedBuf = buffer.listings.slice()
-    slicedOrphans = buffer.orphans.slice()
-    Array.prototype.push.apply(slicedBuf, slicedBuf.stashes)
-    buffer.listings.length = buffer.stashes.length = buffer.orphans.length = 0
-
-    bulkDocuments(slicedBuf)
-      .catch(merged.reject)
-      .then -> orphanListings(slicedOrphans)
-      .catch(merged.reject)
-      .then(merged.resolve)
-  else
-    cacheFill = docCount / parseFloat(config.elastic.batchSize)
-    log.as.debug("cache is #{(cacheFill * 100.0).toFixed(2)}% full with #{pendingQueries} pending queries")
-    merged.resolve()
+          bulkDocuments(slicedBuf)
+            .catch(merged.reject)
+            .then -> orphanListings(slicedOrphans)
+            .catch(merged.reject)
+            .then(merged.resolve)
+        else
+          #cacheFill = docCount / parseFloat(config.elastic.batchSize)
+          #log.as.debug("cache is #{(cacheFill * 100.0).toFixed(2)}% full with #{pendingQueries} pending queries")
+          merged.resolve()
 
   merged.promise
 
@@ -245,7 +250,7 @@ bulkDocuments = (bulk) ->
   duration = process.hrtime()
   elastic.client.bulk({ body: bulk })
     .then ->
-      pendingQueries -= docCount
+      #pendingQueries -= docCount
       bulked.resolve()
       duration = process.hrtime(duration)
       bulkTime = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
