@@ -1,11 +1,11 @@
 default:
+  minify: false
   compress: false
   hostname: localhost
   port: 3000
   socket: 3030
-  esHost: api.exiletools.com
-  esApiKey: 42a539e922414f4b63ba0010eca0c13d
 production:
+  minify: true
   compress: true
   hostname: poe-sniper.com
   port: 80

@@ -4,7 +4,7 @@ default:
     interval: 1
     unit: seconds
   fetch:
-    concurrency: 1
+    concurrency: 4
     interval: 4
     unit: seconds
   retention:

@@ -1,5 +1,0 @@
-default:
-  port: 8080
-  delay:
-    interval: 20
-    unit: seconds

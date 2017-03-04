@@ -16,7 +16,7 @@ parser = require './parser'
 createClient = ->
   new elasticsearch.Client(
     host: config.elastic.host
-    log: config.elastic.logLevel
+    log: if config.log.level is 'debug' then 'trace' else 'error'
     requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
     suggestCompression: true
   )

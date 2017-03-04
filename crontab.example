@@ -2,3 +2,4 @@
 
   30    23       *     *     *     coffee bin/index-update.coffee
   45    22       *     *     *     coffee bin/index-prune.coffee
+  15    6/*      *     *     *     bin/clean-cache.sh
