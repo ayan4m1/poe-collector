@@ -130,7 +130,7 @@ modParsers =
     if second is 'gained on Kill'
       result.offense.onKill[bucket] = modOperators.increased(result.offense.onKill[bucket])
     else
-      result.offense.stats.regen[bucket] = modOperators.to(result.offense.stats.regen[bucket], value, sign)
+      result.stats.regen[bucket] = modOperators.to(result.stats.regen[bucket], value, sign)
   flaskUtilityChance: (mod, result) ->
     [ fullText, sign, value, type ] = mod
   flaskUtility: (mod, result) ->
