@@ -1007,7 +1007,7 @@
                     "type": "boolean"
                   },
                   "stunImmunity": {
-                    "type": "float"
+                    "type": "boolean"
                   },
                   "item": {
                     "properties": {
