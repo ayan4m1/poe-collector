@@ -16,7 +16,7 @@ parser = require './parser'
 createClient = ->
   new elasticsearch.Client(
     host: config.elastic.host
-    log: if config.log.level is 'debug' then 'trace' else 'error'
+    log: if config.log.level is 'debug' then 'info' else 'error'
     requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
     suggestCompression: true
   )
@@ -236,8 +236,9 @@ mergeStashes = (stashes) ->
             .catch(merged.reject)
             .then(merged.resolve)
         else
-          #cacheFill = docCount / parseFloat(config.elastic.batchSize)
-          #log.as.debug("cache is #{(cacheFill * 100.0).toFixed(2)}% full with #{pendingQueries} pending queries")
+          #cacheFill = (docCount / parseFloat(config.elastic.batchSize)) * 100.0
+          #if cacheFill > 75
+          #  log.as.debug("cache is #{cacheFill.toFixed(2)}% full with #{pendingQueries} pending queries")
           merged.resolve()
 
   merged.promise
