@@ -8,6 +8,9 @@ default:
     interval: 4
     unit: seconds
   retention:
+    cache:
+      interval: 2
+      unit: hours
     stash:
       interval: 7
       unit: days
