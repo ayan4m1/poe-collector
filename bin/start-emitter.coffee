@@ -2,7 +2,6 @@ config = require('konfig')()
 
 Q = require 'q'
 Primus = require 'primus'
-delayed = require 'delayed'
 moment = require 'moment'
 
 elastic = require './elastic'

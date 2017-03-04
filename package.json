@@ -1,10 +1,14 @@
 {
   "name": "poe-notifier",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "shows users PoE market data",
   "scripts": {
     "start": "gulp start",
     "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://adelisa@git.codecube.xyz:443/scm/game/poe-notifier.git"
   },
   "author": "ayan4m1 <andrew@bulletlogic.com>",
   "license": "MIT",
@@ -28,7 +32,6 @@
     "core-js": "^2.4.1",
     "cors": "^2.7.1",
     "csv-parse": "^1.2.0",
-    "delayed": "^1.0.1",
     "elasticsearch": "^12.1.3",
     "es6-shim": "^0.35.2",
     "express": "^4.13.4",
@@ -59,8 +62,7 @@
     "vinyl-source-stream": "^1.1.0",
     "winston": "^2.3.0",
     "winston-daily-rotate-file": "^1.4.0",
-    "yamolo": "github:bulletlogic/yamolo",
-    "zone.js": "^0.7.4"
+    "yamolo": "github:bulletlogic/yamolo"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

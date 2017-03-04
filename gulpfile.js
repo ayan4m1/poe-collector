@@ -59,7 +59,8 @@ gulp.task('default', [ 'update' ], function () {
   runScript('bin/start-web.coffee')
 });
 
-var runScript = function (path) { 
+var runScript = function (path) {
+  var reload = config.web.liveReload;
   return nodemon({
     script: path,
     ignore: [
@@ -72,8 +73,8 @@ var runScript = function (path) {
       'src/'
     ],
     ext: 'ts html scss',
-    delay: config.build.watchInterval,
+    delay: moment.duration(reload.interval, reload.unit).asMilliseconds(),
     env: process.env,
     tasks: [ 'update' ]
   });
-}
+};

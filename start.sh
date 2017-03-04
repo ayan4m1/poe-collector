@@ -17,5 +17,6 @@ gulp update
 
 echo "Starting..."
 run_forever "bin/start-watcher.coffee"
+run_forever "bin/start-emitter.coffee"
 run_forever "bin/start-web.coffee"
 

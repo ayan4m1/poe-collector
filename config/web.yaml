@@ -1,10 +1,16 @@
 default:
+  liveReload:
+    enabled: true
+    interval: 5
+    unit: seconds
   minify: false
   compress: false
   hostname: localhost
   port: 3000
   socket: 3030
 production:
+  liveReload:
+    enabled: false
   minify: true
   compress: true
   hostname: poe-sniper.com
