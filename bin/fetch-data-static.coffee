@@ -22,7 +22,7 @@ dataFiles =
   stat: 'Stats.csv'
   ignoredTypes: 'IgnoredMods.json'
 
-parseCsv = Q.denodeify(parse)
+parseRawCsv = Q.denodeify(parse)
 readFile = Q.denodeify(fs.readFile)
 readJson = Q.denodeify(jsonfile.readFile)
 writeJson = Q.denodeify(jsonfile.writeFile)
@@ -62,14 +62,13 @@ dataFilePath = (name) -> "#{__dirname}/../data/#{name}"
 
 parseJson = (name) ->
   readJson(dataFilePath(name))
-    .then (data) ->
-      console.dir(data)
+    .then (data) -> Q(data)
     .catch(log.as.error)
 
 parseCsv = (name) ->
   readFile(dataFilePath(name))
     .then (raw) ->
-      parseCsv(raw, {
+      parseRawCsv(raw, {
         from: 2
         columns: true
       })
@@ -78,7 +77,7 @@ parseCsv = (name) ->
 dumpResults = (name, data) ->
   result = extend({
     createdAt: moment().toISOString()
-    gameVersion: config.build.gameVersion
+    gameVersion: config.static.gameVersion
   }, data)
 
   writeJson("#{__dirname}/../data/#{name}.json", result, {
@@ -87,7 +86,6 @@ dumpResults = (name, data) ->
 
 gearData = {}
 tierData = {}
-
 
 Q.spread [
   parseCsv(dataFiles.mod)

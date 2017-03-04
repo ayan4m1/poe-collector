@@ -1,5 +1,6 @@
 {
-  "createdAt": "2017-02-21T05:23:35.017Z",
+  "createdAt": "2017-03-04T05:29:35.067Z",
+  "gameVersion": "2.6",
   "results": [
     {
       "name": "Strength2",
@@ -6026,8 +6027,8 @@
           "name": "local_maximum_added_physical_damage",
           "text": "Local Maximum Added Physical Damage",
           "level": 21,
-          "min": 12,
-          "max": 14
+          "min": 13,
+          "max": 15
         }
       ],
       "spawnWeights": [
@@ -6049,15 +6050,15 @@
           "text": "Local Minimum Added Physical Damage",
           "level": 29,
           "min": 7,
-          "max": 10
+          "max": 11
         },
         {
           "id": "33",
           "name": "local_maximum_added_physical_damage",
           "text": "Local Maximum Added Physical Damage",
           "level": 29,
-          "min": 15,
-          "max": 18
+          "min": 16,
+          "max": 19
         }
       ],
       "spawnWeights": [
@@ -6079,15 +6080,15 @@
           "text": "Local Minimum Added Physical Damage",
           "level": 36,
           "min": 9,
-          "max": 12
+          "max": 13
         },
         {
           "id": "33",
           "name": "local_maximum_added_physical_damage",
           "text": "Local Maximum Added Physical Damage",
           "level": 36,
-          "min": 19,
-          "max": 22
+          "min": 20,
+          "max": 24
         }
       ],
       "spawnWeights": [
@@ -6108,16 +6109,16 @@
           "name": "local_minimum_added_physical_damage",
           "text": "Local Minimum Added Physical Damage",
           "level": 46,
-          "min": 12,
-          "max": 16
+          "min": 13,
+          "max": 17
         },
         {
           "id": "33",
           "name": "local_maximum_added_physical_damage",
           "text": "Local Maximum Added Physical Damage",
           "level": 46,
-          "min": 24,
-          "max": 28
+          "min": 26,
+          "max": 30
         }
       ],
       "spawnWeights": [
@@ -6138,16 +6139,16 @@
           "name": "local_minimum_added_physical_damage",
           "text": "Local Minimum Added Physical Damage",
           "level": 54,
-          "min": 13,
-          "max": 18
+          "min": 14,
+          "max": 19
         },
         {
           "id": "33",
           "name": "local_maximum_added_physical_damage",
           "text": "Local Maximum Added Physical Damage",
           "level": 54,
-          "min": 27,
-          "max": 32
+          "min": 29,
+          "max": 35
         }
       ],
       "spawnWeights": [
@@ -6168,16 +6169,16 @@
           "name": "local_minimum_added_physical_damage",
           "text": "Local Minimum Added Physical Damage",
           "level": 65,
-          "min": 16,
-          "max": 22
+          "min": 17,
+          "max": 24
         },
         {
           "id": "33",
           "name": "local_maximum_added_physical_damage",
           "text": "Local Maximum Added Physical Damage",
           "level": 65,
-          "min": 33,
-          "max": 38
+          "min": 36,
+          "max": 41
         }
       ],
       "spawnWeights": [
@@ -6198,16 +6199,16 @@
           "name": "local_minimum_added_physical_damage",
           "text": "Local Minimum Added Physical Damage",
           "level": 77,
-          "min": 19,
-          "max": 25
+          "min": 20,
+          "max": 27
         },
         {
           "id": "33",
           "name": "local_maximum_added_physical_damage",
           "text": "Local Maximum Added Physical Damage",
           "level": 77,
-          "min": 38,
-          "max": 45
+          "min": 41,
+          "max": 49
         }
       ],
       "spawnWeights": [
@@ -22369,6 +22370,72 @@
       "spawnWeights": []
     },
     {
+      "name": "LocalIncreaseSocketedGemUnsetRing1",
+      "group": "IncreaseSocketedGemLevel",
+      "domain": "Gear",
+      "generation": "Prefix",
+      "stats": [
+        {
+          "id": "529",
+          "name": "local_socketed_gem_level_+",
+          "text": "Local Socketed Gem Level +",
+          "level": 2,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "spawnWeights": [
+        {
+          "id": 222,
+          "name": "unset_ring"
+        }
+      ]
+    },
+    {
+      "name": "LocalIncreaseSocketedGemUnsetRing2",
+      "group": "IncreaseSocketedGemLevel",
+      "domain": "Gear",
+      "generation": "Prefix",
+      "stats": [
+        {
+          "id": "529",
+          "name": "local_socketed_gem_level_+",
+          "text": "Local Socketed Gem Level +",
+          "level": 50,
+          "min": 2,
+          "max": 2
+        }
+      ],
+      "spawnWeights": [
+        {
+          "id": 222,
+          "name": "unset_ring"
+        }
+      ]
+    },
+    {
+      "name": "LocalIncreaseSocketedGemUnsetRing3",
+      "group": "IncreaseSocketedGemLevel",
+      "domain": "Gear",
+      "generation": "Prefix",
+      "stats": [
+        {
+          "id": "529",
+          "name": "local_socketed_gem_level_+",
+          "text": "Local Socketed Gem Level +",
+          "level": 76,
+          "min": 3,
+          "max": 3
+        }
+      ],
+      "spawnWeights": [
+        {
+          "id": 222,
+          "name": "unset_ring"
+        }
+      ]
+    },
+    {
       "name": "LocalIncreaseSocketedFireGemLevel1",
       "group": "IncreaseSpecificSocketedGemLevel",
       "domain": "Gear",
@@ -22535,8 +22602,8 @@
           "name": "local_socketed_lightning_gem_level_+",
           "text": "Local Socketed Lightning Gem Level +",
           "level": 1,
-          "min": 1,
-          "max": 1
+          "min": 2,
+          "max": 2
         }
       ],
       "spawnWeights": []
@@ -22551,9 +22618,31 @@
           "id": "523",
           "name": "local_socketed_chaos_gem_level_+",
           "text": "",
-          "level": 40,
+          "level": 4,
           "min": 1,
           "max": 1
+        }
+      ],
+      "spawnWeights": [
+        {
+          "id": 45,
+          "name": "focus"
+        }
+      ]
+    },
+    {
+      "name": "LocalIncreaseSocketedChaosGemLevel2",
+      "group": "IncreaseSpecificSocketedGemLevel",
+      "domain": "Gear",
+      "generation": "Prefix",
+      "stats": [
+        {
+          "id": "523",
+          "name": "local_socketed_chaos_gem_level_+",
+          "text": "",
+          "level": 55,
+          "min": 2,
+          "max": 2
         }
       ],
       "spawnWeights": [
@@ -45067,6 +45156,23 @@
       "spawnWeights": []
     },
     {
+      "name": "DamageDuringFlaskEffectWarbands",
+      "group": "DamageDuringFlaskEffect",
+      "domain": "Gear",
+      "generation": "Prefix",
+      "stats": [
+        {
+          "id": "4518",
+          "name": "damage_+%_during_flask_effect",
+          "text": "",
+          "level": 1,
+          "min": 20,
+          "max": 25
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
       "name": "PierceChanceEssence5",
       "group": "Pierce",
       "domain": "Gear",
@@ -54123,7 +54229,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "5260",
+          "id": "5259",
           "name": "chance_to_dodge_%_at_max_charged_attack_stacks",
           "text": "",
           "level": 66,
@@ -54140,7 +54246,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "5260",
+          "id": "5259",
           "name": "chance_to_dodge_%_at_max_charged_attack_stacks",
           "text": "",
           "level": 75,
