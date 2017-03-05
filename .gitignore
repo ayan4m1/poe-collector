@@ -10,3 +10,5 @@ log/
 src/ts/**/*.js
 
 *.js.map
+
+data/ChaosEquivalencies.json
