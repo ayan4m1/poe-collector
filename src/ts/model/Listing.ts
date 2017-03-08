@@ -12,7 +12,8 @@ export enum FrameType {
   Currency = 5,
   DivinationCard = 6,
   QuestItem = 7,
-  Prophecy = 8
+  Prophecy = 8,
+  Relic = 9
 }
 
 export class DamageRange {

@@ -485,14 +485,15 @@ parseType = (item, result) ->
       when 6 then 'Divination Card'
       when 7 then 'Quest Item'
       when 8 then 'Prophecy'
+      when 9 then 'Relic'
       else null
 
   result.name = stripSetText(item.name)
   result.typeLine = stripSetText(item.typeLine)
   result.baseLine = baseTypes[item.typeLine]
 
-  # < 4 means Normal, Magic, or Rare item
-  if item.frameType < 4
+  # Normal, Magic, Rare, Unique, Relic
+  if item.frameType < 4 or item.frameType is 9
     result.rarity = frame
     result.fullName = stripSetText("#{result.name} #{item.typeLine}")
     result.itemType =
