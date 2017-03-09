@@ -1,12 +1,9 @@
 default:
-  process:
-    concurrency: 4
-    interval: 1
-    unit: seconds
-  fetch:
-    concurrency: 4
-    interval: 4
-    unit: seconds
+  index:
+    interval:
+      concurrency: 1
+      interval: 5
+      unit: seconds
   retention:
     cache:
       interval: 2

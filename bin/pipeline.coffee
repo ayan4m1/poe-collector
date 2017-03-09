@@ -21,13 +21,16 @@ latestChangeUrl = 'http://poeninja.azureedge.net/api/Data/GetStats'
 
 # promisified functions
 readDir = Q.denodeify(fs.readdir)
-readJson = Q.denodeify(jsonfile.readFile)
-truncateFile = Q.denodeify(fs.truncate)
 
 # prevent GGG from killing our requests
 downloadLimiter = new Bottleneck(
-  config.watcher.fetch.concurrency,
-  moment.duration(config.watcher.fetch.interval, config.watcher.fetch.unit).asMilliseconds()
+  -1   # unlimited concurrent downloads
+  1000 # one second in ms
+)
+
+indexLimiter = new Bottleneck(
+  config.watcher.index.concurrency
+  moment.duration(config.watcher.index.interval, config.watcher.index.unit8).asMilliseconds()
 )
 
 fetchChange = (changeId) ->
@@ -43,15 +46,16 @@ downloadChange = (changeId) ->
     gzip: true
   )
     .then (res) ->
+      return log.as.error("Got HTML response") if res.startsWith("<!DOCTYPE html")
+
       data = JSON.parse(res)
-      jsonfile.writeFile("#{cacheDir}/#{changeId}", {
+      touch("#{cacheDir}/#{changeId}")
+      handleChange({
         id: changeId
         body: data
-      }, (err) ->
-        return downloading.reject(err) if err?
-        downloading.resolve()
-        processChange(changeId)
-      )
+      })
+        .then(downloading.resolve)
+        .catch(downloading.reject)
 
       # timing + stats
       duration = process.hrtime(duration)
@@ -66,14 +70,13 @@ downloadChange = (changeId) ->
 
   downloading.promise
 
-processChange = (changeId) ->
-  path = "#{cacheDir}/#{changeId}"
-  readJson(path)
-    .then (data) ->
-      log.as.debug("process called for #{data.id}")
-      elastic.mergeStashes(data.body.stashes)
-        .catch(log.as.error)
-        .then -> truncateFile(path)
+handleChange = (data) ->
+  indexLimiter.schedule(processChange, data)
+
+processChange = (data) ->
+  path = "#{cacheDir}/#{data.id}"
+  log.as.debug("process called for #{data.id}")
+  elastic.mergeStashes(data.body.stashes)
     .catch(log.as.error)
 
 findLatestChange = ->
