@@ -1,0 +1,10 @@
+default:
+  cachePath: '../cache/'
+  latestChangeUrl: 'http://poeninja.azureedge.net/api/Data/GetStats'
+  retention:
+    interval: 5
+    unit: minutes
+production:
+  retention:
+    interval: 6
+    unit: hours

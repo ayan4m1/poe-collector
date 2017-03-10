@@ -1,13 +1,11 @@
 default:
+  stashTabUrl: 'http://api.pathofexile.com/public-stash-tabs'
   index:
     interval:
       concurrency: 1
       interval: 5
       unit: seconds
   retention:
-    cache:
-      interval: 2
-      unit: hours
     stash:
       interval: 7
       unit: days
