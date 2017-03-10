@@ -11,7 +11,7 @@ statFile = Q.denodeify(fs.stat)
 readDir = Q.denodeify(fs.readdir)
 unlink = Q.denodeify(fs.unlink)
 
-cacheConfig = config.watcher.retention.cache
+cacheConfig = config.cache.retention
 retention = moment.duration(cacheConfig.interval, cacheConfig.unit)
 cutoff = moment().subtract(retention)
 cacheDir = "#{__dirname}/../cache"

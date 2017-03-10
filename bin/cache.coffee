@@ -2,6 +2,7 @@ config = require('konfig')()
 
 Q = require 'q'
 fs = require 'fs'
+touch = require 'touch'
 moment = require 'moment'
 requestPromise = require 'request-promise-native'
 
@@ -43,6 +44,7 @@ findLatestFromWeb = () ->
   requestPromise({ uri: config.cache.latestChangeUrl })
     .then (res) ->
       stats = JSON.parse(res)
+      touch.sync("#{cacheDir}/#{stats.nextChangeId}}")
       stats.nextChangeId
 
 removeStaleCacheFiles = () ->
