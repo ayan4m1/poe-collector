@@ -42,7 +42,7 @@
   "listing": {
     "settings": {
       "index": {
-        "refresh_interval": "15s",
+        "refresh_interval": "30s",
         "number_of_shards": "1",
         "number_of_replicas": "0",
         "requests.cache.enable": "true",
