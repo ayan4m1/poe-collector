@@ -52,7 +52,7 @@ downloadChange = (changeId) ->
     handleChange({
       id: changeId
       body: data
-    }).then -> touch("#{__dirname}/../cach/#{changeId}")
+    }).then -> touch("#{__dirname}/../cache/#{changeId}")
       .catch(log.as.error)
 
     # continue on to the next data blob
