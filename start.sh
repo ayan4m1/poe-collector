@@ -15,6 +15,9 @@ run_forever ()
 echo "Updating..."
 gulp update
 
+echo "Pruning old cache entries..."
+coffee bin/clean-cache.coffee
+
 echo "Starting..."
 run_forever "bin/start-watcher.coffee"
 run_forever "bin/start-emitter.coffee"
