@@ -44,7 +44,7 @@ findLatestFromWeb = () ->
   requestPromise({ uri: config.cache.latestChangeUrl })
     .then (res) ->
       stats = JSON.parse(res)
-      touch.sync("#{cacheDir}/#{stats.nextChangeId}}")
+      touch.sync("#{cacheDir}/#{stats.nextChangeId}")
       stats.nextChangeId
 
 removeStaleCacheFiles = () ->
