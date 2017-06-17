@@ -1,5 +1,5 @@
 default:
-  stashTabUrl: 'http://api.pathofexile.com/public-stash-tabs'
+  stashTabUrl: 'http://betaapi.pathofexile.com/api/public-stash-tabs'
   index:
     interval:
       concurrency: 1
