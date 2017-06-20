@@ -222,6 +222,8 @@ mergeStashes = (stashes) ->
       .catch(merged.reject)
       .then ->
         docCount = buffer.listings.length / 2
+        fill = ((docCount / config.elastic.batchSize) * 100).toFixed(1)
+        log.as.debug("buffer is #{fill}% full") if docCount <= config.elastic.batchSize
         return merged.resolve() unless docCount > config.elastic.batchSize
         stashCount = buffer.stashes.length / 2
         log.as.debug("flushing #{docCount} listings across #{stashCount} stashes")
