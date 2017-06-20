@@ -11,8 +11,6 @@ default:
           - match:
               removed: false
           - match:
-              league: 'Breach'
-          - match:
               rarity: 'Rare'
           - match:
               itemType: 'Gear'
@@ -24,8 +22,6 @@ default:
         must:
           - match:
               removed: false
-          - match:
-              league: 'Breach'
           - match:
               rarity: 'Rare'
           - match:
