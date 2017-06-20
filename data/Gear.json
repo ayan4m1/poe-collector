@@ -1,5 +1,5 @@
 {
-  "createdAt": "2017-06-17T15:06:46.525Z",
+  "createdAt": "2017-06-19T19:46:46.146Z",
   "gameVersion": "2.6",
   "types": {
     "str_armour": [
@@ -4063,7 +4063,7 @@
       "text": "Additional Strength",
       "min": 12,
       "max": 55,
-      "ideal": null,
+      "ideal": 54,
       "tiers": [
         {
           "level": 11,
@@ -4119,7 +4119,7 @@
       "text": "Additional Dexterity",
       "min": 8,
       "max": 55,
-      "ideal": null,
+      "ideal": 54,
       "tiers": [
         {
           "level": 1,
@@ -4175,7 +4175,7 @@
       "text": "Additional Intelligence",
       "min": 8,
       "max": 55,
-      "ideal": null,
+      "ideal": 54,
       "tiers": [
         {
           "level": 1,
@@ -4231,7 +4231,7 @@
       "text": "Base Maximum Life",
       "min": 3,
       "max": 109,
-      "ideal": null,
+      "ideal": 106,
       "tiers": [
         {
           "level": 1,
@@ -4312,7 +4312,7 @@
       "text": "Base Maximum Mana",
       "min": 8,
       "max": 73,
-      "ideal": null,
+      "ideal": 72,
       "tiers": [
         {
           "level": 1,
@@ -4403,7 +4403,7 @@
       "text": "Local Energy Shield",
       "min": 3,
       "max": 100,
-      "ideal": null,
+      "ideal": 97,
       "tiers": [
         {
           "level": 3,
@@ -4504,7 +4504,7 @@
       "text": "Elemental Damage +%",
       "min": 4,
       "max": 34,
-      "ideal": null,
+      "ideal": 33,
       "tiers": [
         {
           "level": 4,
@@ -4540,7 +4540,7 @@
       "text": "Physical Damage +%",
       "min": 8,
       "max": 33,
-      "ideal": null,
+      "ideal": 32,
       "tiers": [
         {
           "level": 4,
@@ -4581,13 +4581,12 @@
       "text": "Local Minimum Added Physical Damage",
       "min": 1,
       "max": 38,
-      "ideal": null,
+      "ideal": 35,
       "tiers": [
         {
           "level": 2,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         },
         {
           "level": 13,
@@ -4638,7 +4637,7 @@
       "text": "Local Maximum Added Physical Damage",
       "min": 2,
       "max": 68,
-      "ideal": null,
+      "ideal": 65,
       "tiers": [
         {
           "level": 2,
@@ -4694,7 +4693,7 @@
       "text": "Local Energy Shield +%",
       "min": 6,
       "max": 100,
-      "ideal": null,
+      "ideal": 98,
       "tiers": [
         {
           "level": 3,
@@ -4745,7 +4744,7 @@
       "text": "Local Physical Damage Reduction Rating +%",
       "min": 6,
       "max": 100,
-      "ideal": null,
+      "ideal": 98,
       "tiers": [
         {
           "level": 3,
@@ -4806,7 +4805,7 @@
       "text": "Local Evasion Rating +%",
       "min": 6,
       "max": 100,
-      "ideal": null,
+      "ideal": 98,
       "tiers": [
         {
           "level": 3,
@@ -4862,7 +4861,7 @@
       "text": "Local Armour And Energy Shield +%",
       "min": 6,
       "max": 100,
-      "ideal": null,
+      "ideal": 98,
       "tiers": [
         {
           "level": 3,
@@ -4918,7 +4917,7 @@
       "text": "Local Armour And Evasion +%",
       "min": 6,
       "max": 100,
-      "ideal": null,
+      "ideal": 98,
       "tiers": [
         {
           "level": 3,
@@ -4974,7 +4973,7 @@
       "text": "Local Evasion And Energy Shield +%",
       "min": 6,
       "max": 100,
-      "ideal": null,
+      "ideal": 98,
       "tiers": [
         {
           "level": 3,
@@ -5030,7 +5029,7 @@
       "text": "Local Armour And Evasion And Energy Shield +%",
       "min": 6,
       "max": 100,
-      "ideal": null,
+      "ideal": 98,
       "tiers": [
         {
           "level": 3,
@@ -5081,7 +5080,7 @@
       "text": "Base Stun Recovery +%",
       "min": 6,
       "max": 17,
-      "ideal": null,
+      "ideal": 16,
       "tiers": [
         {
           "level": 3,
@@ -5152,19 +5151,17 @@
       "text": "Local Additional Block Chance %",
       "min": 1,
       "max": 6,
-      "ideal": null,
+      "ideal": 5,
       "tiers": [
         {
           "level": 45,
           "min": 2,
-          "max": 2,
-          "ideal": null
+          "max": 2
         },
         {
           "level": 78,
           "min": 3,
-          "max": 3,
-          "ideal": null
+          "max": 3
         },
         {
           "level": 10,
@@ -5185,7 +5182,7 @@
       "text": "Local Minimum Added Fire Damage",
       "min": 1,
       "max": 61,
-      "ideal": null,
+      "ideal": 57,
       "tiers": [
         {
           "level": 1,
@@ -5241,7 +5238,7 @@
       "text": "Local Maximum Added Fire Damage",
       "min": 3,
       "max": 106,
-      "ideal": null,
+      "ideal": 102,
       "tiers": [
         {
           "level": 1,
@@ -5297,7 +5294,7 @@
       "text": "Local Minimum Added Cold Damage",
       "min": 1,
       "max": 50,
-      "ideal": null,
+      "ideal": 46,
       "tiers": [
         {
           "level": 2,
@@ -5353,13 +5350,12 @@
       "text": "Local Maximum Added Cold Damage",
       "min": 3,
       "max": 87,
-      "ideal": null,
+      "ideal": 83,
       "tiers": [
         {
           "level": 2,
           "min": 3,
-          "max": 3,
-          "ideal": null
+          "max": 3
         },
         {
           "level": 12,
@@ -5410,13 +5406,12 @@
       "text": "Local Minimum Added Lightning Damage",
       "min": 1,
       "max": 13,
-      "ideal": null,
+      "ideal": 10,
       "tiers": [
         {
           "level": 3,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         },
         {
           "level": 13,
@@ -5467,13 +5462,12 @@
       "text": "Local Maximum Added Lightning Damage",
       "min": 6,
       "max": 166,
-      "ideal": null,
+      "ideal": 164,
       "tiers": [
         {
           "level": 3,
           "min": 6,
-          "max": 6,
-          "ideal": null
+          "max": 6
         },
         {
           "level": 13,
@@ -5524,7 +5518,7 @@
       "text": "Local Base Evasion Rating",
       "min": 3,
       "max": 400,
-      "ideal": null,
+      "ideal": 380,
       "tiers": [
         {
           "level": 1,
@@ -5595,7 +5589,7 @@
       "text": "Local Base Physical Damage Reduction Rating",
       "min": 3,
       "max": 400,
-      "ideal": null,
+      "ideal": 380,
       "tiers": [
         {
           "level": 1,
@@ -5651,7 +5645,7 @@
       "text": "Spell Damage +%",
       "min": 5,
       "max": 79,
-      "ideal": null,
+      "ideal": 78,
       "tiers": [
         {
           "level": 2,
@@ -5712,7 +5706,7 @@
       "text": "Fire Damage +%",
       "min": 3,
       "max": 79,
-      "ideal": null,
+      "ideal": 78,
       "tiers": [
         {
           "level": 2,
@@ -5793,7 +5787,7 @@
       "text": "Cold Damage +%",
       "min": 3,
       "max": 79,
-      "ideal": null,
+      "ideal": 78,
       "tiers": [
         {
           "level": 2,
@@ -5874,7 +5868,7 @@
       "text": "Lightning Damage +%",
       "min": 3,
       "max": 79,
-      "ideal": null,
+      "ideal": 78,
       "tiers": [
         {
           "level": 2,
@@ -5950,7 +5944,7 @@
       "text": "Cast Speed +%",
       "min": 2,
       "max": 28,
-      "ideal": null,
+      "ideal": 27,
       "tiers": [
         {
           "level": 2,
@@ -6006,7 +6000,7 @@
       "text": "Local Attack Speed +%",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 30,
@@ -6022,7 +6016,7 @@
       "text": "Attack Speed +%",
       "min": 3,
       "max": 13,
-      "ideal": null,
+      "ideal": 12,
       "tiers": [
         {
           "level": 1,
@@ -6048,7 +6042,7 @@
       "text": "Accuracy Rating",
       "min": 5,
       "max": 400,
-      "ideal": null,
+      "ideal": 380,
       "tiers": [
         {
           "level": 1,
@@ -6104,7 +6098,7 @@
       "text": "Life Regeneration Rate per Minute",
       "min": 60,
       "max": 420,
-      "ideal": null,
+      "ideal": 405,
       "tiers": [
         {
           "level": 1,
@@ -6145,7 +6139,7 @@
       "text": "",
       "min": 24,
       "max": 66,
-      "ideal": null,
+      "ideal": 64,
       "tiers": [
         {
           "level": 18,
@@ -6176,7 +6170,7 @@
       "text": "Mana Regeneration Rate +%",
       "min": 10,
       "max": 69,
-      "ideal": null,
+      "ideal": 66,
       "tiers": [
         {
           "level": 2,
@@ -6222,7 +6216,7 @@
       "text": "Base Stun Threshold Reduction +%",
       "min": 5,
       "max": 15,
-      "ideal": null,
+      "ideal": 14,
       "tiers": [
         {
           "level": 5,
@@ -6258,7 +6252,7 @@
       "text": "Resist all Elements",
       "min": 3,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 12,
@@ -6299,7 +6293,7 @@
       "text": "Spell Critical Strike Chance +%",
       "min": 10,
       "max": 109,
-      "ideal": null,
+      "ideal": 106,
       "tiers": [
         {
           "level": 11,
@@ -6345,7 +6339,7 @@
       "text": "Base Projectile Speed +%",
       "min": 6,
       "max": 46,
-      "ideal": null,
+      "ideal": 45,
       "tiers": [
         {
           "level": 14,
@@ -6386,19 +6380,17 @@
       "text": "Local Flask Recovery Speed +%",
       "min": -33,
       "max": 135,
-      "ideal": null,
+      "ideal": 135,
       "tiers": [
         {
           "level": 1,
           "min": 50,
-          "max": 50,
-          "ideal": null
+          "max": 50
         },
         {
           "level": 3,
           "min": 135,
-          "max": 135,
-          "ideal": null
+          "max": 135
         }
       ]
     },
@@ -6409,31 +6401,27 @@
       "text": "Local Flask Amount To Recover +%",
       "min": -66,
       "max": 50,
-      "ideal": null,
+      "ideal": 50,
       "tiers": [
         {
           "level": 1,
           "min": 50,
-          "max": 50,
-          "ideal": null
+          "max": 50
         },
         {
           "level": 9,
           "min": -25,
-          "max": -25,
-          "ideal": null
+          "max": -25
         },
         {
           "level": 3,
           "min": -50,
-          "max": -50,
-          "ideal": null
+          "max": -50
         },
         {
           "level": 7,
           "min": -66,
-          "max": -66,
-          "ideal": null
+          "max": -66
         }
       ]
     },
@@ -6444,13 +6432,12 @@
       "text": "Local Flask Amount To Recover +% When On Low Life",
       "min": 100,
       "max": 100,
-      "ideal": null,
+      "ideal": 100,
       "tiers": [
         {
           "level": 6,
           "min": 100,
-          "max": 100,
-          "ideal": null
+          "max": 100
         }
       ]
     },
@@ -6461,13 +6448,12 @@
       "text": "Local Flask Recover Instantly When On Low Life",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 9,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -6478,13 +6464,12 @@
       "text": "Local Flask Recovery Amount % To Recover Instantly",
       "min": 50,
       "max": 50,
-      "ideal": null,
+      "ideal": 50,
       "tiers": [
         {
           "level": 3,
           "min": 50,
-          "max": 50,
-          "ideal": null
+          "max": 50
         }
       ]
     },
@@ -6495,13 +6480,12 @@
       "text": "Local Flask Recovers Instantly",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 7,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -6512,13 +6496,12 @@
       "text": "Local Flask Mana to Recover +%",
       "min": 60,
       "max": 60,
-      "ideal": null,
+      "ideal": 60,
       "tiers": [
         {
           "level": 11,
           "min": 60,
-          "max": 60,
-          "ideal": null
+          "max": 60
         }
       ]
     },
@@ -6529,13 +6512,12 @@
       "text": "",
       "min": 15,
       "max": 15,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 11,
           "min": 15,
-          "max": 15,
-          "ideal": null
+          "max": 15
         }
       ]
     },
@@ -6546,13 +6528,12 @@
       "text": "Local Flask Life to Recover +%",
       "min": 40,
       "max": 40,
-      "ideal": null,
+      "ideal": 40,
       "tiers": [
         {
           "level": 13,
           "min": 40,
-          "max": 40,
-          "ideal": null
+          "max": 40
         }
       ]
     },
@@ -6563,13 +6544,12 @@
       "text": "",
       "min": 10,
       "max": 10,
-      "ideal": null,
+      "ideal": 10,
       "tiers": [
         {
           "level": 13,
           "min": 10,
-          "max": 10,
-          "ideal": null
+          "max": 10
         }
       ]
     },
@@ -6580,13 +6560,12 @@
       "text": "Local Flask Chill And Freeze Immunity While Healing",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 4,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -6597,13 +6576,12 @@
       "text": "Local Flask Ignite Immunity While Healing",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 6,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -6614,13 +6592,12 @@
       "text": "Local Flask Bleeding Immunity While Healing",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 8,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -6631,13 +6608,12 @@
       "text": "Local Flask Shock Immunity While Healing",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 10,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -6648,7 +6624,7 @@
       "text": "Local Extra Charges",
       "min": 10,
       "max": 20,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 2,
@@ -6664,7 +6640,7 @@
       "text": "Local Charges Added +%",
       "min": 20,
       "max": 40,
-      "ideal": null,
+      "ideal": 35,
       "tiers": [
         {
           "level": 3,
@@ -6680,7 +6656,7 @@
       "text": "Local Flask Armour +% While Healing",
       "min": 60,
       "max": 100,
-      "ideal": null,
+      "ideal": 90,
       "tiers": [
         {
           "level": 6,
@@ -6696,7 +6672,7 @@
       "text": "Local Flask Evasion +% While Healing",
       "min": 60,
       "max": 100,
-      "ideal": null,
+      "ideal": 90,
       "tiers": [
         {
           "level": 8,
@@ -6712,7 +6688,7 @@
       "text": "Local Flask Movement Speed +% While Healing",
       "min": 20,
       "max": 30,
-      "ideal": null,
+      "ideal": 27,
       "tiers": [
         {
           "level": 5,
@@ -6728,7 +6704,7 @@
       "text": "Local Flask Stun Recovery +% While Healing",
       "min": 40,
       "max": 60,
-      "ideal": null,
+      "ideal": 55,
       "tiers": [
         {
           "level": 1,
@@ -6744,7 +6720,7 @@
       "text": "Local Flask Resistances +% While Healing",
       "min": 20,
       "max": 30,
-      "ideal": null,
+      "ideal": 27,
       "tiers": [
         {
           "level": 1,
@@ -6760,13 +6736,12 @@
       "text": "",
       "min": 40,
       "max": 40,
-      "ideal": null,
+      "ideal": 40,
       "tiers": [
         {
           "level": 10,
           "min": 40,
-          "max": 40,
-          "ideal": null
+          "max": 40
         }
       ]
     },
@@ -6777,13 +6752,12 @@
       "text": "Local Flask Mana Leech % While Healing",
       "min": 2,
       "max": 2,
-      "ideal": null,
+      "ideal": 2,
       "tiers": [
         {
           "level": 12,
           "min": 2,
-          "max": 2,
-          "ideal": null
+          "max": 2
         }
       ]
     },
@@ -6794,13 +6768,12 @@
       "text": "",
       "min": 40,
       "max": 40,
-      "ideal": null,
+      "ideal": 40,
       "tiers": [
         {
           "level": 12,
           "min": 40,
-          "max": 40,
-          "ideal": null
+          "max": 40
         }
       ]
     },
@@ -6811,13 +6784,12 @@
       "text": "Local Flask Adds Knockback While Healing",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 9,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -6828,7 +6800,7 @@
       "text": "Local Flask Minion Heal %",
       "min": 40,
       "max": 60,
-      "ideal": null,
+      "ideal": 55,
       "tiers": [
         {
           "level": 10,
@@ -6844,13 +6816,12 @@
       "text": "",
       "min": 20,
       "max": 20,
-      "ideal": null,
+      "ideal": 20,
       "tiers": [
         {
           "level": 8,
           "min": 20,
-          "max": 20,
-          "ideal": null
+          "max": 20
         }
       ]
     },
@@ -6861,13 +6832,12 @@
       "text": "Local Recharge On Take Crit",
       "min": 3,
       "max": 3,
-      "ideal": null,
+      "ideal": 3,
       "tiers": [
         {
           "level": 12,
           "min": 3,
-          "max": 3,
-          "ideal": null
+          "max": 3
         }
       ]
     },
@@ -6878,13 +6848,12 @@
       "text": "",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 16,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -6895,7 +6864,7 @@
       "text": "",
       "min": -33,
       "max": 40,
-      "ideal": null,
+      "ideal": 37,
       "tiers": [
         {
           "level": 20,
@@ -6911,13 +6880,12 @@
       "text": "",
       "min": 25,
       "max": 25,
-      "ideal": null,
+      "ideal": 25,
       "tiers": [
         {
           "level": 20,
           "min": 25,
-          "max": 25,
-          "ideal": null
+          "max": 25
         }
       ]
     },
@@ -6928,7 +6896,7 @@
       "text": "",
       "min": -25,
       "max": -20,
-      "ideal": null,
+      "ideal": -22,
       "tiers": [
         {
           "level": 14,
@@ -6944,31 +6912,27 @@
       "text": "Local Socketed Gem Level +",
       "min": 1,
       "max": 3,
-      "ideal": null,
+      "ideal": 3,
       "tiers": [
         {
           "level": 2,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         },
         {
           "level": 50,
           "min": 2,
-          "max": 2,
-          "ideal": null
+          "max": 2
         },
         {
           "level": 76,
           "min": 3,
-          "max": 3,
-          "ideal": null
+          "max": 3
         },
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -6979,19 +6943,17 @@
       "text": "Local Socketed Fire Gem Level +",
       "min": 1,
       "max": 2,
-      "ideal": null,
+      "ideal": 2,
       "tiers": [
         {
           "level": 2,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         },
         {
           "level": 55,
           "min": 2,
-          "max": 2,
-          "ideal": null
+          "max": 2
         }
       ]
     },
@@ -7002,19 +6964,17 @@
       "text": "Local Socketed Cold Gem Level +",
       "min": 1,
       "max": 2,
-      "ideal": null,
+      "ideal": 2,
       "tiers": [
         {
           "level": 2,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         },
         {
           "level": 55,
           "min": 2,
-          "max": 2,
-          "ideal": null
+          "max": 2
         }
       ]
     },
@@ -7025,19 +6985,17 @@
       "text": "Local Socketed Lightning Gem Level +",
       "min": 1,
       "max": 2,
-      "ideal": null,
+      "ideal": 2,
       "tiers": [
         {
           "level": 2,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         },
         {
           "level": 55,
           "min": 2,
-          "max": 2,
-          "ideal": null
+          "max": 2
         }
       ]
     },
@@ -7048,19 +7006,17 @@
       "text": "",
       "min": 1,
       "max": 2,
-      "ideal": null,
+      "ideal": 2,
       "tiers": [
         {
           "level": 4,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         },
         {
           "level": 55,
           "min": 2,
-          "max": 2,
-          "ideal": null
+          "max": 2
         }
       ]
     },
@@ -7071,19 +7027,17 @@
       "text": "Local Socketed Melee Gem Level +",
       "min": 1,
       "max": 2,
-      "ideal": null,
+      "ideal": 2,
       "tiers": [
         {
           "level": 8,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         },
         {
           "level": 63,
           "min": 2,
-          "max": 2,
-          "ideal": null
+          "max": 2
         }
       ]
     },
@@ -7094,7 +7048,7 @@
       "text": "Physical Damage To Return To Melee Attacker",
       "min": 1,
       "max": 50,
-      "ideal": null,
+      "ideal": 43,
       "tiers": [
         {
           "level": 1,
@@ -7125,31 +7079,27 @@
       "text": "",
       "min": 0,
       "max": 0,
-      "ideal": null,
+      "ideal": 0,
       "tiers": [
         {
           "level": 1,
           "min": 0,
-          "max": 0,
-          "ideal": null
+          "max": 0
         },
         {
           "level": 10,
           "min": 0,
-          "max": 0,
-          "ideal": null
+          "max": 0
         },
         {
           "level": 20,
           "min": 0,
-          "max": 0,
-          "ideal": null
+          "max": 0
         },
         {
           "level": 35,
           "min": 0,
-          "max": 0,
-          "ideal": null
+          "max": 0
         }
       ]
     },
@@ -7160,7 +7110,7 @@
       "text": "",
       "min": 1,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 8,
@@ -7201,13 +7151,12 @@
       "text": "Local Flask Curse Immunity While Healing",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 18,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -7218,19 +7167,17 @@
       "text": "Local Attribute Requirements +%",
       "min": -32,
       "max": -18,
-      "ideal": null,
+      "ideal": -18,
       "tiers": [
         {
           "level": 36,
           "min": -18,
-          "max": -18,
-          "ideal": null
+          "max": -18
         },
         {
           "level": 60,
           "min": -32,
-          "max": -32,
-          "ideal": null
+          "max": -32
         }
       ]
     },
@@ -7241,7 +7188,7 @@
       "text": "",
       "min": 5,
       "max": 100,
-      "ideal": null,
+      "ideal": 96,
       "tiers": [
         {
           "level": 11,
@@ -7282,7 +7229,7 @@
       "text": "",
       "min": 4,
       "max": 39,
-      "ideal": null,
+      "ideal": 37,
       "tiers": [
         {
           "level": 15,
@@ -7313,7 +7260,7 @@
       "text": "",
       "min": 20,
       "max": 40,
-      "ideal": null,
+      "ideal": 35,
       "tiers": [
         {
           "level": 1,
@@ -7329,7 +7276,7 @@
       "text": "",
       "min": -30,
       "max": -15,
-      "ideal": null,
+      "ideal": -19,
       "tiers": [
         {
           "level": 1,
@@ -7345,7 +7292,7 @@
       "text": "",
       "min": 1,
       "max": 3,
-      "ideal": null,
+      "ideal": 2,
       "tiers": [
         {
           "level": 1,
@@ -7361,7 +7308,7 @@
       "text": "",
       "min": 1,
       "max": 4,
-      "ideal": null,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
@@ -7377,7 +7324,7 @@
       "text": "",
       "min": 30,
       "max": 50,
-      "ideal": null,
+      "ideal": 45,
       "tiers": [
         {
           "level": 1,
@@ -7393,7 +7340,7 @@
       "text": "",
       "min": 5,
       "max": 20,
-      "ideal": null,
+      "ideal": 18,
       "tiers": [
         {
           "level": 1,
@@ -7409,7 +7356,7 @@
       "text": "",
       "min": 5,
       "max": 40,
-      "ideal": null,
+      "ideal": 36,
       "tiers": [
         {
           "level": 1,
@@ -7425,25 +7372,22 @@
       "text": "Base Chance To Dodge %",
       "min": 2,
       "max": 6,
-      "ideal": null,
+      "ideal": 5,
       "tiers": [
         {
           "level": 35,
           "min": 2,
-          "max": 2,
-          "ideal": null
+          "max": 2
         },
         {
           "level": 62,
           "min": 3,
-          "max": 3,
-          "ideal": null
+          "max": 3
         },
         {
           "level": 78,
           "min": 4,
-          "max": 4,
-          "ideal": null
+          "max": 4
         },
         {
           "level": 25,
@@ -7464,25 +7408,22 @@
       "text": "",
       "min": 2,
       "max": 4,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 35,
           "min": 2,
-          "max": 2,
-          "ideal": null
+          "max": 2
         },
         {
           "level": 62,
           "min": 3,
-          "max": 3,
-          "ideal": null
+          "max": 3
         },
         {
           "level": 78,
           "min": 4,
-          "max": 4,
-          "ideal": null
+          "max": 4
         }
       ]
     },
@@ -7493,7 +7434,7 @@
       "text": "",
       "min": 1,
       "max": 6,
-      "ideal": null,
+      "ideal": 5,
       "tiers": [
         {
           "level": 30,
@@ -7519,13 +7460,12 @@
       "text": "Maximum Power Charges",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 20,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -7536,7 +7476,7 @@
       "text": "",
       "min": 1,
       "max": 2,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
@@ -7552,7 +7492,7 @@
       "text": "",
       "min": -24,
       "max": -5,
-      "ideal": null,
+      "ideal": -7,
       "tiers": [
         {
           "level": 1,
@@ -7578,13 +7518,12 @@
       "text": "",
       "min": 100,
       "max": 100,
-      "ideal": null,
+      "ideal": 100,
       "tiers": [
         {
           "level": 1,
           "min": 100,
-          "max": 100,
-          "ideal": null
+          "max": 100
         }
       ]
     },
@@ -7595,13 +7534,12 @@
       "text": "",
       "min": 20,
       "max": 20,
-      "ideal": null,
+      "ideal": 20,
       "tiers": [
         {
           "level": 50,
           "min": 20,
-          "max": 20,
-          "ideal": null
+          "max": 20
         }
       ]
     },
@@ -7612,13 +7550,12 @@
       "text": "",
       "min": 100,
       "max": 100,
-      "ideal": null,
+      "ideal": 100,
       "tiers": [
         {
           "level": 1,
           "min": 100,
-          "max": 100,
-          "ideal": null
+          "max": 100
         }
       ]
     },
@@ -7629,13 +7566,12 @@
       "text": "",
       "min": 20,
       "max": 20,
-      "ideal": null,
+      "ideal": 20,
       "tiers": [
         {
           "level": 50,
           "min": 20,
-          "max": 20,
-          "ideal": null
+          "max": 20
         }
       ]
     },
@@ -7646,13 +7582,12 @@
       "text": "",
       "min": 100,
       "max": 100,
-      "ideal": null,
+      "ideal": 100,
       "tiers": [
         {
           "level": 1,
           "min": 100,
-          "max": 100,
-          "ideal": null
+          "max": 100
         }
       ]
     },
@@ -7663,13 +7598,12 @@
       "text": "",
       "min": 20,
       "max": 20,
-      "ideal": null,
+      "ideal": 20,
       "tiers": [
         {
           "level": 50,
           "min": 20,
-          "max": 20,
-          "ideal": null
+          "max": 20
         }
       ]
     },
@@ -7680,7 +7614,7 @@
       "text": "",
       "min": 3,
       "max": 6,
-      "ideal": null,
+      "ideal": 5,
       "tiers": [
         {
           "level": 1,
@@ -7696,7 +7630,7 @@
       "text": "Ignite Avoidance",
       "min": 10,
       "max": 20,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -7712,7 +7646,7 @@
       "text": "Base Chaos Resistance %",
       "min": 1,
       "max": 13,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -7728,7 +7662,7 @@
       "text": "",
       "min": 10,
       "max": 20,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -7744,7 +7678,7 @@
       "text": "",
       "min": 10,
       "max": 20,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -7760,7 +7694,7 @@
       "text": "",
       "min": 10,
       "max": 20,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -7776,7 +7710,7 @@
       "text": "Blocking while Dual Wielding",
       "min": 1,
       "max": 6,
-      "ideal": null,
+      "ideal": 5,
       "tiers": [
         {
           "level": 1,
@@ -7792,13 +7726,12 @@
       "text": "",
       "min": 10,
       "max": 10,
-      "ideal": null,
+      "ideal": 10,
       "tiers": [
         {
           "level": 20,
           "min": 10,
-          "max": 10,
-          "ideal": null
+          "max": 10
         }
       ]
     },
@@ -7809,13 +7742,12 @@
       "text": "",
       "min": 12,
       "max": 12,
-      "ideal": null,
+      "ideal": 12,
       "tiers": [
         {
           "level": 24,
           "min": 12,
-          "max": 12,
-          "ideal": null
+          "max": 12
         }
       ]
     },
@@ -7826,13 +7758,12 @@
       "text": "",
       "min": 10,
       "max": 10,
-      "ideal": null,
+      "ideal": 10,
       "tiers": [
         {
           "level": 24,
           "min": 10,
-          "max": 10,
-          "ideal": null
+          "max": 10
         }
       ]
     },
@@ -7843,13 +7774,12 @@
       "text": "",
       "min": 16,
       "max": 16,
-      "ideal": null,
+      "ideal": 16,
       "tiers": [
         {
           "level": 61,
           "min": 16,
-          "max": 16,
-          "ideal": null
+          "max": 16
         }
       ]
     },
@@ -7860,13 +7790,12 @@
       "text": "",
       "min": 16,
       "max": 16,
-      "ideal": null,
+      "ideal": 16,
       "tiers": [
         {
           "level": 61,
           "min": 16,
-          "max": 16,
-          "ideal": null
+          "max": 16
         }
       ]
     },
@@ -7877,13 +7806,12 @@
       "text": "",
       "min": 16,
       "max": 16,
-      "ideal": null,
+      "ideal": 16,
       "tiers": [
         {
           "level": 61,
           "min": 16,
-          "max": 16,
-          "ideal": null
+          "max": 16
         }
       ]
     },
@@ -7894,13 +7822,12 @@
       "text": "",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -7911,13 +7838,12 @@
       "text": "",
       "min": -1,
       "max": -1,
-      "ideal": null,
+      "ideal": -1,
       "tiers": [
         {
           "level": 1,
           "min": -1,
-          "max": -1,
-          "ideal": null
+          "max": -1
         }
       ]
     },
@@ -7928,7 +7854,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -7944,7 +7870,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -7960,7 +7886,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -7976,7 +7902,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -7992,7 +7918,7 @@
       "text": "",
       "min": 3,
       "max": 7,
-      "ideal": null,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
@@ -8008,13 +7934,12 @@
       "text": "Minimum Added Chaos Damage",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -8025,7 +7950,7 @@
       "text": "Maximum Added Chaos Damage",
       "min": 2,
       "max": 3,
-      "ideal": null,
+      "ideal": 2,
       "tiers": [
         {
           "level": 1,
@@ -8041,7 +7966,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -8057,7 +7982,7 @@
       "text": "",
       "min": 20,
       "max": 30,
-      "ideal": null,
+      "ideal": 27,
       "tiers": [
         {
           "level": 1,
@@ -8073,7 +7998,7 @@
       "text": "",
       "min": 5,
       "max": 10,
-      "ideal": null,
+      "ideal": 8,
       "tiers": [
         {
           "level": 1,
@@ -8089,13 +8014,12 @@
       "text": "",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -8106,13 +8030,12 @@
       "text": "",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -8123,13 +8046,12 @@
       "text": "",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -8140,13 +8062,12 @@
       "text": "",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -8157,7 +8078,7 @@
       "text": "",
       "min": 8,
       "max": 23,
-      "ideal": null,
+      "ideal": 22,
       "tiers": [
         {
           "level": 23,
@@ -8188,7 +8109,7 @@
       "text": "Mace Damage",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -8204,7 +8125,7 @@
       "text": "Bow Damage",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -8220,7 +8141,7 @@
       "text": "Claw Damage",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -8236,7 +8157,7 @@
       "text": "Dagger Damage",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -8252,7 +8173,7 @@
       "text": "Wand Damage",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -8268,7 +8189,7 @@
       "text": "Staff Damage",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -8284,7 +8205,7 @@
       "text": "",
       "min": 10,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -8300,7 +8221,7 @@
       "text": "",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -8316,7 +8237,7 @@
       "text": "",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -8332,7 +8253,7 @@
       "text": "",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -8348,7 +8269,7 @@
       "text": "All Damage",
       "min": 8,
       "max": 10,
-      "ideal": null,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
@@ -8364,7 +8285,7 @@
       "text": "Minion Damage increase",
       "min": 14,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -8380,7 +8301,7 @@
       "text": "",
       "min": 10,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -8396,7 +8317,7 @@
       "text": "Chaos Damage +%",
       "min": 9,
       "max": 13,
-      "ideal": null,
+      "ideal": 12,
       "tiers": [
         {
           "level": 1,
@@ -8412,7 +8333,7 @@
       "text": "",
       "min": 10,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -8428,7 +8349,7 @@
       "text": "Attack Speed with Maces",
       "min": 6,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -8444,7 +8365,7 @@
       "text": "Attack Speed with Bows",
       "min": 6,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -8460,7 +8381,7 @@
       "text": "Attack Speed with Claws",
       "min": 6,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -8476,7 +8397,7 @@
       "text": "Attack Speed with Daggers",
       "min": 6,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -8492,7 +8413,7 @@
       "text": "Attack Speed with Wands",
       "min": 6,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -8508,7 +8429,7 @@
       "text": "Attack Speed with Staves",
       "min": 6,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -8524,7 +8445,7 @@
       "text": "Attack Speed while Dual Wielding",
       "min": 4,
       "max": 6,
-      "ideal": null,
+      "ideal": 5,
       "tiers": [
         {
           "level": 1,
@@ -8540,7 +8461,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -8556,7 +8477,7 @@
       "text": "",
       "min": 4,
       "max": 6,
-      "ideal": null,
+      "ideal": 5,
       "tiers": [
         {
           "level": 1,
@@ -8572,7 +8493,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -8588,7 +8509,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -8604,7 +8525,7 @@
       "text": "",
       "min": 2,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -8635,7 +8556,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -8651,7 +8572,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -8667,7 +8588,7 @@
       "text": "",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -8683,7 +8604,7 @@
       "text": "Additional Strength And Dexterity",
       "min": 8,
       "max": 10,
-      "ideal": null,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
@@ -8699,7 +8620,7 @@
       "text": "Additional Strength And Intelligence",
       "min": 8,
       "max": 10,
-      "ideal": null,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
@@ -8715,7 +8636,7 @@
       "text": "Additional Dexterity And Intelligence",
       "min": 8,
       "max": 10,
-      "ideal": null,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
@@ -8731,7 +8652,7 @@
       "text": "Additional All Attributes",
       "min": 6,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -8747,7 +8668,7 @@
       "text": "Maximum Life +%",
       "min": 5,
       "max": 7,
-      "ideal": null,
+      "ideal": 6,
       "tiers": [
         {
           "level": 1,
@@ -8763,7 +8684,7 @@
       "text": "Maximum Mana +%",
       "min": 6,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -8779,7 +8700,7 @@
       "text": "Global Maximum Energy Shield +%",
       "min": 6,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -8795,7 +8716,7 @@
       "text": "Life Leech From Physical Damage %",
       "min": 1,
       "max": 2,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
@@ -8811,7 +8732,7 @@
       "text": "",
       "min": 20,
       "max": 40,
-      "ideal": null,
+      "ideal": 35,
       "tiers": [
         {
           "level": 1,
@@ -8827,7 +8748,7 @@
       "text": "Mana Leech From Physical Damage %",
       "min": 1,
       "max": 2,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
@@ -8843,7 +8764,7 @@
       "text": "",
       "min": 20,
       "max": 40,
-      "ideal": null,
+      "ideal": 35,
       "tiers": [
         {
           "level": 1,
@@ -8859,7 +8780,7 @@
       "text": "Life Gained On Hit",
       "min": 2,
       "max": 3,
-      "ideal": null,
+      "ideal": 2,
       "tiers": [
         {
           "level": 1,
@@ -8875,7 +8796,7 @@
       "text": "Mana gained on Hit",
       "min": 1,
       "max": 2,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
@@ -8891,7 +8812,7 @@
       "text": "",
       "min": 2,
       "max": 3,
-      "ideal": null,
+      "ideal": 2,
       "tiers": [
         {
           "level": 1,
@@ -8907,7 +8828,7 @@
       "text": "Physical Damage Reduction Rating +%",
       "min": 14,
       "max": 18,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -8923,7 +8844,7 @@
       "text": "Global Evasion Rating +%",
       "min": 14,
       "max": 18,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -8939,7 +8860,7 @@
       "text": "Base Item Found Rarity +%",
       "min": 4,
       "max": 6,
-      "ideal": null,
+      "ideal": 5,
       "tiers": [
         {
           "level": 1,
@@ -8955,7 +8876,7 @@
       "text": "Accuracy Rating +%",
       "min": 6,
       "max": 14,
-      "ideal": null,
+      "ideal": 13,
       "tiers": [
         {
           "level": 1,
@@ -8971,7 +8892,7 @@
       "text": "Critical Strike Chance +%",
       "min": 6,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -8987,7 +8908,7 @@
       "text": "Base Critical Strike Multiplier +%",
       "min": 9,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -9003,7 +8924,7 @@
       "text": "",
       "min": 14,
       "max": 18,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -9019,7 +8940,7 @@
       "text": "",
       "min": 14,
       "max": 18,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -9035,7 +8956,7 @@
       "text": "",
       "min": 14,
       "max": 18,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -9051,7 +8972,7 @@
       "text": "",
       "min": 10,
       "max": 14,
-      "ideal": null,
+      "ideal": 13,
       "tiers": [
         {
           "level": 1,
@@ -9067,7 +8988,7 @@
       "text": "",
       "min": 12,
       "max": 15,
-      "ideal": null,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
@@ -9083,7 +9004,7 @@
       "text": "",
       "min": 15,
       "max": 18,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -9099,7 +9020,7 @@
       "text": "",
       "min": 15,
       "max": 18,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -9115,7 +9036,7 @@
       "text": "",
       "min": 15,
       "max": 18,
-      "ideal": null,
+      "ideal": 17,
       "tiers": [
         {
           "level": 1,
@@ -9131,7 +9052,7 @@
       "text": "",
       "min": 12,
       "max": 15,
-      "ideal": null,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
@@ -9147,7 +9068,7 @@
       "text": "Base Fire Resistance %",
       "min": 12,
       "max": 15,
-      "ideal": null,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
@@ -9163,7 +9084,7 @@
       "text": "Base Cold Resistance %",
       "min": 12,
       "max": 15,
-      "ideal": null,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
@@ -9179,7 +9100,7 @@
       "text": "Base Lightning Resistance %",
       "min": 12,
       "max": 15,
-      "ideal": null,
+      "ideal": 14,
       "tiers": [
         {
           "level": 1,
@@ -9195,7 +9116,7 @@
       "text": "Fire And Cold Resistance %",
       "min": 10,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -9211,7 +9132,7 @@
       "text": "Fire And Lightning Resistance %",
       "min": 10,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -9227,7 +9148,7 @@
       "text": "Cold And Lightning Resistance %",
       "min": 10,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -9243,7 +9164,7 @@
       "text": "Base Stun Duration +%",
       "min": 10,
       "max": 14,
-      "ideal": null,
+      "ideal": 13,
       "tiers": [
         {
           "level": 1,
@@ -9259,7 +9180,7 @@
       "text": "Mana Cost Reduction",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -9275,7 +9196,7 @@
       "text": "",
       "min": 4,
       "max": 6,
-      "ideal": null,
+      "ideal": 5,
       "tiers": [
         {
           "level": 1,
@@ -9291,13 +9212,12 @@
       "text": "Shield Block Chance",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -9308,13 +9228,12 @@
       "text": "",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -9325,13 +9244,12 @@
       "text": "",
       "min": 1,
       "max": 1,
-      "ideal": null,
+      "ideal": 1,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         }
       ]
     },
@@ -9342,7 +9260,7 @@
       "text": "",
       "min": 2,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -9363,7 +9281,7 @@
       "text": "Freeze Duration Increase",
       "min": 12,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -9379,7 +9297,7 @@
       "text": "",
       "min": 2,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -9400,7 +9318,7 @@
       "text": "Shock Duration Increase",
       "min": 12,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -9416,7 +9334,7 @@
       "text": "",
       "min": 2,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -9437,7 +9355,7 @@
       "text": "Ignite Duration Increase",
       "min": 3,
       "max": 5,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 1,
@@ -9453,7 +9371,7 @@
       "text": "Energy Shield Delay Recovery Increase",
       "min": 4,
       "max": 6,
-      "ideal": null,
+      "ideal": 5,
       "tiers": [
         {
           "level": 1,
@@ -9469,7 +9387,7 @@
       "text": "",
       "min": 6,
       "max": 8,
-      "ideal": null,
+      "ideal": 7,
       "tiers": [
         {
           "level": 1,
@@ -9485,7 +9403,7 @@
       "text": "",
       "min": 2,
       "max": 4,
-      "ideal": null,
+      "ideal": 3,
       "tiers": [
         {
           "level": 1,
@@ -9501,7 +9419,7 @@
       "text": "Minion Life Increase",
       "min": 8,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -9517,7 +9435,7 @@
       "text": "",
       "min": 6,
       "max": 10,
-      "ideal": null,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
@@ -9533,7 +9451,7 @@
       "text": "",
       "min": 12,
       "max": 16,
-      "ideal": null,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
@@ -9549,7 +9467,7 @@
       "text": "Totem Life increase",
       "min": 8,
       "max": 12,
-      "ideal": null,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
@@ -9565,7 +9483,7 @@
       "text": "",
       "min": 6,
       "max": 10,
-      "ideal": null,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
@@ -9581,7 +9499,7 @@
       "text": "",
       "min": 4,
       "max": 34,
-      "ideal": null,
+      "ideal": 33,
       "tiers": [
         {
           "level": 4,
@@ -9617,7 +9535,7 @@
       "text": "",
       "min": 11,
       "max": 22,
-      "ideal": null,
+      "ideal": 21,
       "tiers": [
         {
           "level": 1,
@@ -9633,7 +9551,7 @@
       "text": "",
       "min": 1,
       "max": 49,
-      "ideal": null,
+      "ideal": 45,
       "tiers": [
         {
           "level": 1,
@@ -9689,7 +9607,7 @@
       "text": "",
       "min": 3,
       "max": 85,
-      "ideal": null,
+      "ideal": 82,
       "tiers": [
         {
           "level": 1,
@@ -9745,13 +9663,12 @@
       "text": "",
       "min": 1,
       "max": 40,
-      "ideal": null,
+      "ideal": 37,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         },
         {
           "level": 11,
@@ -9802,7 +9719,7 @@
       "text": "",
       "min": 2,
       "max": 69,
-      "ideal": null,
+      "ideal": 66,
       "tiers": [
         {
           "level": 1,
@@ -9858,13 +9775,12 @@
       "text": "",
       "min": 1,
       "max": 10,
-      "ideal": null,
+      "ideal": 8,
       "tiers": [
         {
           "level": 1,
           "min": 1,
-          "max": 1,
-          "ideal": null
+          "max": 1
         },
         {
           "level": 11,
@@ -9915,7 +9831,7 @@
       "text": "",
       "min": 4,
       "max": 133,
-      "ideal": null,
+      "ideal": 131,
       "tiers": [
         {
           "level": 1,
@@ -9971,7 +9887,7 @@
       "text": "Local Minimum Added Chaos Damage",
       "min": 47,
       "max": 72,
-      "ideal": null,
+      "ideal": 65,
       "tiers": [
         {
           "level": 83,
@@ -9987,7 +9903,7 @@
       "text": "Local Maximum Added Chaos Damage",
       "min": 98,
       "max": 123,
-      "ideal": null,
+      "ideal": 116,
       "tiers": [
         {
           "level": 83,
@@ -10003,7 +9919,7 @@
       "text": "Burning Damage Increase",
       "min": 16,
       "max": 30,
-      "ideal": null,
+      "ideal": 29,
       "tiers": [
         {
           "level": 20,
@@ -10029,7 +9945,7 @@
       "text": "",
       "min": 2,
       "max": 4,
-      "ideal": null,
+      "ideal": 4,
       "tiers": [
         {
           "level": 25,
@@ -10039,8 +9955,7 @@
         {
           "level": 85,
           "min": 4,
-          "max": 4,
-          "ideal": null
+          "max": 4
         }
       ]
     },
@@ -10051,7 +9966,7 @@
       "text": "",
       "min": 36,
       "max": 60,
-      "ideal": null,
+      "ideal": 57,
       "tiers": [
         {
           "level": 25,

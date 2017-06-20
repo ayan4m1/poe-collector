@@ -197,12 +197,11 @@ Q.spread [
           level: stat.level
           min: stat.min
           max: stat.max
-          ideal: null
         }) unless tiers.tiers.findIndex((v) -> v.level is stat.level) >= 0
 
-        continue if stat.min is stat.max
         ideal = new gauss.Vector([ stat.min ... stat.max ]).percentile(config.neural.idealPercentile)
-        tiers.tiers[tiers.tiers.length - 1].ideal = ideal
+        # if stat.min == stat.max ideal will be null, use the max value
+        ideal = ideal ? stat.max
         tiers.ideal = Math.max(tiers.ideal ? ideal, ideal)
 
       gearData[gear.name].sort()
