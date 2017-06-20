@@ -219,27 +219,23 @@ mergeStashes = (stashes) ->
     # search and upsert all items in this tab
     # todo: convert to flushed buffer
     mergeListings(listingShard, items)
+      .catch(merged.reject)
       .then ->
         docCount = buffer.listings.length / 2
-        if docCount > config.elastic.batchSize
-          stashCount = buffer.stashes.length / 2
-          log.as.debug("flushing #{docCount} listings across #{stashCount} stashes")
+        return merged.resolve() unless docCount > config.elastic.batchSize
+        stashCount = buffer.stashes.length / 2
+        log.as.debug("flushing #{docCount} listings across #{stashCount} stashes")
 
-          slicedBuf = buffer.listings.slice()
-          slicedOrphans = buffer.orphans.slice()
-          Array.prototype.push.apply(slicedBuf, slicedBuf.stashes)
-          buffer.listings.length = buffer.stashes.length = buffer.orphans.length = 0
+        slicedBuf = buffer.listings.slice()
+        slicedOrphans = buffer.orphans.slice()
+        Array.prototype.push.apply(slicedBuf, slicedBuf.stashes)
+        buffer.listings.length = buffer.stashes.length = buffer.orphans.length = 0
 
-          bulkDocuments(slicedBuf)
-            .catch(merged.reject)
-            .then -> orphanListings(slicedOrphans)
-            .catch(merged.reject)
-            .then(merged.resolve)
-        else
-          #cacheFill = (docCount / parseFloat(config.elastic.batchSize)) * 100.0
-          #if cacheFill > 75
-          #  log.as.debug("cache is #{cacheFill.toFixed(2)}% full with #{pendingQueries} pending queries")
-          merged.resolve()
+        bulkDocuments(slicedBuf)
+          .catch(merged.reject)
+          .then -> orphanListings(slicedOrphans)
+          .catch(merged.reject)
+          .then(merged.resolve)
 
   merged.promise
 
