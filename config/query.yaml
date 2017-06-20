@@ -17,7 +17,7 @@ default:
           - match:
               itemType: 'Gear'
           - match:
-              'meta.modQuality': 0
+              'meta.quality': 0
   unscoring:
     query:
       bool:
@@ -31,6 +31,6 @@ default:
           - match:
               itemType: 'Gear'
           - range:
-              'meta.modQuality':
+              'meta.quality':
                 gt: 0
 

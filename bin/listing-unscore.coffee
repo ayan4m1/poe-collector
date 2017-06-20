@@ -11,7 +11,7 @@ unscoreHit = (hit) ->
     type: 'listing'
     id: hit._id
     body:
-      script: 'ctx._source.meta.remove(\"modQuality\")'
+      script: 'ctx._source.meta.remove(\"meta.quality\")'
   , (err, res) ->
     return log.as.error(err) if err?
     commitCount++ if res.result is 'updated'

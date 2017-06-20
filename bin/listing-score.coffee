@@ -191,17 +191,17 @@ scoreHit = (hit) ->
 
   log.as.debug("found #{mods.length} eligible mods for #{listing.typeLine} #{listing.fullName} - #{listing.baseLine}")
 
-  domains =
+  ###domains =
     prefix: false
     suffix: false
-  groups = []
+  groups = []###
 
-  for mod in mods
-    console.dir(mod)
-
-  ###matchedGroups = []
+  matchedGroups = []
+  matchedCount = 0
+  totalQuality = 0
 
   for mod in listing.modifiers
+    console.dir(mod)
     value = valuate(mod)
     continue unless value.max? or value > 0
 
@@ -210,30 +210,29 @@ scoreHit = (hit) ->
     else if mod.indexOf(' and ') > 0 and mod.endsWith('Strength') or mod.endsWith('Dexterity') or mod.endsWith('Intelligence')
     then mod.match(/(Strength|Dexterity|Intelligence) and (Strength|Dexterity|Intelligence)/)
 
-    log.as.silly(mod)
     tokens = tokenize(mod)
     tokens.push(pair[1].toLowerCase(), pair[2].toLowerCase()) if pair?
     match = null
-    for cmpKey, cmpVal of modInfo
+    for cmpKey, cmpVal of mods
       cmpTokens = tokenize(cmpKey)
       matches = all(tokens, cmpTokens)
-      match = cmpVal if matches is true and matchedGroups.indexOf(mod.id) is -1###
+      match = cmpVal if matches is true and matchedGroups.indexOf(mod.id) is -1
 
-  ###if match?
+  if match?
     log.as.silly("modifier #{mod} matched #{match.text}")
     matchedGroups.push(mod.id)
     matchedCount++
     if value.min? and value.max?
       quality = (value.min / match.max) + (value.max / match.max)
       display = "#{value.min} to #{value.max}"
-      else
+    else
       quality = value / match.max
       display = value
 
     totalQuality += quality
     log.as.debug("#{mod} -> #{match.id} has quality #{quality.toFixed(4)} from #{match.min} - #{match.max}")
   else
-    log.as.warn("could not match mod for #{mod}, tokenized as #{tokens}")###
+    log.as.warn("could not match mod for #{mod}, tokenized as #{tokens}")
 
   result = totalQuality / matchedCount
   log.as.info("overall quality is #{result.toFixed(4)}")
@@ -243,10 +242,10 @@ scoreHit = (hit) ->
       _type: 'listing'
       _id: hit._id
   }, {
-    script: "ctx._source.meta.modQuality = #{result}"
+    script: "ctx._source.meta.quality = #{result}"
     upsert:
       meta:
-        modQuality: 0
+        quality: 0
   })
 
 bodies = []
