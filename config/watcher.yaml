@@ -1,9 +1,14 @@
 default:
-  stashTabUrl: 'http://betaapi.pathofexile.com/api/public-stash-tabs'
-  index:
+  stashTabUrl: 'http://www.pathofexile.com/api/public-stash-tabs'
+  download:
+    concurrency: -1 # unlimited
     interval:
-      concurrency: 1
-      interval: 5
+      value: 2
+      unit: seconds
+  index:
+    concurrency: 1 # one at a time to preserve order
+    interval:
+      value: 1
       unit: seconds
   retention:
     stash:
@@ -12,6 +17,8 @@ default:
     listing:
       interval: 2
       unit: days
+beta:
+  stashTabUrl: 'http://betaapi.pathofexile.com/api/public-stash-tabs'
 production:
   retention:
     stash:

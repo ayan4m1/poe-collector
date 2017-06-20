@@ -15,15 +15,16 @@ log = require './logging'
 cache = require './cache'
 elastic = require './elastic'
 
-# prevent GGG from killing our requests
+downloadSpeed = config.watcher.download
 downloadLimiter = new Bottleneck(
-  -1   # unlimited concurrent downloads
-  1000 # one second in ms
+  downloadSpeed.concurrency
+  moment.duration(downloadSpeed.interval.value, downloadSpeed.interval.unit).asMilliseconds()
 )
 
+indexSpeed = config.watcher.index
 indexLimiter = new Bottleneck(
-  config.watcher.index.concurrency
-  moment.duration(config.watcher.index.interval, config.watcher.index.unit8).asMilliseconds()
+  indexSpeed.concurrency
+  moment.duration(indexSpeed.interval.value, indexSpeed.interval.unit).asMilliseconds()
 )
 
 fetchNextChange = ->
@@ -57,6 +58,10 @@ downloadChange = (changeId) ->
 
     # continue on to the next data blob
     if data.next_change_id?
+      if data.next_change_id is changeId
+        log.as.debug("caught up, waiting for new data")
+        # todo: put the 5 second delay in the config
+        return Q.delay(5000).then(-> fetchChange(changeId))
       log.as.info("following river to #{data.next_change_id}")
       return fetchChange(data.next_change_id)
     else
