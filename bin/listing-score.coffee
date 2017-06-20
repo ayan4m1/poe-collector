@@ -7,8 +7,23 @@ jsonfile = require 'jsonfile'
 log = require './logging'
 elastic = require './elastic'
 
-data = jsonfile.readFileSync("#{__dirname}/../data/Gear.json")
-utilityFlasks = jsonfile.readFileSync("#{__dirname}/../data/Gear.json")
+data = jsonfile.readFileSync("#{__dirname}/../data/Gear.json").types
+utilityFlasks = [
+  'Quicksilver'
+  'Bismuth'
+  'Stibnite'
+  'Amethyst'
+  'Ruby'
+  'Sapphire'
+  'Topaz'
+  'Silver'
+  'Aquamarine'
+  'Granite'
+  'Jade'
+  'Quartz'
+  'Sulphur'
+  'Basalt'
+]
 
 valueRegex = /([+-])?([0-9\\.]+)%?( to ([+-])?([0-9\\.]+)%?)?/i
 valuate = (source) ->
@@ -19,7 +34,6 @@ valuate = (source) ->
     max: parseInt(slug[5])
   else parseInt(slug[2])
 
-###
 replacements = [
   ['Minions have', 'minion']
   ['Staves', 'staff']
