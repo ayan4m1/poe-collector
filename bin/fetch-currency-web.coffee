@@ -17,6 +17,7 @@ cloudscraper.get(priceQuery, (err, res, body) ->
   $ = cheerio.load(body)
   $('#currency-want').find('.currency-selectable').each ->
     $v = $(@)
+    return unless $v.children('.currencyimg')?
     id = parseInt($v.data('id'))
     names[id] = $v.attr('title')
 
@@ -31,6 +32,7 @@ cloudscraper.get(priceQuery, (err, res, body) ->
     offers[currency].push(rate)
 
   for currency, val of offers
+    continue unless names[currency]?
     total = val.reduce((accum, rate) ->
       accum += rate
     , 0)
