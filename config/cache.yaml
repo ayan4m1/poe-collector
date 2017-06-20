@@ -1,9 +1,12 @@
 default:
   cachePath: '../cache/'
   latestChangeUrl: 'http://poeninja.azureedge.net/api/Data/GetStats'
+  changeIdField: 'nextChangeId'
   retention:
     interval: 5
     unit: minutes
+beta:
+  changeIdField: 'nextBetaChangeId'
 production:
   retention:
     interval: 6
