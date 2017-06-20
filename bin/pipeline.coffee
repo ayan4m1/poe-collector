@@ -64,6 +64,7 @@ downloadChange = (changeId) ->
       return fetchNextChange()
 
 handleChange = (data) ->
+  log.as.debug("handle called for #{data.id}")
   handled = Q.defer()
   indexLimiter.schedule(processChange, data, handled)
   handled.promise
@@ -73,7 +74,7 @@ processChange = (data, handled) ->
   elastic
     .mergeStashes(data.body.stashes)
     .catch(log.as.error)
-    .then(handled)
+    .then -> handled.resolve()
 
 module.exports =
   fetch: fetchNextChange
