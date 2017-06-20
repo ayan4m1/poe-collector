@@ -55,7 +55,6 @@ replacements = [
   [/(Block Chance|Chance to Block)/, 'block']
   [/for each Enemy hit by your (Attack|Spell)s/, '$1']
   [/Cast Speed with (Cold|Fire|Lightning) Skills/, '$1']
-  ['Chaos Resistance', 'chaos damage resistance percent']
 ]
 
 tokenize = (source) ->
@@ -95,6 +94,16 @@ all = (left, right) ->
     return false unless right.indexOf(leftOne) >= 0
   true###
 
+findArmourType = (listing) ->
+  switch
+    when listing.defense.armour.flat > 0 and listing.defense.evasion.flat > 0 and listing.defense.shield.flat > 0 then 'str_dex_int'
+    when listing.defense.armour.flat > 0 and listing.defense.evasion.flat > 0 then 'str_dex'
+    when listing.defense.armour.flat > 0 and listing.defense.shield.flat > 0 then 'str_int'
+    when listing.defense.armour.flat > 0 then 'str'
+    when listing.defense.evasion.flat > 0 and listing.defense.shield.flat > 0 then 'dex_int'
+    when listing.defense.evasion.flat > 0 then 'dex'
+    when listing.defense.shield.flat > 0 then 'int'
+
 # parse the item information to determine which mods it is
 # able to receive
 findEligibleMods = (listing) ->
@@ -102,18 +111,14 @@ findEligibleMods = (listing) ->
   modInfo = null
 
   if key is 'body'
-    armourType = switch
-      when listing.defense.armour.flat > 0 and listing.defense.evasion.flat > 0 and listing.defense.shield.flat > 0 then 'str_dex_int'
-      when listing.defense.armour.flat > 0 and listing.defense.evasion.flat > 0 then 'str_dex'
-      when listing.defense.armour.flat > 0 and listing.defense.shield.flat > 0 then 'str_int'
-      when listing.defense.armour.flat > 0 then 'str'
-      when listing.defense.evasion.flat > 0 and listing.defense.shield.flat > 0 then 'dex_int'
-      when listing.defense.evasion.flat > 0 then 'dex'
-      when listing.defense.shield.flat > 0 then 'int'
-
+    armourType = findArmourType(listing)
     log.as.debug("detected #{listing.fullName} as #{armourType}")
     modInfo = data["#{armourType}_armour"]
     extend(modInfo, data['body_armour'])
+  else if key is 'shield'
+    shieldType = findArmourType(listing)
+    log.as.debug("detected #{listing.fullName} as #{shieldType}")
+    modInfo = data["#{shieldType}_shield"]
   else if key is 'map'
     key = if listing.tier > 0 and listing.tier < 6 then 'low_tier_map' else
       if listing.tier <= 10 then 'mid_tier_map' else
