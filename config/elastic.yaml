@@ -1,9 +1,11 @@
 default:
-  host: http://phreak.space:9200
+  host: http://localhost:9200
   batchSize: 10000
   timeout:
     interval: 120
     unit: seconds
+beta:
+  batchSize: 100
 production:
   host: http://phreak.space:9200
   timeout:
