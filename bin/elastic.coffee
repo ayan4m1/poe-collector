@@ -11,7 +11,7 @@ elasticsearch = require 'elasticsearch'
 log = require './logging'
 parser = require './parser'
 
-#pendingQueries = 0
+lastBufferCount = 0
 
 createClient = ->
   new elasticsearch.Client(
@@ -222,9 +222,12 @@ mergeStashes = (stashes) ->
       .catch(merged.reject)
       .then ->
         docCount = buffer.listings.length / 2
-        fill = ((docCount / config.elastic.batchSize) * 100).toFixed(1)
-        log.as.debug("buffer is #{fill}% full") if docCount <= config.elastic.batchSize
+        fill = docCount / config.elastic.batchSize
+        if fill > lastBufferCount + 0.1 and docCount <= config.elastic.batchSize
+          log.as.debug("buffer is #{(fill * 100).toFixed(1)}% full")
+          lastBufferCount = fill
         return merged.resolve() unless docCount > config.elastic.batchSize
+
         stashCount = buffer.stashes.length / 2
         log.as.debug("flushing #{docCount} listings across #{stashCount} stashes")
 
@@ -232,6 +235,7 @@ mergeStashes = (stashes) ->
         slicedOrphans = buffer.orphans.slice()
         Array.prototype.push.apply(slicedBuf, slicedBuf.stashes)
         buffer.listings.length = buffer.stashes.length = buffer.orphans.length = 0
+        lastBufferCount = 0
 
         bulkDocuments(slicedBuf)
           .catch(merged.reject)
