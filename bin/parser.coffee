@@ -24,6 +24,7 @@ regexes =
     map: /^Travel to this Map by using it in the Eternal Laboratory/
     flask: /^Right click to drink/
     jewel: /^Place into an allocated Jewel Socket/
+    leaguestone: /^Right-click to open your Legacy Panel/
   mods:
     damage: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced|more|less)\s+(Chaos|Cold|Fire|Lightning|Burning|Spell|Projectile|Elemental|Area|Melee)?\s*Damage/
     defense: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced) (Armour and Evasion Rating|Armour|Evasion Rating|Stun and Block Recovery)/
@@ -504,6 +505,7 @@ parseType = (item, result) ->
         when regexes.type.map.test(item.descrText) then 'Map'
         when regexes.type.jewel.test(item.descrText) then 'Jewel'
         when regexes.type.flask.test(item.descrText) then 'Flask'
+        when regexes.type.leaguestone.test(item.descrText) then 'Leaguestone'
         else 'Gear'
   else if frame?
     result.itemType = frame
