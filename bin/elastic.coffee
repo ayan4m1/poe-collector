@@ -143,7 +143,6 @@ mergeStash = (shard, stash) ->
   )
 
 appendPayload = (verb, shard, listing) ->
-  #pendingQueries++
   header = {}
   header[verb] =
     _index: shard
@@ -173,8 +172,6 @@ mergeListings = (shard, items) ->
       log.as.silly("#{ids.length} item listings queried, #{res.hits.hits.length} returned")
       for hit in res.hits.hits
         listing = hit._source
-        parser.existing(hit, listing)
-        appendPayload('update', shard, listing)
         if hit._index isnt shard
           log.as.silly("moving #{hit._id} up from #{hit._index}")
           buffer.orphans.push(elastic.client.delete(
@@ -182,7 +179,9 @@ mergeListings = (shard, items) ->
             type: 'listing'
             id: hit._id
           ))
-        delete items[hit._id]
+        else
+          parser.existing(hit, listing)
+          appendPayload('update', shard, listing)
 
     for id, val of items
       appendPayload('index', shard, parser.new(val))
@@ -253,7 +252,6 @@ bulkDocuments = (bulk) ->
   duration = process.hrtime()
   elastic.client.bulk({ body: bulk })
     .then ->
-      #pendingQueries -= docCount
       bulked.resolve()
       duration = process.hrtime(duration)
       bulkTime = moment.duration(duration[0] + (duration[1] / 1e9), 'seconds')
