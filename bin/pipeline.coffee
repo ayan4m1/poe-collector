@@ -79,7 +79,7 @@ processChange = (data, handled) ->
   elastic
     .mergeStashes(data.body.stashes)
     .catch(log.as.error)
-    .then -> handled.resolve()
+    .then(handled)
 
 module.exports =
   fetch: fetchNextChange
