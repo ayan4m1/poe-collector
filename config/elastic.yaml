@@ -1,6 +1,6 @@
 default:
   host: http://localhost:9200
-  batchSize: 10000
+  batchSize: 1000
   timeout:
     interval: 120
     unit: seconds
