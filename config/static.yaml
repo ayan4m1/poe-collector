@@ -1,2 +1,6 @@
 default:
-  gameVersion: '2.6'
+  gameVersion: '3.0.0'
+  leagues:
+    - 'Standard'
+    - 'Hardcore'
+    - 'Legacy'

@@ -1731,7 +1731,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 1729,base_deal_no_fire_damage,False,False,False,4,False,,False,False,-1,-1,False,1300650170,[]
 1730,base_deal_no_cold_damage,False,False,False,4,False,,False,False,-1,-1,False,-1962408988,[]
 1731,base_deal_no_lightning_damage,False,False,False,4,False,,False,False,-1,-1,False,-1310387361,[]
-1732,base_deal_no_chaos_damage,False,False,False,4,False,,False,False,-1,-1,False,-823593578,[]
+1732,base_deal_no_chaos_damage,False,False,False,4,False,,False,False,-1,-1,True,-823593578,[]
 1733,local_can_only_deal_damage_with_this_weapon,False,True,True,4,False,,False,False,1724,1723,False,1703200560,[]
 1734,reave_area_of_effect_+%_final_per_stage,True,False,False,1,False,,True,False,-1,-1,True,-1176649367,[]
 1735,skill_can_add_multiple_charges_per_action,True,False,False,4,False,,False,False,-1,-1,False,194637144,[]
@@ -2027,7 +2027,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 2025,base_monster_will_be_deleted_on_death,False,False,False,4,False,,False,False,-1,-1,False,-926991026,[]
 2026,monster_will_be_deleted_on_death,True,False,False,4,False,,False,True,-1,-1,False,0,[]
 2027,charged_blast_spell_damage_+%_final_per_stack,False,False,False,1,False,,False,False,-1,-1,True,1991970680,[]
-2028,charged_blast_spell_damage_+%_final,False,False,False,1,False,,False,False,-1,-1,False,2073405203,[]
+2028,from_code_active_skill_spell_damage_+%_final,False,False,False,1,False,,False,False,-1,-1,False,2133462731,[]
 2029,leech_X_life_per_spell_cast,True,False,False,1,False,,False,False,-1,-1,False,792110421,[]
 2030,zero_elemental_resistance,False,True,False,4,False,,False,False,-1,-1,False,-477514494,[]
 2031,global_defences_+%,False,False,False,1,False,,False,False,-1,-1,False,-418031886,[]
@@ -2409,7 +2409,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 2407,old_do_not_use_life_leech_permyriad_on_crit,True,False,False,3,False,,False,False,-1,-1,False,1440471164,[]
 2408,ground_smoke_on_rampage_threshold_ms,True,False,False,3,False,,False,False,-1,-1,False,-2120966493,[]
 2409,phasing_on_rampage_threshold_ms,True,False,False,3,False,,False,False,-1,-1,False,-1498203406,[]
-2410,on_full_energy_shield,True,False,False,4,False,,False,False,-1,-1,False,-583713247,[]
+2410,on_full_energy_shield,True,False,False,4,False,,True,False,-1,-1,True,-583713247,[]
 2411,movement_velocity_+%_on_full_energy_shield,False,False,False,1,False,,False,False,-1,-1,False,-1980232218,[]
 2412,sword_critical_strike_chance_+%,False,False,False,1,False,,False,False,-1,-1,False,-629539065,[]
 2413,attack_damage_+%_per_450_evasion,False,False,False,1,False,,False,False,-1,-1,False,380954074,[]
@@ -3214,7 +3214,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 3212,number_of_power_charges_to_gain,False,False,False,3,False,,False,False,-1,-1,False,284890553,[]
 3213,number_of_frenzy_charges_to_gain,False,False,False,3,False,,False,False,-1,-1,False,1821240465,[]
 3214,number_of_endurance_charges_to_gain,False,False,False,3,False,,False,False,-1,-1,False,-2094839163,[]
-3215,animate_weapon_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,260008616,"[254494, 254526]"
+3215,animate_weapon_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,260008616,"[254512, 254544]"
 3216,totem_skill_area_of_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-90099192,[]
 3217,life_leech_from_skills_used_by_totems_permyriad,False,False,False,1,False,,False,False,-1,-1,False,879136614,[]
 3218,damage_reflected_to_enemies_%_gained_as_life,False,False,False,1,False,,False,False,-1,-1,False,-1327198983,[]
@@ -3327,7 +3327,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 3325,local_unique_jewel_glacial_cascade_additional_sequence_with_x_int_in_radius,True,True,False,3,False,,False,False,-1,-1,False,1760894809,[]
 3326,local_unique_jewel_animate_weapon_animates_bows_and_wands_with_x_dex_in_radius,True,True,False,3,False,,False,False,-1,-1,False,-613746873,[]
 3327,local_unique_jewel_split_arrow_fires_additional_arrow_with_x_dex_in_radius,True,True,False,3,False,,False,False,-1,-1,False,-480912379,[]
-3328,vigilant_strike_applies_to_nearby_allies_for_X_seconds,True,False,False,3,False,,False,False,-1,-1,False,-549201568,[263826]
+3328,vigilant_strike_applies_to_nearby_allies_for_X_seconds,True,False,False,3,False,,False,False,-1,-1,False,-549201568,[263844]
 3329,split_arrow_number_of_additional_arrows,True,False,False,3,False,,True,False,-1,-1,True,-1028368957,[]
 3330,animate_weapon_can_animate_bows,True,False,False,4,False,,False,False,-1,-1,False,1021380413,[]
 3331,animate_weapon_can_animate_wands,True,False,False,4,False,,False,False,-1,-1,False,-1298358589,[]
@@ -3358,7 +3358,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 3356,item_destroyed_on_death,False,True,False,4,False,,False,False,-1,-1,False,-1715765163,[]
 3357,summoned_monsters_set_parent,True,False,False,4,False,,False,False,-1,-1,False,489425537,[]
 3358,maximum_number_of_spinning_blades,True,False,False,3,False,,True,False,-1,-1,True,30645271,[]
-3359,ball_lightning_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1561750703,[266468]
+3359,ball_lightning_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1561750703,[266486]
 3360,cast_when_critically_hit_%,True,False,False,1,False,,False,False,-1,-1,True,-300117186,[]
 3361,attack_trigger_on_hit_%,True,False,False,1,False,,False,False,-1,-1,True,-1857362386,[]
 3362,cast_on_hit_%,False,False,False,1,False,,False,False,-1,-1,True,-260701514,[]
@@ -3402,13 +3402,13 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 3400,base_poison_damage_+%,True,False,False,1,False,,False,False,-1,-1,True,620927105,[]
 3401,base_poison_duration_+%,True,False,False,1,False,,False,False,-1,-1,True,705854193,[]
 3402,poison_duration_+%,False,False,False,1,False,,False,True,-1,-1,False,0,[]
-3403,poison_skill_effect_duration,True,False,False,3,False,,False,True,-1,-1,False,0,[]
+3403,poison_skill_effect_duration,True,False,False,3,False,,False,True,-1,-1,True,0,[]
 3404,base_chance_to_poison_on_hit_%,True,False,False,1,False,,False,False,-1,-1,True,-569707504,[]
 3405,quake_slam_fully_charged_explosion_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,True,2018192786,[]
 3406,local_unique_jewel_glacial_hammer_item_rarity_on_shattering_enemy_+%_with_50_strength_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-1622392429,[]
 3407,local_unique_jewel_spectral_throw_damage_for_each_enemy_hit_with_spectral_weapon_+%_with_50_dexterity_in_radius,True,True,False,1,False,,False,False,-1,-1,False,1311232991,[]
 3408,local_unique_jewel_double_strike_chance_to_trigger_on_kill_effects_an_additional_time_%_with_50_dexterity_in_radius,True,True,False,1,False,,False,False,-1,-1,False,1960251482,[]
-3409,local_unique_jewel_viper_strike_attack_damage_per_poison_on_enemy_+%_with_50_dexterity_in_radius,True,True,False,1,False,,False,False,-1,-1,False,956233031,[270746]
+3409,local_unique_jewel_viper_strike_attack_damage_per_poison_on_enemy_+%_with_50_dexterity_in_radius,True,True,False,1,False,,False,False,-1,-1,False,956233031,[270764]
 3410,local_unique_jewel_heavy_strike_chance_to_deal_double_damage_%_with_50_strength_in_radius,True,True,False,1,False,,False,False,-1,-1,False,353046139,[]
 3411,enchantment_boots_mana_costs_when_hit_+%,True,False,False,1,False,,False,False,-1,-1,False,530651918,[]
 3412,enchantment_boots_stun_avoid_%_on_kill,True,False,False,1,False,,False,False,-1,-1,False,131783403,[]
@@ -3466,7 +3466,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 3464,number_of_melee_skeletons_to_summon_as_mage_skeletons,True,False,False,3,False,,False,False,-1,-1,False,888182212,[]
 3465,local_unique_jewel_with_50_int_in_radius_summon_X_melee_skeletons_as_mage_skeletons,True,True,False,3,False,,False,False,-1,-1,False,-558701054,[]
 3466,local_display_socketed_trap_skills_create_smoke_cloud,False,True,False,3,False,,False,False,-1,-1,False,1629360403,[]
-3467,glacial_hammer_item_rarity_on_shattering_enemy_+%,True,False,False,1,False,,False,False,-1,-1,False,1821221008,"[275698, 275730]"
+3467,glacial_hammer_item_rarity_on_shattering_enemy_+%,True,False,False,1,False,,False,False,-1,-1,False,1821221008,"[275716, 275748]"
 3468,spectral_throw_damage_for_each_enemy_hit_with_spectral_weapon_+%,True,False,False,1,False,,False,False,-1,-1,False,-496466302,[]
 3469,double_strike_chance_to_trigger_on_kill_effects_an_additional_time_%,True,False,False,1,False,,False,False,-1,-1,False,-1097339426,[]
 3470,viper_strike_attack_damage_per_poison_on_enemy_+%,True,False,False,1,False,,False,False,-1,-1,False,1172006055,[]
@@ -3475,11 +3475,11 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 3473,local_unique_jewel_fireball_radius_up_to_+%_at_longer_ranges_with_50_int_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-2008797960,[]
 3474,fireball_radius_up_to_+%_at_longer_ranges,True,False,False,1,False,,True,False,-1,-1,True,-973299905,[]
 3475,local_unique_jewel_animate_weapon_can_animate_up_to_x_additional_ranged_weapons_with_50_dex_in_radius,True,True,False,3,False,,False,False,-1,-1,False,-2023488937,[]
-3476,animate_weapon_can_animate_up_to_x_additional_ranged_weapons,True,False,False,3,False,,False,False,-1,-1,False,1279044710,"[277020, 277052]"
+3476,animate_weapon_can_animate_up_to_x_additional_ranged_weapons,True,False,False,3,False,,False,False,-1,-1,False,1279044710,"[277038, 277070]"
 3477,local_unique_jewel_ground_slam_angle_+%_with_50_str_in_radius,True,True,False,1,False,,False,False,-1,-1,False,1469272516,[]
 3478,ground_slam_angle_+%,True,False,False,1,False,,True,False,-1,-1,True,1206513685,[]
 3479,local_unique_jewel_cold_snap_gain_power_charge_on_kill_%_with_50_int_in_radius,True,True,False,1,False,,False,False,-1,-1,False,1331237104,[]
-3480,cold_snap_gain_power_charge_on_kill_%,True,False,False,1,False,,False,False,-1,-1,False,796056598,[277516]
+3480,cold_snap_gain_power_charge_on_kill_%,True,False,False,1,False,,False,False,-1,-1,False,796056598,[277534]
 3481,local_unique_jewel_rallying_cry_damage_taken_goes_to_mana_%_with_50_int_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-219195707,[]
 3482,rallying_cry_damage_taken_goes_to_mana_%,True,False,False,1,False,,False,False,-1,-1,False,-2063095366,[]
 3483,local_unique_jewel_barrage_final_volley_fires_x_additional_projectiles_simultaneously_with_50_dex_in_radius,True,True,False,3,False,,False,False,-1,-1,False,1747190351,[]
@@ -3533,8 +3533,8 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 3531,elemental_damage_taken_+%,False,False,False,1,False,,False,False,-1,-1,False,-1020527045,[]
 3532,damage_taken_from_traps_and_mines_+%,True,False,False,1,False,,False,False,-1,-1,False,-1437808560,[]
 3533,maim_on_hit_%_vs_poisoned_enemies,True,False,False,1,False,,False,False,-1,-1,False,-1179953916,[]
-3534,raider_passive_evade_melee_attacks_while_onslaughted_+%_final,False,False,False,1,False,,False,False,-1,-1,False,22458203,[]
-3535,raider_passive_evade_projectile_attacks_while_onslaughted_+%_final,False,False,False,1,False,,False,False,-1,-1,False,1393164439,[]
+3534,raider_passive_evade_melee_attacks_while_onslaughted_+%_final,False,False,False,1,False,,True,False,-1,-1,True,22458203,[]
+3535,raider_passive_evade_projectile_attacks_while_onslaughted_+%_final,False,False,False,1,False,,True,False,-1,-1,True,1393164439,[]
 3536,dispel_status_ailments_on_flask_use,True,False,False,4,False,,False,False,-1,-1,False,-106879138,[]
 3537,avoid_status_ailments_%_during_flask_effect,False,False,False,1,False,,False,False,-1,-1,False,683807904,[]
 3538,attack_speed_+%_during_flask_effect,False,False,False,1,False,,False,False,-1,-1,False,2052344153,[]
@@ -3636,19 +3636,19 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 3634,local_display_manifest_rageblade_destroy_on_end_rampage,False,True,False,4,False,,False,False,-1,-1,False,1023847185,[]
 3635,minions_grant_onslaught,True,False,False,4,False,,False,False,-1,-1,False,364668932,[]
 3636,ground_fire_art_variation,True,False,False,3,False,,True,False,-1,-1,True,-908198237,[]
-3637,frost_blades_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1164135944,[291256]
-3638,frost_blades_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1324139943,[291356]
-3639,frost_blades_number_of_additional_projectiles_in_chain,True,False,False,3,False,,False,False,-1,-1,False,321564873,[291500]
-3640,summoned_raging_spirit_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1042197908,"[291604, 291648]"
+3637,frost_blades_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1164135944,[291274]
+3638,frost_blades_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1324139943,[291374]
+3639,frost_blades_number_of_additional_projectiles_in_chain,True,False,False,3,False,,False,False,-1,-1,False,321564873,[291518]
+3640,summoned_raging_spirit_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1042197908,"[291622, 291666]"
 3641,summoned_raging_spirit_chance_to_spawn_additional_minion_%,True,False,False,1,False,,False,False,-1,-1,False,1731154973,[]
-3642,discharge_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1292457642,[291882]
-3643,discharge_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,403307020,[291950]
+3642,discharge_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1292457642,[291900]
+3643,discharge_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,403307020,[291968]
 3644,discharge_chance_not_to_consume_charges_%,True,False,False,1,False,,False,False,-1,-1,False,-1882497056,[]
-3645,anger_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,2039758837,[292116]
-3646,anger_aura_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-472693821,[292178]
-3647,lightning_trap_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,850380245,[292248]
-3648,lightning_trap_number_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,-1421747271,[292404]
-3649,lightning_trap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,True,789657009,[292530]
+3645,anger_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,2039758837,[292134]
+3646,anger_aura_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-472693821,[292196]
+3647,lightning_trap_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,850380245,"[292266, 292320]"
+3648,lightning_trap_number_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,-1421747271,"[292490, 292544]"
+3649,lightning_trap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,True,789657009,[292684]
 3650,virtual_number_of_additional_projectiles_in_chain,True,False,False,3,False,,True,True,-1,-1,True,0,[]
 3651,ambush_passive_critical_strike_chance_vs_enemies_on_full_life_+%_final,True,False,False,1,False,,False,False,-1,-1,False,1219354788,[]
 3652,critical_strike_multiplier_vs_enemies_on_full_life_+,False,False,False,3,False,,False,False,-1,-1,False,1672035317,[]
@@ -3843,7 +3843,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 3841,display_cast_word_of_tempest_on_hit_%,True,True,False,1,False,,False,False,-1,-1,False,-551214713,[]
 3842,display_cast_word_of_winter_when_hit_%,True,True,False,1,False,,False,False,-1,-1,False,-1600601882,[]
 3843,life_es_and_mana_recovery_+%_for_4_seconds_on_killing_enemies_affected_by_your_degen,True,True,False,1,False,,False,False,-1,-1,False,-1388589181,[]
-3844,trickster_passive_chance_to_evade_attacks_while_not_on_full_energy_shield_+%_final,True,True,False,1,False,,False,False,-1,-1,False,1331110652,[]
+3844,trickster_passive_chance_to_evade_attacks_while_not_on_full_energy_shield_+%_final,True,True,False,1,False,,True,False,-1,-1,True,1331110652,[]
 3845,display_cast_word_of_flames_on_hit_%,True,True,False,1,False,,False,False,-1,-1,False,-1885152337,[]
 3846,display_cast_edict_of_flames_on_hit_%,True,True,False,1,False,,False,False,-1,-1,False,-1938826150,[]
 3847,display_cast_decree_of_flames_on_hit_%,True,True,False,1,False,,False,False,-1,-1,False,2112008307,[]
@@ -3879,7 +3879,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 3877,minion_damage_taken_+%_from_guillotine_traps_final,True,False,False,1,False,,False,False,-1,-1,False,156389147,[]
 3878,labyrinth_arrow_movement_speed_+%_final,False,False,False,1,False,,False,False,-1,-1,False,727351682,[]
 3879,map_disable_portal_use,True,False,False,4,False,,True,False,-1,-1,True,556684939,[]
-3880,jorrhasts_blacksteel_animate_weapon_duration_+%_final,True,False,False,1,False,,False,False,-1,-1,False,456150843,"[312908, 312940]"
+3880,jorrhasts_blacksteel_animate_weapon_duration_+%_final,True,False,False,1,False,,False,False,-1,-1,False,456150843,"[313062, 313094]"
 3881,shockwave_slam_explosion_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,True,-1415053750,[]
 3882,display_monster_casts_wither,False,False,False,4,False,,True,False,-1,-1,True,164611881,[]
 3883,display_monster_causes_ground_desecration,False,False,False,4,False,,True,False,-1,-1,True,696104215,[]
@@ -4026,107 +4026,107 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4024,chill_on_you_proliferates_to_nearby_enemies_within_x_radius,False,False,False,3,False,,False,False,-1,-1,True,1793732826,[]
 4025,freeze_on_you_proliferates_to_nearby_enemies_within_x_radius,True,False,False,3,False,,False,False,-1,-1,True,-113658656,[]
 4026,animate_weapon_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1988340669,[]
-4027,burning_arrow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-915129689,"[325906, 325936]"
-4028,cleave_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,403550946,[326020]
-4029,double_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1656751430,"[326090, 326120]"
-4030,dual_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1345885019,[326214]
-4031,fire_trap_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,311784386,[326286]
-4032,fireball_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,770078741,[326366]
-4033,freezing_pulse_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1894006734,"[326442, 326474]"
-4034,glacial_hammer_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1962281578,[326586]
-4035,ground_slam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-151488611,"[326668, 326694]"
-4036,heavy_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,456404479,"[326786, 326814]"
-4037,infernal_blow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1300872729,[326910]
-4038,lightning_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,465240732,"[327000, 327036]"
-4039,lightning_tendrils_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1343467485,[327150]
-4040,magma_orb_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-745973800,[327236]
-4041,molten_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-456962527,[327316]
+4027,burning_arrow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-915129689,"[326060, 326090]"
+4028,cleave_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,403550946,[326174]
+4029,double_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1656751430,"[326244, 326274]"
+4030,dual_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1345885019,[326368]
+4031,fire_trap_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,311784386,[326440]
+4032,fireball_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,770078741,[326520]
+4033,freezing_pulse_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1894006734,"[326596, 326628]"
+4034,glacial_hammer_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1962281578,[326740]
+4035,ground_slam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-151488611,"[326822, 326848]"
+4036,heavy_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,456404479,"[326940, 326968]"
+4037,infernal_blow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1300872729,[327064]
+4038,lightning_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,465240732,"[327154, 327190]"
+4039,lightning_tendrils_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1343467485,[327304]
+4040,magma_orb_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-745973800,[327390]
+4041,molten_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-456962527,[327470]
 4042,zombie_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-742075819,[]
-4043,reave_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,13366374,"[327420, 327434]"
-4044,spark_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,670464211,"[327500, 327514]"
-4045,spectral_throw_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1016418084,"[327598, 327628, 327668]"
-4046,split_arrow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1737586601,[327774]
-4047,ethereal_knives_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1531704323,[327858]
-4048,ice_shot_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1594867517,[327942]
-4049,rain_of_arrows_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-62990829,"[328018, 328050]"
+4043,reave_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,13366374,"[327574, 327588]"
+4044,spark_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,670464211,"[327654, 327668]"
+4045,spectral_throw_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1016418084,"[327752, 327782, 327822]"
+4046,split_arrow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1737586601,[327928]
+4047,ethereal_knives_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1531704323,[328012]
+4048,ice_shot_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1594867517,[328096]
+4049,rain_of_arrows_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-62990829,"[328172, 328204]"
 4050,raging_spirit_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1562408952,[]
-4051,viper_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1312300010,[328198]
-4052,flicker_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-73330021,[328282]
-4053,leap_slam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-868786120,[328360]
-4054,lightning_arrow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1251952095,[328440]
-4055,lightning_warp_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1440559986,"[328530, 328560]"
-4056,puncture_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-948337957,[328650]
-4057,shield_charge_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1538762360,"[328724, 328754]"
+4051,viper_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1312300010,[328352]
+4052,flicker_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-73330021,[328436]
+4053,leap_slam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-868786120,[328514]
+4054,lightning_arrow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1251952095,[328594]
+4055,lightning_warp_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1440559986,"[328684, 328714]"
+4056,puncture_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-948337957,[328804]
+4057,shield_charge_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1538762360,"[328878, 328908]"
 4058,skeletons_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-630394166,[]
-4059,arc_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1010811937,"[328872, 328882]"
-4060,barrage_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,2031578616,[328948]
-4061,fire_nova_mine_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1790501840,[329022]
-4062,fire_storm_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,524935851,"[329092, 329116]"
-4063,flame_surge_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1175894524,[329216]
-4064,ice_nova_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1771021081,"[329284, 329304]"
-4065,ice_spear_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-2079646722,[329384]
-4066,incinerate_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1195864221,"[329454, 329478]"
-4067,power_siphon_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,434186145,"[329574, 329602]"
-4068,searing_bond_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-2023702618,[329696]
-4069,static_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-521899467,[329778]
-4070,storm_call_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1343225333,"[329856, 329880, 329918, 329952]"
-4071,sweep_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,744267410,"[330036, 330050]"
-4072,frenzy_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1876464793,[330118]
-4073,righteous_fire_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1529043355,"[330190, 330222, 330264]"
-4074,elemental_hit_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,366404684,[330378]
-4075,cyclone_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,182404801,"[330450, 330468]"
-4076,tornado_shot_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-610247202,[330552]
-4077,arctic_breath_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,263733258,[330634]
-4078,explosive_arrow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1352947080,[330722]
-4079,flameblast_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1534724004,"[330804, 330834, 330858]"
-4080,glacial_cascade_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1842183382,[330964]
-4081,ice_crash_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,303804576,[331044]
-4082,kinetic_blast_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1492020587,[331120]
-4083,shock_nova_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-43704081,"[331198, 331222]"
-4084,shockwave_totem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1429768094,[331316]
-4085,wild_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1724616829,[331402]
-4086,detonate_dead_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1241695484,"[331482, 331512]"
-4087,caustic_arrow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1781187244,[331610]
+4059,arc_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1010811937,"[329026, 329036]"
+4060,barrage_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,2031578616,[329102]
+4061,fire_nova_mine_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1790501840,[329176]
+4062,fire_storm_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,524935851,"[329246, 329270]"
+4063,flame_surge_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1175894524,[329370]
+4064,ice_nova_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1771021081,"[329438, 329458]"
+4065,ice_spear_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-2079646722,[329538]
+4066,incinerate_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1195864221,"[329608, 329632]"
+4067,power_siphon_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,434186145,"[329728, 329756]"
+4068,searing_bond_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-2023702618,[329850]
+4069,static_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-521899467,[329932]
+4070,storm_call_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1343225333,"[330010, 330034, 330072, 330106]"
+4071,sweep_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,744267410,"[330190, 330204]"
+4072,frenzy_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1876464793,[330272]
+4073,righteous_fire_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1529043355,"[330344, 330376, 330418]"
+4074,elemental_hit_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,366404684,[330532]
+4075,cyclone_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,182404801,"[330604, 330622]"
+4076,tornado_shot_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-610247202,[330706]
+4077,arctic_breath_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,263733258,[330788]
+4078,explosive_arrow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1352947080,[330876]
+4079,flameblast_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1534724004,"[330958, 330988, 331012]"
+4080,glacial_cascade_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1842183382,[331118]
+4081,ice_crash_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,303804576,[331198]
+4082,kinetic_blast_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1492020587,[331274]
+4083,shock_nova_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-43704081,"[331352, 331376]"
+4084,shockwave_totem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1429768094,[331470]
+4085,wild_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1724616829,[331556]
+4086,detonate_dead_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1241695484,"[331636, 331666]"
+4087,caustic_arrow_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1781187244,[331764]
 4088,chaos_golem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1746351672,[]
 4089,flame_golem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-251072416,[]
 4090,ice_golem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,561941029,[]
-4091,cold_snap_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1022683851,"[331820, 331842]"
-4092,flame_totem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1652488773,[331928]
+4091,cold_snap_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1022683851,"[331974, 331996]"
+4092,flame_totem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1652488773,[332082]
 4093,animate_guardian_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1551831051,[]
-4094,bear_trap_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1115991667,[332066]
-4095,frost_wall_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1756522216,[332144]
-4096,molten_shell_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,156018188,"[332220, 332248, 332286]"
-4097,reckoning_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1544130784,[332394]
-4098,vigilant_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1028935127,[332474]
-4099,whirling_blades_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1144682337,"[332566, 332594]"
-4100,flame_dash_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1869447689,[332692]
-4101,freeze_mine_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-643733094,[332766]
-4102,herald_of_ash_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1772021596,[332846]
-4103,herald_of_ice_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,485011981,[332930]
-4104,herald_of_thunder_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1264455667,[333022]
-4105,tempest_shield_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1580644875,[333116]
-4106,desecrate_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-820173287,[333194]
+4094,bear_trap_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1115991667,[332220]
+4095,frost_wall_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1756522216,[332298]
+4096,molten_shell_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,156018188,"[332374, 332402, 332440]"
+4097,reckoning_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1544130784,[332548]
+4098,vigilant_strike_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1028935127,[332628]
+4099,whirling_blades_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1144682337,"[332720, 332748]"
+4100,flame_dash_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1869447689,[332846]
+4101,freeze_mine_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-643733094,[332920]
+4102,herald_of_ash_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1772021596,[333000]
+4103,herald_of_ice_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,485011981,[333084]
+4104,herald_of_thunder_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1264455667,[333176]
+4105,tempest_shield_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1580644875,[333270]
+4106,desecrate_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-820173287,[333348]
 4107,blink_arrow_and_blink_arrow_clone_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-2017972839,[]
 4108,mirror_arrow_and_mirror_arrow_clone_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1894049377,[]
-4109,riposte_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1907411795,[333442]
-4110,vengeance_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,520503797,[333506]
+4109,riposte_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1907411795,[333596]
+4110,vengeance_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,520503797,[333660]
 4111,converted_enemies_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,797334026,[]
-4112,abyssal_cry_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1544910409,[333636]
-4113,shrapnel_shot_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,326092632,[333716]
-4114,blast_rain_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1857311138,[333794]
-4115,essence_drain_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1886593889,[333872]
-4116,contagion_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,523859925,[333948]
-4117,blade_vortex_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,2089433634,"[334022, 334050, 334086]"
-4118,bladefall_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1905778530,[334184]
-4119,ice_trap_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1488975800,[334250]
-4120,earthquake_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-714049071,"[334318, 334342]"
+4112,abyssal_cry_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1544910409,"[333790, 333816]"
+4113,shrapnel_shot_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,326092632,[333920]
+4114,blast_rain_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1857311138,[333998]
+4115,essence_drain_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1886593889,[334076]
+4116,contagion_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,523859925,[334152]
+4117,blade_vortex_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,2089433634,"[334226, 334254, 334290]"
+4118,bladefall_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1905778530,[334388]
+4119,ice_trap_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1488975800,[334454]
+4120,earthquake_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-714049071,"[334522, 334546]"
 4121,stone_golem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1957134411,[]
-4122,frost_bomb_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1926798180,[334480]
-4123,orb_of_storms_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1456070358,[334558]
-4124,siege_ballista_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,201168059,[334644]
-4125,blight_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1806884622,[334716]
-4126,shockwave_slam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1397008028,[334804]
-4127,fire_beam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-264600376,[334866]
+4122,frost_bomb_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1926798180,[334684]
+4123,orb_of_storms_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1456070358,[334762]
+4124,siege_ballista_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,201168059,[334848]
+4125,blight_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1806884622,[334920]
+4126,shockwave_slam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1397008028,[335008]
+4127,fire_beam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-264600376,[335070]
 4128,life_regeneration_per_minute_%_while_frozen,True,False,False,1,False,,False,False,-1,-1,True,989458975,[]
 4129,occultist_stacking_energy_shield_regeneration_rate_per_minute_%_on_kill_for_4_seconds,True,False,False,1,False,,False,False,-1,-1,False,-1847561809,[]
 4130,occultist_immune_to_stun_while_on_full_energy_shield,False,False,False,4,False,,False,False,-1,-1,False,988644253,[]
@@ -4220,116 +4220,116 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4218,number_of_perandus_coin_stacks_to_drop,True,False,False,3,False,,False,False,-1,-1,False,-118689742,[]
 4219,melee_ancestor_totem_grant_owner_attack_speed_+%_final,True,False,False,1,False,,False,False,-1,-1,True,-760584402,[]
 4220,gain_cannot_be_stunned_aura_for_4_seconds_on_block_radius,True,False,False,3,False,,False,False,-1,-1,False,995463413,[]
-4221,cleave_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1447168050,[343140]
-4222,ground_slam_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-981724765,"[343206, 343232]"
-4223,infernal_blow_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,168249379,[343326]
-4224,lightning_tendrils_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,736019580,[343420]
-4225,magma_orb_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,2040266276,[343506]
-4226,reave_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1289471267,"[343570, 343584]"
-4227,molten_strike_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1672036007,[343666]
-4228,ice_shot_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,547790985,[343740]
-4229,rain_of_arrows_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1878884447,"[343816, 343848]"
-4230,leap_slam_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1048976526,[343940]
-4231,lightning_arrow_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1045905843,[344020]
-4232,ice_nova_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-497459292,"[344098, 344118]"
-4233,static_strike_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-432036953,[344206]
-4234,storm_call_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1172046686,"[344284, 344308, 344346, 344380]"
-4235,sweep_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1334356061,"[344464, 344478]"
-4236,righteous_fire_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-221671137,"[344562, 344594, 344636]"
-4237,arctic_breath_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-949589830,[344750]
-4238,ball_lightning_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1694488782,[344836]
-4239,explosive_arrow_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1969263453,[344926]
-4240,flameblast_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-851477181,"[345008, 345038, 345062]"
-4241,glacial_cascade_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,392077093,[345168]
-4242,wild_strike_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-594649231,[345252]
-4243,detonate_dead_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1675574146,"[345332, 345362]"
-4244,ice_crash_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1299028772,[345452]
-4245,kinetic_blast_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,368952563,[345528]
-4246,caustic_arrow_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1414225605,[345612]
-4247,cold_snap_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1915786322,"[345688, 345710]"
-4248,decoy_totem_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1890594863,[345796]
-4249,shock_nova_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,237436751,"[345870, 345894]"
-4250,shockwave_totem_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1068019885,[345988]
-4251,cleave_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,482082502,[346076]
-4252,double_strike_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1539839151,"[346158, 346188]"
-4253,dual_strike_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,610646410,[346294]
-4254,heavy_strike_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-192679797,"[346384, 346412]"
+4221,cleave_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1447168050,[343344]
+4222,ground_slam_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-981724765,"[343410, 343436]"
+4223,infernal_blow_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,168249379,[343530]
+4224,lightning_tendrils_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,736019580,[343624]
+4225,magma_orb_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,2040266276,[343710]
+4226,reave_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1289471267,"[343774, 343788]"
+4227,molten_strike_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1672036007,[343870]
+4228,ice_shot_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,547790985,[343944]
+4229,rain_of_arrows_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1878884447,"[344020, 344052]"
+4230,leap_slam_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1048976526,[344144]
+4231,lightning_arrow_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1045905843,[344224]
+4232,ice_nova_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-497459292,"[344302, 344322]"
+4233,static_strike_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-432036953,[344410]
+4234,storm_call_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1172046686,"[344488, 344512, 344550, 344584]"
+4235,sweep_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1334356061,"[344668, 344682]"
+4236,righteous_fire_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-221671137,"[344766, 344798, 344840]"
+4237,arctic_breath_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-949589830,[344954]
+4238,ball_lightning_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1694488782,[345040]
+4239,explosive_arrow_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1969263453,[345130]
+4240,flameblast_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-851477181,"[345212, 345242, 345266]"
+4241,glacial_cascade_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,392077093,[345372]
+4242,wild_strike_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-594649231,[345456]
+4243,detonate_dead_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1675574146,"[345536, 345566]"
+4244,ice_crash_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1299028772,[345656]
+4245,kinetic_blast_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,368952563,[345732]
+4246,caustic_arrow_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1414225605,[345816]
+4247,cold_snap_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1915786322,"[345892, 345914]"
+4248,decoy_totem_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1890594863,[346000]
+4249,shock_nova_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,237436751,"[346074, 346098]"
+4250,shockwave_totem_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1068019885,[346192]
+4251,cleave_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,482082502,[346280]
+4252,double_strike_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1539839151,"[346362, 346392]"
+4253,dual_strike_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,610646410,[346498]
+4254,heavy_strike_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-192679797,"[346588, 346616]"
 4255,zombie_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1843983168,[]
-4256,rain_of_arrows_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1270311446,"[346570, 346602]"
-4257,leap_slam_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,667862344,[346706]
-4258,shield_charge_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,842247416,"[346794, 346824]"
-4259,barrage_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1404440317,[346920]
-4260,elemental_hit_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-1713562206,[347004]
-4261,cyclone_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,2096042677,"[347088, 347106]"
-4262,power_siphon_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1806783872,"[347202, 347230]"
+4256,rain_of_arrows_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1270311446,"[346774, 346806]"
+4257,leap_slam_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,667862344,[346910]
+4258,shield_charge_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,842247416,"[346998, 347028]"
+4259,barrage_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1404440317,[347124]
+4260,elemental_hit_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-1713562206,[347208]
+4261,cyclone_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,2096042677,"[347292, 347310]"
+4262,power_siphon_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1806783872,"[347406, 347434]"
 4263,spectre_attack_and_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-136392219,[]
-4264,freezing_pulse_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-1748850983,"[347404, 347436]"
-4265,fireball_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-496001323,[347544]
-4266,fire_nova_mine_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,912030796,[347628]
-4267,lightning_warp_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-994355860,"[347714, 347744]"
-4268,fire_trap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,37071509,"[347852, 347888]"
-4269,flicker_strike_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,154192696,[347996]
-4270,cold_snap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-1109863409,"[348090, 348112]"
-4271,ball_lightning_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-982704477,[348224]
-4272,freezing_pulse_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1406926950,"[348332, 348364]"
-4273,spark_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1666436661,"[348478, 348492]"
-4274,spectral_throw_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,2053400789,"[348596, 348626, 348666]"
-4275,ethereal_knives_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,2123199576,[348800]
-4276,flame_totem_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1450521782,[348910]
-4277,incinerate_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1294683926,"[349014, 349038]"
-4278,dominating_blow_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1116674681,[349144]
-4279,puncture_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1361137206,[349230]
-4280,viper_strike_poison_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-720666957,[349320]
-4281,firestorm_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1085567075,"[349398, 349422]"
-4282,static_strike_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-400518894,[349530]
-4283,storm_call_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1293179735,"[349612, 349636, 349674, 349708]"
-4284,arctic_breath_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-177941858,[349812]
-4285,lightning_warp_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1081177471,"[349902, 349932]"
-4286,ice_shot_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-235913944,[350026]
-4287,caustic_arrow_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,582918874,[350104]
-4288,double_strike_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-64937721,"[350220, 350250]"
-4289,dual_strike_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-1729474273,[350376]
-4290,split_arrow_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-1640123104,[350484]
-4291,viper_strike_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,357067701,[350594]
-4292,flameblast_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-34137036,"[350702, 350732, 350756]"
-4293,flame_surge_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,1333481536,[350886]
-4294,tornado_shot_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-793222439,[350994]
-4295,lightning_strike_num_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,1275791702,"[351122, 351158]"
-4296,molten_strike_num_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,-78945899,[351302]
-4297,spark_num_of_additional_projectiles,True,True,False,3,False,,True,False,-1,-1,True,-227681934,"[351410, 351424]"
-4298,split_arrow_num_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,-2079611617,[351542]
-4299,barrage_num_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,-99825721,[351650]
+4264,freezing_pulse_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-1748850983,"[347608, 347640]"
+4265,fireball_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-496001323,[347748]
+4266,fire_nova_mine_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,912030796,[347832]
+4267,lightning_warp_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-994355860,"[347918, 347948]"
+4268,fire_trap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,37071509,"[348056, 348092]"
+4269,flicker_strike_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,154192696,[348200]
+4270,cold_snap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-1109863409,"[348294, 348316]"
+4271,ball_lightning_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-982704477,[348428]
+4272,freezing_pulse_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1406926950,"[348536, 348568]"
+4273,spark_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1666436661,"[348682, 348696]"
+4274,spectral_throw_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,2053400789,"[348800, 348830, 348870]"
+4275,ethereal_knives_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,2123199576,[349004]
+4276,flame_totem_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1450521782,[349114]
+4277,incinerate_projectile_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1294683926,"[349218, 349242]"
+4278,dominating_blow_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1116674681,[349348]
+4279,puncture_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1361137206,[349434]
+4280,viper_strike_poison_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-720666957,[349524]
+4281,firestorm_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1085567075,"[349602, 349626]"
+4282,static_strike_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-400518894,[349734]
+4283,storm_call_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1293179735,"[349816, 349840, 349878, 349912]"
+4284,arctic_breath_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-177941858,[350016]
+4285,lightning_warp_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1081177471,"[350106, 350136]"
+4286,ice_shot_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-235913944,[350230]
+4287,caustic_arrow_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,582918874,[350308]
+4288,double_strike_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-64937721,"[350424, 350454]"
+4289,dual_strike_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-1729474273,[350580]
+4290,split_arrow_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-1640123104,[350688]
+4291,viper_strike_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,357067701,[350798]
+4292,flameblast_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-34137036,"[350906, 350936, 350960]"
+4293,flame_surge_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,1333481536,[351090]
+4294,tornado_shot_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-793222439,[351198]
+4295,lightning_strike_num_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,1275791702,"[351326, 351362]"
+4296,molten_strike_num_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,-78945899,[351506]
+4297,spark_num_of_additional_projectiles,True,True,False,3,False,,True,False,-1,-1,True,-227681934,"[351614, 351628]"
+4298,split_arrow_num_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,-2079611617,[351746]
+4299,barrage_num_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,-99825721,[351854]
 4300,tornado_shot_num_of_secondary_projectiles,True,False,False,3,False,,True,False,-1,-1,True,1912799386,[]
-4301,magma_orb_num_of_additional_projectiles_in_chain,True,False,False,3,False,,True,False,-1,-1,True,178155184,[351858]
-4302,arc_num_of_additional_projectiles_in_chain,True,False,False,3,False,,True,False,-1,-1,True,579116514,"[351976, 351986]"
-4303,flame_totem_num_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,1840297648,[352100]
-4304,burning_arrow_ignite_chance_%,True,False,False,1,False,,False,False,-1,-1,False,-2033975553,"[352202, 352232]"
-4305,burning_arrow_physical_damage_%_to_add_as_fire_damage,True,False,False,1,False,,False,False,-1,-1,False,-1975745897,"[352390, 352420]"
-4306,infernal_blow_physical_damage_%_to_add_as_fire_damage,True,False,False,1,False,,False,False,-1,-1,False,161585487,[352578]
-4307,fire_trap_burning_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-921662060,[352670]
-4308,fireball_ignite_chance_%,True,False,False,1,False,,False,False,-1,-1,False,1389926819,"[352762, 352782]"
-4309,glacial_hammer_freeze_chance_%,True,False,False,1,False,,False,False,-1,-1,False,939482816,"[352884, 352916]"
-4310,ice_nova_freeze_chance_%,True,False,False,1,False,,False,False,-1,-1,False,1161429784,"[353018, 353038]"
-4311,lightning_strike_pierce_chance_%,True,False,False,1,False,,False,False,-1,-1,False,119313597,"[353144, 353180]"
+4301,magma_orb_num_of_additional_projectiles_in_chain,True,False,False,3,False,,True,False,-1,-1,True,178155184,[352062]
+4302,arc_num_of_additional_projectiles_in_chain,True,False,False,3,False,,True,False,-1,-1,True,579116514,"[352180, 352190]"
+4303,flame_totem_num_of_additional_projectiles,True,False,False,3,False,,True,False,-1,-1,True,1840297648,[352304]
+4304,burning_arrow_ignite_chance_%,True,False,False,1,False,,False,False,-1,-1,False,-2033975553,"[352406, 352436]"
+4305,burning_arrow_physical_damage_%_to_add_as_fire_damage,True,False,False,1,False,,False,False,-1,-1,False,-1975745897,"[352594, 352624]"
+4306,infernal_blow_physical_damage_%_to_add_as_fire_damage,True,False,False,1,False,,False,False,-1,-1,False,161585487,[352782]
+4307,fire_trap_burning_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-921662060,[352874]
+4308,fireball_ignite_chance_%,True,False,False,1,False,,False,False,-1,-1,False,1389926819,"[352966, 352986]"
+4309,glacial_hammer_freeze_chance_%,True,False,False,1,False,,False,False,-1,-1,False,939482816,"[353088, 353120]"
+4310,ice_nova_freeze_chance_%,True,False,False,1,False,,False,False,-1,-1,False,1161429784,"[353222, 353242]"
+4311,lightning_strike_pierce_chance_%,True,False,False,1,False,,False,False,-1,-1,False,119313597,[]
 4312,reave_attack_speed_per_reave_stack_+%,True,False,False,1,False,,False,False,-1,-1,False,-1538819310,[]
 4313,spectral_throw_projectile_deceleration_+%,True,False,False,1,False,,True,False,-1,-1,True,1962575981,[]
-4314,flicker_strike_damage_+%_per_frenzy_charge,True,False,False,1,False,,False,False,-1,-1,False,-1858703266,[353486]
+4314,flicker_strike_damage_+%_per_frenzy_charge,True,False,False,1,False,,False,False,-1,-1,False,-1858703266,[353600]
 4315,puncture_maim_on_hit_%_chance,True,False,False,1,False,,False,False,-1,-1,False,-229829155,[]
-4316,arc_shock_chance_%,True,False,False,1,False,,False,False,-1,-1,False,805640592,"[353624, 353634]"
-4317,fire_nova_mine_num_of_additional_repeats,True,False,False,3,False,,False,False,-1,-1,False,896873271,[353746]
+4316,arc_shock_chance_%,True,False,False,1,False,,False,False,-1,-1,False,805640592,"[353738, 353748]"
+4317,fire_nova_mine_num_of_additional_repeats,True,False,False,3,False,,False,False,-1,-1,False,896873271,[353860]
 4318,firestorm_explosion_area_of_effect_+%,True,False,False,1,False,,False,False,-1,-1,True,-70864008,[]
-4319,flame_surge_damage_+%_vs_burning_enemies,True,False,False,1,False,,False,False,-1,-1,False,1056415583,[353934]
+4319,flame_surge_damage_+%_vs_burning_enemies,True,False,False,1,False,,False,False,-1,-1,False,1056415583,[354048]
 4320,ice_spear_%_chance_to_gain_power_charge_on_critical_strike,True,False,False,1,False,,False,False,-1,-1,False,1045249708,[]
-4321,lightning_trap_pierce_chance_%,True,False,False,1,False,,False,False,-1,-1,False,-938808015,"[354146, 354200]"
+4321,lightning_trap_pierce_chance_%,True,False,False,1,False,,False,False,-1,-1,False,-938808015,[]
 4322,power_siphon_%_chance_to_gain_power_charge_on_kill,True,False,False,1,False,,False,False,-1,-1,False,850524521,[]
-4323,searing_bond_totem_placement_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-77075353,[354454]
-4324,sweep_knockback_chance_%,True,False,False,1,False,,False,False,-1,-1,False,-573715949,"[354538, 354552]"
-4325,frenzy_damage_+%_per_frenzy_charge,True,False,False,1,False,,False,False,-1,-1,False,-466763027,[354656]
+4323,searing_bond_totem_placement_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-77075353,[354442]
+4324,sweep_knockback_chance_%,True,False,False,1,False,,False,False,-1,-1,False,-573715949,"[354526, 354540]"
+4325,frenzy_damage_+%_per_frenzy_charge,True,False,False,1,False,,False,False,-1,-1,False,-466763027,[354644]
 4326,frenzy_%_chance_to_gain_additional_frenzy_charge,True,False,False,1,False,,False,False,-1,-1,False,-1920521449,[]
-4327,elemental_hit_chance_to_freeze_shock_ignite_%,True,False,False,1,False,,False,False,-1,-1,False,-1504461543,[354870]
-4328,glacial_cascade_physical_damage_%_to_convert_to_cold,True,False,False,1,False,,False,False,-1,-1,False,-1005002962,[355012]
-4329,glacial_hammer_physical_damage_%_to_add_as_cold_damage,True,False,False,1,False,,False,False,-1,-1,False,1739989618,[355162]
-4330,ice_crash_physical_damage_%_to_add_as_cold_damage,True,False,False,1,False,,False,False,-1,-1,False,-724277106,[355300]
+4327,elemental_hit_chance_to_freeze_shock_ignite_%,True,False,False,1,False,,False,False,-1,-1,False,-1504461543,[354858]
+4328,glacial_cascade_physical_damage_%_to_convert_to_cold,True,False,False,1,False,,False,False,-1,-1,False,-1005002962,[355000]
+4329,glacial_hammer_physical_damage_%_to_add_as_cold_damage,True,False,False,1,False,,False,False,-1,-1,False,1739989618,[355150]
+4330,ice_crash_physical_damage_%_to_add_as_cold_damage,True,False,False,1,False,,False,False,-1,-1,False,-724277106,[355288]
 4331,spectre_elemental_resistances_%,True,False,False,1,False,,False,False,-1,-1,False,1980117033,[]
 4332,zombie_elemental_resistances_%,True,False,False,1,False,,False,False,-1,-1,False,1431983519,[]
 4333,flame_golem_elemental_resistances_%,True,False,False,1,False,,False,False,-1,-1,False,-151898767,[]
@@ -4338,117 +4338,117 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4336,shock_nova_ring_damage_+%,True,False,False,1,False,,False,False,-1,-1,True,-1642271125,[]
 4337,detonate_dead_%_chance_to_detonate_additional_corpse,True,False,False,1,False,,False,False,-1,-1,False,-1270329050,[]
 4338,animate_weapon_chance_to_create_additional_copy_%,True,False,False,1,False,,False,False,-1,-1,False,34835664,[]
-4339,decoy_totem_life_+%,True,False,False,1,False,,False,False,-1,-1,False,-1140234353,[355980]
+4339,decoy_totem_life_+%,True,False,False,1,False,,False,False,-1,-1,False,-1140234353,[355968]
 4340,devouring_totem_leech_per_second_+%,False,False,False,1,False,,False,False,-1,-1,False,-119997808,[]
 4341,rejuvenation_totem_%_life_regeneration_added_as_mana_regeneration,True,False,False,1,False,,False,False,-1,-1,False,1227080490,[]
-4342,rejuvenation_totem_aura_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,1362893026,[356288]
+4342,rejuvenation_totem_aura_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,1362893026,[356276]
 4343,summon_skeletons_num_additional_warrior_skeletons,True,False,False,3,False,,False,False,-1,-1,False,-88394371,[]
-4344,wild_strike_num_of_additional_projectiles_in_chain,True,False,False,3,False,,False,False,-1,-1,True,-715309144,[356534]
-4345,shockwave_totem_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-151411009,[356626]
+4344,wild_strike_num_of_additional_projectiles_in_chain,True,False,False,3,False,,False,False,-1,-1,True,-715309144,[356522]
+4345,shockwave_totem_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-151411009,[356614]
 4346,devouring_totem_%_chance_to_consume_additional_corpse,True,False,False,1,False,,False,False,-1,-1,False,381063668,[]
 4347,incinerate_damage_+%_per_stage,True,False,False,1,False,,False,False,-1,-1,True,81589993,[]
 4348,virtual_pierce_%,True,False,False,1,False,,True,True,-1,-1,True,0,[]
-4349,siege_ballista_totem_placement_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,2051364620,[356958]
+4349,siege_ballista_totem_placement_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,2051364620,[356946]
 4350,virtual_curse_effect_+%,True,False,False,1,False,,False,True,-1,-1,True,0,[]
-4351,poachers_mark_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,1443724353,[357106]
-4352,projectile_weakness_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-174348239,[357214]
-4353,temporal_chains_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-1190562877,[357326]
-4354,assassins_mark_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-788078621,[357428]
-4355,conductivity_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,1511723353,[357524]
-4356,elemental_weakness_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-1049133037,[357640]
-4357,enfeeble_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-1836767147,[357736]
-4358,flammability_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-1882964236,[357820]
-4359,frostbite_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,729542163,[357908]
-4360,punishment_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,1462688969,"[357998, 358022]"
-4361,vulnerability_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,264707685,[358124]
-4362,warlords_mark_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,632478629,[358220]
+4351,poachers_mark_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,1443724353,[357094]
+4352,projectile_weakness_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-174348239,[357202]
+4353,temporal_chains_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-1190562877,[357314]
+4354,assassins_mark_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-788078621,[357416]
+4355,conductivity_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,1511723353,[357512]
+4356,elemental_weakness_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-1049133037,[357628]
+4357,enfeeble_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-1836767147,[357724]
+4358,flammability_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-1882964236,[357808]
+4359,frostbite_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,729542163,[357896]
+4360,punishment_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,1462688969,"[357986, 358010]"
+4361,vulnerability_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,264707685,[358112]
+4362,warlords_mark_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,632478629,[358208]
 4363,lightning_golem_grants_attack_and_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,True,-249620993,[]
 4364,lightning_golem_grants_added_lightning_damage,True,False,False,3,False,,False,False,-1,-1,True,-573026365,[]
-4365,arctic_armour_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,-531696803,[358516]
-4366,herald_of_ash_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,1380863625,[358628]
-4367,herald_of_ice_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,2038219754,[358732]
-4368,herald_of_thunder_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,55697575,[358844]
-4369,clarity_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,342970660,"[358944, 358962]"
-4370,hatred_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,-1287640169,[359054]
-4371,purity_of_ice_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,2088052348,[359144]
-4372,determination_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,603119867,"[359254, 359284]"
-4373,discipline_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,-434402895,"[359396, 359420]"
-4374,purity_of_elements_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,1906941157,[359542]
-4375,purity_of_fire_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,722416945,[359634]
-4376,purity_of_lightning_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,-1337185116,[359756]
-4377,vitality_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,98369741,"[359866, 359886]"
-4378,wrath_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,-1906536318,[359978]
-4379,grace_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,276559304,"[360050, 360064]"
-4380,haste_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,209026227,"[360150, 360164]"
-4381,immortal_call_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1117757839,"[360250, 360280]"
-4382,bone_offering_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-512316346,[360382]
-4383,flesh_offering_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-502792900,[360472]
-4384,smoke_mine_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1057388793,[360556]
-4385,frost_wall_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1145828008,[360632]
-4386,vigilant_strike_fortify_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-326824892,[360734]
-4387,poachers_mark_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,304526606,[360826]
-4388,projectile_weakness_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-953840652,[360926]
-4389,temporal_chains_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1267608444,[361030]
-4390,warlords_mark_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1907962938,[361122]
-4391,vulnerability_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1247569786,[361210]
-4392,punishment_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1127665097,"[361292, 361316]"
-4393,frostbite_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-754496477,[361402]
-4394,flammability_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-433762877,[361488]
-4395,enfeeble_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,814839670,[361566]
-4396,elemental_weakness_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,151694722,[361654]
-4397,conductivity_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-608387500,[361750]
-4398,assassins_mark_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1060809889,[361850]
-4399,rallying_cry_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1438238607,[361938]
-4400,abyssal_cry_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-231744962,[362022]
-4401,contagion_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1204435041,[362098]
-4402,siphon_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1401068809,[362164]
-4403,wither_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-902720016,"[362238, 362254]"
-4404,blade_vortex_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1966836375,"[362346, 362374, 362410]"
-4405,earthquake_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-835371520,"[362514, 362538]"
+4365,arctic_armour_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,-531696803,[358504]
+4366,herald_of_ash_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,1380863625,[358616]
+4367,herald_of_ice_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,2038219754,[358720]
+4368,herald_of_thunder_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,55697575,[358832]
+4369,clarity_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,342970660,"[358932, 358950]"
+4370,hatred_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,-1287640169,[359042]
+4371,purity_of_ice_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,2088052348,[359132]
+4372,determination_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,603119867,"[359242, 359272]"
+4373,discipline_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,-434402895,"[359384, 359408]"
+4374,purity_of_elements_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,1906941157,[359530]
+4375,purity_of_fire_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,722416945,[359622]
+4376,purity_of_lightning_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,-1337185116,[359744]
+4377,vitality_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,98369741,"[359854, 359874]"
+4378,wrath_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,-1906536318,[359966]
+4379,grace_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,276559304,"[360038, 360052]"
+4380,haste_mana_reservation_+%,True,False,False,1,False,,False,False,-1,-1,False,209026227,"[360138, 360152]"
+4381,immortal_call_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1117757839,"[360238, 360268]"
+4382,bone_offering_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-512316346,[360370]
+4383,flesh_offering_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-502792900,[360460]
+4384,smoke_mine_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1057388793,[360544]
+4385,frost_wall_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1145828008,[360620]
+4386,vigilant_strike_fortify_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-326824892,[360722]
+4387,poachers_mark_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,304526606,[360814]
+4388,projectile_weakness_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-953840652,[360914]
+4389,temporal_chains_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1267608444,[361018]
+4390,warlords_mark_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1907962938,[361110]
+4391,vulnerability_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1247569786,[361198]
+4392,punishment_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1127665097,"[361280, 361304]"
+4393,frostbite_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-754496477,[361390]
+4394,flammability_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-433762877,[361476]
+4395,enfeeble_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,814839670,[361554]
+4396,elemental_weakness_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,151694722,[361642]
+4397,conductivity_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-608387500,[361738]
+4398,assassins_mark_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1060809889,[361838]
+4399,rallying_cry_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1438238607,[361926]
+4400,abyssal_cry_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-231744962,"[362010, 362036]"
+4401,contagion_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,1204435041,[362136]
+4402,siphon_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1401068809,[362202]
+4403,wither_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-902720016,"[362276, 362292]"
+4404,blade_vortex_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-1966836375,"[362384, 362412, 362448]"
+4405,earthquake_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-835371520,"[362552, 362576]"
 4406,blight_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,145824703,[]
-4407,blight_secondary_skill_effect_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,130487866,[362712]
-4408,convocation_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-2126877020,[362810]
-4409,bear_trap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-1184652575,[362898]
-4410,frost_wall_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1775745237,[362992]
-4411,reckoning_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-431193666,[363078]
-4412,flame_dash_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,98620528,[363164]
-4413,desecrate_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1074399274,[363250]
+4407,blight_secondary_skill_effect_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,130487866,[362750]
+4408,convocation_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-2126877020,[362848]
+4409,bear_trap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-1184652575,[362936]
+4410,frost_wall_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1775745237,[363030]
+4411,reckoning_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-431193666,[363116]
+4412,flame_dash_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,98620528,[363202]
+4413,desecrate_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1074399274,[363288]
 4414,blink_arrow_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,416886457,[]
 4415,mirror_arrow_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,592400192,[]
-4416,riposte_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,161831148,[363456]
-4417,vengeance_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,255660103,[363536]
-4418,enduring_cry_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,567186668,[363626]
-4419,frost_bomb_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,297623012,[363718]
-4420,conversion_trap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,622082745,[363816]
-4421,ice_trap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-1159018031,[363904]
-4422,siege_ballista_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1095986688,[363992]
-4423,shockwave_slam_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,907317935,[364092]
+4416,riposte_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,161831148,[363494]
+4417,vengeance_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,255660103,[363574]
+4418,enduring_cry_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,567186668,[363664]
+4419,frost_bomb_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,297623012,[363756]
+4420,conversion_trap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,622082745,[363854]
+4421,ice_trap_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-1159018031,[363942]
+4422,siege_ballista_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1095986688,[364030]
+4423,shockwave_slam_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,907317935,[364130]
 4424,mirror_arrow_and_mirror_arrow_clone_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-761038828,[]
-4425,freeze_mine_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-579208606,[364264]
-4426,shrapnel_shot_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-518394923,[364344]
-4427,blast_rain_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1910420404,[364422]
-4428,contagion_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-618577526,[364492]
-4429,wither_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-476216645,"[364554, 364570]"
-4430,blade_vortex_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1773618144,"[364658, 364686, 364722]"
-4431,bladefall_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,909034553,[364820]
-4432,ice_trap_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-484126106,[364886]
-4433,earthquake_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1029212333,"[364954, 364978]"
-4434,frost_bomb_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,498793046,[365070]
-4435,storm_cloud_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1674891819,[365144]
-4436,blight_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-806466655,[365214]
-4437,shockwave_slam_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1247204470,[365302]
+4425,freeze_mine_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-579208606,[364302]
+4426,shrapnel_shot_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-518394923,[364382]
+4427,blast_rain_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1910420404,[364460]
+4428,contagion_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-618577526,[364530]
+4429,wither_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-476216645,"[364592, 364608]"
+4430,blade_vortex_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1773618144,"[364696, 364724, 364760]"
+4431,bladefall_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,909034553,[364858]
+4432,ice_trap_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-484126106,[364924]
+4433,earthquake_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-1029212333,"[364992, 365016]"
+4434,frost_bomb_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,498793046,[365108]
+4435,storm_cloud_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1674891819,[365182]
+4436,blight_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-806466655,[365252]
+4437,shockwave_slam_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1247204470,[365340]
 4438,display_attack_with_decree_of_ire_when_hit_%,True,True,False,1,False,,False,False,-1,-1,False,1493274797,[]
 4439,display_attack_with_commandment_of_ire_when_hit_%,True,True,False,1,False,,False,False,-1,-1,False,-1658775242,[]
 4440,blink_arrow_and_blink_arrow_clone_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,898745402,[]
-4441,whirling_blades_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-399716575,"[365684, 365712]"
-4442,arctic_armour_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,362343643,"[365826, 365856]"
+4441,whirling_blades_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-399716575,"[365722, 365750]"
+4442,arctic_armour_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,362343643,"[365864, 365894]"
 4443,immortal_call_%_chance_to_not_consume_endurance_charges,True,False,False,1,False,,False,False,-1,-1,False,516106347,[]
 4444,phase_run_%_chance_to_not_consume_frenzy_charges,True,False,False,1,False,,False,False,-1,-1,False,1879294862,[]
 4445,animate_guardian_elemental_resistances_%,True,False,False,1,False,,False,False,-1,-1,False,1926535668,[]
-4446,shrapnel_shot_physical_damage_%_to_add_as_lightning_damage,True,False,False,1,False,,False,False,-1,-1,False,-1297768883,[366320]
-4447,bladefall_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,107862561,[366428]
-4448,storm_cloud_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,1690668704,[366532]
-4449,tempest_shield_num_of_additional_projectiles_in_chain,True,False,False,3,False,,False,False,-1,-1,False,-20336642,[366676]
+4446,shrapnel_shot_physical_damage_%_to_add_as_lightning_damage,True,False,False,1,False,,False,False,-1,-1,False,-1297768883,[366358]
+4447,bladefall_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,107862561,[366466]
+4448,storm_cloud_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,1690668704,[366570]
+4449,tempest_shield_num_of_additional_projectiles_in_chain,True,False,False,3,False,,False,False,-1,-1,False,-20336642,[366714]
 4450,map_labyrinth_secret1_override,False,False,False,3,False,,False,False,-1,-1,False,400826436,[]
 4451,map_labyrinth_secret2_override,False,False,False,3,False,,False,False,-1,-1,False,-1501693717,[]
 4452,melee_ancestor_totem_granted_attack_speed_+%_final,False,False,False,1,False,,False,False,-1,-1,False,-988788963,[]
@@ -4487,7 +4487,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4485,base_avoid_bleed_%,False,False,False,1,False,,False,False,-1,-1,False,-215269898,[]
 4486,avoid_bleed_%,True,False,False,1,False,,False,True,-1,-1,False,0,[]
 4487,virtual_phase_through_objects,True,False,False,4,False,,True,True,-1,-1,True,0,[]
-4488,virtual_has_onslaught,True,False,False,4,False,,False,True,-1,-1,False,0,[]
+4488,virtual_has_onslaught,True,False,False,4,False,,True,True,-1,-1,True,0,[]
 4489,shield_charge_damage_per_target_hit_+%,True,False,False,1,False,,False,False,-1,-1,True,-1521728631,[]
 4490,number_of_mines_to_place,False,False,False,3,False,,False,True,-1,-1,True,0,[]
 4491,local_flask_life_gain_on_skill_use_%_mana_cost,True,True,False,1,False,,False,False,-1,-1,False,-1626043082,[]
@@ -4521,8 +4521,8 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4519,base_body_armour_physical_damage_reduction_rating,False,False,False,3,False,,False,False,-1,-1,False,122129026,[]
 4520,chance_to_grant_power_charge_to_nearby_allies_on_kill_%,True,False,False,1,False,,False,False,-1,-1,True,-1154453924,[]
 4521,chance_to_grant_frenzy_charge_to_nearby_allies_on_hit_%,True,False,False,1,False,,False,False,-1,-1,True,629282236,[]
-4522,blood_rage_grants_additional_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,414907726,[372820]
-4523,blood_rage_grants_additional_%_chance_to_gain_frenzy_on_kill,True,False,False,1,False,,False,False,-1,-1,False,-765790786,[372972]
+4522,blood_rage_grants_additional_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,414907726,[372858]
+4523,blood_rage_grants_additional_%_chance_to_gain_frenzy_on_kill,True,False,False,1,False,,False,False,-1,-1,False,-765790786,[373010]
 4524,play_tempestuous_steel_sounds,True,False,False,4,False,,False,False,-1,-1,True,-1560525178,[]
 4525,from_totem_aura_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,False,294648436,[]
 4526,explode_enemies_for_25%_life_as_chaos_on_kill_chance_%,True,False,False,1,False,,False,False,-1,-1,False,-2082054223,[]
@@ -4543,20 +4543,20 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4541,damage_+%_vs_hindered_enemies,True,False,False,1,False,,False,False,-1,-1,False,609168858,[]
 4542,blast_rain_number_of_blasts,True,False,False,3,False,,True,False,-1,-1,True,-315094088,[]
 4543,local_display_socketed_curse_gems_have_mana_reservation_+%,False,True,False,1,False,,False,False,-1,-1,False,695962681,[]
-4544,bone_offering_block_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,1103019433,[374596]
+4544,bone_offering_block_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,1103019433,[374634]
 4545,map_number_of_explicit_mods,True,False,False,4,False,,False,False,-1,-1,False,1034667441,[]
 4546,curse_orb_additional_height,True,False,False,3,False,,True,False,-1,-1,True,-1132170535,[]
 4547,curse_orb_additional_radius,True,False,False,3,False,,True,False,-1,-1,True,319359774,[]
-4548,phase_run_skill_effect_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-2076771524,"[374876, 374898]"
-4549,lightning_tendrils_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-2097620368,[375028]
-4550,searing_totem_elemental_resistance_+%,True,False,False,1,False,,False,False,-1,-1,False,1781234669,[375150]
-4551,flesh_offering_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,99774734,[375246]
-4552,smoke_mine_base_movement_velocity_+%,True,False,False,1,False,,False,False,-1,-1,True,775499033,[375358]
-4553,convocation_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-771355935,[375442]
-4554,molten_shell_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-149783574,"[375530, 375558, 375596]"
-4555,enduring_cry_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,1619742928,[375720]
-4556,righteous_fire_spell_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-70895080,"[375816, 375848]"
-4557,rallying_cry_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-1715961139,[375966]
+4548,phase_run_skill_effect_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,-2076771524,"[374914, 374936]"
+4549,lightning_tendrils_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-2097620368,[375066]
+4550,searing_totem_elemental_resistance_+%,True,False,False,1,False,,False,False,-1,-1,False,1781234669,[375188]
+4551,flesh_offering_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,99774734,[375284]
+4552,smoke_mine_base_movement_velocity_+%,True,False,False,1,False,,False,False,-1,-1,True,775499033,[375396]
+4553,convocation_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-771355935,[375480]
+4554,molten_shell_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-149783574,"[375568, 375596, 375634]"
+4555,enduring_cry_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,1619742928,[375758]
+4556,righteous_fire_spell_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-70895080,"[375854, 375886]"
+4557,rallying_cry_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,-1715961139,[376004]
 4558,attack_trigger_when_critically_hit_%,True,False,False,1,False,,False,False,-1,-1,True,2093904954,[]
 4559,cast_when_hit_%,True,False,False,1,False,,False,False,-1,-1,True,940060961,[]
 4560,attack_trigger_when_hit_%,True,False,False,1,False,,False,False,-1,-1,True,270413027,[]
@@ -4564,9 +4564,9 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4562,decrement_parent_counter_on_death,True,False,False,4,False,,False,False,-1,-1,False,-724461345,[]
 4563,minions_explode_on_death_for_%_max_life_at_end_of_duration,True,False,False,1,False,,False,False,-1,-1,False,457150294,[]
 4564,explode_on_death_for_%_max_life_at_end_of_duration,True,False,False,1,False,,False,False,-1,-1,False,1827146864,[]
-4565,melee_ancestor_totem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1127754259,[376574]
-4566,melee_ancestor_totem_placement_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-376520171,[376686]
-4567,melee_ancestor_totem_elemental_resistance_%,True,False,False,1,False,,False,False,-1,-1,False,670986195,[376806]
+4565,melee_ancestor_totem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1127754259,[376612]
+4566,melee_ancestor_totem_placement_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-376520171,[376724]
+4567,melee_ancestor_totem_elemental_resistance_%,True,False,False,1,False,,False,False,-1,-1,False,670986195,[376844]
 4568,blast_rain_%_chance_for_additional_blast,True,False,False,1,False,,True,False,-1,-1,True,1779186660,[]
 4569,perandus_chest_revive_targeted_monster,True,False,False,4,False,,False,False,-1,-1,False,-26038499,[]
 4570,current_difficulty,False,False,False,3,False,,False,False,-1,-1,False,-93364156,[]
@@ -4587,7 +4587,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4585,monster_do_not_give_soul_to_soul_eater,True,False,False,4,False,,False,False,-1,-1,False,1110721692,[]
 4586,monster_grants_no_flask_charges,True,False,False,4,False,,False,False,-1,-1,True,-8898688,[]
 4587,used_teleports,True,False,False,3,False,,True,False,-1,-1,True,1716358659,[]
-4588,explosive_arrow_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,True,-927141161,[378536]
+4588,explosive_arrow_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,True,-927141161,[378574]
 4589,slam_ancestor_totem_grant_owner_melee_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,True,830965819,[]
 4590,slash_ancestor_totem_grant_owner_physical_damage_added_as_fire_+%,True,False,False,1,False,,False,False,-1,-1,True,-1372507419,[]
 4591,slam_ancestor_totem_granted_melee_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,False,-828414691,[]
@@ -4606,18 +4606,18 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4604,always_crit_shocked_enemies,True,False,False,4,False,,False,False,-1,-1,False,-294285395,[]
 4605,cannot_crit_non_shocked_enemies,True,False,False,4,False,,False,False,-1,-1,False,-1480246957,[]
 4606,map_prophecy,True,False,False,4,False,,False,False,-1,-1,False,2092203777,[]
-4607,frost_bolt_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-273471861,[379846]
-4608,frost_bolt_nova_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1929586714,[379928]
-4609,double_slash_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,520162514,[380014]
-4610,charged_attack_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-766239548,"[380098, 380130]"
-4611,slam_ancestor_totem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-70809367,[380248]
-4612,slash_ancestor_totem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1278453287,[380358]
-4613,slash_ancestor_totem_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-2025445619,[380470]
-4614,slam_ancestor_totem_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1003730844,[380580]
-4615,frost_bolt_nova_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1945071099,[380680]
-4616,double_slash_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-1717684588,[380798]
-4617,charged_attack_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,393984120,"[380882, 380914]"
-4618,double_slash_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-432634608,[381018]
+4607,frost_bolt_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-273471861,[379884]
+4608,frost_bolt_nova_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1929586714,[379966]
+4609,double_slash_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,520162514,[380052]
+4610,charged_attack_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-766239548,"[380136, 380168]"
+4611,slam_ancestor_totem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-70809367,[380286]
+4612,slash_ancestor_totem_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1278453287,[380396]
+4613,slash_ancestor_totem_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-2025445619,[380508]
+4614,slam_ancestor_totem_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1003730844,[380618]
+4615,frost_bolt_nova_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,1945071099,[380718]
+4616,double_slash_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-1717684588,[380836]
+4617,charged_attack_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,393984120,"[380920, 380952]"
+4618,double_slash_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-432634608,[381056]
 4619,charged_attack_damage_per_stack_+%_final,True,False,False,1,False,,False,False,-1,-1,True,1682056105,[]
 4620,%_of_life_and_energy_shield_to_take_as_damage_on_using_a_movement_skill,True,False,False,1,False,,False,False,-1,-1,False,-309686206,[]
 4621,remove_%_of_targets_current_flask_charges_on_hit,True,False,False,1,False,,True,False,-1,-1,True,-261345614,[]
@@ -4651,7 +4651,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4649,damage_taken_+%_if_you_have_taken_a_savage_hit_recently,True,False,False,1,False,,False,False,-1,-1,False,-986823835,[]
 4650,is_maimed,True,False,False,4,False,,False,False,-1,-1,False,252907360,[]
 4651,track_have_been_savage_hit_recently,True,False,False,4,False,,False,True,-1,-1,False,0,[]
-4652,have_been_savage_hit_recently,False,False,False,4,False,,False,False,-1,-1,False,453513299,[]
+4652,have_been_savage_hit_recently,False,False,False,4,False,,True,False,-1,-1,True,453513299,[]
 4653,track_have_taken_attack_damage_recently,True,False,False,4,False,,False,True,-1,-1,False,0,[]
 4654,have_taken_attack_damage_recently,False,False,False,4,False,,False,False,-1,-1,False,-1404501618,[]
 4655,track_have_taken_spell_damage_recently,True,False,False,4,False,,False,True,-1,-1,False,0,[]
@@ -4675,8 +4675,8 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4673,global_critical_strike_mulitplier_+_per_green_socket_on_item,True,False,False,1,False,,False,False,-1,-1,False,-361810874,[]
 4674,additional_block_chance_%_when_in_off_hand,False,False,True,1,False,,False,False,-1,1100,False,-187460634,[]
 4675,critical_strike_chance_+%_when_in_main_hand,False,False,True,1,False,,False,False,560,-1,False,-1141413575,[]
-4676,spirit_offering_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,168507599,[386082]
-4677,spirit_offering_physical_damage_%_to_add_as_chaos,True,False,False,1,False,,False,False,-1,-1,False,1399117044,[386222]
+4676,spirit_offering_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,168507599,[386120]
+4677,spirit_offering_physical_damage_%_to_add_as_chaos,True,False,False,1,False,,False,False,-1,-1,False,1399117044,[386260]
 4678,base_fire_damage_%_of_maximum_life_taken_per_minute_in_normal,True,False,False,1,False,,False,False,-1,-1,False,-1007548738,[]
 4679,base_fire_damage_%_of_maximum_es_taken_per_minute_in_normal,True,False,False,1,False,,False,False,-1,-1,False,-522444239,[]
 4680,base_fire_damage_%_of_maximum_life_taken_per_minute_in_cruel,True,False,False,1,False,,False,False,-1,-1,False,-803778162,[]
@@ -4757,12 +4757,12 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 4755,elemental_damage_+%_during_flask_effect,True,False,False,1,False,,False,False,-1,-1,False,257045459,[]
 4756,chance_to_freeze_shock_ignite_%_during_flask_effect,True,False,False,1,False,,False,False,-1,-1,False,-1923038468,[]
 4757,summoned_monster_types_arent_duplicated,True,False,False,4,False,,False,False,-1,-1,False,448221444,[]
-4758,slash_ancestor_totem_elemental_resistance_%,True,False,False,1,False,,False,False,-1,-1,False,184377865,[393640]
+4758,slash_ancestor_totem_elemental_resistance_%,True,False,False,1,False,,False,False,-1,-1,False,184377865,[393678]
 4759,melee_ancestor_totem_grant_owner_attack_speed_+%,True,False,False,1,False,,False,False,-1,-1,True,348422995,[]
 4760,slam_ancestor_totem_grant_owner_melee_damage_+%,True,False,False,1,False,,False,False,-1,-1,True,-1645813028,[]
-4761,frost_bolt_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,True,-1914041617,[393938]
-4762,frost_bolt_freeze_chance_%,True,False,False,1,False,,False,False,-1,-1,True,-577766700,[394022]
-4763,frost_bolt_nova_duration_+%,True,False,False,1,False,,False,False,-1,-1,True,170870623,[394108]
+4761,frost_bolt_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,True,-1914041617,[393976]
+4762,frost_bolt_freeze_chance_%,True,False,False,1,False,,False,False,-1,-1,True,-577766700,[394060]
+4763,frost_bolt_nova_duration_+%,True,False,False,1,False,,False,False,-1,-1,True,170870623,[394146]
 4764,chest_drop_additional_fire_warband_uniques,True,False,False,3,False,,False,False,-1,-1,False,135328700,[]
 4765,chest_drop_additional_cold_warband_uniques,True,False,False,3,False,,False,False,-1,-1,False,344786402,[]
 4766,chest_drop_additional_lightning_warband_uniques,True,False,False,3,False,,False,False,-1,-1,False,-1555722131,[]
@@ -5126,7 +5126,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 5124,map_unique_monsters_drop_corrupted_items,True,False,False,4,False,,False,False,-1,-1,False,-896461274,[]
 5125,fire_beam_degen_spread_to_enemies_in_radius_on_kill,True,False,False,3,False,,False,False,-1,-1,False,1980136937,[]
 5126,fire_beam_enemy_fire_resistance_%_per_stack,True,False,False,1,False,,False,False,-1,-1,True,-2102507108,[]
-5127,fire_beam_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,583361137,[423706]
+5127,fire_beam_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,583361137,[423744]
 5128,map_corrupted_bosses_drop_x_additional_vaal_items,True,False,False,3,False,,False,False,-1,-1,False,718882968,[]
 5129,map_strongboxes_are_corrupted,True,False,False,4,False,,False,False,-1,-1,False,-765578141,[]
 5130,map_players_cannot_take_reflected_damage,True,False,False,4,False,,False,False,-1,-1,False,1462522618,[]
@@ -5174,7 +5174,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 5172,have_summoned_a_golem_in_past_8_seconds,True,False,False,1,False,,False,False,-1,-1,False,1186168124,[]
 5173,damage_+%_if_golem_summoned_in_past_8_seconds,True,False,False,1,False,,False,False,-1,-1,False,2018116162,[]
 5174,golem_damage_+%_if_summoned_in_past_8_seconds,True,False,False,1,False,,False,False,-1,-1,False,1954131980,[]
-5175,golem_skill_cooldown_recovery_+%,True,False,False,1,False,,False,False,-1,-1,False,-1298133551,"[427358, 427406, 427450, 427496, 427534]"
+5175,golem_skill_cooldown_recovery_+%,True,False,False,1,False,,False,False,-1,-1,False,-1298133551,"[427396, 427444, 427488, 427534, 427572]"
 5176,golem_cooldown_recovery_+%,True,False,False,1,False,,False,False,-1,-1,False,-1605747820,[]
 5177,golem_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,2002502597,[]
 5178,golem_attack_and_cast_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,1462657821,[]
@@ -5423,44 +5423,44 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 5421,chest_number_of_additional_pirate_uniques_to_drop,True,False,False,3,False,,False,False,-1,-1,False,-765218800,[]
 5422,shrapnel_shot_number_of_additional_cones,True,False,False,3,False,,True,False,-1,-1,True,658050623,[]
 5423,local_unique_jewel_shrapnel_shot_number_of_additional_cones_with_50_dex_in_radius,True,True,False,3,False,,False,False,-1,-1,False,-504527614,[]
-5424,burning_arrow_additional_ignite_stacks,True,False,False,3,False,,False,False,-1,-1,False,-796387591,"[447904, 447934]"
+5424,burning_arrow_additional_ignite_stacks,True,False,False,3,False,,False,False,-1,-1,False,-796387591,"[447942, 447972]"
 5425,local_unique_jewel_burning_arrow_additional_ignite_stacks_with_50_dex_in_radius,True,True,False,3,False,,False,False,-1,-1,False,-1413312060,[]
-5426,cleave_fortify_on_hit,True,False,False,4,False,,False,False,-1,-1,False,-877836101,[448190]
+5426,cleave_fortify_on_hit,True,False,False,4,False,,False,False,-1,-1,False,-877836101,[448228]
 5427,local_unique_jewel_cleave_fortify_on_hit_with_50_str_in_radius,True,True,False,4,False,,False,False,-1,-1,False,186462992,[]
 5428,cleave_skill_area_of_effect_+%_per_nearby_enemy,True,False,False,1,False,,True,False,-1,-1,True,700865862,[]
 5429,local_unique_jewel_cleave_skill_area_of_effect_+%_per_nearby_enemy_with_50_str_in_radius,True,True,False,1,False,,False,False,-1,-1,False,1917104917,[]
-5430,freezing_pulse_number_of_additional_projectiles,True,False,False,3,False,,False,False,-1,-1,False,-1019949873,[448714]
+5430,freezing_pulse_number_of_additional_projectiles,True,False,False,3,False,,False,False,-1,-1,False,-1019949873,[448752]
 5431,local_unique_jewel_freezing_pulse_number_of_additional_projectiles_with_50_int_in_radius,True,True,False,3,False,,False,False,-1,-1,False,935528686,[]
 5432,freezing_pulse_damage_+%_if_enemy_shattered_recently,True,False,False,1,False,,False,False,-1,-1,False,1659558658,[]
 5433,local_unique_jewel_freezing_pulse_damage_+%_if_enemy_shattered_recently_with_50_int_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-220624215,[]
 5434,local_unique_jewel_ice_shot_explosion_skill_area_of_effect_+%_with_50_dex_in_radius,True,True,False,1,False,,False,False,-1,-1,False,1562694432,[]
-5435,ice_shot_pierce_chance_%,True,False,False,1,False,,False,False,-1,-1,False,-476722350,[449450]
+5435,ice_shot_pierce_chance_%,True,False,False,1,False,,False,False,-1,-1,False,-476722350,[449488]
 5436,local_unique_jewel_ice_shot_pierce_chance_%_with_50_dex_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-1683185578,[]
-5437,ice_shot_damage_+%_to_chilled_enemies,True,False,False,1,False,,False,False,-1,-1,False,1587270004,[449686]
+5437,ice_shot_damage_+%_to_chilled_enemies,True,False,False,1,False,,False,False,-1,-1,False,1587270004,[449724]
 5438,local_unique_jewel_ice_shot_damage_+%_to_chilled_enemies_with_50_dex_in_radius,True,True,False,1,False,,False,False,-1,-1,False,374278316,[]
 5439,local_unique_jewel_molten_strike_number_of_additional_projectiles_with_50_str_in_radius,True,True,False,3,False,,False,False,-1,-1,False,641720736,[]
 5440,local_unique_jewel_molten_strike_skill_area_of_effect_+%_with_50_str_in_radius,True,True,False,3,False,,False,False,-1,-1,False,1643793478,[]
 5441,frost_blades_melee_cold_damage_+%_per_frenzy_charge,True,False,False,1,False,,False,False,-1,-1,False,679804285,[]
 5442,local_unique_jewel_frost_blades_melee_cold_damage_+%_per_frenzy_charge_with_50_dex_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-407841715,[]
-5443,dual_strike_melee_splash_with_off_hand_weapon,True,False,False,4,False,,False,False,-1,-1,False,879280738,[450596]
+5443,dual_strike_melee_splash_with_off_hand_weapon,True,False,False,4,False,,False,False,-1,-1,False,879280738,[450634]
 5444,local_unique_jewel_dual_strike_melee_splash_with_off_hand_weapon_with_50_dex_in_radius,True,True,False,4,False,,False,False,-1,-1,False,533369357,[]
 5445,frostbolt_projectile_acceleration,True,False,False,1,False,,True,False,-1,-1,True,-1074897712,[]
 5446,local_unique_jewel_frostbolt_projectile_acceleration_with_50_int_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-750727910,[]
-5447,ethereal_knives_projectiles_nova,True,False,False,4,False,,False,False,-1,-1,False,1643885465,[451092]
+5447,ethereal_knives_projectiles_nova,True,False,False,4,False,,False,False,-1,-1,False,1643885465,[451130]
 5448,local_unique_jewel_ethereal_knives_projectiles_nova_with_50_dex_in_radius,True,True,False,4,False,,False,False,-1,-1,False,-530704077,[]
-5449,ethereal_knives_number_of_additional_projectiles,True,False,False,3,False,,False,False,-1,-1,False,47680294,[451386]
+5449,ethereal_knives_number_of_additional_projectiles,True,False,False,3,False,,False,False,-1,-1,False,47680294,[451424]
 5450,local_unique_jewel_ethereal_knives_number_of_additional_projectiles_with_50_dex_in_radius,True,True,False,3,False,,False,False,-1,-1,False,2045816861,[]
 5451,ethereal_knives_projectile_speed_+%_per_frenzy_charge,True,False,False,1,False,,True,False,-1,-1,True,428095275,[]
 5452,local_unique_jewel_ethereal_knives_projectile_speed_+%_per_frenzy_charge_with_50_dex_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-1533880565,[]
-5453,ethereal_knives_grant_frenzy_charge_on_kill,True,False,False,4,False,,False,False,-1,-1,False,6217940,[452004]
+5453,ethereal_knives_grant_frenzy_charge_on_kill,True,False,False,4,False,,False,False,-1,-1,False,6217940,[452042]
 5454,local_unique_jewel_ethereal_knives_grant_frenzy_charge_on_kill_with_50_dex_in_radius,True,True,False,4,False,,False,False,-1,-1,False,314998986,[]
 5455,lightning_tendrils_skill_area_of_effect_+%_per_enemy_hit,True,False,False,1,False,,True,False,-1,-1,True,629903668,[]
 5456,local_unique_jewel_lightning_tendrils_skill_area_of_effect_+%_per_enemy_hit_with_50_int_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-272777825,[]
 5457,magma_orb_skill_area_of_effect_+%_per_bounce,True,False,False,1,False,,True,False,-1,-1,True,-895992672,[]
 5458,local_unique_jewel_magma_orb_skill_area_of_effect_+%_per_bounce_with_50_int_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-134149914,[]
-5459,glacial_hammer_melee_splash_with_cold_damage,True,False,False,4,False,,False,False,-1,-1,False,-282911697,"[452892, 452924]"
+5459,glacial_hammer_melee_splash_with_cold_damage,True,False,False,4,False,,False,False,-1,-1,False,-282911697,"[452930, 452962]"
 5460,local_unique_jewel_glacial_hammer_melee_splash_with_cold_damage_with_50_str_in_radius,True,True,False,4,False,,False,False,-1,-1,False,467519682,[]
-5461,glacial_hammer_physical_damage_%_to_convert_to_cold,True,False,False,1,False,,False,False,-1,-1,False,-868555205,"[453254, 453286]"
+5461,glacial_hammer_physical_damage_%_to_convert_to_cold,True,False,False,1,False,,False,False,-1,-1,False,-868555205,"[453292, 453324]"
 5462,local_unique_jewel_glacial_hammer_physical_damage_%_to_convert_to_cold_with_50_str_in_radius,True,True,False,1,False,,False,False,-1,-1,False,-192025060,[]
 5463,blight_skill_area_of_effect_+%_after_1_second_channelling,True,False,False,1,False,,True,False,-1,-1,True,1776612471,[]
 5464,local_unique_jewel_blight_skill_area_of_effect_+%_after_1_second_channelling_with_50_int_in_radius,True,True,False,1,False,,False,False,-1,-1,False,1905509534,[]
@@ -5500,12 +5500,12 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 5498,map_monsters_that_drop_silver_coin_drop_x_additional_silver_coins,True,False,False,4,False,,False,False,-1,-1,False,71569968,[]
 5499,map_item_quantity_from_monsters_that_drop_silver_coin_+%,True,False,False,1,False,,False,False,-1,-1,False,-384782756,[]
 5500,local_unique_jewel_spark_number_of_additional_projectiles_with_50_int_in_radius,False,True,False,3,False,,False,False,-1,-1,False,-1016824701,[]
-5501,spark_num_of_additional_projectiles_in_chain,True,False,False,3,False,,False,False,-1,-1,False,-2078701273,"[457648, 457662]"
+5501,spark_num_of_additional_projectiles_in_chain,True,False,False,3,False,,False,False,-1,-1,False,-2078701273,"[457686, 457700]"
 5502,local_unique_jewel_spark_number_of_additional_chains_with_50_int_in_radius,False,True,False,3,False,,False,False,-1,-1,False,-79313464,[]
-5503,monster_slam_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-210389425,[457910]
+5503,monster_slam_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-210389425,[457948]
 5504,zombie_slam_cooldown_speed_+%,True,False,False,1,False,,False,False,-1,-1,False,-659245091,[]
 5505,local_unique_jewel_zombie_slam_cooldown_speed_+%_with_50_int_in_radius,False,True,False,1,False,,False,False,-1,-1,False,-613830706,[]
-5506,monster_slam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1516997712,[458196]
+5506,monster_slam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,-1516997712,[458234]
 5507,zombie_slam_damage_+%,True,False,False,1,False,,False,False,-1,-1,False,1373473715,[]
 5508,local_unique_jewel_zombie_slam_damage_+%_with_50_int_in_radius,False,True,False,1,False,,False,False,-1,-1,False,1177189971,[]
 5509,map_leaguestone_override_base_num_rogue_exiles,False,False,False,3,False,,False,False,-1,-1,False,1860076991,[]
@@ -5564,7 +5564,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 5562,blood_offering_life_regenerated_+%_per_corpse,True,False,False,1,False,,False,False,-1,-1,False,1793477624,[]
 5563,damage_+%_vs_chilled_enemies,False,False,False,1,False,,False,False,-1,-1,False,922531115,[]
 5564,additional_block_%_while_on_consecrated_ground,False,False,False,1,False,,False,False,-1,-1,False,-369314932,[]
-5565,warcry_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,939912600,"[463292, 463320]"
+5565,warcry_buff_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,939912600,"[463330, 463358]"
 5566,spell_and_attack_minimum_added_fire_damage,False,False,False,3,False,,False,False,-1,-1,False,-1838533933,[]
 5567,spell_and_attack_maximum_added_fire_damage,False,False,False,3,False,,False,False,-1,-1,False,1794747511,[]
 5568,resist_all_elements_%_with_200_or_more_strength,False,False,False,1,False,,False,False,-1,-1,False,-899982587,[]
@@ -5681,11 +5681,11 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 5679,map_leaguestone_implicit_tempest_random,True,False,False,3,False,,False,False,-1,-1,False,1777539526,[]
 5680,map_leaguestone_explicit_tempest_type_override,True,False,False,3,False,,False,False,-1,-1,False,-448685958,[]
 5681,local_unique_jewel_frostbolt_additional_projectiles_with_40_int_in_radius,True,True,False,3,False,,False,False,-1,-1,False,-1698578496,[]
-5682,frostbolt_number_of_additional_projectiles,True,False,False,3,False,,False,False,-1,-1,False,-1854777264,[473504]
+5682,frostbolt_number_of_additional_projectiles,True,False,False,3,False,,False,False,-1,-1,False,-1854777264,[473542]
 5683,skill_area_of_effect_+%_final,True,False,False,1,False,,True,True,-1,-1,True,0,[]
 5684,total_skill_area_of_effect_+%_including_final,True,False,False,1,False,,True,True,-1,-1,True,0,[]
 5685,local_unique_jewel_magma_orb_additional_projectiles_with_40_int_in_radius,True,True,False,3,False,,False,False,-1,-1,False,802066234,[]
-5686,magma_orb_number_of_additional_projectiles,True,False,False,3,False,,False,False,-1,-1,False,1481378466,[473926]
+5686,magma_orb_number_of_additional_projectiles,True,False,False,3,False,,False,False,-1,-1,False,1481378466,[473964]
 5687,curse_on_hit_level_cold_weakness,False,False,False,3,False,,False,False,-1,-1,False,-1736501562,[]
 5688,elemental_damage_+%_if_used_a_warcry_recently,False,False,False,1,False,,False,False,-1,-1,False,-111434389,[]
 5689,local_display_socketed_golem_attack_and_cast_speed_+%,False,False,False,1,False,,False,False,-1,-1,False,1871292676,[]
@@ -5738,7 +5738,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 5736,unique_ryuslathas_clutches_maximum_physical_attack_damage_+%_final,False,False,False,1,False,,False,False,-1,-1,False,-1575077341,[]
 5737,is_intimidated,False,False,False,4,False,,False,False,-1,-1,False,-1286153510,[]
 5738,local_unique_jewel_frost_blades_melee_damage_penetrates_%_cold_resistance_with_40_dex_in_radius,False,True,False,1,False,,False,False,-1,-1,False,578365436,[]
-5739,frost_blades_melee_damage_penetrates_%_cold_resistance,True,False,False,1,False,,False,False,-1,-1,False,-1188254007,[478942]
+5739,frost_blades_melee_damage_penetrates_%_cold_resistance,True,False,False,1,False,,False,False,-1,-1,False,-1188254007,[478980]
 5740,melee_damage_penetrates_%_cold_resistance,False,False,False,1,False,,False,False,-1,-1,False,-807294626,[]
 5741,local_display_socketed_golem_skills_minions_life_%_to_add_as_energy_shield,False,True,False,1,False,,False,False,-1,-1,False,1995433573,[]
 5742,mana_leech_permyriad_vs_frozen_enemies,False,False,False,6,False,,False,False,-1,-1,False,-1270249455,[]
@@ -5905,12 +5905,12 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 5903,life_flasks_gain_X_charges_every_3_seconds_if_you_have_not_used_a_life_flask_recently,True,False,False,3,False,,False,False,-1,-1,False,-29324182,[]
 5904,life_recovery_+%_from_flasks_while_on_low_life,False,False,False,1,False,,False,False,-1,-1,False,681058921,[]
 5905,virtual_flask_life_to_recover_+%,False,False,False,1,False,,False,True,-1,-1,False,0,[]
-5906,additional_%_chance_to_evade_attacks_if_you_have_taken_a_savage_hit_recently,False,False,False,1,False,,False,False,-1,-1,False,616705296,[]
+5906,additional_%_chance_to_evade_attacks_if_you_have_taken_a_savage_hit_recently,False,False,False,1,False,,True,False,-1,-1,True,616705296,[]
 5907,physical_damage_reduction_%_per_hit_you_have_taken_recently,False,False,False,1,False,,False,False,-1,-1,False,-1268985973,[]
 5908,curses_have_no_effect_on_you_for_4_seconds_every_10_seconds,True,False,False,4,False,,False,False,-1,-1,False,-337277839,[]
 5909,hinder_effect_on_self_+%,False,False,False,1,False,,False,False,-1,-1,False,-1562558177,[]
 5910,avoid_corrupted_blood_%_chance,False,False,False,1,False,,False,False,-1,-1,False,-79453246,[]
-5911,blind_effect_on_self_+%,False,False,False,1,False,,False,False,-1,-1,False,-652494355,[]
+5911,blind_effect_on_self_+%,False,False,False,1,False,,True,False,-1,-1,True,-652494355,[]
 5912,avoid_maim_%_chance,False,False,False,1,False,,False,False,-1,-1,False,1549816328,[]
 5913,monster_ground_fire_on_death_variation,False,False,False,3,False,,False,False,-1,-1,False,396249443,[]
 5914,traps_explode_on_timeout,True,False,False,4,False,,False,False,-1,-1,False,-1142925991,[]
@@ -6107,7 +6107,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 6105,cold_damage_with_attack_skills_+%,False,False,False,1,False,,False,False,-1,-1,False,966561360,[]
 6106,lightning_damage_with_attack_skills_+%,False,False,False,1,False,,False,False,-1,-1,False,1486844275,[]
 6107,chaos_damage_with_attack_skills_+%,False,False,False,1,False,,False,False,-1,-1,False,-32193152,[]
-6108,doedre_aura_damage_+%_final,False,False,False,1,False,,False,False,-1,-1,False,117801066,[]
+6108,doedre_aura_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,False,117801066,[]
 6109,base_fire_damage_%_of_maximum_life_plus_maximum_ES_to_deal_per_minute,True,False,False,1,False,,False,False,-1,-1,False,1666425614,[]
 6110,cast_at_teleport_start_%,True,False,False,1,False,,False,False,-1,-1,False,-1515677910,[]
 6111,cast_at_teleport_end_%,True,False,False,1,False,,False,False,-1,-1,False,1724941389,[]
@@ -6118,10 +6118,10 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 6116,map_bosses_have_summon_zombie_giant,False,False,False,4,False,,False,False,-1,-1,False,380566518,[]
 6117,monster_spawn_bloodlines_zombie_giant,True,False,False,4,False,,False,False,-1,-1,False,1662826006,[]
 6118,base_critical_degen_multiplier,False,False,False,3,False,,False,False,-1,-1,False,-310623187,[]
-6119,critical_degen_multiplier_from_main_hand,True,False,False,3,False,,False,True,-1,-1,False,0,[]
-6120,critical_degen_multiplier_from_off_hand,True,False,False,3,False,,False,True,-1,-1,False,0,[]
-6121,critical_degen_multiplier_from_spell,True,False,False,3,False,,False,True,-1,-1,False,0,[]
-6122,critical_degen_multiplier_from_secondary,True,False,False,3,False,,False,True,-1,-1,False,0,[]
+6119,critical_degen_multiplier_from_main_hand,True,False,False,3,False,,False,True,-1,-1,True,0,[]
+6120,critical_degen_multiplier_from_off_hand,True,False,False,3,False,,False,True,-1,-1,True,0,[]
+6121,critical_degen_multiplier_from_spell,True,False,False,3,False,,False,True,-1,-1,True,0,[]
+6122,critical_degen_multiplier_from_secondary,True,False,False,3,False,,False,True,-1,-1,True,0,[]
 6123,monster_ignite_damage_+%_final,False,False,False,1,False,,False,False,-1,-1,False,1051466476,[]
 6124,monster_bleeding_damage_+%_final,False,False,False,1,False,,False,False,-1,-1,False,747667828,[]
 6125,monster_poison_damage_+%_final,False,False,False,1,False,,False,False,-1,-1,False,-1284863452,[]
@@ -6261,5 +6261,78 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown2,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 6259,attack_maximum_added_physical_damage_with_weapons,False,False,False,3,False,,False,False,-1,-1,True,1542889918,[]
 6260,trigger_on_projectile_loop_count,True,False,False,3,False,,False,False,-1,-1,False,1160688638,[]
 6261,trigger_on_projectile_death,True,False,False,4,False,,False,False,-1,-1,False,-61946445,[]
-6262,molten_shell_explosion_cooldown_ms,False,False,False,3,False,,False,False,-1,-1,False,1110401074,[]
-6263,from_code_active_skill_hit_and_ailment_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,False,735908224,[]
+6262,base_number_of_beast_minions_allowed,False,False,False,3,False,,False,False,-1,-1,False,-1510199737,[]
+6263,number_of_beast_minions_allowed,True,False,False,3,False,,True,True,-1,-1,True,0,[]
+6264,local_display_grants_summon_beast_companion,False,True,False,3,False,,False,False,-1,-1,False,-125823947,[]
+6265,molten_shell_explosion_cooldown_ms,False,False,False,3,False,,False,False,-1,-1,False,1110401074,[]
+6266,from_code_active_skill_hit_and_ailment_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,False,735908224,[]
+6267,tornado_movement_velocity_+%,True,False,False,1,False,,True,False,-1,-1,True,1626764054,[]
+6268,monster_aggro_radius_+%,True,False,False,1,False,,False,False,-1,-1,False,-2049279958,[]
+6269,ground_ice_art_variation,True,False,False,3,False,,True,False,-1,-1,True,1948564461,[]
+6270,additional_projectiles_fire_parallel_x_dist,True,False,False,3,False,,True,False,-1,-1,True,-1502009451,[]
+6271,additional_projectiles_fire_parallel_y_dist,True,False,False,3,False,,True,False,-1,-1,True,107325740,[]
+6272,from_code_active_skill_ailment_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,False,-1320212580,[]
+6273,flameblast_ailment_damage_+%_final_per_stack,True,False,False,1,False,,False,False,-1,-1,True,-1264071777,[]
+6274,trigger_cascade_spiral_A,True,False,False,3,False,,False,False,-1,-1,False,499425620,[]
+6275,trigger_cascade_spiral_B,True,False,False,3,False,,False,False,-1,-1,False,-206719860,[]
+6276,trigger_cascade_spiral_angle,True,False,False,3,False,,False,False,-1,-1,False,-1432508817,[]
+6277,use_skill_on_hit_%,False,False,False,1,False,,False,False,-1,-1,True,1570694030,[]
+6278,local_display_use_level_X_abyssal_cry_on_hit,False,False,False,3,False,,False,False,-1,-1,False,518101500,[]
+6279,accelerate_min,True,False,False,3,False,,False,False,-1,-1,False,769672712,[]
+6280,accelerate_max,True,False,False,3,False,,False,False,-1,-1,False,322342800,[]
+6281,accelerate_time,True,False,False,3,False,,False,False,-1,-1,False,-307307292,[]
+6282,skill_is_minion_skill,True,False,False,4,False,,False,False,-1,-1,False,-1869809491,[]
+6283,minion_skill_mana_cost_+%,False,False,False,1,False,,False,False,-1,-1,False,1268004823,[]
+6284,local_display_grants_skill_doryanis_touch_level,False,True,False,3,False,,False,False,-1,-1,False,1390916664,[]
+6285,trigger_cascade_target_variation,True,False,False,3,False,,False,False,-1,-1,False,1158650549,[]
+6286,trigger_cascade_number_of_arms,True,False,False,3,False,,False,False,-1,-1,False,386763352,[]
+6287,trigger_cascade_angle_between_arms,True,False,False,3,False,,False,False,-1,-1,False,1535339939,[]
+6288,support_ruthless_big_hit_chance_%,True,False,False,1,False,,False,False,-1,-1,True,1239731752,[]
+6289,melee_damage_+%_final_from_ruthless_blow,True,False,False,1,False,,False,False,-1,-1,False,1182628727,[]
+6290,stun_base_duration_override_ms,True,False,False,3,False,,False,False,-1,-1,False,-48783586,[]
+6291,support_ruthless_big_hit_stun_base_duration_override_ms,True,False,False,3,False,,False,False,-1,-1,True,-926587423,[]
+6292,support_ruthless_big_hit_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,True,-511633058,[]
+6293,support_scion_onslaught_on_killing_blow_%_chance,True,False,False,1,False,,False,False,-1,-1,True,-1278687840,[]
+6294,support_scion_onslaught_on_killing_blow_duration_ms,True,False,False,3,False,,False,False,-1,-1,True,1870393808,[]
+6295,support_arcane_surge_%_chance_to_gain_buff_on_skill_use,True,False,False,1,False,,False,False,-1,-1,True,87909665,[]
+6296,support_arcane_surge_spell_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,True,-1795247728,[]
+6297,spell_damage_+%_final_from_arcane_surge,False,False,False,1,False,,False,False,-1,-1,False,-1043019921,[]
+6298,support_arcane_surge_duration_ms,True,False,False,3,False,,False,True,-1,-1,True,0,[]
+6299,support_arcane_surge_base_duration_ms,False,False,False,3,False,,False,False,-1,-1,False,418554872,[]
+6300,hidden_monster_can_have_auras,True,False,False,4,False,,False,False,-1,-1,False,957180138,[]
+6301,projectile_number_of_targets_to_pierce,True,False,False,3,False,,True,True,-1,-1,True,0,[]
+6302,arrow_number_of_targets_to_pierce,True,False,False,3,False,,True,True,-1,-1,True,0,[]
+6303,projectile_base_number_of_targets_to_pierce,False,False,False,3,False,,False,False,-1,-1,False,193423113,[]
+6304,arrow_base_number_of_targets_to_pierce,False,False,False,3,False,,False,False,-1,-1,False,-1450168904,[]
+6305,arrows_always_pierce,True,False,False,4,False,,True,True,-1,-1,True,0,[]
+6306,base_arrows_always_pierce,False,False,False,4,False,,False,False,-1,-1,False,-829772704,[]
+6307,virtual_always_pierce,False,False,False,4,False,,True,True,-1,-1,True,0,[]
+6308,support_ignite_prolif_ignite_damage_+%_final,False,False,False,1,False,,False,False,-1,-1,True,724688543,[]
+6309,combined_ailment_all_damage_over_time_+%_final,False,False,False,1,False,,False,True,-1,-1,False,0,[]
+6310,projectiles_always_pierce_you,True,False,False,4,False,,True,False,-1,-1,True,589139115,[]
+6311,arrow_damage_+%_vs_pierced_targets,True,False,False,1,False,,False,False,-1,-1,False,2110716013,[]
+6312,projectiles_pierce_x_additional_targets_while_you_have_phasing,False,False,False,3,False,,False,False,-1,-1,False,1266214888,[]
+6313,quiver_projectiles_pierce_1_additional_target,False,False,False,4,False,,False,False,-1,-1,False,-560132395,[]
+6314,quiver_projectiles_pierce_2_additional_targets,False,False,False,4,False,,False,False,-1,-1,False,-1766185642,[]
+6315,quiver_projectiles_pierce_3_additional_targets,False,False,False,4,False,,False,False,-1,-1,False,-742032763,[]
+6316,projectiles_pierce_all_nearby_targets,True,False,False,4,False,,True,False,-1,-1,True,-1064674097,[]
+6317,projectiles_pierce_1_additional_target_per_10_stat_value,False,False,False,3,False,,False,False,-1,-1,False,233280155,[]
+6318,projectiles_pierce_1_additional_target_per_15_stat_value,False,False,False,3,False,,False,False,-1,-1,False,308748314,[]
+6319,talisman_implicit_projectiles_pierce_1_additional_target_per_10,False,False,False,3,False,,False,False,-1,-1,False,1387367751,[]
+6320,blade_vortex_ailment_damage_+%_per_blade_final,True,False,False,1,False,,False,False,-1,-1,True,-292467247,[]
+6321,bladefall_width_+%,True,False,False,1,False,,True,False,-1,-1,True,-198885548,[]
+6322,lightning_strike_additional_pierce_per_10_old,True,False,False,3,False,,False,False,-1,-1,False,506104415,"[533476, 533512]"
+6323,lightning_strike_additional_pierce,True,False,False,3,False,,False,False,-1,-1,False,1279506854,"[533638, 533674]"
+6324,lightning_trap_additional_pierce_per_10_old,True,False,False,3,False,,False,False,-1,-1,False,1786050390,"[533818, 533872]"
+6325,lightning_trap_additional_pierce,True,False,False,3,False,,False,False,-1,-1,False,-1373121790,"[534012, 534066]"
+6326,support_poison_poison_damage_+%_final,True,False,False,1,False,,False,False,-1,-1,True,-439841876,[]
+6327,attacks_chance_to_poison_%_on_max_frenzy_charges,True,False,False,1,False,,False,False,-1,-1,False,1255817372,[]
+6328,chance_to_poison_%_vs_cursed_enemies,True,False,False,1,False,,False,False,-1,-1,False,-1407100137,[]
+6329,chaos_damage_chance_to_poison_%,True,False,False,1,False,,False,False,-1,-1,False,-1086121427,[]
+6330,virtual_chance_to_poison_on_hit_with_attacks_%,True,False,False,1,False,,False,True,-1,-1,False,0,[]
+6331,piercing_projectiles_critical_strike_chance_+%,True,False,False,1,False,,False,False,-1,-1,False,-835925883,[]
+6332,arrow_damage_+hardcoded%_vs_pierced_targets,True,False,False,4,False,,False,False,-1,-1,False,-1525568890,[]
+6333,arrows_pierce_additional_target,False,False,False,4,False,,False,False,-1,-1,False,-2115616189,[]
+6334,ice_shot_additional_pierce_per_10_old,False,False,False,3,False,,False,False,-1,-1,False,-1170781659,[]
+6335,local_unique_jewel_ice_shot_additional_pierce_per_10_old_with_40_dex_in_radius,True,True,False,3,False,,False,False,-1,-1,False,1305731924,[]
+6336,arrows_pierce_1_additional_target_per_10_stat_value,False,False,False,3,False,,False,False,-1,-1,False,843584640,[]
