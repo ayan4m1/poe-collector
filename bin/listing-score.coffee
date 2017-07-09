@@ -8,22 +8,7 @@ log = require './logging'
 elastic = require './elastic'
 
 data = jsonfile.readFileSync("#{__dirname}/../data/Gear.json").types
-utilityFlasks = [
-  'Quicksilver'
-  'Bismuth'
-  'Stibnite'
-  'Amethyst'
-  'Ruby'
-  'Sapphire'
-  'Topaz'
-  'Silver'
-  'Aquamarine'
-  'Granite'
-  'Jade'
-  'Quartz'
-  'Sulphur'
-  'Basalt'
-]
+utilityFlasks = jsonfile.readFileSync("#{__dirname}/../data/Flasks.json")
 
 valueRegex = /([+-])?([0-9\\.]+)%?( to ([+-])?([0-9\\.]+)%?)?/i
 valuate = (source) ->
@@ -210,11 +195,6 @@ scoreHit = (hit) ->
 
   log.as.debug("found #{mods.length} eligible mods for #{listing.fullName} - #{listing.baseLine}")
 
-  ###domains =
-    prefix: false
-    suffix: false
-  groups = []###
-
   matchedGroups = []
   matchedCount = 0
   totalQuality = 0
@@ -237,35 +217,36 @@ scoreHit = (hit) ->
       matches = all(tokens, cmpTokens)
       match = cmpVal if matches is true and matchedGroups.indexOf(mod.id) is -1
 
-  if match?
-    log.as.silly("modifier #{mod} matched #{match.text}")
-    matchedGroups.push(mod.id)
-    matchedCount++
-    if value.min? and value.max?
-      quality = (value.min / match.max) + (value.max / match.max)
-      display = "#{value.min} to #{value.max}"
+    if match?
+      log.as.debug("modifier #{mod} matched #{match.text}")
+      matchedGroups.push(mod.id)
+      matchedCount++
+      if value.min? and value.max?
+        quality = (value.min / match.max) + (value.max / match.max)
+        display = "#{value.min} to #{value.max}"
+      else
+        quality = value / match.max
+        display = value
+
+      totalQuality += quality
+      log.as.debug("#{mod} -> #{match.id} has quality #{quality.toFixed(4)} from #{match.min} - #{match.max}")
     else
-      quality = value / match.max
-      display = value
+      log.as.warn("could not match mod for #{mod}, tokenized as #{tokens}")
 
-    totalQuality += quality
-    log.as.debug("#{mod} -> #{match.id} has quality #{quality.toFixed(4)} from #{match.min} - #{match.max}")
-  else
-    log.as.warn("could not match mod for #{mod}, tokenized as #{tokens}")
-
-  result = totalQuality / matchedCount
-  log.as.info("overall quality is #{result.toFixed(4)}")
-  bodies.push({
-    update:
-      _index: hit._index
-      _type: 'listing'
-      _id: hit._id
-  }, {
-    script: "ctx._source.meta.quality = #{result}"
-    upsert:
-      meta:
-        quality: 0
-  })
+  if matchedCount > 0
+    result = totalQuality / matchedCount
+    log.as.info("overall quality is #{result.toFixed(4)}")
+    bodies.push({
+      update:
+        _index: hit._index
+        _type: 'listing'
+        _id: hit._id
+    }, {
+      script: "ctx._source.meta.quality = #{result}"
+      upsert:
+        meta:
+          quality: 0
+    })
 
 bodies = []
 hitCount = 0
