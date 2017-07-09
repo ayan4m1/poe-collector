@@ -403,11 +403,16 @@ parseCurrency = (item, result) ->
   raw.shift()
   for term in raw
     continue if term is 'price' or term is 'b/o'
+    break unless currency.values[item.league]?
     if isNaN(parseFloat(term))
       for key, regex of currency.regexes
         if regex.test(term)
-          factor = currency.values[key]
-          break
+          for curr in currency.values[item.league]
+            if regex.test(curr.name)
+              log.as.silly("#{term} matches #{curr.name} matches #{key} - #{curr.value}")
+              factor = curr.value
+              break
+        break if factor > 0
     else quantity = parseFloat(term)
 
   return unless factor > 0 and quantity > 0
