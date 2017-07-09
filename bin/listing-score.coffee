@@ -159,7 +159,7 @@ findEligibleMods = (listing) ->
     modInfo = data['weapon']
     extend(modInfo, data['sceptre'])
   else if key is 'shield' and listing.baseLine.endsWith('Spirit Shield')
-    modInfo = data['shield']
+    modInfo = data['int_shield']
     extend(modInfo, data['focus'])
   else if key is 'sword' and (
     (listing.baseLine.endsWith('Rapier') or listing.baseLine.endsWith('Foil')) or
