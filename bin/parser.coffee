@@ -52,7 +52,7 @@ regexes =
     stunOffense: /([-+]?)(\d*\.?\d+%?) (increased|reduced) (Enemy Stun Threshold|Stun Duration on Enemies)( while using a Flask)?/
     regen: /(\d*\.?\d+) (Life|Mana) Regenerated per second/
     breach: /Properties are doubled while in a Breach/
-    attrReqs: /(\d+) reduced Attribute Requirements/
+    attrReqs: /(\d+)% reduced Attribute Requirements/
 
 modOperators =
   increased: (a, b) -> a * (b + 1.0)
