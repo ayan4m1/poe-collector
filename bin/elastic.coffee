@@ -19,6 +19,7 @@ createClient = ->
     log: if config.log.level is 'debug' then 'info' else 'error'
     requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
     suggestCompression: true
+    apiVersion: '5.2'
   )
 
 putTemplate = (name, settings, mappings) ->
