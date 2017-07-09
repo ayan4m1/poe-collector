@@ -1,18 +1,16 @@
 default:
-  liveReload:
-    enabled: true
-    interval: 5
-    unit: seconds
-  minify: false
-  compress: false
   hostname: localhost
   port: 3000
   socket: 3030
+  emit:
+    delay:
+      interval: 5
+      unit: seconds
 production:
-  liveReload:
-    enabled: false
-  minify: true
-  compress: true
   hostname: poe-sniper.com
   port: 80
   socket: 8080
+  emit:
+    delay:
+      interval: 15
+      unit: seconds

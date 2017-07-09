@@ -10,10 +10,10 @@ log = require './logging'
 hosts = []
 
 notifier = Primus.createServer
-  port: config.emitter.port
+  port: config.web.socket
   transformer: 'faye'
 
-log.as.info("emitter started on port #{config.emitter.port}")
+log.as.info("emitter started on port #{config.web.socket}")
 
 notifier.on 'connection', (spark) ->
   log.as.info("new connection from #{spark.address}")
@@ -60,7 +60,7 @@ process = ->
 
 processLoop = ->
   Q(process()).delay(
-    moment.duration(config.emitter.delay.interval, config.emitter.delay.unit).asMilliseconds() / 5
+    moment.duration(config.web.emit.delay.interval, config.web.emit.delay.unit).asMilliseconds()
   ).then(processLoop)
 
 processLoop().done()

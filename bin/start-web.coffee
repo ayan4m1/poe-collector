@@ -10,7 +10,7 @@ express = require 'express'
 app = express()
 
 # deflate support
-app.use require('compression')() if config.web.compress
+app.use require('compression')()
 
 # determine our webroot
 path = require 'path'
