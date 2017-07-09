@@ -675,7 +675,7 @@ parseItem = (item) ->
       reduced:
         attributeRequirements: 0.0
         manaCost: 0.0
-        inverseLightRadius: 0.0
+      lightRadius: 0.0
       movementSpeed: 0.0
       item:
         rarity: 0.0

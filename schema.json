@@ -269,11 +269,11 @@
                   },
                   "attributeRequirements": {
                     "type": "float"
-                  },
-                  "inverseLightRadius": {
-                    "type": "float"
                   }
                 }
+              },
+              "lightRadius": {
+                "type": "float"
               },
               "item": {
                 "properties": {
