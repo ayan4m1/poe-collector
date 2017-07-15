@@ -1,6 +1,6 @@
 {
-  "createdAt": "2017-06-19T19:46:46.146Z",
-  "gameVersion": "2.6",
+  "createdAt": "2017-07-15T15:30:35.432Z",
+  "gameVersion": "3.0.0",
   "types": {
     "str_armour": [
       "additional_strength",
@@ -9945,16 +9945,16 @@
       "text": "",
       "min": 2,
       "max": 4,
-      "ideal": 4,
+      "ideal": 3,
       "tiers": [
         {
           "level": 25,
           "min": 2,
-          "max": 3
+          "max": 2
         },
         {
           "level": 85,
-          "min": 4,
+          "min": 3,
           "max": 4
         }
       ]
@@ -9966,16 +9966,16 @@
       "text": "",
       "min": 36,
       "max": 60,
-      "ideal": 57,
+      "ideal": 60,
       "tiers": [
         {
           "level": 25,
           "min": 36,
-          "max": 48
+          "max": 36
         },
         {
           "level": 85,
-          "min": 49,
+          "min": 60,
           "max": 60
         }
       ]

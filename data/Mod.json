@@ -1,6 +1,6 @@
 {
-  "createdAt": "2017-06-17T15:06:46.556Z",
-  "gameVersion": "2.6",
+  "createdAt": "2017-07-15T15:30:35.463Z",
+  "gameVersion": "3.0.0",
   "results": [
     {
       "name": "Strength2",
@@ -15828,7 +15828,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 4,
@@ -15845,7 +15845,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 15,
@@ -15862,7 +15862,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 30,
@@ -15879,7 +15879,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 60,
@@ -15896,7 +15896,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 81,
@@ -15913,7 +15913,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 1,
@@ -15930,7 +15930,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 10,
@@ -15947,7 +15947,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 26,
@@ -15964,7 +15964,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 42,
@@ -15981,7 +15981,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 58,
@@ -15998,7 +15998,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 74,
@@ -16015,7 +16015,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 82,
@@ -16032,7 +16032,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 4,
@@ -16049,7 +16049,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 15,
@@ -16066,7 +16066,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 30,
@@ -16083,7 +16083,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 60,
@@ -16100,7 +16100,7 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 81,
@@ -29359,7 +29359,7 @@
       "generation": "Corrupted",
       "stats": [
         {
-          "id": "6103",
+          "id": "6102",
           "name": "elemental_damage_with_attack_skills_+%",
           "text": "",
           "level": 1,
@@ -29907,29 +29907,46 @@
       "name": "PierceCurruption",
       "group": "ArrowPierce",
       "domain": "Gear",
+      "generation": "Unique",
+      "stats": [
+        {
+          "id": "6350",
+          "name": "arrows_pierce_additional_target",
+          "text": "",
+          "level": 1,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "AdditionalPierceCorruption",
+      "group": "ArrowPierce",
+      "domain": "Gear",
       "generation": "Corrupted",
       "stats": [
         {
-          "id": "174",
-          "name": "base_arrow_pierce_%",
-          "text": "Arrow Pierce",
+          "id": "6304",
+          "name": "arrow_base_number_of_targets_to_pierce",
+          "text": "",
           "level": 1,
-          "min": 5,
-          "max": 10
+          "min": 1,
+          "max": 1
         }
       ],
       "spawnWeights": []
     },
     {
       "name": "GlobalPierceCorruption",
-      "group": "Pierce",
+      "group": "ProjectileSpeed",
       "domain": "Gear",
       "generation": "Corrupted",
       "stats": [
         {
-          "id": "173",
-          "name": "pierce_%",
-          "text": "Projectile Pierce chance",
+          "id": "177",
+          "name": "base_projectile_speed_+%",
+          "text": "Base Projectile Speed +%",
           "level": 1,
           "min": 4,
           "max": 8
@@ -44599,7 +44616,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6144",
+          "id": "6143",
           "name": "base_avoid_stun_%",
           "text": "",
           "level": 1,
@@ -47400,7 +47417,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6144",
+          "id": "6143",
           "name": "base_avoid_stun_%",
           "text": "",
           "level": 1,
@@ -47430,7 +47447,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6144",
+          "id": "6143",
           "name": "base_avoid_stun_%",
           "text": "",
           "level": 1,
@@ -47460,7 +47477,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6144",
+          "id": "6143",
           "name": "base_avoid_stun_%",
           "text": "",
           "level": 1,
@@ -47490,7 +47507,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6144",
+          "id": "6143",
           "name": "base_avoid_stun_%",
           "text": "",
           "level": 1,
@@ -47520,7 +47537,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6144",
+          "id": "6143",
           "name": "base_avoid_stun_%",
           "text": "",
           "level": 1,
@@ -47537,7 +47554,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6144",
+          "id": "6143",
           "name": "base_avoid_stun_%",
           "text": "",
           "level": 1,
@@ -47554,7 +47571,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6144",
+          "id": "6143",
           "name": "base_avoid_stun_%",
           "text": "",
           "level": 1,
@@ -49299,9 +49316,9 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "173",
-          "name": "pierce_%",
-          "text": "Projectile Pierce chance",
+          "id": "6313",
+          "name": "quiver_projectiles_pierce_1_additional_target",
+          "text": "",
           "level": 1,
           "min": 11,
           "max": 15
@@ -49316,9 +49333,9 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "173",
-          "name": "pierce_%",
-          "text": "Projectile Pierce chance",
+          "id": "6313",
+          "name": "quiver_projectiles_pierce_1_additional_target",
+          "text": "",
           "level": 1,
           "min": 16,
           "max": 20
@@ -49333,12 +49350,63 @@
       "generation": "Prefix",
       "stats": [
         {
-          "id": "173",
-          "name": "pierce_%",
-          "text": "Projectile Pierce chance",
+          "id": "6314",
+          "name": "quiver_projectiles_pierce_2_additional_targets",
+          "text": "",
           "level": 1,
           "min": 21,
           "max": 25
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "AdditionalPierceEssence5",
+      "group": "Pierce",
+      "domain": "Gear",
+      "generation": "Prefix",
+      "stats": [
+        {
+          "id": "6303",
+          "name": "projectile_base_number_of_targets_to_pierce",
+          "text": "",
+          "level": 1,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "AdditionalPierceEssence6_",
+      "group": "Pierce",
+      "domain": "Gear",
+      "generation": "Prefix",
+      "stats": [
+        {
+          "id": "6303",
+          "name": "projectile_base_number_of_targets_to_pierce",
+          "text": "",
+          "level": 1,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "AdditionalPierceEssence7",
+      "group": "Pierce",
+      "domain": "Gear",
+      "generation": "Prefix",
+      "stats": [
+        {
+          "id": "6303",
+          "name": "projectile_base_number_of_targets_to_pierce",
+          "text": "",
+          "level": 1,
+          "min": 2,
+          "max": 2
         }
       ],
       "spawnWeights": []
@@ -58349,7 +58417,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "5216",
+          "id": "5215",
           "name": "chance_to_dodge_%_at_max_charged_attack_stacks",
           "text": "",
           "level": 66,
@@ -58366,7 +58434,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "5216",
+          "id": "5215",
           "name": "chance_to_dodge_%_at_max_charged_attack_stacks",
           "text": "",
           "level": 75,
@@ -62701,8 +62769,8 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "4311",
-          "name": "lightning_strike_pierce_chance_%",
+          "id": "6322",
+          "name": "lightning_strike_additional_pierce_per_10_old",
           "text": "",
           "level": 66,
           "min": 20,
@@ -62718,12 +62786,46 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "4311",
-          "name": "lightning_strike_pierce_chance_%",
+          "id": "6322",
+          "name": "lightning_strike_additional_pierce_per_10_old",
           "text": "",
           "level": 75,
           "min": 30,
           "max": 30
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentLightningStrikeAdditionalPierce1",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "6323",
+          "name": "lightning_strike_additional_pierce",
+          "text": "",
+          "level": 66,
+          "min": 2,
+          "max": 2
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentLightningStrikeAdditionalPierce2",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "6323",
+          "name": "lightning_strike_additional_pierce",
+          "text": "",
+          "level": 75,
+          "min": 3,
+          "max": 3
         }
       ],
       "spawnWeights": []
@@ -62803,8 +62905,8 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "4321",
-          "name": "lightning_trap_pierce_chance_%",
+          "id": "6324",
+          "name": "lightning_trap_additional_pierce_per_10_old",
           "text": "",
           "level": 66,
           "min": 20,
@@ -62820,12 +62922,46 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "4321",
-          "name": "lightning_trap_pierce_chance_%",
+          "id": "6324",
+          "name": "lightning_trap_additional_pierce_per_10_old",
           "text": "",
           "level": 75,
           "min": 30,
           "max": 30
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentLightningTrapAdditionalPierce1",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "6325",
+          "name": "lightning_trap_additional_pierce",
+          "text": "",
+          "level": 66,
+          "min": 2,
+          "max": 2
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentLightningTrapAdditionalPierce2",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "6325",
+          "name": "lightning_trap_additional_pierce",
+          "text": "",
+          "level": 75,
+          "min": 3,
+          "max": 3
         }
       ],
       "spawnWeights": []
@@ -66991,7 +67127,24 @@
           "name": "local_chance_to_bleed_on_hit_%",
           "text": "Local Chance To Bleed On Hit %",
           "level": 15,
-          "min": 12,
+          "min": 8,
+          "max": 8
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "ChanceToBleed2_",
+      "group": "LocalChanceToBleed",
+      "domain": "Gear",
+      "generation": "Suffix",
+      "stats": [
+        {
+          "id": "2860",
+          "name": "local_chance_to_bleed_on_hit_%",
+          "text": "Local Chance To Bleed On Hit %",
+          "level": 65,
+          "min": 15,
           "max": 15
         }
       ],
@@ -67004,12 +67157,29 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "5381",
+          "id": "5380",
           "name": "local_poison_on_hit_%",
           "text": "",
           "level": 15,
-          "min": 12,
-          "max": 15
+          "min": 10,
+          "max": 10
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "ChanceToPoison2",
+      "group": "LocalChanceToPoisonOnHit",
+      "domain": "Gear",
+      "generation": "Suffix",
+      "stats": [
+        {
+          "id": "5380",
+          "name": "local_poison_on_hit_%",
+          "text": "",
+          "level": 65,
+          "min": 20,
+          "max": 20
         }
       ],
       "spawnWeights": []
@@ -67267,7 +67437,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6098",
+          "id": "6097",
           "name": "bleeding_damage_+%",
           "text": "",
           "level": 20,
@@ -67284,7 +67454,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6098",
+          "id": "6097",
           "name": "bleeding_damage_+%",
           "text": "",
           "level": 40,
@@ -67301,7 +67471,7 @@
       "generation": "Suffix",
       "stats": [
         {
-          "id": "6098",
+          "id": "6097",
           "name": "bleeding_damage_+%",
           "text": "",
           "level": 60,
@@ -67323,7 +67493,7 @@
           "text": "",
           "level": 25,
           "min": 2,
-          "max": 3
+          "max": 2
         }
       ],
       "spawnWeights": [
@@ -67356,7 +67526,7 @@
           "name": "base_additional_physical_damage_reduction_%",
           "text": "",
           "level": 85,
-          "min": 4,
+          "min": 3,
           "max": 4
         }
       ],
@@ -67459,7 +67629,7 @@
           "text": "",
           "level": 25,
           "min": 36,
-          "max": 48
+          "max": 36
         }
       ],
       "spawnWeights": [
@@ -67492,7 +67662,7 @@
           "name": "base_energy_shield_regeneration_rate_per_minute_%",
           "text": "",
           "level": 85,
-          "min": 49,
+          "min": 60,
           "max": 60
         }
       ],
