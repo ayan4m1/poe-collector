@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SocketService } from "../service/socket";
+import { SocketService } from '../service/socket';
 
 @Component({
   selector: 'socket-status',

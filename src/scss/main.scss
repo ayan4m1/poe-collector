@@ -1,13 +1,8 @@
-@import 'lib/fontawesome/scss/font-awesome';
-
-@import 'lib/bootswatch/readable/variables';
-@import 'lib/bootstrap-sass/assets/stylesheets/bootstrap';
-@import 'lib/bootswatch/readable/bootswatch';
-
-@import 'node_modules/angular2-toaster/toaster';
+body {
+  background: #666;
+}
 
 // bootstrap buttons + fontawesome icons fixes
 .btn .fa {
   vertical-align: middle;
 }
-

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: 'partials/pricing.html'
+  templateUrl: '../../html/partials/pricing.html'
 }) export class PricingComponent { }

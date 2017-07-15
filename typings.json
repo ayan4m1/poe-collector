@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "cheerio": "registry:npm/cheerio#0.20.0+20160422172414"
+  }
+}

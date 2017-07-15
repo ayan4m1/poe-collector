@@ -2,5 +2,5 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'saved-searches',
-  templateUrl: 'partials/searches.html'
+  templateUrl: '../../html/partials/searches.html'
 }) export class SearchesComponent { }

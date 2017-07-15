@@ -10,7 +10,6 @@ import { PricingComponent } from './component/pricing';
 import { SearchesComponent } from './component/searches';
 import { HeaderComponent, NavComponent } from './component/header';
 
-import { SpinnerComponent } from 'angular2-spinner';
 import { MomentModule } from 'angular2-moment';
 
 const routes: Routes = [

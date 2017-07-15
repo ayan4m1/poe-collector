@@ -1,5 +1,5 @@
-import {Injectable, Inject} from "@angular/core";
-import {QueryHashService} from "./query-hash";
+import {Injectable, Inject} from '@angular/core';
+import {QueryHashService} from './query-hash';
 
 @Injectable()
 export class SocketService {

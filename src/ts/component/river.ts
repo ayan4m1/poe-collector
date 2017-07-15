@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: 'components/river.html'
+  templateUrl: '../../html/partials/river.html'
 }) export class RiverComponent { }
