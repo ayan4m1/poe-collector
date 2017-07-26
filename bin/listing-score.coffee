@@ -65,15 +65,6 @@ tokenize = (source) ->
 startRegex = /^(display|base|self|additional)/gi
 stripRegex = /\s+(to |goes to|while you havent|when not|of socketed|on enemies|for )/gi
 
-###tokenize = (source) ->
-  slug = source
-    .replace(/_+/g, ' ')
-    .trim()
-    .toLowerCase()
-    .replace(valueRegex, '')
-
-  slug.split(' ').filter (v) -> v.trim() isnt ''###
-
 all = (left, right) ->
   for leftOne in left
     return false unless right.indexOf(leftOne) >= 0
@@ -200,7 +191,6 @@ scoreHit = (hit) ->
   totalQuality = 0
 
   for mod in listing.modifiers
-    console.dir(mod)
     value = valuate(mod)
     continue unless value.max? or value > 0
 
