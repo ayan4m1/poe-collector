@@ -11,7 +11,8 @@ logger = new (winston.Logger)(
   transports: [
     new (winston.transports.Console)(),
     new (winston.transports.DailyRotateFile)(
-      filename: 'log/watcher.log'
+      filename: 'log/.log'
+      prepend: true
       datePattern: 'yyyy-MM-dd'
       level: config.log.level ? 'info'
     )
