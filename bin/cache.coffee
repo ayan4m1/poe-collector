@@ -10,12 +10,14 @@ log = require './logging'
 
 # promisified functions
 
+mkdir = Q.denodeify(fs.mkdir)
 unlink = Q.denodeify(fs.unlink)
 readDir = Q.denodeify(fs.readdir)
 cacheDir = "#{__dirname}/#{config.cache.cachePath}"
 
 findLatestChangeId = () ->
-  findLatestOnDisk()
+  mkdir(cacheDir)
+    .then(findLatestOnDisk)
     .catch (err) ->
       console.error(err)
       findLatestFromWeb()
