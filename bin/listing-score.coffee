@@ -7,7 +7,9 @@ jsonfile = require 'jsonfile'
 log = require './logging'
 elastic = require './elastic'
 
-data = jsonfile.readFileSync("#{__dirname}/../data/Gear.json").types
+gearData =jsonfile.readFileSync("#{__dirname}/../data/Gear.json")
+data = gearData.types
+stats = gearData.stats
 utilityFlasks = jsonfile.readFileSync("#{__dirname}/../data/Flasks.json")
 
 valueRegex = /([+-])?([0-9\\.]+)%?( to ([+-])?([0-9\\.]+)%?)?/i
@@ -203,9 +205,11 @@ scoreHit = (hit) ->
     tokens.push(pair[1].toLowerCase(), pair[2].toLowerCase()) if pair?
     match = null
     for cmpKey, cmpVal of mods
-      cmpTokens = tokenize(cmpKey)
+      cmpTokens = tokenize(cmpVal)
       matches = all(tokens, cmpTokens)
-      match = cmpVal if matches is true and matchedGroups.indexOf(mod.id) is -1
+      if matches is true and matchedGroups.indexOf(cmpKey) is -1
+        match = stats[cmpVal]
+        break
 
     if match?
       log.as.debug("modifier #{mod} matched #{match.text}")
