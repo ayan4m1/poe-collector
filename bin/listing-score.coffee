@@ -30,7 +30,7 @@ replacements = [
   ['to return to', 'reflects']
   [/^adds /i, 'added']
   [/\+?%$/, 'percent']
-  [/\s\+$/, 'flat']
+  [/\s\+\s$/, 'flat']
   ['Rarity of Items found', 'item found rarity']
   ['all Elemental Resistances', 'resist all elements']
   ['Stun and Block', 'stun block']
