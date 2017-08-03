@@ -212,15 +212,19 @@ scoreHit = (hit) ->
         break
 
     if match?
+      if value.min? and value.max?
+        if value.min < match.min or value.max > match.max
+          return
+        quality = ((value.min / match.min) + (value.max / match.max) / 2)
+        display = "#{value.min} to #{value.max}"
+      else
+        if value > match.max
+          return
+        quality = value / match.max
+        display = value
       log.as.debug("modifier #{mod} matched #{match.text}")
       matchedGroups.push(mod.id)
       matchedCount++
-      if value.min? and value.max?
-        quality = (value.min / match.max) + (value.max / match.max)
-        display = "#{value.min} to #{value.max}"
-      else
-        quality = value / match.max
-        display = value
 
       totalQuality += quality
       log.as.debug("#{mod} -> #{match.id} has quality #{quality.toFixed(4)} from #{match.min} - #{match.max}")
