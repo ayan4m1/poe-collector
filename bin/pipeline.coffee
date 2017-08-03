@@ -53,8 +53,7 @@ downloadChange = (changeId) ->
     handleChange({
       id: changeId
       body: data
-    }).then -> touch("#{__dirname}/../cache/#{changeId}")
-      .catch(log.as.error)
+    })
 
     # continue on to the next data blob
     if data.next_change_id?
@@ -74,12 +73,14 @@ handleChange = (data) ->
   indexLimiter.schedule(processChange, data, handled)
   handled.promise
 
-processChange = (data, handled) ->
+processChange = (data) ->
   log.as.debug("process called for #{data.id}")
   elastic
     .mergeStashes(data.body.stashes)
     .catch(log.as.error)
-    .then(handled)
+    .then ->
+      log.as.info("caching #{data.id}")
+      touch("#{__dirname}/../cache/#{data.id}")
 
 module.exports =
   fetch: fetchNextChange
