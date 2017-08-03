@@ -310,21 +310,6 @@ logFetch = (changeId, sizeKb, timeMs) ->
       fileSizeKb: sizeKb
       downloadTimeMs: timeMs
 
-createTemplates = ->
-  for name, template of elastic.schema
-    log.as.info("creating index template for #{name}*")
-    elastic.client.indices.putTemplate(name,
-      body: template
-    )
-
-dropTemplate = (name) ->
-  Q.denodeify(elastic.client.indices.deleteTemplate(name))
-
-dropTemplates = (templates) ->
-  tasks = []
-  tasks.push(dropTemplate(template)) for template in templates
-  Q.all(tasks)
-
 buffer =
   stashes: []
   listings: []
@@ -334,8 +319,6 @@ elastic =
   client: createClient()
   config: config.elastic
   schema: jsonfile.readFileSync("#{__dirname}/../schema.json")
-  dropTemplates: dropTemplates
-  createTemplates: createTemplates
   updateIndices: updateIndices
   pruneIndices: pruneAllIndices
   mergeStashes: mergeStashes
