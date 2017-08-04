@@ -12,6 +12,11 @@ data = gearData.types
 stats = gearData.stats
 utilityFlasks = jsonfile.readFileSync("#{__dirname}/../data/Flasks.json")
 
+bodies = []
+hitCount = 0
+commitCount = 0
+totalHits = 0
+
 valueRegex = /([+-])?([0-9\\.]+)%?( to ([+-])?([0-9\\.]+)%?)?/i
 valuate = (source) ->
   slug = source.match(valueRegex)
@@ -212,13 +217,13 @@ scoreHit = (hit) ->
     if match?
       if value.min? and value.max?
         if value.min < match.min or value.max > match.max
-          return
+          break
         quality = ((value.min / match.min) + (value.max / match.max) / 2)
         display = "#{value.min} to #{value.max}"
       else
         if value > match.max
-          return
-        quality = value / match.max
+          break
+        quality = Math.sqrt(value / (match.ideal - match.min))
         display = value
       log.as.debug("modifier #{mod} matched #{match.text}")
       matchedGroups.push(mod.id)
@@ -243,11 +248,6 @@ scoreHit = (hit) ->
         meta:
           quality: 0
     })
-
-bodies = []
-hitCount = 0
-commitCount = 0
-totalHits = 0
 
 handleSearch = (err, res) ->
   return log.as.error(err) if err?
