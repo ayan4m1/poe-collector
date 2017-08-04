@@ -184,7 +184,7 @@ scoreHit = (hit) ->
   mods = findEligibleMods(listing)
   return log.as.warn("did not find mods for #{listing.fullName}") unless mods?
 
-  log.as.debug("found #{mods.length} eligible mods for #{listing.fullName} - #{listing.baseLine}")
+  log.as.silly("found #{mods.length} eligible mods for #{listing.fullName} - #{listing.baseLine}")
 
   matchedGroups = []
   matchedCount = 0
