@@ -22,6 +22,7 @@ valuate = (source) ->
   else parseInt(slug[2])
 
 replacements = [
+  [' increased ', ' ']
   ['Minions have', 'minion']
   ['Staves', 'staff']
   ['while holding a', 'while holding']
