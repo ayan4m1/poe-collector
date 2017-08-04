@@ -1,7 +1,5 @@
 config = require('konfig')()
 
-jsonfile = require 'jsonfile'
-
 log = require './logging'
 elastic = require './elastic'
 
@@ -11,7 +9,7 @@ unscoreHit = (hit) ->
     type: 'listing'
     id: hit._id
     body:
-      script: 'ctx._source.meta.remove(\"meta.quality\")'
+      script: "ctx._source.meta.remove('quality')"
   , (err, res) ->
     return log.as.error(err) if err?
     commitCount++ if res.result is 'updated'
