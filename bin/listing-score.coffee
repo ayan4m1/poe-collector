@@ -1,5 +1,6 @@
 config = require('konfig')()
 
+Q = require 'q'
 process = require 'process'
 extend = require 'extend'
 jsonfile = require 'jsonfile'
@@ -252,32 +253,35 @@ scoreHit = (hit) ->
 handleSearch = (err, res) ->
   return log.as.error(err) if err?
 
-  totalHits = res.hits.total if res.hits.total?
+  totalHits = res.hits.total if totalHits is 0
 
-  log.as.info("processing #{res.hits.hits.length} hits") unless res.hits.hits.length is 0
-  scoreHit(hit) for hit in res.hits.hits
-  hitCount += res.hits.hits.length if res.hits.hits?
+  if res?.hits?
+    log.as.info("processing #{res.hits.hits.length} hits") unless res.hits.hits.length is 0
+    scoreHit(hit) for hit in res.hits.hits
+    hitCount += res.hits.hits.length if res.hits.hits?
 
-  if bodies.length > Math.min(totalHits, 1000) * 2
-    docs = bodies.slice()
-    bodies.length = 0
-    elastic.client.bulk({
-      body: docs
-    }, (err) ->
-      return log.as.error(err) if err?
-      commitCount += (docs.length / 2)
-      if commitCount >= totalHits and totalHits isnt 0
-        log.as.info("flushed all updates")
-        process.exit(0)
-    )
-  else
+    if bodies.length > Math.min(res.hits.total, 1000) * 2
+      docs = bodies.slice()
+      bodies.length = 0
+      elastic.client.bulk({
+        body: docs
+      }, (err) ->
+        return log.as.error(err) if err?
+        commitCount += (docs.length / 2)
+        console.log("checked in #{docs.length} documents")
+      )
+
+  if hitCount is totalHits and commitCount < hitCount
     log.as.info("#{((hitCount / totalHits) * 100).toFixed(2)}% complete, #{((commitCount / totalHits) * 100).toFixed(2)}% committed (#{commitCount} / #{hitCount} of #{totalHits})")
-
-  return log.as.info("completed walk of results!") unless res._scroll_id?
-  elastic.client.scroll({
-    scroll: '1m'
-    scrollId: res._scroll_id
-  }, handleSearch)
+    return Q.delay(1000).then(handleSearch)
+  else if commitCount is hitCount
+    log.as.info("completed commits")
+    process.exit(0)
+  else
+    elastic.client.scroll({
+      scroll: '1m'
+      scrollId: res._scroll_id
+    }, handleSearch)
 
 elastic.client.search({
   index: 'poe-listing*'
