@@ -166,7 +166,7 @@ findEligibleMods = (listing) ->
   else if key is 'staff'
     extend(modInfo, data['two_hand_weapon'])
   else if ['axe', 'mace', 'sword'].indexOf(key) >= 0
-    area = listing.width * listing.height
+    area = listing.size.width * listing.size.height
     type = switch area
       when 3, 4, 6 then 'one'
       when 8 then 'two'
