@@ -5,8 +5,6 @@ default:
   retention:
     interval: 5
     unit: minutes
-beta:
-  changeIdField: 'nextBetaChangeId'
 production:
   retention:
     interval: 6

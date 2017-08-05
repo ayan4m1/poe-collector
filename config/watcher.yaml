@@ -17,8 +17,6 @@ default:
     listing:
       interval: 2
       unit: days
-beta:
-  stashTabUrl: 'http://betaapi.pathofexile.com/api/public-stash-tabs'
 production:
   retention:
     stash:
