@@ -218,15 +218,17 @@ scoreHit = (hit) ->
         break
 
     if match?
+      quality = 0
       if value.min? and value.max?
+        continue unless match.min? and match.max?
         if value.min < match.min or value.max > match.max
-          break
+          continue
         quality = ((value.min / match.min) + (value.max / match.max) / 2)
         display = "#{value.min} to #{value.max}"
       else
-        if value > match.max
-          break
-        quality = Math.sqrt(value / (match.ideal - match.min))
+        if value > match.max or value < match.min
+          continue
+        quality = (value - match.min) / match.ideal
         display = value
       log.as.debug("modifier #{mod} matched #{match.text}")
       matchedGroups.push(mod.id)
