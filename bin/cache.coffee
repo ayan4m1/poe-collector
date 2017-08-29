@@ -17,9 +17,11 @@ cacheDir = "#{__dirname}/#{config.cache.cachePath}"
 
 findLatestChangeId = () ->
   mkdir(cacheDir)
+    .catch () ->
+      log.as.warn("cache dir exists")
     .then(findLatestOnDisk)
     .catch (err) ->
-      console.error(err)
+      log.as.error(err)
       findLatestFromWeb()
 
 findLatestOnDisk = () ->
@@ -37,6 +39,7 @@ findLatestOnDisk = () ->
         fs.statSync("#{cacheDir}/#{a}").mtime.getTime() - fs.statSync("#{cacheDir}/#{b}").mtime.getTime()
 
       result = items.pop()
+      log.as.info("resuming from cache #{result}")
       if result? then found.resolve(result) else found.reject(new Error("time sorting of files failed"))
 
   found.promise
