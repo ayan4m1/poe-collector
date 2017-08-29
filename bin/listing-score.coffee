@@ -39,7 +39,8 @@ replacements = [
   ['to return to', 'reflects']
   [/^adds /i, 'added']
   [/\+?%$/, 'percent']
-  [/\s\+\s$/, 'flat']
+  [/\s+(\d)(?!%)$/, 'flat']
+  [/Adds \d+ to \d+/, 'flat']
   ['Rarity of Items found', 'item found rarity']
   ['all Elemental Resistances', 'resist all elements']
   ['Stun and Block', 'stun block']
@@ -51,6 +52,7 @@ replacements = [
   [/(Block Chance|Chance to Block)/, 'block']
   [/for each Enemy hit by your (Attack|Spell)s/, '$1']
   [/Cast Speed with (Cold|Fire|Lightning) Skills/, '$1']
+  [/(Armour|Evasion|Energy Shield) and (Evasion|Energy Shield)/, '$1 $2']
 ]
 
 tokenize = (source) ->
