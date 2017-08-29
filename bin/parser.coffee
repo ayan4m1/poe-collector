@@ -2,11 +2,9 @@
 
 qs = require 'qs'
 moment = require 'moment'
-process = require 'process'
 jsonfile = require 'jsonfile'
 
 currency = require './currency'
-elastic = require './elastic'
 log = require './logging'
 
 baseTypes = jsonfile.readFileSync("#{__dirname}/../data/BaseTypes.json")
