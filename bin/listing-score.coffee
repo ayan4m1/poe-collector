@@ -18,6 +18,8 @@ hitCount = 0
 commitCount = 0
 totalHits = 0
 
+batchSize = 1000
+
 valueRegex = /([+-])?([0-9\\.]+)%?( to ([+-])?([0-9\\.]+)%?)?/i
 valuate = (source) ->
   slug = source.match(valueRegex)
@@ -249,6 +251,8 @@ scoreHit = (hit) ->
         meta:
           quality: 0
     })
+  else
+    commitCount++
 
 handleSearch = (err, res) ->
   return log.as.error(err) if err?
@@ -260,21 +264,19 @@ handleSearch = (err, res) ->
     scoreHit(hit) for hit in res.hits.hits
     hitCount += res.hits.hits.length if res.hits.hits?
 
-    if bodies.length > Math.min(res.hits.total, 1000) * 2
-      docs = bodies.slice()
-      bodies.length = 0
-      elastic.client.bulk({
-        body: docs
-      }, (err) ->
-        return log.as.error(err) if err?
-        commitCount += (docs.length / 2)
-        console.log("checked in #{docs.length} documents")
-      )
-
   if hitCount is totalHits and commitCount < hitCount
     log.as.info("#{((hitCount / totalHits) * 100).toFixed(2)}% complete, #{((commitCount / totalHits) * 100).toFixed(2)}% committed (#{commitCount} / #{hitCount} of #{totalHits})")
-    return Q.delay(1000).then(handleSearch)
-  else if commitCount is hitCount
+    docs = bodies.splice(0, batchSize)
+    elastic.client.bulk({
+      body: docs
+    }, (err) ->
+      return log.as.error(err) if err?
+      docCount = docs.length / 2
+      commitCount += docCount
+      log.as.debug("checked in #{docCount} documents")
+    )
+    return Q.delay(750).then(handleSearch)
+  else if hitCount is totalHits and commitCount is hitCount
     log.as.info("completed commits")
     process.exit(0)
   else
