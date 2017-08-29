@@ -35,7 +35,7 @@ regexes =
     resist: /([-+]?)(\d+%) to (all )?(maximum )?(Lightning|Cold|Fire|Chaos|Elemental)(and (Lightning|Cold|Fire))? Resistance(s?)/
     dualResist: /([-+]?)(\d+%) to (Fire|Cold|Lightning) and (Fire|Cold|Lightning) Resistances/
     attribute: /([-+]?)(\d+) to (all )?(Attributes|Strength|Dexterity|Intelligence)( and (Dexterity|Intelligence))?/
-    vitals: /([-+]?)(\d+%?) (increased|reduced|to)(?: maximum)? (Life|Mana|Energy Shield|Light Radius)( Recharge Rate)?/
+    vitals: /([-+]?)(\d+%?) (increased|reduced|to)(?: maximum)? (Life|Mana|Energy Shield|Light Radius)( Recharge Rate)?/i
     gemLevel: /\+\d to Level of Socketed (Aura|Bow|Chaos|Cold|Elemental|Fire|Lightning|Melee|Minion|Strength|Support|Vaal|Spell)?\s*Gems/
     ailment: /(\d+%) (?:chance )?(to|increased) (Shock|Ignite|Freeze)( Duration on Enemies)?/
     resistPen: /Penetrates (\d+%) (Cold|Lightning|Fire|Chaos) Resistance/
@@ -348,6 +348,7 @@ modParsers =
     if isPercent then value *= 0.01
     bucket = if isPercent then 'percent' else 'flat'
 
+    op = op.toLowerCase()
     operator = modOperators[op]
     if recharge is 'Recharge Rate'
       result.defense.shield.recharge = operator(result.defense.shield.recharge, value, sign)
