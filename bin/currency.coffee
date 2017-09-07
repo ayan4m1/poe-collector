@@ -1,40 +1,62 @@
 'use strict'
 
-fs = require 'fs'
-jsonfile = require 'jsonfile'
+config = require('konfig')()
 
-log = require './logging'
+Q = require 'q'
+moment = require 'moment'
+elasticsearch = require 'elasticsearch'
 
-path = "#{__dirname}/../data/ChaosEquivalencies.json"
-chaosExists = fs.statSync(path)
-return log.as.error('Did not find ChaosEquivalencies.json') unless chaosExists.isFile()
+values = {}
 
-currencies = jsonfile.readFileSync(path)
-regexes =
-  bauble: /(Glassblower)?'?s?Bauble/i
-  chisel: /(Cartographer)?'?s?Chis(el)?/i
-  gcp: /(Gemcutter'?s?)?(Prism|gcp)/i
-  jewelers: /Jew(eller)?'?s?(Orb)?/i
-  chrome: /Chrom(atic)?(Orb)?/i
-  fuse: /(Orb)?(of)?Fus(ing|e)?/i
-  transmute: /(Orb)?(of)?Trans(mut(ation|e))?/i
-  chance: /(Orb)?(of)?Chance/i
-  alch: /(Orb)?(of)?Alch(emy)?/i
-  regal: /Regal(Orb)?/i
-  aug: /Orb(of)?Augmentation/i
-  exalt: /Ex(alted)?(Orb)?/i
-  alt: /Alt|(Orb)?(of)?Alteration/i
-  chaos: /Chaos(Orb)?/i
-  blessed: /Bless|Blessed(Orb)?/i
-  divine: /Divine(Orb)?/i
-  scour: /Scour|(Orb)?(of)?Scouring/i
-  mirror: /Mir+(or)?(of)?(Kalandra)?/i
-  regret: /(Orb)?(of)?Regret/i
-  vaal: /Vaal(Orb)?/i
-  eternal: /Eternal(Orb)?/i
-  gold: /PerandusCoins?/i
-  silver: /(Silver|Coin)+/i
+elastic =
+  client: new elasticsearch.Client(
+    host: config.elastic.host
+    log: if config.log.level is 'debug' then 'info' else 'error'
+    requestTimeout: moment.duration(config.elastic.timeout.interval, config.elastic.timeout.unit).asMilliseconds()
+  )
+
+fetchValue = (league) ->
+  fetched = Q.defer()
+
+  elastic.client.search
+    index: 'poe-currency'
+    body:
+      query:
+        term:
+          league: league
+      size: 1000
+      sort:
+        timestamp:
+          order: 'desc'
+  , (err, res) ->
+    return fetched.reject(err) if err?
+    values = {}
+    existing = []
+    values[league] = {}
+    for hit in res.hits.hits
+      listing = hit._source
+      continue unless existing.indexOf(listing.name) is -1
+      if listing.name is 'Chaos Orb'
+        values[league]['Chaos Orb'] = 1
+        continue
+      values[league][listing.name] = listing.chaos
+      existing.push listing.name
+    fetched.resolve(values)
+
+  fetched.promise
+
+fetchValues = ->
+  promises = []
+
+  for league in config.static.leagues
+    promises.push fetchValue(league)
+
+  Q.all(promises)
+    .then (results) ->
+      result = {}
+      for value in results
+        Object.assign(result, value)
+      result
 
 module.exports =
-  regexes: regexes
-  values: currencies
+  fetchValues: fetchValues

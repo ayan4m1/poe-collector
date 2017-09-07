@@ -11,6 +11,36 @@ baseTypes = jsonfile.readFileSync("#{__dirname}/../data/BaseTypes.json")
 
 slug = (input) -> input.trim().toLowerCase()
 
+currencyValues = null
+currency.fetchValues()
+  .then (results) ->
+    currencyValues = results
+
+currencies =
+  bauble: /(Glassblower)?'?s?Bauble/i
+  chisel: /(Cartographer)?'?s?Chis(el)?/i
+  gcp: /(Gemcutter'?s?)?(Prism|gcp)/i
+  jewelers: /Jew(eller)?'?s?(Orb)?/i
+  chrome: /Chrom(atic)?(Orb)?/i
+  fuse: /(Orb)?(of)?Fus(ing|e)?/i
+  transmute: /(Orb)?(of)?Trans(mut(ation|e))?/i
+  chance: /(Orb)?(of)?Chance/i
+  alch: /(Orb)?(of)?Alch(emy)?/i
+  regal: /Regal(Orb)?/i
+  aug: /Orb(of)?Augmentation/i
+  exalt: /Ex(alted)?(Orb)?/i
+  alt: /Alt|(Orb)?(of)?Alteration/i
+  chaos: /Chaos(Orb)?/i
+  blessed: /Bless|Blessed(Orb)?/i
+  divine: /Divine(Orb)?/i
+  scour: /Scour|(Orb)?(of)?Scouring/i
+  mirror: /Mir+(or)?(of)?(Kalandra)?/i
+  regret: /(Orb)?(of)?Regret/i
+  vaal: /Vaal(Orb)?/i
+  eternal: /Eternal(Orb)?/i
+  gold: /PerandusCoins?/i
+  silver: /(Silver|Coin)+/i
+
 regexes =
   price:
     note: /\~(b\/o|price|c\/o)\s*((?:\d+)*(?:(?:\.|,)\d+)?)\s*([A-Za-z]+)\s*.*$/
@@ -402,14 +432,14 @@ parseCurrency = (item, result) ->
   raw.shift()
   for term in raw
     continue if term is 'price' or term is 'b/o'
-    break unless currency.values[item.league]?
+    break unless currencyValues[item.league]?
     if isNaN(parseFloat(term))
-      for key, regex of currency.regexes
+      for key, regex of currencies
         if regex.test(term)
-          for curr in currency.values[item.league]
-            if regex.test(curr.name)
-              log.as.silly("#{term} matches #{curr.name} matches #{key} - #{curr.value}")
-              factor = curr.value
+          for name, value of currencyValues[item.league]
+            if regex.test(name)
+              log.as.silly("#{term} matches #{name} matches #{key} - #{value}")
+              factor = value
               break
         break if factor > 0
     else quantity = parseFloat(term)

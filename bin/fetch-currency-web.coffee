@@ -4,6 +4,7 @@ Q = require 'q'
 moment = require 'moment'
 cheerio = require 'cheerio'
 cloudscraper = require 'cloudscraper'
+ntile = require 'stats-percentile'
 
 log = require './logging'
 elastic = require './elastic'
@@ -50,10 +51,7 @@ fetch = (league, currency) ->
       rate = buy / sell
       offers.push(rate)
 
-    total = offers.reduce((accum, rate) ->
-      accum += rate
-    , 0)
-    total /= offers.length
+    total = ntile(offers, 95) ? 0
     total = total.toFixed(2)
 
     log.as.info("#{currency.title} averages #{total} chaos")
