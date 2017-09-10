@@ -36,7 +36,7 @@ getMetadata = () ->
 
 fetch = (league, currency) ->
   fetched = Q.defer()
-  log.as.info("fetching currency offers for league #{league}")
+  log.as.info("fetching #{currency.title} in #{league}")
 
   cloudscraper.get("http://currency.poe.trade/search?league=#{league}&online=x&want=#{currency.id}&have=4", (err, res, body) ->
     return fetched.reject(err) if err?
