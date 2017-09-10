@@ -51,7 +51,7 @@ fetch = (league, currency) ->
       rate = buy / sell
       offers.push(rate)
 
-    total = ntile(offers, 95) ? 0
+    total = ntile(offers, config.static.currencyPercentile) ? 0
     total = total.toFixed(2)
 
     log.as.info("#{currency.title} averages #{total} chaos")

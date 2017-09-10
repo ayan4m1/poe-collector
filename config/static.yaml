@@ -1,5 +1,6 @@
 default:
   gameVersion: '3.0.0'
+  currencyPercentile: 50
   leagues:
     - 'Standard'
     - 'Hardcore'
