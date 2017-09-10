@@ -21,6 +21,12 @@ isStale = (changeId) ->
   statFile(path).then (stats) ->
     moment(stats.birthtime).isBefore(cutoff)
 
+purgeCache = (list) ->
+  for purgeItem in list
+    path = "#{cacheDir}/#{purgeItem}"
+    log.as.debug(path)
+    unlink(path)
+
 log.as.info("cutoff is #{cutoff.toISOString()}")
 readDir(cacheDir)
   .catch(log.as.error)
@@ -29,6 +35,10 @@ readDir(cacheDir)
     toPurge = changeIds.filter(isStale)
 
     return log.as.info("no cache markers need to be purged") if toPurge.length is 0
+
+    if process.argv[2] is '-f'
+      purgeCache(toPurge)
+      return log.as.info('forced cache purge')
 
     inquirer.prompt([{
       name: 'purge'
@@ -41,7 +51,4 @@ readDir(cacheDir)
       .then (res) ->
         return log.as.info('user requested exit') if res?.purge is false
         return unless res?.purge is true
-        for purgeItem in toPurge
-          path = "#{cacheDir}/#{purgeItem}"
-          log.as.debug(path)
-          unlink(path)
+        purgeCache(toPurge)
