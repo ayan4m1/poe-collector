@@ -284,6 +284,7 @@ orphanListing = (stashId, itemIds) ->
   elastic.client.updateByQuery(
     index: 'poe-listing*'
     type: 'listing'
+    requestsPerSecond: 1000
     body:
       script:
         lang: 'painless'
