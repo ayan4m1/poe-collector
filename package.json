@@ -45,7 +45,6 @@
     "inquirer": "^3.2.3",
     "jsonfile": "^2.2.3",
     "jsonpath": "^0.2.12",
-    "karma-chrome-launcher": "^2.2.0",
     "konfig": "^0.2.1",
     "moment": "^2.18.1",
     "primus": "^6.1.0",
@@ -59,7 +58,6 @@
     "stats-percentile": "^3.0.0",
     "synaptic": "^1.1.2",
     "touch": "^1.0.0",
-    "webpack": "^2.7.0",
     "winston": "^2.3.1",
     "winston-daily-rotate-file": "^1.4.6",
     "zone.js": "^0.8.17"
