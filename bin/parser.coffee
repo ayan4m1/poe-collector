@@ -59,28 +59,16 @@ regexes =
     offense: /([-+]?)(\d*\.?\d+%?) (to|increased|reduced|more|less) (Cast|Attack|Movement|Physical|Mine|Trap|Totem|Accuracy Rating|Projectile)\s*(and Cast|Throwing|Laying|Speed)?\s*(with Weapons|for Spells)?/
     block: /([-+]?)(\d*\.?\d+%?)(?: additional| to maximum)? (?:Chance to Block|Block Chance)( Spells)?\s*(?:with|while)?\s*(Staves|Shields|Dual Wielding)?/
     flatOffense: /Adds (\d+)( to (\d+))? (Chaos |Elemental |Fire |Physical |Cold |Lightning )?Damage(?: to (Attacks|Spells))?/
-    reflect: /Reflects (\d+)( to (\d+))? (Cold|Fire|Lightning|Physical) Damage to( Melee)? Attackers( on Block)?/
     resist: /([-+]?)(\d+%) to (all )?(maximum )?(Lightning|Cold|Fire|Chaos|Elemental)(and (Lightning|Cold|Fire))? Resistance(s?)/
     dualResist: /([-+]?)(\d+%) to (Fire|Cold|Lightning) and (Fire|Cold|Lightning) Resistances/
     attribute: /([-+]?)(\d+) to (all )?(Attributes|Strength|Dexterity|Intelligence)( and (Dexterity|Intelligence))?/
     vitals: /([-+]?)(\d+%?) (increased|reduced|to)(?: maximum)? (Life|Mana|Energy Shield|Light Radius)( Recharge Rate)?/i
     gemLevel: /\+\d to Level of Socketed (Aura|Bow|Chaos|Cold|Elemental|Fire|Lightning|Melee|Minion|Strength|Support|Vaal|Spell)?\s*Gems/
-    ailment: /(\d+%) (?:chance )?(to|increased) (Shock|Ignite|Freeze)( Duration on Enemies)?/
     resistPen: /Penetrates (\d+%) (Cold|Lightning|Fire|Chaos) Resistance/
-    flaskUtility: /([-+]?)(\d+%) (increased|reduced) Flask (effect|Charges) (duration|gained|used)/
-    flaskUtilityChance: /([-+]?)(\d+%) chance to (Avoid being)\s+(Chilled|Frozen) during (?:Flask)? effect/
-    flaskAilment: /Removes (Bleeding|Burning|Curses|Freeze and Chill|Shock) on use/
-    conversion: /(\d+%) of (Physical|Lightning|Cold|Fire) Damage Converted to (Lightning|Cold|Fire|Chaos) Damage/
     loot: /([\d+%]) increased (Rarity|Quantity) of Items found/
-    recovery: /([-+]?)(\d*\.?\d+%?) (Life|Mana) (Regenerated per Second|gained on Kill)/
     critical: /([-+]?)(\d*\.?\d+%?) (increased|reduced|more|less|to)(\s+Global)?\s+Critical Strike (Chance|Multiplier)\s*(?:while|with|for)?\s*(Dual Wielding|Fire|Cold|Lightning|Elemental|Spells)?/
-    ailmentPrevent: /^Cannot be (Ignited|Frozen|Knocked Back|Poisoned)/
     leechPermyriad: /(\d*\.?\d+%?) of (Cold|Fire|Lightning|Physical Attack) Damage Leeched as (Life|Mana)/
-    leechFlat: /([-+]?)(\d*\.?\d+) (Life|Mana|Energy Shield) gained for each Enemy hit by (?:your )?(Attacks|Spells)/
-    stunOffense: /([-+]?)(\d*\.?\d+%?) (increased|reduced) (Enemy Stun Threshold|Stun Duration on Enemies)( while using a Flask)?/
     regen: /(\d*\.?\d+) (Life|Mana) Regenerated per second/
-    breach: /Properties are doubled while in a Breach/
-    attrReqs: /(\d+)% reduced Attribute Requirements/
 
 modOperators =
   increased: (a, b) -> a * (b + 1.0)
@@ -95,14 +83,6 @@ modParsers =
     buckets = [ slug(first), slug(second) ]
     result.defense.resist.elemental[buckets[0]] = modOperators.more(result.defense.resist.elemental[buckets[0]], value, sign)
     result.defense.resist.elemental[buckets[1]] = modOperators.more(result.defense.resist.elemental[buckets[1]], value, sign)
-  attrReqs: (mod, result) ->
-    [ fullText, value ] = mod
-    result.stats.reduced.attributeRequirements = modOperators.reduced(result.stats.reduced.attributeRequirements, value)
-  stunOffense: (mod, result) ->
-    [ fullText, percent, value, op, type, flask ] = mod
-    log.as.silly('no-op stun offense')
-    #when 'Enemy Stun Threshold'
-    #when 'Stun Duration on Enemies'
   leechPermyriad: (mod, result) ->
     [ fullText, value, subType, type ] = mod
     subType = 'physical' if subType is 'Physical Attack'
@@ -110,34 +90,11 @@ modParsers =
     bucket = slug(type)
     subBucket = slug(subType)
     result.offense.leech[bucket][subBucket] = modOperators.increased(result.offense.leech[bucket][subBucket], value)
-  leechFlat: (mod, result) ->
-    [ fullText, sign, value, type, subType ] = mod
-    type = 'shield' if type is 'Energy Shield'
-    bucket = slug(type)
-    result.offense.onHit[bucket] = modOperators.increased(result.offense.leech[bucket], value)
-  leech: (mod, result) ->
-    [ fullText, sign, value, source, type ] = mod
-    bucket = slug(type)
-    floatVal = parseFloat(value)
-    switch source
-      when 'Cold', 'Fire', 'Lightning'
-        subBucket = slug(source)
-        result.offense.leech.elemental[subBucket][bucket] = modOperators.more(result.offense.leech.elemental[subBucket][bucket], value, sign)
-      when 'Physical Attack'
-        result.offense.leech[bucket] = modOperators.more(result.offense.leech[bucket], floatVal, sign)
   regen: (mod, result) ->
     [ fullText, value, type ] = mod
     bucket = slug(type)
     floatVal = parseFloat(value)
-    result.stats.regen[bucket].percent = modOperators.more(result.stats.regen[bucket].percent, floatVal)
-  breach: (mod, result) ->
-    result.stats.breach = true
-  ailmentPrevent: (mod, result) ->
-    [ fullText, type ] = mod
-    bucket = slug(type)
-    if type is 'Knocked Back'
-      bucket = 'knockedBack'
-    result.defense.prevent[bucket] = true
+    result.offense.regen[bucket].percent = modOperators.more(result.offense.regen[bucket].percent, floatVal)
   critical: (mod, result) ->
     [ fullText, sign, value, op, global, type, subBucket ] = mod
 
@@ -145,7 +102,6 @@ modParsers =
     operator = modOperators[op]
 
     if subBucket is 'Dual Wielding'
-      result.offense.critical.dualWielding[bucket] = operator(result.offense.critical.dualWielding[bucket])
       return
 
     if global is 'Global'
@@ -153,24 +109,6 @@ modParsers =
 
     if subBucket is 'Spells'
       result.offense.critical.spell[bucket] = operator(result.offense.critical.spell[bucket], value)
-  recovery: (mod, result) ->
-    [ fullText, sign, value, first, second ] = mod
-    bucket = slug(first)
-    if second is 'gained on Kill'
-      result.offense.onKill[bucket] = modOperators.increased(result.offense.onKill[bucket])
-    else
-      result.stats.regen[bucket] = modOperators.to(result.stats.regen[bucket], value, sign)
-  flaskUtilityChance: (mod, result) ->
-    [ fullText, sign, value, type ] = mod
-  flaskUtility: (mod, result) ->
-    [ fullText, sign, value, op, type, verb ] = mod
-    operator = modOperators[op]
-    bucket = slug(type)
-    switch bucket
-      when 'effect'
-        result.flask.effect = operator(result.flask.effect, value, sign)
-      when 'charges'
-        result.flask.chargesUsed = operator(result.flask.chargesUsed, value, sign)
   damage: (mod, result) ->
     [ fullText, sign, value, op, type ] = mod
     operator = modOperators[op]
@@ -199,30 +137,11 @@ modParsers =
     [ fullText, value, type ] = mod
     bucket = slug(type)
     result.stats.item[bucket] = modOperators.increased(result.stats.item[bucket], value)
-  conversion: (mod, result) ->
-    [ fullText, value, sourceType, destType ] = mod
-    log.as.silly('no-op damage conversion')
   resistPen: (mod, result) ->
     [ fullText, value, type ] = mod
     bucket = slug(type)
     value = parseInt(value.replace('%', '')) * 0.01
     result.offense.damage.penetration[bucket] += value
-  flaskAilment: (mod, result) ->
-    [ fullText, type ] = mod
-    if mod.indexOf(' and ') >= 0
-      console.dir(mod)
-    bucket = slug(type)
-    result.flask.removeAilment[bucket] = true
-  ailment: (mod, result) ->
-    [ fullText, value, op, type, duration ] = mod
-    bucket = slug(type)
-    subBucket = if duration is ' Duration on Enemies' then 'duration' else 'chance'
-    isPercent = value.indexOf('%') > 0
-    value = parseInt(value.replace('%', ''))
-    if isPercent then value *= 0.01
-    # "to" verb is always positive here, so hard-code sign
-    operator = modOperators[op]
-    result.offense.ailment[bucket][subBucket] = operator(result.offense.ailment[bucket][subBucket], value, '+')
   defense: (mod, result) ->
     [ fullText, sign, value, op, type ] = mod
     return new Error(mod) unless value?
@@ -308,17 +227,6 @@ modParsers =
     else
       # todo: break this out into the types
       result.defense.blockChance.weapons += value
-  reflect: (mod, result) ->
-    [ fullText, min, bogus, max, type, melee, block ] = mod
-    range =
-      min: parseInt(min)
-      max: parseInt(max)
-    return if isNaN(range.min) or isNaN(range.max)
-
-    # todo: work this out
-    #switch type
-    #  when 'Physical'
-    #  when 'Cold', 'Fire', 'Lightning'
   resist: (mod, result) ->
     [ fullText, sign, value, all, maximum, type ] = mod
     return new Error(mod) unless value?
@@ -348,13 +256,6 @@ modParsers =
           result.defense.resist[bucket][subBucket] = operator(result.defense.resist[bucket][subBucket], value, sign)
         else
           result.defense.resist.elemental[subBucket] = operator(result.defense.resist.elemental[subBucket], value, sign)
-
-    if all is 'all '
-      result.pseudo.resist.all = operator(result.pseudo.resist.all, value, sign)
-    else if maximum is 'maximum '
-      result.pseudo.resist.maximum = operator(result.pseudo.resist.maximum, value, sign)
-
-    result.pseudo.resist.elemental = operator(result.pseudo.resist.elemental, value, sign)
   attribute: (mod, result) ->
     [ fullText, sign, value, all, first, second ] = mod
     value = parseInt(value)
@@ -388,8 +289,6 @@ modParsers =
           result.stats.mana[bucket] = operator(result.stats.mana[bucket], value, sign)
         when 'Energy Shield'
           result.defense.shield[bucket] = operator(result.defense.shield[bucket], value, sign)
-        when 'Light Radius'
-          result.stats.reduced.inverseLightRadius = operator(result.stats.reduced.inverselightRadius, value, sign)
   gemLevel: (mod, result) ->
     [ value, type ] = mod
     value = parseInt(value)
@@ -683,10 +582,8 @@ parseItem = (item) ->
     modifiers: []
     sockets: []
     meta:
-      quality: 0
       level: item.ilvl ? 0
-      prefix: false
-      suffix: false
+      quality: 0
     stats:
       attribute:
         all: 0
@@ -699,17 +596,6 @@ parseItem = (item) ->
       mana:
         flat: 0
         percent: 0.0
-      regen:
-        life:
-          flat: 0
-          percent: 0.0
-        mana:
-          flat: 0
-          percent: 0.0
-      reduced:
-        attributeRequirements: 0.0
-        manaCost: 0.0
-      lightRadius: 0.0
       movementSpeed: 0.0
       item:
         rarity: 0.0
@@ -741,28 +627,6 @@ parseItem = (item) ->
       spell: 0
       support: 0
       vaal: 0
-    flask:
-      charges: 0.0
-      effect: 0.0
-      chargesUsed: 0
-      duration: 0.0
-      recovery:
-        amount: 0
-        speed: 0.0
-      during:
-        damage:
-          all: 0
-          lightning: 0
-        reverseKnockback: false
-        stunImmunity: false
-        soulEater: false
-        lightRadius: 0.0
-        block: 0.0
-      removeAilment:
-        bleeding: false
-        burning: false
-        freezeAndChill: false
-        shock: false
     offense:
       leech:
         life:
@@ -777,19 +641,6 @@ parseItem = (item) ->
             cold: 0
             fire: 0
             lightning: 0
-      onHit:
-        life: 0
-        mana: 0
-        shield: 0
-      onKill:
-        life: 0
-        mana: 0
-      onCrit:
-        life: 0
-        mana: 0
-      perTarget:
-        life: 0
-        shield: 0
       critical:
         global:
           chance: 0
@@ -803,19 +654,13 @@ parseItem = (item) ->
         melee:
           chance: 0
           multiplier: 0
-        dualWielding:
-          chance: 0
-          multiplier: 0
-      ailment:
-        freeze:
-          chance: 0
-          duration: 0
-        shock:
-          chance: 0
-          duration: 0
-        ignite:
-          chance: 0
-          duration: 0
+      regen:
+        life:
+          flat: 0
+          percent: 0.0
+        mana:
+          flat: 0
+          percent: 0.0
       damage:
         all:
           flat: 0
@@ -910,17 +755,6 @@ parseItem = (item) ->
         recharge: 0
         flat: 0
         percent: 0
-      prevent:
-        knockedBack: false
-        frozen: false
-        poisoned: false
-        ignited: false
-    minions:
-      damage: 0
-      life: 0
-      blockChance: 0
-      movementSpeed: 0
-      allResists: 0
 
   if item.icon?
     iconHash = qs.parse(item.icon.substring(item.icon.indexOf('?')))
