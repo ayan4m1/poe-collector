@@ -75,7 +75,6 @@
         "requests.cache.enable": "true",
         "translog.durability": "async",
         "translog.sync_interval": "15s",
-        "store.throttle.type": "none",
         "merge.scheduler.max_thread_count": "1"
       },
       "analysis": {
