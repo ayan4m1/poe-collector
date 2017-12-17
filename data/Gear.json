@@ -1,5 +1,5 @@
 {
-  "createdAt": "2017-12-02T15:03:16.913Z",
+  "createdAt": "2017-12-17T15:06:22.401Z",
   "gameVersion": "3.0.0",
   "types": {
     "str_armour": [
@@ -3957,10 +3957,16 @@
       "damage_taken_goes_to_mana_%",
       "dummy_stat_display_nothing",
       "local_additional_block_chance_%",
+      "local_armour_and_energy_shield_+%",
+      "local_armour_and_evasion_+%",
       "local_attribute_requirements_+%",
       "local_display_grants_skill_determination_level",
       "local_display_grants_skill_discipline_level",
       "local_display_grants_skill_grace_level",
+      "local_energy_shield_+%",
+      "local_evasion_and_energy_shield_+%",
+      "local_evasion_rating_+%",
+      "local_physical_damage_reduction_rating_+%",
       "local_socketed_gem_level_+",
       "local_socketed_melee_gem_level_+",
       "local_socketed_vaal_gem_level_+",
@@ -4245,6 +4251,861 @@
       "life_leech_speed_+%_per_equipped_corrupted_item",
       "mana_leech_speed_+%_per_equipped_corrupted_item",
       "vaal_skill_damage_+%"
+    ],
+    "boots_elder": [
+      "base_avoid_stun_%",
+      "base_chance_to_dodge_spells_%",
+      "endurance_charge_on_kill_%",
+      "local_display_socketed_gems_get_spell_totem_level",
+      "local_display_socketed_gems_supported_by_level_x_fortify",
+      "local_display_socketed_gems_supported_by_level_x_increased_duration",
+      "skill_effect_duration_+%",
+      "summon_totem_cast_speed_+%",
+      "totem_damage_+%",
+      "unaffected_by_desecrated_ground",
+      "unaffected_by_shocked_ground"
+    ],
+    "boots_shaper": [
+      "avoid_all_elemental_status_%",
+      "base_avoid_projectiles_%_chance",
+      "base_chance_to_dodge_%",
+      "base_cooldown_speed_+%",
+      "local_display_grants_skill_decoy_totem_level",
+      "local_display_socketed_gems_get_life_leech_level",
+      "local_display_socketed_gems_supported_by_level_x_ranged_attack_totem",
+      "summon_totem_cast_speed_+%",
+      "totem_damage_+%",
+      "unaffected_by_burning_ground",
+      "unaffected_by_chilled_ground"
+    ],
+    "quiver_elder": [
+      "add_frenzy_charge_on_kill_%_chance",
+      "base_avoid_stun_%",
+      "base_chance_to_poison_on_hit_%",
+      "base_poison_damage_+%",
+      "base_skill_area_of_effect_+%",
+      "bleed_on_hit_with_attacks_%",
+      "bleeding_damage_+%",
+      "maximum_added_cold_damage_per_frenzy_charge",
+      "minimum_added_cold_damage_per_frenzy_charge",
+      "phasing_for_4_seconds_on_kill_%",
+      "projectile_base_number_of_targets_to_pierce"
+    ],
+    "2h_axe_elder": [
+      "attack_speed_+%_if_enemy_killed_recently",
+      "attacks_chance_to_blind_on_hit_%",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_skill_area_of_effect_+%",
+      "critical_strike_multiplier_+_if_have_not_dealt_critical_strike_recently",
+      "endurance_charge_on_kill_%",
+      "kill_enemy_on_hit_if_under_10%_life",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_culling_strike_vs_bleeding_enemies",
+      "local_display_socketed_gems_supported_by_level_x_endurance_charge_on_stun",
+      "local_display_socketed_gems_supported_by_level_x_fortify",
+      "local_display_socketed_gems_supported_by_level_x_onslaught",
+      "local_physical_damage_+%",
+      "local_weapon_range_+",
+      "remove_bleeding_on_warcry"
+    ],
+    "2h_mace_elder": [
+      "area_of_effect_+%_if_have_stunned_an_enemy_recently",
+      "area_of_effect_+%_per_endurance_charge",
+      "attack_speed_+%_if_enemy_killed_recently",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_skill_area_of_effect_+%",
+      "critical_strike_multiplier_+_if_have_not_dealt_critical_strike_recently",
+      "endurance_charge_on_kill_%",
+      "kill_enemy_on_hit_if_under_10%_life",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_weapon_range_+"
+    ],
+    "2h_sword_elder": [
+      "attack_speed_+%_if_enemy_killed_recently",
+      "attacks_chance_to_blind_on_hit_%",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_skill_area_of_effect_+%",
+      "critical_strike_multiplier_+_if_have_not_dealt_critical_strike_recently",
+      "endurance_charge_on_kill_%",
+      "kill_enemy_on_hit_if_under_10%_life",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_supported_by_level_x_endurance_charge_on_stun",
+      "local_display_socketed_gems_supported_by_level_x_fortify",
+      "local_display_socketed_gems_supported_by_level_x_onslaught",
+      "local_physical_damage_+%",
+      "local_weapon_range_+",
+      "melee_weapon_range_+_if_you_have_killed_recently",
+      "number_of_endurance_charges_to_gain_every_4_seconds_while_stationary"
+    ],
+    "staff_elder": [
+      "attack_speed_+%_if_enemy_killed_recently",
+      "avoid_interruption_while_casting_%",
+      "base_cast_speed_+%",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_skill_area_of_effect_+%",
+      "blocking_blocks_spells_%",
+      "chance_to_gain_unholy_might_on_kill_for_3_seconds_%",
+      "critical_strike_multiplier_+_if_have_not_dealt_critical_strike_recently",
+      "endurance_charge_on_kill_%",
+      "kill_enemy_on_hit_if_under_10%_life",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_get_reduced_mana_cost_level",
+      "local_display_socketed_gems_supported_by_level_x_endurance_charge_on_stun",
+      "local_display_socketed_gems_supported_by_level_x_fortify",
+      "local_display_socketed_gems_supported_by_level_x_power_charge_on_crit",
+      "local_physical_damage_+%",
+      "local_weapon_range_+",
+      "power_charge_on_block_%_chance",
+      "spell_damage_+%",
+      "spell_damage_+%_per_10_int",
+      "spell_damage_+%_per_10_strength",
+      "spell_maximum_added_chaos_damage",
+      "spell_maximum_added_physical_damage",
+      "spell_minimum_added_chaos_damage",
+      "spell_minimum_added_physical_damage",
+      "staff_block_%"
+    ],
+    "gloves_elder": [
+      "accuracy_rating_+%",
+      "add_frenzy_charge_on_kill_%_chance",
+      "attack_and_cast_speed_+%",
+      "attack_speed_+%",
+      "base_poison_damage_+%",
+      "base_poison_duration_+%",
+      "base_projectile_speed_+%",
+      "bleeding_damage_+%",
+      "local_display_socketed_attacks_critical_strike_multiplier_+",
+      "local_display_socketed_gems_get_additional_accuracy_level",
+      "local_display_socketed_gems_get_faster_attacks_level",
+      "local_display_socketed_gems_get_faster_projectiles_level",
+      "local_display_socketed_gems_supported_by_level_x_chance_to_bleed",
+      "local_display_socketed_gems_supported_by_level_x_poison",
+      "melee_range_+",
+      "monster_base_block_%"
+    ],
+    "gloves_shaper": [
+      "avoid_interruption_while_casting_%",
+      "base_cast_speed_+%",
+      "global_chance_to_blind_on_hit_%",
+      "local_display_socketed_gems_get_blind_level",
+      "local_display_socketed_gems_get_faster_cast_level",
+      "local_display_socketed_gems_get_trap_level",
+      "local_display_socketed_gems_supported_by_level_x_slower_projectiles",
+      "local_display_socketed_gems_supported_by_level_x_trap_and_mine_damage",
+      "local_display_socketed_gems_supported_by_level_x_trap_cooldown",
+      "local_display_socketed_gems_supported_by_x_mana_leech",
+      "local_display_socketed_spells_critical_strike_multiplier_+",
+      "number_of_additional_traps_to_throw",
+      "projectile_damage_+%",
+      "trap_damage_+%",
+      "trap_throwing_speed_+%"
+    ],
+    "2h_axe_shaper": [
+      "add_frenzy_charge_on_kill_%_chance",
+      "attack_maximum_added_fire_damage_per_10_strength",
+      "attack_minimum_added_fire_damage_per_10_strength",
+      "attacks_with_this_weapon_maximum_added_cold_damage_per_10_dexterity",
+      "attacks_with_this_weapon_minimum_added_cold_damage_per_10_dexterity",
+      "base_movement_velocity_+%",
+      "chance_to_deal_double_damage_%",
+      "chance_to_gain_endurance_charge_on_crit_%",
+      "chance_to_gain_endurance_charge_when_you_taunt_enemy_%",
+      "chance_to_gain_onslaught_on_kill_for_4_seconds_%",
+      "critical_strike_chance_+%_if_enemy_killed_recently",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_get_cast_on_crit_level",
+      "local_display_socketed_gems_supported_by_level_x_cast_on_kill",
+      "max_endurance_charges",
+      "max_frenzy_charges",
+      "reduce_enemy_elemental_resistance_%"
+    ],
+    "2h_sword_shaper": [
+      "add_frenzy_charge_on_kill_%_chance",
+      "attack_maximum_added_fire_damage_per_10_strength",
+      "attack_minimum_added_fire_damage_per_10_strength",
+      "attacks_with_this_weapon_maximum_added_cold_damage_per_10_dexterity",
+      "attacks_with_this_weapon_minimum_added_cold_damage_per_10_dexterity",
+      "base_movement_velocity_+%",
+      "chance_to_deal_double_damage_%",
+      "chance_to_gain_onslaught_on_kill_for_4_seconds_%",
+      "critical_strike_chance_+%_if_enemy_killed_recently",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_get_cast_on_crit_level",
+      "local_display_socketed_gems_supported_by_level_x_cast_on_kill",
+      "local_display_socketed_movement_skills_have_no_mana_cost",
+      "max_endurance_charges",
+      "max_frenzy_charges",
+      "melee_movement_skill_chance_to_fortify_on_hit_%",
+      "physical_damage_%_to_add_as_cold",
+      "physical_damage_%_to_add_as_fire",
+      "reduce_enemy_elemental_resistance_%"
+    ],
+    "bow_shaper": [
+      "add_frenzy_charge_on_kill_%_chance",
+      "add_power_charge_on_critical_strike_%",
+      "attacks_with_this_weapon_maximum_added_cold_damage_per_10_dexterity",
+      "attacks_with_this_weapon_minimum_added_cold_damage_per_10_dexterity",
+      "base_critical_strike_multiplier_+",
+      "base_movement_velocity_+%",
+      "chance_to_deal_double_damage_%",
+      "chance_to_gain_onslaught_on_kill_for_4_seconds_%",
+      "critical_strike_chance_+%_if_enemy_killed_recently",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_chain_X_additional_times",
+      "local_display_socketed_gems_get_cast_on_crit_level",
+      "max_frenzy_charges",
+      "physical_damage_%_to_add_as_cold",
+      "projectile_base_number_of_targets_to_pierce",
+      "projectile_damage_+%_per_pierced_enemy",
+      "reduce_enemy_elemental_resistance_%"
+    ],
+    "helmet_elder": [
+      "area_damage_+%",
+      "base_spell_block_%",
+      "burn_damage_+%",
+      "ignite_duration_+%",
+      "local_display_socketed_attacks_additional_critical_strike_chance",
+      "local_display_socketed_gems_get_concentrated_area_level",
+      "local_display_socketed_gems_supported_by_level_x_immolate",
+      "local_display_socketed_gems_supported_by_level_x_increased_burning_damage",
+      "local_display_socketed_gems_supported_by_level_x_reduced_duration",
+      "local_display_socketed_gems_supported_by_x_increased_minion_damage_level",
+      "local_display_socketed_gems_supported_by_x_increased_minion_life_level",
+      "maximum_mana_+%",
+      "minion_damage_+%",
+      "minion_maximum_life_+%",
+      "spell_maximum_added_chaos_damage",
+      "spell_maximum_added_fire_damage",
+      "spell_maximum_added_physical_damage",
+      "spell_minimum_added_chaos_damage",
+      "spell_minimum_added_fire_damage",
+      "spell_minimum_added_physical_damage"
+    ],
+    "helmet_shaper": [
+      "add_power_charge_on_kill_%_chance",
+      "base_mana_regeneration_rate_per_minute",
+      "base_skill_area_of_effect_+%",
+      "chill_effect_+%",
+      "local_display_socketed_gems_get_increased_area_level",
+      "local_display_socketed_gems_get_remote_mine_level",
+      "local_display_socketed_gems_supported_by_level_x_trap_and_mine_damage",
+      "local_display_socketed_gems_supported_by_x_hypothermia",
+      "local_display_socketed_gems_supported_by_x_innervate_level",
+      "local_display_socketed_spells_additional_critical_strike_chance",
+      "mana_regeneration_rate_+%",
+      "mine_damage_+%",
+      "number_of_additional_mines_to_place",
+      "shock_effect_+%",
+      "spell_maximum_added_cold_damage",
+      "spell_maximum_added_lightning_damage",
+      "spell_minimum_added_cold_damage",
+      "spell_minimum_added_lightning_damage"
+    ],
+    "staff_shaper": [
+      "add_power_charge_on_critical_strike_%",
+      "add_power_charge_on_kill_%_chance",
+      "attack_maximum_added_fire_damage_per_10_strength",
+      "attack_maximum_added_lightning_damage_per_10_int",
+      "attack_minimum_added_fire_damage_per_10_strength",
+      "attack_minimum_added_lightning_damage_per_10_int",
+      "base_cast_speed_+%",
+      "base_critical_strike_multiplier_+",
+      "base_movement_velocity_+%",
+      "cast_speed_+%_if_enemy_killed_recently",
+      "chance_to_deal_double_damage_%",
+      "critical_strike_chance_+%_if_enemy_killed_recently",
+      "critical_strike_chance_+%_if_have_not_crit_recently",
+      "critical_strike_multiplier_+_if_you_have_blocked_recently",
+      "elemental_damage_%_to_add_as_chaos",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_supported_by_level_x_arcane_surge",
+      "local_display_socketed_gems_supported_by_level_x_cast_on_kill",
+      "local_display_socketed_gems_supported_by_level_x_cast_while_channelling",
+      "local_display_socketed_gems_supported_by_level_x_power_charge_on_crit",
+      "max_endurance_charges",
+      "max_power_charges",
+      "physical_damage_%_to_add_as_fire",
+      "physical_damage_%_to_add_as_lightning",
+      "reduce_enemy_elemental_resistance_%",
+      "spell_critical_strike_chance_+%",
+      "spell_damage_+%",
+      "staff_block_%"
+    ],
+    "body_armour_shaper": [
+      "base_damage_removed_from_mana_before_life_%",
+      "elemental_reflect_damage_taken_+%",
+      "intelligence_+%",
+      "local_display_socketed_gems_supported_by_level_x_item_rarity",
+      "local_socketed_skill_gem_level_+",
+      "physical_damage_taken_%_as_cold",
+      "physical_damage_taken_%_as_lightning",
+      "recover_%_maximum_mana_on_kill",
+      "recover_energy_shield_%_on_kill",
+      "spell_additional_critical_strike_chance_permyriad",
+      "unique_monster_dropped_item_rarity_+%"
+    ],
+    "body_armour_elder": [
+      "attack_additional_critical_strike_chance_permyriad",
+      "dexterity_+%",
+      "life_regeneration_rate_per_minute_%",
+      "local_socketed_support_gem_level_+",
+      "maximum_life_+%",
+      "physical_damage_taken_%_as_fire",
+      "physical_reflect_damage_taken_+%",
+      "recover_%_maximum_life_on_kill",
+      "strength_+%"
+    ],
+    "amulet_elder": [
+      "attack_speed_+%",
+      "base_additional_physical_damage_reduction_%",
+      "base_life_leech_from_fire_damage_permyriad",
+      "base_life_leech_from_physical_damage_permyriad",
+      "base_number_of_skeletons_allowed",
+      "base_number_of_spectres_allowed",
+      "base_number_of_zombies_allowed",
+      "base_skill_area_of_effect_+%",
+      "damage_+%_per_15_strength",
+      "life_regeneration_rate_per_minute_%",
+      "local_display_grants_level_X_envy",
+      "local_display_grants_skill_anger_level",
+      "local_display_grants_skill_hatred_level",
+      "local_display_grants_skill_wrath_level",
+      "maximum_life_leech_rate_%_per_minute",
+      "non_chaos_damage_to_add_as_chaos_damage_%",
+      "physical_damage_%_to_add_as_fire",
+      "projectile_base_number_of_targets_to_pierce"
+    ],
+    "amulet_shaper": [
+      "all_attributes_+%",
+      "base_item_found_quantity_+%",
+      "base_life_leech_from_cold_damage_permyriad",
+      "base_life_leech_from_lightning_damage_permyriad",
+      "base_mana_reservation_+%",
+      "base_movement_velocity_+%",
+      "blocking_blocks_spells_%",
+      "damage_+%_per_15_dex",
+      "damage_+%_per_15_int",
+      "global_item_attribute_requirements_+%",
+      "local_display_grants_skill_clarity_level",
+      "local_display_grants_skill_determination_level",
+      "local_display_grants_skill_discipline_level",
+      "local_display_grants_skill_grace_level",
+      "local_display_grants_skill_haste_level",
+      "local_display_grants_skill_vitality_level",
+      "maximum_block_%",
+      "physical_damage_%_to_add_as_cold",
+      "physical_damage_%_to_add_as_lightning",
+      "power_frenzy_or_endurance_charge_on_kill_%",
+      "reduce_enemy_elemental_resistance_%"
+    ],
+    "belt_elder": [
+      "all_attributes_+%",
+      "attack_speed_+%_during_flask_effect",
+      "base_resist_all_elements_%",
+      "chance_to_fortify_on_melee_stun_%",
+      "chaos_resistance_+_while_using_flask",
+      "flask_effect_+%",
+      "flasks_%_chance_to_not_consume_charges",
+      "life_recovery_rate_+%",
+      "local_display_grants_skill_enduring_cry_level",
+      "local_display_grants_skill_rallying_cry_level",
+      "maximum_life_+%",
+      "melee_damage_+%_during_flask_effect",
+      "projectile_attack_damage_+%_during_flask_effect",
+      "remove_ignite_and_burning_on_flask_use"
+    ],
+    "shield_elder": [
+      "X_armour_if_you_have_blocked_recently",
+      "additional_block_%_with_5_or_more_nearby_enemies",
+      "base_additional_physical_damage_reduction_%",
+      "base_maximum_fire_damage_resistance_%",
+      "base_skill_area_of_effect_+%",
+      "damage_+%_per_1%_block_chance",
+      "local_display_socketed_gems_supported_by_level_x_cast_on_damage_taken",
+      "maximum_life_+%"
+    ],
+    "ring_shaper": [
+      "base_chance_to_freeze_%",
+      "base_chance_to_shock_%",
+      "base_life_gained_on_spell_hit",
+      "critical_strike_chance_+%",
+      "curse_effect_on_self_+%",
+      "curse_on_hit_level_assassins_mark",
+      "elemental_reflect_damage_taken_+%",
+      "experience_gain_+%",
+      "global_maximum_added_cold_damage_vs_chilled_or_frozen_enemies",
+      "global_maximum_added_lightning_damage_vs_shocked_enemies",
+      "global_minimum_added_cold_damage_vs_chilled_or_frozen_enemies",
+      "global_minimum_added_lightning_damage_vs_shocked_enemies",
+      "local_display_grants_skill_herald_of_ice_level",
+      "local_display_grants_skill_herald_of_thunder_level",
+      "mana_gained_on_spell_hit",
+      "spell_and_attack_maximum_added_cold_damage",
+      "spell_and_attack_maximum_added_lightning_damage",
+      "spell_and_attack_minimum_added_cold_damage",
+      "spell_and_attack_minimum_added_lightning_damage",
+      "spell_damage_+%"
+    ],
+    "ring_elder": [
+      "accuracy_rating_+%",
+      "base_chance_to_ignite_%",
+      "base_critical_strike_multiplier_+",
+      "base_life_gain_per_target",
+      "chance_to_evade_attacks_%",
+      "curse_on_hit_level_poachers_mark",
+      "curse_on_hit_level_warlords_mark",
+      "global_maximum_added_fire_damage_vs_ignited_enemies",
+      "global_minimum_added_fire_damage_vs_ignited_enemies",
+      "local_display_grants_skill_herald_of_ash_level",
+      "mana_gain_per_target",
+      "melee_damage_+%",
+      "physical_reflect_damage_taken_+%",
+      "projectile_attack_damage_+%",
+      "spell_and_attack_maximum_added_fire_damage",
+      "spell_and_attack_minimum_added_fire_damage"
+    ],
+    "quiver_shaper": [
+      "attacks_chance_to_blind_on_hit_%",
+      "base_movement_velocity_+%",
+      "base_number_of_additional_arrows",
+      "chance_to_gain_onslaught_on_kill_for_4_seconds_%",
+      "maim_on_hit_%",
+      "mana_gain_per_target",
+      "physical_damage_%_to_add_as_cold"
+    ],
+    "belt_shaper": [
+      "base_cooldown_speed_+%",
+      "base_self_critical_strike_multiplier_-%",
+      "cast_speed_+%_during_flask_effect",
+      "energy_shield_recovery_rate_+%",
+      "local_display_grants_skill_abyssal_cry_level",
+      "mana_recovery_rate_+%",
+      "maximum_energy_shield_+%",
+      "movement_speed_+%_during_flask_effect",
+      "physical_attack_damage_taken_+",
+      "remove_chill_and_freeze_on_flask_use",
+      "remove_shock_on_flask_use",
+      "spell_damage_+%_during_flask_effect"
+    ],
+    "shield_shaper": [
+      "additional_maximum_all_resistances_%",
+      "base_maximum_cold_damage_resistance_%",
+      "base_maximum_lightning_damage_resistance_%",
+      "blocking_blocks_spells_%",
+      "chill_attackers_for_4_seconds_on_block_%_chance",
+      "dodge_attacks_chance_%_if_you_have_blocked_recently",
+      "energy_shield_%_gained_on_block",
+      "gain_random_charge_on_block",
+      "local_display_socketed_gems_have_mana_reservation_+%",
+      "mana_%_gained_on_block",
+      "recover_%_of_maximum_life_on_block",
+      "shock_attackers_for_4_seconds_on_block_%_chance"
+    ],
+    "sword_elder": [
+      "additional_block_%_per_endurance_charge",
+      "attacks_chance_to_blind_on_hit_%",
+      "base_critical_strike_multiplier_+",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_skill_area_of_effect_+%",
+      "chance_to_gain_endurance_charge_on_block_%",
+      "local_attack_speed_+%",
+      "local_chance_to_bleed_on_hit_%",
+      "local_display_socketed_gems_get_increased_critical_damage_level",
+      "local_display_socketed_gems_get_melee_physical_damage_level",
+      "local_display_socketed_gems_get_multistrike_level",
+      "local_display_socketed_gems_supported_by_level_x_brutality",
+      "local_display_socketed_gems_supported_by_level_x_chance_to_bleed",
+      "local_display_socketed_gems_supported_by_level_x_poison",
+      "local_display_socketed_gems_supported_by_level_x_ruthless",
+      "local_display_socketed_gems_supported_by_level_x_spirit_strike",
+      "local_physical_damage_+%",
+      "local_poison_on_hit_%",
+      "number_of_endurance_charges_to_gain_every_4_seconds_while_stationary",
+      "physical_damage_while_dual_wielding_+%"
+    ],
+    "axe_elder": [
+      "attacks_chance_to_blind_on_hit_%",
+      "base_critical_strike_multiplier_+",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_skill_area_of_effect_+%",
+      "chance_to_gain_endurance_charge_on_hit_%_vs_bleeding_enemy",
+      "local_attack_speed_+%",
+      "local_chance_to_bleed_on_hit_%",
+      "local_culling_strike_vs_bleeding_enemies",
+      "local_display_socketed_gems_get_increased_critical_damage_level",
+      "local_display_socketed_gems_get_melee_physical_damage_level",
+      "local_display_socketed_gems_get_multistrike_level",
+      "local_display_socketed_gems_supported_by_level_x_brutality",
+      "local_display_socketed_gems_supported_by_level_x_chance_to_bleed",
+      "local_display_socketed_gems_supported_by_level_x_poison",
+      "local_display_socketed_gems_supported_by_level_x_ruthless",
+      "local_display_socketed_gems_supported_by_level_x_spirit_strike",
+      "local_physical_damage_+%",
+      "local_poison_on_hit_%",
+      "physical_damage_while_dual_wielding_+%"
+    ],
+    "mace_elder": [
+      "area_of_effect_+%_if_have_stunned_an_enemy_recently",
+      "area_of_effect_+%_per_50_strength",
+      "base_critical_strike_multiplier_+",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_skill_area_of_effect_+%",
+      "local_attack_speed_+%",
+      "local_chance_to_bleed_on_hit_%",
+      "local_display_socketed_gems_get_increased_critical_damage_level",
+      "local_display_socketed_gems_get_melee_physical_damage_level",
+      "local_display_socketed_gems_get_multistrike_level",
+      "local_display_socketed_gems_supported_by_level_x_brutality",
+      "local_display_socketed_gems_supported_by_level_x_chance_to_bleed",
+      "local_display_socketed_gems_supported_by_level_x_poison",
+      "local_display_socketed_gems_supported_by_level_x_ruthless",
+      "local_display_socketed_gems_supported_by_level_x_spirit_strike",
+      "local_physical_damage_+%",
+      "local_poison_on_hit_%",
+      "physical_damage_while_dual_wielding_+%"
+    ],
+    "claw_elder": [
+      "attacks_chance_to_blind_on_hit_%",
+      "base_critical_strike_multiplier_+",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_skill_area_of_effect_+%",
+      "chance_to_gain_unholy_might_on_kill_for_3_seconds_%",
+      "gain_1_rare_monster_mod_on_kill_for_10_seconds_%_chance",
+      "local_attack_speed_+%",
+      "local_chance_to_bleed_on_hit_%",
+      "local_display_socketed_gems_get_increased_critical_damage_level",
+      "local_display_socketed_gems_get_melee_physical_damage_level",
+      "local_display_socketed_gems_get_multistrike_level",
+      "local_display_socketed_gems_supported_by_level_x_brutality",
+      "local_display_socketed_gems_supported_by_level_x_chance_to_bleed",
+      "local_display_socketed_gems_supported_by_level_x_poison",
+      "local_display_socketed_gems_supported_by_level_x_ruthless",
+      "local_display_socketed_gems_supported_by_level_x_spirit_strike",
+      "local_life_gain_per_target_vs_blinded_enemies",
+      "local_physical_damage_+%",
+      "local_poison_on_hit_%",
+      "physical_damage_while_dual_wielding_+%"
+    ],
+    "sceptre_elder": [
+      "area_damage_+%",
+      "base_cast_speed_+%",
+      "base_critical_strike_multiplier_+",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_skill_area_of_effect_+%",
+      "chance_to_freeze_shock_ignite_%",
+      "fire_damage_+%",
+      "local_attack_speed_+%",
+      "local_display_socketed_gems_get_increased_area_level",
+      "local_display_socketed_gems_get_increased_critical_damage_level",
+      "local_display_socketed_gems_get_melee_physical_damage_level",
+      "local_display_socketed_gems_get_multistrike_level",
+      "local_display_socketed_gems_supported_by_level_x_brutality",
+      "local_display_socketed_gems_supported_by_level_x_efficacy",
+      "local_display_socketed_gems_supported_by_level_x_fire_penetration",
+      "local_display_socketed_gems_supported_by_level_x_multicast",
+      "local_display_socketed_gems_supported_by_level_x_ruthless",
+      "local_display_socketed_gems_supported_by_level_x_spirit_strike",
+      "local_display_socketed_gems_supported_by_level_x_unbound_ailments",
+      "local_physical_damage_+%",
+      "spell_damage_+%",
+      "spell_damage_+%_per_16_int",
+      "spell_damage_+%_per_16_strength",
+      "spell_maximum_added_chaos_damage",
+      "spell_maximum_added_physical_damage",
+      "spell_minimum_added_chaos_damage",
+      "spell_minimum_added_physical_damage"
+    ],
+    "dagger_elder": [
+      "area_damage_+%",
+      "base_cast_speed_+%",
+      "base_critical_strike_multiplier_+",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_poison_duration_+%",
+      "base_skill_area_of_effect_+%",
+      "critical_strike_chance_+%_vs_poisoned_enemies",
+      "local_attack_speed_+%",
+      "local_chance_to_bleed_on_hit_%",
+      "local_display_socketed_gems_get_increased_area_level",
+      "local_display_socketed_gems_get_increased_critical_damage_level",
+      "local_display_socketed_gems_get_melee_physical_damage_level",
+      "local_display_socketed_gems_get_multistrike_level",
+      "local_display_socketed_gems_supported_by_level_x_brutality",
+      "local_display_socketed_gems_supported_by_level_x_chance_to_bleed",
+      "local_display_socketed_gems_supported_by_level_x_efficacy",
+      "local_display_socketed_gems_supported_by_level_x_multicast",
+      "local_display_socketed_gems_supported_by_level_x_poison",
+      "local_display_socketed_gems_supported_by_level_x_ruthless",
+      "local_display_socketed_gems_supported_by_level_x_spirit_strike",
+      "local_physical_damage_+%",
+      "spell_damage_+%",
+      "spell_damage_+%_per_16_dex",
+      "spell_damage_+%_per_16_int",
+      "spell_maximum_added_chaos_damage",
+      "spell_maximum_added_physical_damage",
+      "spell_minimum_added_chaos_damage",
+      "spell_minimum_added_physical_damage"
+    ],
+    "sword_shaper": [
+      "accuracy_rating_+%_per_frenzy_charge",
+      "area_damage_+%",
+      "attack_maximum_added_fire_damage_per_10_strength",
+      "attack_minimum_added_fire_damage_per_10_strength",
+      "attacks_with_this_weapon_maximum_added_cold_damage_per_10_dexterity",
+      "attacks_with_this_weapon_minimum_added_cold_damage_per_10_dexterity",
+      "block_while_dual_wielding_%",
+      "chance_to_gain_frenzy_charge_on_block_%",
+      "chance_to_gain_onslaught_on_kill_for_4_seconds_%",
+      "elemental_damage_with_attack_skills_+%",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_get_added_fire_damage_level",
+      "local_display_socketed_gems_get_faster_attacks_level",
+      "local_display_socketed_gems_get_melee_splash_level",
+      "local_display_socketed_gems_get_weapon_elemental_damage_level",
+      "local_display_socketed_gems_supported_by_level_x_increased_critical_strikes",
+      "local_display_socketed_gems_supported_by_level_x_maim",
+      "local_display_socketed_movement_skills_have_no_mana_cost",
+      "local_maim_on_hit_%",
+      "local_physical_damage_+%",
+      "physical_damage_%_to_add_as_cold",
+      "physical_damage_%_to_add_as_fire",
+      "reduce_enemy_elemental_resistance_%"
+    ],
+    "axe_shaper": [
+      "area_damage_+%",
+      "attack_maximum_added_fire_damage_per_10_strength",
+      "attack_minimum_added_fire_damage_per_10_strength",
+      "attacks_with_this_weapon_maximum_added_cold_damage_per_10_dexterity",
+      "attacks_with_this_weapon_minimum_added_cold_damage_per_10_dexterity",
+      "block_while_dual_wielding_%",
+      "chance_to_gain_endurance_charge_on_crit_%",
+      "chance_to_gain_onslaught_on_kill_for_4_seconds_%",
+      "critical_strike_chance_+%_if_enemy_killed_recently",
+      "elemental_damage_with_attack_skills_+%",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_get_added_fire_damage_level",
+      "local_display_socketed_gems_get_faster_attacks_level",
+      "local_display_socketed_gems_get_melee_splash_level",
+      "local_display_socketed_gems_get_weapon_elemental_damage_level",
+      "local_display_socketed_gems_supported_by_level_x_increased_critical_strikes",
+      "local_display_socketed_gems_supported_by_level_x_maim",
+      "local_maim_on_hit_%",
+      "local_physical_damage_+%",
+      "physical_damage_%_to_add_as_cold",
+      "physical_damage_%_to_add_as_fire",
+      "reduce_enemy_elemental_resistance_%"
+    ],
+    "mace_shaper": [
+      "area_damage_+%",
+      "attack_maximum_added_fire_damage_per_10_strength",
+      "attack_minimum_added_fire_damage_per_10_strength",
+      "block_while_dual_wielding_%",
+      "chance_to_fortify_on_melee_stun_%",
+      "elemental_damage_with_attack_skills_+%",
+      "explode_on_kill_%_fire_damage_to_deal",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_get_added_fire_damage_level",
+      "local_display_socketed_gems_get_faster_attacks_level",
+      "local_display_socketed_gems_get_melee_splash_level",
+      "local_display_socketed_gems_get_weapon_elemental_damage_level",
+      "local_display_socketed_gems_supported_by_level_x_increased_critical_strikes",
+      "local_display_socketed_gems_supported_by_level_x_maim",
+      "local_maim_on_hit_%",
+      "local_physical_damage_+%",
+      "physical_damage_%_to_add_as_fire",
+      "reduce_enemy_elemental_resistance_%"
+    ],
+    "claw_shaper": [
+      "area_damage_+%",
+      "attack_maximum_added_lightning_damage_per_10_int",
+      "attack_minimum_added_lightning_damage_per_10_int",
+      "attacks_with_this_weapon_maximum_added_cold_damage_per_10_dexterity",
+      "attacks_with_this_weapon_minimum_added_cold_damage_per_10_dexterity",
+      "block_while_dual_wielding_%",
+      "chance_to_gain_onslaught_on_kill_for_4_seconds_%",
+      "critical_strike_chance_+%_vs_blinded_enemies",
+      "elemental_damage_with_attack_skills_+%",
+      "enemy_evasion_+%_if_you_have_hit_them_recently",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_get_added_fire_damage_level",
+      "local_display_socketed_gems_get_faster_attacks_level",
+      "local_display_socketed_gems_get_melee_splash_level",
+      "local_display_socketed_gems_get_weapon_elemental_damage_level",
+      "local_display_socketed_gems_supported_by_level_x_increased_critical_strikes",
+      "local_display_socketed_gems_supported_by_level_x_maim",
+      "local_maim_on_hit_%",
+      "local_physical_damage_+%",
+      "physical_damage_%_to_add_as_cold",
+      "physical_damage_%_to_add_as_lightning",
+      "reduce_enemy_elemental_resistance_%"
+    ],
+    "sceptre_shaper": [
+      "area_damage_+%",
+      "attack_maximum_added_fire_damage_per_10_strength",
+      "attack_maximum_added_lightning_damage_per_10_int",
+      "attack_minimum_added_fire_damage_per_10_strength",
+      "attack_minimum_added_lightning_damage_per_10_int",
+      "base_cast_speed_+%",
+      "base_skill_area_of_effect_+%",
+      "chance_to_freeze_shock_ignite_%",
+      "elemental_damage_%_to_add_as_chaos",
+      "elemental_damage_+%",
+      "elemental_damage_with_attack_skills_+%",
+      "lightning_damage_+%",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_get_added_fire_damage_level",
+      "local_display_socketed_gems_get_elemental_proliferation_level",
+      "local_display_socketed_gems_get_faster_attacks_level",
+      "local_display_socketed_gems_get_faster_cast_level",
+      "local_display_socketed_gems_get_melee_splash_level",
+      "local_display_socketed_gems_get_weapon_elemental_damage_level",
+      "local_display_socketed_gems_supported_by_level_x_elemental_focus",
+      "local_display_socketed_gems_supported_by_level_x_increased_critical_strikes",
+      "local_display_socketed_gems_supported_by_level_x_lightning_penetration",
+      "local_display_socketed_gems_supported_by_level_x_spell_cascade",
+      "local_display_socketed_gems_supported_by_x_controlled_destruction",
+      "local_physical_damage_+%",
+      "physical_damage_%_to_add_as_fire",
+      "physical_damage_%_to_add_as_lightning",
+      "physical_damage_%_to_add_as_random_element",
+      "reduce_enemy_elemental_resistance_%",
+      "spell_critical_strike_chance_+%",
+      "spell_damage_+%"
+    ],
+    "dagger_shaper": [
+      "area_damage_+%",
+      "attack_maximum_added_lightning_damage_per_10_int",
+      "attack_minimum_added_lightning_damage_per_10_int",
+      "attacks_with_this_weapon_maximum_added_cold_damage_per_10_dexterity",
+      "attacks_with_this_weapon_minimum_added_cold_damage_per_10_dexterity",
+      "base_cast_speed_+%",
+      "base_poison_damage_+%",
+      "base_skill_area_of_effect_+%",
+      "cold_damage_+%",
+      "critical_strike_multiplier_vs_enemies_on_full_life_+",
+      "elemental_damage_%_to_add_as_chaos",
+      "elemental_damage_with_attack_skills_+%",
+      "lightning_damage_+%",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_get_added_fire_damage_level",
+      "local_display_socketed_gems_get_faster_attacks_level",
+      "local_display_socketed_gems_get_faster_cast_level",
+      "local_display_socketed_gems_get_melee_splash_level",
+      "local_display_socketed_gems_get_weapon_elemental_damage_level",
+      "local_display_socketed_gems_supported_by_X_lesser_poison",
+      "local_display_socketed_gems_supported_by_level_x_increased_critical_strikes",
+      "local_display_socketed_gems_supported_by_level_x_lightning_penetration",
+      "local_display_socketed_gems_supported_by_level_x_maim",
+      "local_display_socketed_gems_supported_by_level_x_spell_cascade",
+      "local_display_socketed_gems_supported_by_x_cold_penetration",
+      "local_display_socketed_gems_supported_by_x_controlled_destruction",
+      "local_maim_on_hit_%",
+      "local_physical_damage_+%",
+      "physical_damage_%_to_add_as_cold",
+      "physical_damage_%_to_add_as_lightning",
+      "reduce_enemy_elemental_resistance_%",
+      "spell_critical_strike_chance_+%",
+      "spell_damage_+%"
+    ],
+    "wand_shaper": [
+      "attack_maximum_added_lightning_damage_per_10_int",
+      "attack_minimum_added_lightning_damage_per_10_int",
+      "base_cast_speed_+%",
+      "base_projectile_speed_+%",
+      "base_skill_area_of_effect_+%",
+      "cold_damage_+%",
+      "elemental_damage_%_to_add_as_chaos",
+      "elemental_damage_with_attack_skills_+%",
+      "lightning_damage_+%",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_gain_power_charge_on_spending_mana",
+      "local_display_socketed_gems_get_added_fire_damage_level",
+      "local_display_socketed_gems_get_faster_attacks_level",
+      "local_display_socketed_gems_get_faster_cast_level",
+      "local_display_socketed_gems_get_weapon_elemental_damage_level",
+      "local_display_socketed_gems_supported_by_level_x_increased_critical_strikes",
+      "local_display_socketed_gems_supported_by_level_x_lightning_penetration",
+      "local_display_socketed_gems_supported_by_level_x_parallel_projectiles",
+      "local_display_socketed_gems_supported_by_level_x_spell_cascade",
+      "local_display_socketed_gems_supported_by_x_cold_penetration",
+      "local_display_socketed_gems_supported_by_x_controlled_destruction",
+      "local_physical_damage_+%",
+      "physical_damage_%_to_add_as_lightning",
+      "projectile_base_number_of_targets_to_pierce",
+      "reduce_enemy_elemental_resistance_%",
+      "spell_critical_strike_chance_+%",
+      "spell_damage_+%"
+    ],
+    "bow_elder": [
+      "attack_speed_+%_if_enemy_killed_recently",
+      "attacks_chance_to_blind_on_hit_%",
+      "base_number_of_additional_arrows",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "base_skill_area_of_effect_+%",
+      "critical_strike_multiplier_+_if_have_not_dealt_critical_strike_recently",
+      "kill_enemy_on_hit_if_under_10%_life",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_get_faster_projectiles_level",
+      "local_display_socketed_gems_supported_by_level_x_iron_grip",
+      "local_physical_damage_+%",
+      "projectile_attack_damage_+%_per_200_accuracy"
+    ],
+    "wand_elder": [
+      "area_damage_+%",
+      "base_cast_speed_+%",
+      "base_critical_strike_multiplier_+",
+      "base_physical_damage_%_to_convert_to_chaos",
+      "damage_+%_per_power_charge",
+      "fire_damage_+%",
+      "local_attack_speed_+%",
+      "local_display_socketed_gems_get_increased_area_level",
+      "local_display_socketed_gems_get_increased_critical_damage_level",
+      "local_display_socketed_gems_supported_by_level_x_efficacy",
+      "local_display_socketed_gems_supported_by_level_x_fire_penetration",
+      "local_display_socketed_gems_supported_by_level_x_multicast",
+      "local_display_socketed_gems_supported_by_level_x_onslaught",
+      "local_display_socketed_gems_supported_by_level_x_physical_projectile_attack_damage",
+      "local_display_socketed_gems_supported_by_x_lesser_multiple_projectiles_level",
+      "local_physical_damage_+%",
+      "projectile_damage_+%",
+      "spell_damage_+%",
+      "spell_damage_+%_per_16_int",
+      "spell_maximum_added_chaos_damage",
+      "spell_maximum_added_physical_damage",
+      "spell_minimum_added_chaos_damage",
+      "spell_minimum_added_physical_damage"
+    ],
+    "2h_mace_shaper": [
+      "attack_maximum_added_fire_damage_per_10_strength",
+      "attack_minimum_added_fire_damage_per_10_strength",
+      "base_movement_velocity_+%",
+      "base_stun_duration_+%",
+      "base_stun_threshold_reduction_+%",
+      "chance_to_deal_double_damage_%",
+      "critical_strike_chance_+%_if_enemy_killed_recently",
+      "explode_on_kill_%_fire_damage_to_deal",
+      "local_attack_speed_+%",
+      "local_critical_strike_chance_+%",
+      "local_display_socketed_gems_supported_by_level_x_cast_on_kill",
+      "local_display_socketed_gems_supported_by_level_x_maim",
+      "local_maim_on_hit_%",
+      "max_endurance_charges",
+      "reduce_enemy_elemental_resistance_%"
     ]
   },
   "stats": {
@@ -4695,8 +5556,8 @@
       "domain": "Gear",
       "text": "Elemental Damage +%",
       "min": 4,
-      "max": 34,
-      "ideal": 33,
+      "max": 60,
+      "ideal": 59,
       "tiers": [
         {
           "level": 4,
@@ -4722,6 +5583,21 @@
           "level": 81,
           "min": 30,
           "max": 34
+        },
+        {
+          "level": 68,
+          "min": 45,
+          "max": 52
+        },
+        {
+          "level": 75,
+          "min": 53,
+          "max": 56
+        },
+        {
+          "level": 80,
+          "min": 57,
+          "max": 60
         }
       ]
     },
@@ -4884,8 +5760,8 @@
       "domain": "Gear",
       "text": "Local Energy Shield +%",
       "min": 6,
-      "max": 100,
-      "ideal": 98,
+      "max": 110,
+      "ideal": 107,
       "tiers": [
         {
           "level": 3,
@@ -4923,6 +5799,11 @@
           "max": 100
         },
         {
+          "level": 86,
+          "min": 101,
+          "max": 110
+        },
+        {
           "level": 78,
           "min": 39,
           "max": 42
@@ -4935,8 +5816,8 @@
       "domain": "Gear",
       "text": "Local Physical Damage Reduction Rating +%",
       "min": 6,
-      "max": 100,
-      "ideal": 98,
+      "max": 110,
+      "ideal": 107,
       "tiers": [
         {
           "level": 3,
@@ -4974,6 +5855,11 @@
           "max": 100
         },
         {
+          "level": 86,
+          "min": 101,
+          "max": 110
+        },
+        {
           "level": 1,
           "min": 6,
           "max": 13
@@ -4996,8 +5882,8 @@
       "domain": "Gear",
       "text": "Local Evasion Rating +%",
       "min": 6,
-      "max": 100,
-      "ideal": 98,
+      "max": 110,
+      "ideal": 107,
       "tiers": [
         {
           "level": 3,
@@ -5033,6 +5919,11 @@
           "level": 84,
           "min": 92,
           "max": 100
+        },
+        {
+          "level": 86,
+          "min": 101,
+          "max": 110
         },
         {
           "level": 2,
@@ -5052,8 +5943,8 @@
       "domain": "Gear",
       "text": "Local Armour And Energy Shield +%",
       "min": 6,
-      "max": 100,
-      "ideal": 98,
+      "max": 110,
+      "ideal": 107,
       "tiers": [
         {
           "level": 3,
@@ -5089,6 +5980,11 @@
           "level": 84,
           "min": 92,
           "max": 100
+        },
+        {
+          "level": 86,
+          "min": 101,
+          "max": 110
         },
         {
           "level": 2,
@@ -5108,8 +6004,8 @@
       "domain": "Gear",
       "text": "Local Armour And Evasion +%",
       "min": 6,
-      "max": 100,
-      "ideal": 98,
+      "max": 110,
+      "ideal": 107,
       "tiers": [
         {
           "level": 3,
@@ -5145,6 +6041,11 @@
           "level": 84,
           "min": 92,
           "max": 100
+        },
+        {
+          "level": 86,
+          "min": 101,
+          "max": 110
         },
         {
           "level": 2,
@@ -5164,8 +6065,8 @@
       "domain": "Gear",
       "text": "Local Evasion And Energy Shield +%",
       "min": 6,
-      "max": 100,
-      "ideal": 98,
+      "max": 110,
+      "ideal": 107,
       "tiers": [
         {
           "level": 3,
@@ -5201,6 +6102,11 @@
           "level": 84,
           "min": 92,
           "max": 100
+        },
+        {
+          "level": 86,
+          "min": 101,
+          "max": 110
         },
         {
           "level": 2,
@@ -5342,8 +6248,8 @@
       "domain": "Gear",
       "text": "Local Additional Block Chance %",
       "min": 1,
-      "max": 6,
-      "ideal": 5,
+      "max": 8,
+      "ideal": 7,
       "tiers": [
         {
           "level": 45,
@@ -5364,6 +6270,11 @@
           "level": 58,
           "min": 4,
           "max": 6
+        },
+        {
+          "level": 85,
+          "min": 7,
+          "max": 8
         }
       ]
     },
@@ -5836,8 +6747,8 @@
       "domain": "Gear",
       "text": "Spell Damage +%",
       "min": 5,
-      "max": 79,
-      "ideal": 78,
+      "max": 87,
+      "ideal": 86,
       "tiers": [
         {
           "level": 2,
@@ -5888,6 +6799,21 @@
           "level": 1,
           "min": 10,
           "max": 12
+        },
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 82,
+          "min": 31,
+          "max": 35
         }
       ]
     },
@@ -5969,6 +6895,21 @@
           "level": 1,
           "min": 14,
           "max": 16
+        },
+        {
+          "level": 68,
+          "min": 45,
+          "max": 52
+        },
+        {
+          "level": 75,
+          "min": 53,
+          "max": 56
+        },
+        {
+          "level": 80,
+          "min": 57,
+          "max": 60
         }
       ]
     },
@@ -5977,7 +6918,7 @@
       "generation": "Prefix",
       "domain": "Gear",
       "text": "Cold Damage +%",
-      "min": 3,
+      "min": 0,
       "max": 79,
       "ideal": 78,
       "tiers": [
@@ -6050,6 +6991,21 @@
           "level": 1,
           "min": 14,
           "max": 16
+        },
+        {
+          "level": 68,
+          "min": 0,
+          "max": 0
+        },
+        {
+          "level": 75,
+          "min": 0,
+          "max": 0
+        },
+        {
+          "level": 80,
+          "min": 0,
+          "max": 0
         }
       ]
     },
@@ -6126,6 +7082,21 @@
           "level": 1,
           "min": 14,
           "max": 16
+        },
+        {
+          "level": 68,
+          "min": 45,
+          "max": 52
+        },
+        {
+          "level": 75,
+          "min": 53,
+          "max": 56
+        },
+        {
+          "level": 80,
+          "min": 57,
+          "max": 60
         }
       ]
     },
@@ -6182,6 +7153,21 @@
           "level": 1,
           "min": 4,
           "max": 6
+        },
+        {
+          "level": 68,
+          "min": 7,
+          "max": 9
+        },
+        {
+          "level": 75,
+          "min": 10,
+          "max": 12
+        },
+        {
+          "level": 84,
+          "min": 13,
+          "max": 14
         }
       ]
     },
@@ -6190,14 +7176,24 @@
       "generation": "Suffix",
       "domain": "Gear",
       "text": "Local Attack Speed +%",
-      "min": 14,
-      "max": 16,
-      "ideal": 15,
+      "min": 8,
+      "max": 21,
+      "ideal": 20,
       "tiers": [
         {
           "level": 30,
           "min": 14,
           "max": 16
+        },
+        {
+          "level": 68,
+          "min": 17,
+          "max": 19
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 21
         }
       ]
     },
@@ -6207,8 +7203,8 @@
       "domain": "Gear",
       "text": "Attack Speed +%",
       "min": 3,
-      "max": 13,
-      "ideal": 12,
+      "max": 14,
+      "ideal": 13,
       "tiers": [
         {
           "level": 1,
@@ -6224,6 +7220,21 @@
           "level": 22,
           "min": 11,
           "max": 13
+        },
+        {
+          "level": 68,
+          "min": 7,
+          "max": 9
+        },
+        {
+          "level": 75,
+          "min": 10,
+          "max": 12
+        },
+        {
+          "level": 82,
+          "min": 13,
+          "max": 14
         }
       ]
     },
@@ -6289,8 +7300,8 @@
       "domain": "Gear",
       "text": "Life Regeneration Rate per Minute",
       "min": 60,
-      "max": 420,
-      "ideal": 405,
+      "max": 1200,
+      "ideal": 1140,
       "tiers": [
         {
           "level": 1,
@@ -6300,27 +7311,32 @@
         {
           "level": 18,
           "min": 121,
-          "max": 180
-        },
-        {
-          "level": 30,
-          "min": 181,
           "max": 240
         },
         {
-          "level": 44,
+          "level": 30,
           "min": 241,
-          "max": 300
+          "max": 420
+        },
+        {
+          "level": 44,
+          "min": 421,
+          "max": 600
         },
         {
           "level": 59,
-          "min": 301,
-          "max": 360
+          "min": 601,
+          "max": 780
         },
         {
           "level": 78,
-          "min": 361,
-          "max": 420
+          "min": 781,
+          "max": 960
+        },
+        {
+          "level": 83,
+          "min": 961,
+          "max": 1200
         }
       ]
     },
@@ -6330,8 +7346,8 @@
       "domain": "Gear",
       "text": "",
       "min": 24,
-      "max": 66,
-      "ideal": 64,
+      "max": 120,
+      "ideal": 114,
       "tiers": [
         {
           "level": 18,
@@ -6352,6 +7368,16 @@
           "level": 81,
           "min": 60,
           "max": 66
+        },
+        {
+          "level": 68,
+          "min": 60,
+          "max": 90
+        },
+        {
+          "level": 75,
+          "min": 96,
+          "max": 120
         }
       ]
     },
@@ -6361,7 +7387,7 @@
       "domain": "Gear",
       "text": "Mana Regeneration Rate +%",
       "min": 10,
-      "max": 69,
+      "max": 70,
       "ideal": 66,
       "tiers": [
         {
@@ -6398,6 +7424,16 @@
           "level": 1,
           "min": 12,
           "max": 15
+        },
+        {
+          "level": 68,
+          "min": 41,
+          "max": 55
+        },
+        {
+          "level": 75,
+          "min": 56,
+          "max": 70
         }
       ]
     },
@@ -6407,8 +7443,8 @@
       "domain": "Gear",
       "text": "Base Stun Threshold Reduction +%",
       "min": 5,
-      "max": 15,
-      "ideal": 14,
+      "max": 30,
+      "ideal": 27,
       "tiers": [
         {
           "level": 5,
@@ -6434,6 +7470,11 @@
           "level": 58,
           "min": 14,
           "max": 15
+        },
+        {
+          "level": 68,
+          "min": 20,
+          "max": 30
         }
       ]
     },
@@ -6443,8 +7484,8 @@
       "domain": "Gear",
       "text": "Resist all Elements",
       "min": 3,
-      "max": 16,
-      "ideal": 15,
+      "max": 18,
+      "ideal": 17,
       "tiers": [
         {
           "level": 12,
@@ -6472,9 +7513,24 @@
           "max": 16
         },
         {
+          "level": 85,
+          "min": 17,
+          "max": 18
+        },
+        {
           "level": 1,
           "min": 8,
           "max": 10
+        },
+        {
+          "level": 68,
+          "min": 9,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 15
         }
       ]
     },
@@ -6521,6 +7577,16 @@
           "level": 1,
           "min": 10,
           "max": 14
+        },
+        {
+          "level": 68,
+          "min": 60,
+          "max": 74
+        },
+        {
+          "level": 75,
+          "min": 75,
+          "max": 82
         }
       ]
     },
@@ -6562,6 +7628,21 @@
           "level": 1,
           "min": 6,
           "max": 8
+        },
+        {
+          "level": 68,
+          "min": 15,
+          "max": 20
+        },
+        {
+          "level": 75,
+          "min": 21,
+          "max": 25
+        },
+        {
+          "level": 80,
+          "min": 23,
+          "max": 25
         }
       ]
     },
@@ -7563,8 +8644,8 @@
       "domain": "Gear",
       "text": "Base Chance To Dodge %",
       "min": 2,
-      "max": 6,
-      "ideal": 5,
+      "max": 10,
+      "ideal": 9,
       "tiers": [
         {
           "level": 35,
@@ -7590,6 +8671,21 @@
           "level": 85,
           "min": 5,
           "max": 6
+        },
+        {
+          "level": 68,
+          "min": 3,
+          "max": 5
+        },
+        {
+          "level": 75,
+          "min": 6,
+          "max": 8
+        },
+        {
+          "level": 84,
+          "min": 9,
+          "max": 10
         }
       ]
     },
@@ -7599,8 +8695,8 @@
       "domain": "Gear",
       "text": "",
       "min": 2,
-      "max": 4,
-      "ideal": 4,
+      "max": 10,
+      "ideal": 9,
       "tiers": [
         {
           "level": 35,
@@ -7616,6 +8712,21 @@
           "level": 78,
           "min": 4,
           "max": 4
+        },
+        {
+          "level": 68,
+          "min": 3,
+          "max": 5
+        },
+        {
+          "level": 75,
+          "min": 6,
+          "max": 8
+        },
+        {
+          "level": 83,
+          "min": 9,
+          "max": 10
         }
       ]
     },
@@ -7625,8 +8736,8 @@
       "domain": "Gear",
       "text": "",
       "min": 1,
-      "max": 6,
-      "ideal": 5,
+      "max": 7,
+      "ideal": 6,
       "tiers": [
         {
           "level": 30,
@@ -7642,6 +8753,16 @@
           "level": 1,
           "min": 2,
           "max": 4
+        },
+        {
+          "level": 68,
+          "min": 4,
+          "max": 5
+        },
+        {
+          "level": 80,
+          "min": 6,
+          "max": 7
         }
       ]
     },
@@ -7656,6 +8777,11 @@
       "tiers": [
         {
           "level": 20,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 84,
           "min": 1,
           "max": 1
         }
@@ -7682,7 +8808,7 @@
       "generation": "Corrupted",
       "domain": "Gear",
       "text": "",
-      "min": -24,
+      "min": -45,
       "max": -5,
       "ideal": -7,
       "tiers": [
@@ -7700,6 +8826,16 @@
           "level": 60,
           "min": -24,
           "max": -17
+        },
+        {
+          "level": 68,
+          "min": -35,
+          "max": -25
+        },
+        {
+          "level": 75,
+          "min": -45,
+          "max": -36
         }
       ]
     },
@@ -7725,13 +8861,18 @@
       "domain": "Gear",
       "text": "",
       "min": 20,
-      "max": 20,
-      "ideal": 20,
+      "max": 50,
+      "ideal": 45,
       "tiers": [
         {
           "level": 50,
           "min": 20,
           "max": 20
+        },
+        {
+          "level": 68,
+          "min": 30,
+          "max": 50
         }
       ]
     },
@@ -7757,13 +8898,18 @@
       "domain": "Gear",
       "text": "",
       "min": 20,
-      "max": 20,
-      "ideal": 20,
+      "max": 50,
+      "ideal": 45,
       "tiers": [
         {
           "level": 50,
           "min": 20,
           "max": 20
+        },
+        {
+          "level": 68,
+          "min": 30,
+          "max": 50
         }
       ]
     },
@@ -7789,13 +8935,18 @@
       "domain": "Gear",
       "text": "",
       "min": 20,
-      "max": 20,
-      "ideal": 20,
+      "max": 50,
+      "ideal": 45,
       "tiers": [
         {
           "level": 50,
           "min": 20,
           "max": 20
+        },
+        {
+          "level": 68,
+          "min": 30,
+          "max": 50
         }
       ]
     },
@@ -7901,13 +9052,28 @@
       "domain": "Gear",
       "text": "Blocking while Dual Wielding",
       "min": 1,
-      "max": 6,
-      "ideal": 5,
+      "max": 9,
+      "ideal": 8,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 6
+        },
+        {
+          "level": 68,
+          "min": 2,
+          "max": 4
+        },
+        {
+          "level": 75,
+          "min": 5,
+          "max": 7
+        },
+        {
+          "level": 80,
+          "min": 8,
+          "max": 9
         }
       ]
     },
@@ -7917,13 +9083,28 @@
       "domain": "Gear",
       "text": "",
       "min": 10,
-      "max": 10,
-      "ideal": 10,
+      "max": 20,
+      "ideal": 20,
       "tiers": [
         {
           "level": 20,
           "min": 10,
           "max": 10
+        },
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
         }
       ]
     },
@@ -7933,13 +9114,23 @@
       "domain": "Gear",
       "text": "",
       "min": 12,
-      "max": 12,
-      "ideal": 12,
+      "max": 20,
+      "ideal": 20,
       "tiers": [
         {
           "level": 24,
           "min": 12,
           "max": 12
+        },
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
         }
       ]
     },
@@ -7949,13 +9140,28 @@
       "domain": "Gear",
       "text": "",
       "min": 10,
-      "max": 10,
-      "ideal": 10,
+      "max": 20,
+      "ideal": 20,
       "tiers": [
         {
           "level": 24,
           "min": 10,
           "max": 10
+        },
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 84,
+          "min": 20,
+          "max": 20
         }
       ]
     },
@@ -7965,13 +9171,18 @@
       "domain": "Gear",
       "text": "",
       "min": 16,
-      "max": 16,
-      "ideal": 16,
+      "max": 22,
+      "ideal": 22,
       "tiers": [
         {
           "level": 61,
           "min": 16,
           "max": 16
+        },
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
         }
       ]
     },
@@ -7981,13 +9192,18 @@
       "domain": "Gear",
       "text": "",
       "min": 16,
-      "max": 16,
-      "ideal": 16,
+      "max": 22,
+      "ideal": 22,
       "tiers": [
         {
           "level": 61,
           "min": 16,
           "max": 16
+        },
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
         }
       ]
     },
@@ -7997,13 +9213,18 @@
       "domain": "Gear",
       "text": "",
       "min": 16,
-      "max": 16,
-      "ideal": 16,
+      "max": 22,
+      "ideal": 22,
       "tiers": [
         {
           "level": 61,
           "min": 16,
           "max": 16
+        },
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
         }
       ]
     },
@@ -8269,8 +9490,8 @@
       "domain": "Gear",
       "text": "",
       "min": 8,
-      "max": 23,
-      "ideal": 22,
+      "max": 35,
+      "ideal": 34,
       "tiers": [
         {
           "level": 23,
@@ -8291,6 +9512,21 @@
           "level": 73,
           "min": 20,
           "max": 23
+        },
+        {
+          "level": 68,
+          "min": 15,
+          "max": 22
+        },
+        {
+          "level": 75,
+          "min": 23,
+          "max": 30
+        },
+        {
+          "level": 81,
+          "min": 31,
+          "max": 35
         }
       ]
     },
@@ -8396,13 +9632,33 @@
       "domain": "Jewel",
       "text": "",
       "min": 10,
-      "max": 12,
-      "ideal": 11,
+      "max": 30,
+      "ideal": 29,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 12
+        },
+        {
+          "level": 68,
+          "min": 15,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 19,
+          "max": 22
+        },
+        {
+          "level": 83,
+          "min": 23,
+          "max": 25
+        },
+        {
+          "level": 80,
+          "min": 26,
+          "max": 30
         }
       ]
     },
@@ -8476,13 +9732,28 @@
       "domain": "Jewel",
       "text": "Minion Damage increase",
       "min": 14,
-      "max": 16,
-      "ideal": 15,
+      "max": 25,
+      "ideal": 24,
       "tiers": [
         {
           "level": 1,
           "min": 14,
           "max": 16
+        },
+        {
+          "level": 68,
+          "min": 15,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 19,
+          "max": 22
+        },
+        {
+          "level": 83,
+          "min": 23,
+          "max": 25
         }
       ]
     },
@@ -8524,13 +9795,33 @@
       "domain": "Jewel",
       "text": "",
       "min": 10,
-      "max": 12,
-      "ideal": 11,
+      "max": 37,
+      "ideal": 36,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 12
+        },
+        {
+          "level": 68,
+          "min": 15,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 19,
+          "max": 22
+        },
+        {
+          "level": 82,
+          "min": 23,
+          "max": 25
+        },
+        {
+          "level": 80,
+          "min": 33,
+          "max": 37
         }
       ]
     },
@@ -8716,8 +10007,8 @@
       "domain": "Jewel",
       "text": "",
       "min": 2,
-      "max": 8,
-      "ideal": 7,
+      "max": 14,
+      "ideal": 13,
       "tiers": [
         {
           "level": 1,
@@ -8738,6 +10029,21 @@
           "level": 70,
           "min": 7,
           "max": 8
+        },
+        {
+          "level": 68,
+          "min": 7,
+          "max": 9
+        },
+        {
+          "level": 75,
+          "min": 10,
+          "max": 12
+        },
+        {
+          "level": 85,
+          "min": 13,
+          "max": 14
         }
       ]
     },
@@ -8858,14 +10164,34 @@
       "generation": "Prefix",
       "domain": "Jewel",
       "text": "Maximum Life +%",
-      "min": 5,
-      "max": 7,
-      "ideal": 6,
+      "min": 3,
+      "max": 12,
+      "ideal": 11,
       "tiers": [
         {
           "level": 1,
           "min": 5,
           "max": 7
+        },
+        {
+          "level": 68,
+          "min": 5,
+          "max": 8
+        },
+        {
+          "level": 85,
+          "min": 9,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 8,
+          "max": 10
+        },
+        {
+          "level": 84,
+          "min": 7,
+          "max": 10
         }
       ]
     },
@@ -8875,13 +10201,23 @@
       "domain": "Jewel",
       "text": "Maximum Mana +%",
       "min": 6,
-      "max": 8,
-      "ideal": 7,
+      "max": 20,
+      "ideal": 19,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8
+        },
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 16,
+          "max": 20
         }
       ]
     },
@@ -8890,14 +10226,24 @@
       "generation": "Prefix",
       "domain": "Jewel",
       "text": "Global Maximum Energy Shield +%",
-      "min": 6,
-      "max": 8,
-      "ideal": 7,
+      "min": 4,
+      "max": 10,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8
+        },
+        {
+          "level": 68,
+          "min": 4,
+          "max": 7
+        },
+        {
+          "level": 75,
+          "min": 8,
+          "max": 10
         }
       ]
     },
@@ -8971,13 +10317,23 @@
       "domain": "Jewel",
       "text": "Life Gained On Hit",
       "min": 2,
-      "max": 3,
-      "ideal": 2,
+      "max": 20,
+      "ideal": 19,
       "tiers": [
         {
           "level": 1,
           "min": 2,
           "max": 3
+        },
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 16,
+          "max": 20
         }
       ]
     },
@@ -8987,13 +10343,18 @@
       "domain": "Jewel",
       "text": "Mana gained on Hit",
       "min": 1,
-      "max": 2,
-      "ideal": 1,
+      "max": 3,
+      "ideal": 2,
       "tiers": [
         {
           "level": 1,
           "min": 1,
           "max": 2
+        },
+        {
+          "level": 68,
+          "min": 2,
+          "max": 3
         }
       ]
     },
@@ -9067,13 +10428,33 @@
       "domain": "Jewel",
       "text": "Accuracy Rating +%",
       "min": 6,
-      "max": 14,
-      "ideal": 13,
+      "max": 20,
+      "ideal": 19,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 14
+        },
+        {
+          "level": 68,
+          "min": 6,
+          "max": 10
+        },
+        {
+          "level": 75,
+          "min": 11,
+          "max": 15
+        },
+        {
+          "level": 83,
+          "min": 16,
+          "max": 20
+        },
+        {
+          "level": 82,
+          "min": 16,
+          "max": 20
         }
       ]
     },
@@ -9083,13 +10464,28 @@
       "domain": "Jewel",
       "text": "Critical Strike Chance +%",
       "min": 6,
-      "max": 12,
-      "ideal": 11,
+      "max": 25,
+      "ideal": 24,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 10
+        },
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 16,
+          "max": 20
+        },
+        {
+          "level": 80,
+          "min": 21,
+          "max": 25
         }
       ]
     },
@@ -9098,14 +10494,29 @@
       "generation": "Suffix",
       "domain": "Jewel",
       "text": "Base Critical Strike Multiplier +%",
-      "min": 9,
-      "max": 12,
-      "ideal": 11,
+      "min": 8,
+      "max": 29,
+      "ideal": 28,
       "tiers": [
         {
           "level": 1,
           "min": 9,
           "max": 12
+        },
+        {
+          "level": 68,
+          "min": 8,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 16
+        },
+        {
+          "level": 80,
+          "min": 17,
+          "max": 20
         }
       ]
     },
@@ -9355,13 +10766,18 @@
       "domain": "Jewel",
       "text": "Base Stun Duration +%",
       "min": 10,
-      "max": 14,
-      "ideal": 13,
+      "max": 30,
+      "ideal": 27,
       "tiers": [
         {
           "level": 1,
           "min": 10,
           "max": 14
+        },
+        {
+          "level": 68,
+          "min": 20,
+          "max": 30
         }
       ]
     },
@@ -9451,8 +10867,8 @@
       "domain": "Jewel",
       "text": "",
       "min": 3,
-      "max": 8,
-      "ideal": 7,
+      "max": 10,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
@@ -9463,6 +10879,16 @@
           "level": 15,
           "min": 6,
           "max": 8
+        },
+        {
+          "level": 68,
+          "min": 4,
+          "max": 6
+        },
+        {
+          "level": 75,
+          "min": 7,
+          "max": 10
         }
       ]
     },
@@ -9488,8 +10914,8 @@
       "domain": "Jewel",
       "text": "",
       "min": 3,
-      "max": 8,
-      "ideal": 7,
+      "max": 10,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
@@ -9500,6 +10926,16 @@
           "level": 15,
           "min": 6,
           "max": 8
+        },
+        {
+          "level": 68,
+          "min": 4,
+          "max": 6
+        },
+        {
+          "level": 75,
+          "min": 7,
+          "max": 10
         }
       ]
     },
@@ -9525,8 +10961,8 @@
       "domain": "Jewel",
       "text": "",
       "min": 3,
-      "max": 8,
-      "ideal": 7,
+      "max": 10,
+      "ideal": 9,
       "tiers": [
         {
           "level": 1,
@@ -9537,6 +10973,16 @@
           "level": 15,
           "min": 6,
           "max": 8
+        },
+        {
+          "level": 68,
+          "min": 4,
+          "max": 6
+        },
+        {
+          "level": 75,
+          "min": 7,
+          "max": 10
         }
       ]
     },
@@ -9546,13 +10992,28 @@
       "domain": "Jewel",
       "text": "Ignite Duration Increase",
       "min": 6,
-      "max": 8,
-      "ideal": 7,
+      "max": 20,
+      "ideal": 19,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8
+        },
+        {
+          "level": 68,
+          "min": 8,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 16
+        },
+        {
+          "level": 80,
+          "min": 17,
+          "max": 20
         }
       ]
     },
@@ -9562,13 +11023,23 @@
       "domain": "Jewel",
       "text": "",
       "min": 3,
-      "max": 5,
-      "ideal": 4,
+      "max": 20,
+      "ideal": 20,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5
+        },
+        {
+          "level": 68,
+          "min": 15,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
         }
       ]
     },
@@ -9578,13 +11049,28 @@
       "domain": "Jewel",
       "text": "",
       "min": 6,
-      "max": 8,
-      "ideal": 7,
+      "max": 20,
+      "ideal": 19,
       "tiers": [
         {
           "level": 1,
           "min": 6,
           "max": 8
+        },
+        {
+          "level": 68,
+          "min": 8,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 16
+        },
+        {
+          "level": 80,
+          "min": 17,
+          "max": 20
         }
       ]
     },
@@ -9594,13 +11080,23 @@
       "domain": "Jewel",
       "text": "",
       "min": 3,
-      "max": 5,
-      "ideal": 4,
+      "max": 15,
+      "ideal": 15,
       "tiers": [
         {
           "level": 1,
           "min": 3,
           "max": 5
+        },
+        {
+          "level": 68,
+          "min": 10,
+          "max": 10
+        },
+        {
+          "level": 75,
+          "min": 15,
+          "max": 15
         }
       ]
     },
@@ -9625,14 +11121,29 @@
       "generation": "Suffix",
       "domain": "Jewel",
       "text": "",
-      "min": 16,
-      "max": 20,
-      "ideal": 19,
+      "min": 15,
+      "max": 35,
+      "ideal": 34,
       "tiers": [
         {
           "level": 1,
           "min": 16,
           "max": 20
+        },
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 80,
+          "min": 31,
+          "max": 35
         }
       ]
     },
@@ -9641,14 +11152,29 @@
       "generation": "Suffix",
       "domain": "Jewel",
       "text": "",
-      "min": 16,
-      "max": 20,
-      "ideal": 19,
+      "min": 15,
+      "max": 35,
+      "ideal": 34,
       "tiers": [
         {
           "level": 1,
           "min": 16,
           "max": 20
+        },
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 80,
+          "min": 31,
+          "max": 35
         }
       ]
     },
@@ -9658,8 +11184,8 @@
       "domain": "Jewel",
       "text": "Burning Damage Increase",
       "min": 16,
-      "max": 30,
-      "ideal": 29,
+      "max": 35,
+      "ideal": 34,
       "tiers": [
         {
           "level": 1,
@@ -9680,6 +11206,21 @@
           "level": 60,
           "min": 26,
           "max": 30
+        },
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 82,
+          "min": 31,
+          "max": 35
         }
       ]
     },
@@ -9737,13 +11278,28 @@
       "domain": "Jewel",
       "text": "Minion Life Increase",
       "min": 8,
-      "max": 12,
-      "ideal": 11,
+      "max": 25,
+      "ideal": 24,
       "tiers": [
         {
           "level": 1,
           "min": 8,
           "max": 12
+        },
+        {
+          "level": 68,
+          "min": 15,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 19,
+          "max": 22
+        },
+        {
+          "level": 80,
+          "min": 23,
+          "max": 25
         }
       ]
     },
@@ -9769,13 +11325,28 @@
       "domain": "Jewel",
       "text": "",
       "min": 12,
-      "max": 16,
-      "ideal": 15,
+      "max": 35,
+      "ideal": 34,
       "tiers": [
         {
           "level": 1,
           "min": 12,
           "max": 16
+        },
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 80,
+          "min": 31,
+          "max": 35
         }
       ]
     },
@@ -9853,13 +11424,28 @@
       "domain": "Gear",
       "text": "",
       "min": 11,
-      "max": 22,
-      "ideal": 21,
+      "max": 35,
+      "ideal": 34,
       "tiers": [
         {
           "level": 1,
           "min": 11,
           "max": 13
+        },
+        {
+          "level": 68,
+          "min": 15,
+          "max": 22
+        },
+        {
+          "level": 75,
+          "min": 23,
+          "max": 30
+        },
+        {
+          "level": 82,
+          "min": 31,
+          "max": 35
         }
       ]
     },
@@ -9916,6 +11502,21 @@
           "level": 74,
           "min": 36,
           "max": 49
+        },
+        {
+          "level": 68,
+          "min": 17,
+          "max": 22
+        },
+        {
+          "level": 75,
+          "min": 21,
+          "max": 28
+        },
+        {
+          "level": 82,
+          "min": 25,
+          "max": 34
         }
       ]
     },
@@ -9972,6 +11573,21 @@
           "level": 74,
           "min": 73,
           "max": 85
+        },
+        {
+          "level": 68,
+          "min": 33,
+          "max": 39
+        },
+        {
+          "level": 75,
+          "min": 42,
+          "max": 49
+        },
+        {
+          "level": 82,
+          "min": 51,
+          "max": 59
         }
       ]
     },
@@ -10028,6 +11644,21 @@
           "level": 74,
           "min": 30,
           "max": 40
+        },
+        {
+          "level": 68,
+          "min": 14,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 17,
+          "max": 23
+        },
+        {
+          "level": 83,
+          "min": 21,
+          "max": 28
         }
       ]
     },
@@ -10084,6 +11715,21 @@
           "level": 74,
           "min": 60,
           "max": 69
+        },
+        {
+          "level": 68,
+          "min": 27,
+          "max": 32
+        },
+        {
+          "level": 75,
+          "min": 34,
+          "max": 40
+        },
+        {
+          "level": 83,
+          "min": 41,
+          "max": 48
         }
       ]
     },
@@ -10140,6 +11786,21 @@
           "level": 74,
           "min": 3,
           "max": 10
+        },
+        {
+          "level": 68,
+          "min": 2,
+          "max": 5
+        },
+        {
+          "level": 75,
+          "min": 2,
+          "max": 6
+        },
+        {
+          "level": 84,
+          "min": 2,
+          "max": 7
         }
       ]
     },
@@ -10196,6 +11857,21 @@
           "level": 74,
           "min": 126,
           "max": 133
+        },
+        {
+          "level": 68,
+          "min": 58,
+          "max": 61
+        },
+        {
+          "level": 75,
+          "min": 73,
+          "max": 77
+        },
+        {
+          "level": 84,
+          "min": 88,
+          "max": 93
         }
       ]
     },
@@ -10237,8 +11913,8 @@
       "domain": "Gear",
       "text": "",
       "min": 2,
-      "max": 4,
-      "ideal": 3,
+      "max": 5,
+      "ideal": 4,
       "tiers": [
         {
           "level": 25,
@@ -10249,6 +11925,11 @@
           "level": 85,
           "min": 3,
           "max": 4
+        },
+        {
+          "level": 83,
+          "min": 3,
+          "max": 5
         }
       ]
     },
@@ -10270,6 +11951,5632 @@
           "level": 85,
           "min": 60,
           "max": 60
+        }
+      ]
+    },
+    "skill_effect_duration_+%": {
+      "id": "SkillEffectDuration",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Skill Duration",
+      "min": 10,
+      "max": 15,
+      "ideal": 13,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_increased_duration": {
+      "id": "SkillEffectDuration",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 15,
+      "ideal": 15,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 15
+        }
+      ]
+    },
+    "base_cooldown_speed_+%": {
+      "id": "CooldownRecovery",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 10,
+      "max": 20,
+      "ideal": 19,
+      "tiers": [
+        {
+          "level": 80,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 84,
+          "min": 16,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_fortify": {
+      "id": "DisplaySocketedGemGetsFortify",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 20
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "unaffected_by_chilled_ground": {
+      "id": "GroundEffectEffectiveness",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "unaffected_by_burning_ground": {
+      "id": "GroundEffectEffectiveness",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "unaffected_by_shocked_ground": {
+      "id": "GroundEffectEffectiveness",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "unaffected_by_desecrated_ground": {
+      "id": "GroundEffectEffectiveness",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "base_avoid_projectiles_%_chance": {
+      "id": "ChanceToAvoidProjectiles",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 6,
+      "max": 12,
+      "ideal": 11,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 6,
+          "max": 9
+        },
+        {
+          "level": 84,
+          "min": 10,
+          "max": 12
+        }
+      ]
+    },
+    "endurance_charge_on_kill_%": {
+      "id": "EnduranceChargeOnKillChance",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 4,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 4,
+          "max": 6
+        },
+        {
+          "level": 83,
+          "min": 7,
+          "max": 10
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_spell_totem_level": {
+      "id": "TotemSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        },
+        {
+          "level": 80,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "summon_totem_cast_speed_+%": {
+      "id": "TotemSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 20,
+      "ideal": 19,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 8,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 16
+        },
+        {
+          "level": 80,
+          "min": 17,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_ranged_attack_totem": {
+      "id": "TotemSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        },
+        {
+          "level": 80,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_life_leech_level": {
+      "id": "SupportedByLifeLeech",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 15,
+      "ideal": 15,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 15
+        }
+      ]
+    },
+    "local_display_grants_skill_decoy_totem_level": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_faster_attacks_level": {
+      "id": "IncreasedAttackSpeed",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 82,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_x_mana_leech": {
+      "id": "Supported",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 15,
+      "ideal": 15,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 15
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_faster_projectiles_level": {
+      "id": "ProjectileSpeed",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 82,
+          "min": 20,
+          "max": 20
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_slower_projectiles": {
+      "id": "ProjectileDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 83,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "avoid_interruption_while_casting_%": {
+      "id": "AvoidInterruptionWhileCasting",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 35,
+      "ideal": 32,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 20
+        },
+        {
+          "level": 75,
+          "min": 21,
+          "max": 25
+        },
+        {
+          "level": 80,
+          "min": 26,
+          "max": 30
+        }
+      ]
+    },
+    "melee_range_+": {
+      "id": "MeleeWeaponAndUnarmedRange",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 85,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "number_of_additional_traps_to_throw": {
+      "id": "TrapSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 75,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 84,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_trap_level": {
+      "id": "TrapSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        },
+        {
+          "level": 84,
+          "min": 22,
+          "max": 22
+        },
+        {
+          "level": 80,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "trap_damage_+%": {
+      "id": "TrapSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 35,
+      "ideal": 34,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 80,
+          "min": 31,
+          "max": 35
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_trap_cooldown": {
+      "id": "TrapSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "trap_throwing_speed_+%": {
+      "id": "TrapSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Trap Throwing Speed increase",
+      "min": 8,
+      "max": 20,
+      "ideal": 19,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 8,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 16
+        },
+        {
+          "level": 80,
+          "min": 17,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_trap_and_mine_damage": {
+      "id": "TrapSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_poison": {
+      "id": "PoisonDamage",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_chance_to_bleed": {
+      "id": "BleedingDamage",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "add_frenzy_charge_on_kill_%_chance": {
+      "id": "FrenzyChargeOnKillChance",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 4,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 4,
+          "max": 6
+        },
+        {
+          "level": 84,
+          "min": 7,
+          "max": 10
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_additional_accuracy_level": {
+      "id": "IncreasedAccuracyPercent",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 83,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "monster_base_block_%": {
+      "id": "BlockPercent",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Monster Base Block %",
+      "min": 2,
+      "max": 5,
+      "ideal": 4,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 2,
+          "max": 3
+        },
+        {
+          "level": 80,
+          "min": 4,
+          "max": 5
+        }
+      ]
+    },
+    "global_chance_to_blind_on_hit_%": {
+      "id": "BlindOnHit",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 6
+        },
+        {
+          "level": 75,
+          "min": 7,
+          "max": 8
+        },
+        {
+          "level": 80,
+          "min": 9,
+          "max": 10
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_blind_level": {
+      "id": "BlindOnHit",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_spells_critical_strike_multiplier_+": {
+      "id": "SocketedCriticalMultiplier",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 30,
+      "max": 70,
+      "ideal": 70,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 30,
+          "max": 30
+        },
+        {
+          "level": 75,
+          "min": 50,
+          "max": 50
+        },
+        {
+          "level": 83,
+          "min": 70,
+          "max": 70
+        }
+      ]
+    },
+    "local_display_socketed_attacks_critical_strike_multiplier_+": {
+      "id": "SocketedCriticalMultiplier",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 30,
+      "max": 70,
+      "ideal": 70,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 30,
+          "max": 30
+        },
+        {
+          "level": 75,
+          "min": 50,
+          "max": 50
+        },
+        {
+          "level": 84,
+          "min": 70,
+          "max": 70
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_concentrated_area_level": {
+      "id": "AreaDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 82,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "base_skill_area_of_effect_+%": {
+      "id": "AreaOfEffect",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "Base Skill Area Of Effect +%",
+      "min": 5,
+      "max": 20,
+      "ideal": 19,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 7,
+          "max": 9
+        },
+        {
+          "level": 75,
+          "min": 10,
+          "max": 12
+        },
+        {
+          "level": 83,
+          "min": 13,
+          "max": 15
+        },
+        {
+          "level": 82,
+          "min": 13,
+          "max": 15
+        },
+        {
+          "level": 80,
+          "min": 13,
+          "max": 15
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_increased_area_level": {
+      "id": "AreaOfEffect",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 83,
+          "min": 20,
+          "max": 20
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_x_increased_minion_damage_level": {
+      "id": "MinionDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 83,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_x_increased_minion_life_level": {
+      "id": "MinionLife",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "number_of_additional_mines_to_place": {
+      "id": "MineSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 75,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 85,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_remote_mine_level": {
+      "id": "MineSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        },
+        {
+          "level": 85,
+          "min": 22,
+          "max": 22
+        },
+        {
+          "level": 80,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "mine_damage_+%": {
+      "id": "MineSupported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 35,
+      "ideal": 34,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 80,
+          "min": 31,
+          "max": 35
+        }
+      ]
+    },
+    "chill_effect_+%": {
+      "id": "HelmetAilmentUber",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 20,
+      "ideal": 19,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 8,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 16
+        },
+        {
+          "level": 80,
+          "min": 17,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_x_hypothermia": {
+      "id": "HelmetAilmentUber",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "shock_effect_+%": {
+      "id": "HelmetAilmentUber",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 20,
+      "ideal": 19,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 8,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 16
+        },
+        {
+          "level": 80,
+          "min": 17,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_x_innervate_level": {
+      "id": "HelmetAilmentUber",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_immolate": {
+      "id": "HelmetAilmentUber",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_increased_burning_damage": {
+      "id": "HelmetAilmentUber",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 82,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "add_power_charge_on_kill_%_chance": {
+      "id": "PowerChargeOnKillChance",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 4,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 4,
+          "max": 6
+        },
+        {
+          "level": 84,
+          "min": 7,
+          "max": 10
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_reduced_duration": {
+      "id": "Supported",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "spell_minimum_added_physical_damage": {
+      "id": "SpellAddedPhysicalDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 40,
+      "ideal": 37,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 17,
+          "max": 22
+        },
+        {
+          "level": 75,
+          "min": 21,
+          "max": 28
+        },
+        {
+          "level": 85,
+          "min": 25,
+          "max": 34
+        },
+        {
+          "level": 84,
+          "min": 22,
+          "max": 30
+        }
+      ]
+    },
+    "spell_maximum_added_physical_damage": {
+      "id": "SpellAddedPhysicalDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 32,
+      "max": 71,
+      "ideal": 68,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 33,
+          "max": 39
+        },
+        {
+          "level": 75,
+          "min": 42,
+          "max": 49
+        },
+        {
+          "level": 85,
+          "min": 51,
+          "max": 59
+        },
+        {
+          "level": 84,
+          "min": 45,
+          "max": 52
+        }
+      ]
+    },
+    "spell_minimum_added_chaos_damage": {
+      "id": "SpellAddedChaosDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 14,
+      "max": 40,
+      "ideal": 37,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 14,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 17,
+          "max": 23
+        },
+        {
+          "level": 85,
+          "min": 21,
+          "max": 28
+        }
+      ]
+    },
+    "spell_maximum_added_chaos_damage": {
+      "id": "SpellAddedChaosDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 27,
+      "max": 71,
+      "ideal": 68,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 27,
+          "max": 32
+        },
+        {
+          "level": 75,
+          "min": 34,
+          "max": 40
+        },
+        {
+          "level": 85,
+          "min": 41,
+          "max": 48
+        }
+      ]
+    },
+    "base_mana_regeneration_rate_per_minute": {
+      "id": "ManaRegeneration",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Mana Regeneration Rate per Minute",
+      "min": 180,
+      "max": 480,
+      "ideal": 450,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 180,
+          "max": 300
+        },
+        {
+          "level": 80,
+          "min": 360,
+          "max": 480
+        }
+      ]
+    },
+    "local_display_socketed_spells_additional_critical_strike_chance": {
+      "id": "SocketedCriticalStrikeChance",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 100,
+      "max": 300,
+      "ideal": 300,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 100,
+          "max": 100
+        },
+        {
+          "level": 75,
+          "min": 200,
+          "max": 200
+        },
+        {
+          "level": 84,
+          "min": 300,
+          "max": 300
+        }
+      ]
+    },
+    "local_display_socketed_attacks_additional_critical_strike_chance": {
+      "id": "SocketedCriticalStrikeChance",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 100,
+      "max": 300,
+      "ideal": 300,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 100,
+          "max": 100
+        },
+        {
+          "level": 75,
+          "min": 200,
+          "max": 200
+        },
+        {
+          "level": 83,
+          "min": 300,
+          "max": 300
+        }
+      ]
+    },
+    "local_socketed_skill_gem_level_+": {
+      "id": "IncreaseSkillGemLevel",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 80,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "local_socketed_support_gem_level_+": {
+      "id": "IncreaseSpecificSocketedGemLevel",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 80,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "physical_damage_taken_%_as_fire": {
+      "id": "PhysicalDamageTakenAsElementUber",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 15,
+      "ideal": 14,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 10
+        },
+        {
+          "level": 84,
+          "min": 11,
+          "max": 15
+        }
+      ]
+    },
+    "physical_damage_taken_%_as_cold": {
+      "id": "PhysicalDamageTakenAsElementUber",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 15,
+      "ideal": 14,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 10
+        },
+        {
+          "level": 83,
+          "min": 11,
+          "max": 15
+        }
+      ]
+    },
+    "physical_damage_taken_%_as_lightning": {
+      "id": "PhysicalDamageTakenAsElementUber",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 15,
+      "ideal": 14,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 10
+        },
+        {
+          "level": 82,
+          "min": 11,
+          "max": 15
+        }
+      ]
+    },
+    "elemental_reflect_damage_taken_+%": {
+      "id": "ReflectedDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": -30,
+      "max": -10,
+      "ideal": -12,
+      "tiers": [
+        {
+          "level": 68,
+          "min": -22,
+          "max": -15
+        },
+        {
+          "level": 75,
+          "min": -30,
+          "max": -23
+        }
+      ]
+    },
+    "physical_reflect_damage_taken_+%": {
+      "id": "ReflectedDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": -30,
+      "max": -10,
+      "ideal": -12,
+      "tiers": [
+        {
+          "level": 68,
+          "min": -22,
+          "max": -15
+        },
+        {
+          "level": 75,
+          "min": -30,
+          "max": -23
+        }
+      ]
+    },
+    "base_damage_removed_from_mana_before_life_%": {
+      "id": "DamageRemovedFromManaBeforeLife",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 8,
+      "tiers": [
+        {
+          "level": 80,
+          "min": 5,
+          "max": 10
+        }
+      ]
+    },
+    "recover_%_maximum_life_on_kill": {
+      "id": "MaximumLifeOnKillPercent",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 6,
+      "ideal": 5,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 4
+        },
+        {
+          "level": 75,
+          "min": 5,
+          "max": 6
+        }
+      ]
+    },
+    "recover_%_maximum_mana_on_kill": {
+      "id": "MaximumManaOnKillPercent",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 6,
+      "ideal": 5,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 4
+        },
+        {
+          "level": 75,
+          "min": 5,
+          "max": 6
+        }
+      ]
+    },
+    "recover_energy_shield_%_on_kill": {
+      "id": "MaximumEnergyShieldOnKillPercent",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 6,
+      "ideal": 5,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 4
+        },
+        {
+          "level": 75,
+          "min": 5,
+          "max": 6
+        }
+      ]
+    },
+    "strength_+%": {
+      "id": "Strength",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 12,
+      "ideal": 11,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 8
+        },
+        {
+          "level": 83,
+          "min": 9,
+          "max": 12
+        }
+      ]
+    },
+    "dexterity_+%": {
+      "id": "Dexterity",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 12,
+      "ideal": 11,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 8
+        },
+        {
+          "level": 83,
+          "min": 9,
+          "max": 12
+        }
+      ]
+    },
+    "intelligence_+%": {
+      "id": "PercentageIntelligence",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 12,
+      "ideal": 11,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 8
+        },
+        {
+          "level": 83,
+          "min": 9,
+          "max": 12
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_item_rarity": {
+      "id": "Supported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 10,
+      "max": 15,
+      "ideal": 15,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 10,
+          "max": 10
+        },
+        {
+          "level": 85,
+          "min": 15,
+          "max": 15
+        }
+      ]
+    },
+    "unique_monster_dropped_item_rarity_+%": {
+      "id": "Supported",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 18,
+      "ideal": 16,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 8,
+          "max": 12
+        },
+        {
+          "level": 85,
+          "min": 13,
+          "max": 18
+        }
+      ]
+    },
+    "attack_additional_critical_strike_chance_permyriad": {
+      "id": "AdditionalCriticalStrikeChanceWithAttacks",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 50,
+      "max": 150,
+      "ideal": 140,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 50,
+          "max": 100
+        },
+        {
+          "level": 84,
+          "min": 110,
+          "max": 150
+        }
+      ]
+    },
+    "spell_additional_critical_strike_chance_permyriad": {
+      "id": "AdditionalCriticalStrikeChanceWithSpells",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 50,
+      "max": 150,
+      "ideal": 140,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 50,
+          "max": 100
+        },
+        {
+          "level": 84,
+          "min": 110,
+          "max": 150
+        }
+      ]
+    },
+    "local_display_grants_skill_wrath_level": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "local_display_grants_skill_anger_level": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "local_display_grants_skill_hatred_level": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "local_display_grants_level_X_envy": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 15,
+      "ideal": 15,
+      "tiers": [
+        {
+          "level": 85,
+          "min": 15,
+          "max": 15
+        }
+      ]
+    },
+    "local_display_grants_skill_haste_level": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "local_display_grants_skill_vitality_level": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "local_display_grants_skill_clarity_level": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "global_item_attribute_requirements_+%": {
+      "id": "GlobalItemAttributeRequirements",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 15,
+      "ideal": 14,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 10
+        },
+        {
+          "level": 75,
+          "min": 11,
+          "max": 15
+        }
+      ]
+    },
+    "base_life_leech_from_physical_damage_permyriad": {
+      "id": "PhysicalDamageLifeLeech",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 30,
+      "max": 50,
+      "ideal": 45,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 30,
+          "max": 50
+        }
+      ]
+    },
+    "base_movement_velocity_+%": {
+      "id": "MovementVelocity",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "Base Movement Velocity +%",
+      "min": 3,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 4,
+          "max": 6
+        },
+        {
+          "level": 84,
+          "min": 7,
+          "max": 8
+        },
+        {
+          "level": 75,
+          "min": 3,
+          "max": 6
+        },
+        {
+          "level": 80,
+          "min": 7,
+          "max": 10
+        }
+      ]
+    },
+    "blocking_blocks_spells_%": {
+      "id": "BlockingBlocksSpells",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Spell Blocking",
+      "min": 25,
+      "max": 60,
+      "ideal": 55,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 25,
+          "max": 35
+        },
+        {
+          "level": 75,
+          "min": 36,
+          "max": 40
+        }
+      ]
+    },
+    "all_attributes_+%": {
+      "id": "PercentageAllAttributes",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 6,
+      "max": 12,
+      "ideal": 11,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 6,
+          "max": 9
+        },
+        {
+          "level": 75,
+          "min": 10,
+          "max": 12
+        }
+      ]
+    },
+    "base_mana_reservation_+%": {
+      "id": "ReducedManaReservationsCost",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": -5,
+      "max": -3,
+      "ideal": -4,
+      "tiers": [
+        {
+          "level": 82,
+          "min": -5,
+          "max": -3
+        }
+      ]
+    },
+    "projectile_base_number_of_targets_to_pierce": {
+      "id": "Pierce",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 2,
+      "ideal": 2,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 75,
+          "min": 2,
+          "max": 2
+        }
+      ]
+    },
+    "base_item_found_quantity_+%": {
+      "id": "ItemFoundQuantityIncrease",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Increased Item Quantity %",
+      "min": 4,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 4,
+          "max": 7
+        },
+        {
+          "level": 85,
+          "min": 8,
+          "max": 10
+        }
+      ]
+    },
+    "physical_damage_%_to_add_as_fire": {
+      "id": "PhysicalAddedAsFire",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 10,
+      "max": 40,
+      "ideal": 39,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 16,
+          "max": 20
+        },
+        {
+          "level": 80,
+          "min": 36,
+          "max": 40
+        }
+      ]
+    },
+    "physical_damage_%_to_add_as_cold": {
+      "id": "PhysicalAddedAsCold",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 40,
+      "ideal": 39,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 16,
+          "max": 20
+        },
+        {
+          "level": 80,
+          "min": 36,
+          "max": 40
+        }
+      ]
+    },
+    "physical_damage_%_to_add_as_lightning": {
+      "id": "PhysicalAddedAsLightning",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 10,
+      "max": 40,
+      "ideal": 39,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 16,
+          "max": 20
+        },
+        {
+          "level": 80,
+          "min": 36,
+          "max": 40
+        }
+      ]
+    },
+    "non_chaos_damage_to_add_as_chaos_damage_%": {
+      "id": "NonChaosAddedAsChaos",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 7,
+      "max": 13,
+      "ideal": 11,
+      "tiers": [
+        {
+          "level": 81,
+          "min": 7,
+          "max": 13
+        }
+      ]
+    },
+    "power_frenzy_or_endurance_charge_on_kill_%": {
+      "id": "PowerFrenzyOrEnduranceChargeOnKill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 6
+        },
+        {
+          "level": 75,
+          "min": 7,
+          "max": 10
+        }
+      ]
+    },
+    "base_number_of_zombies_allowed": {
+      "id": "MaximumMinionCount",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "Zombie Quantity",
+      "min": 0,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "base_number_of_skeletons_allowed": {
+      "id": "MaximumMinionCount",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 0,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 0,
+          "max": 0
+        }
+      ]
+    },
+    "base_number_of_spectres_allowed": {
+      "id": "MaximumMinionCount",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "Spectre Quantity",
+      "min": 0,
+      "max": 0,
+      "ideal": 0,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 0,
+          "max": 0
+        }
+      ]
+    },
+    "maximum_block_%": {
+      "id": "MaximumBlockChance",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 2,
+      "max": 2,
+      "ideal": 2,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 2,
+          "max": 2
+        }
+      ]
+    },
+    "maximum_life_leech_rate_%_per_minute": {
+      "id": "MaximumLeechRate",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 180,
+      "max": 300,
+      "ideal": 270,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 180,
+          "max": 300
+        }
+      ]
+    },
+    "reduce_enemy_elemental_resistance_%": {
+      "id": "ElementalPenetration",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "Reduce Enemy Elemental Resistance %",
+      "min": 4,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 4,
+          "max": 7
+        },
+        {
+          "level": 82,
+          "min": 8,
+          "max": 10
+        },
+        {
+          "level": 75,
+          "min": 7,
+          "max": 8
+        },
+        {
+          "level": 83,
+          "min": 9,
+          "max": 10
+        }
+      ]
+    },
+    "damage_+%_per_15_strength": {
+      "id": "DamagePer15Attributes",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 80,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "damage_+%_per_15_dex": {
+      "id": "DamagePer15Attributes",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 80,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "damage_+%_per_15_int": {
+      "id": "DamagePer15Attributes",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 80,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "curse_effect_on_self_+%": {
+      "id": "ReducedCurseEffect",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": -25,
+      "max": -15,
+      "ideal": -17,
+      "tiers": [
+        {
+          "level": 68,
+          "min": -20,
+          "max": -15
+        },
+        {
+          "level": 75,
+          "min": -25,
+          "max": -21
+        }
+      ]
+    },
+    "melee_damage_+%": {
+      "id": "MeleeDamage",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Melee Damage +%",
+      "min": 20,
+      "max": 35,
+      "ideal": 34,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 83,
+          "min": 31,
+          "max": 35
+        }
+      ]
+    },
+    "projectile_attack_damage_+%": {
+      "id": "ProjectileAttackDamage",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Projectile Attack Damage +%",
+      "min": 20,
+      "max": 35,
+      "ideal": 34,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 84,
+          "min": 31,
+          "max": 35
+        }
+      ]
+    },
+    "spell_and_attack_minimum_added_fire_damage": {
+      "id": "AddedFireDamageSpellsAndAttacks",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 17,
+      "max": 24,
+      "ideal": 23,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 17,
+          "max": 20
+        },
+        {
+          "level": 75,
+          "min": 21,
+          "max": 24
+        }
+      ]
+    },
+    "spell_and_attack_maximum_added_fire_damage": {
+      "id": "AddedFireDamageSpellsAndAttacks",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 38,
+      "max": 48,
+      "ideal": 46,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 38,
+          "max": 42
+        },
+        {
+          "level": 75,
+          "min": 43,
+          "max": 48
+        }
+      ]
+    },
+    "spell_and_attack_minimum_added_cold_damage": {
+      "id": "AddedColdDamageToSpellsAndAttacks",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 17,
+      "max": 24,
+      "ideal": 23,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 17,
+          "max": 20
+        },
+        {
+          "level": 75,
+          "min": 21,
+          "max": 24
+        }
+      ]
+    },
+    "spell_and_attack_maximum_added_cold_damage": {
+      "id": "AddedColdDamageToSpellsAndAttacks",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 38,
+      "max": 48,
+      "ideal": 46,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 38,
+          "max": 42
+        },
+        {
+          "level": 75,
+          "min": 43,
+          "max": 48
+        }
+      ]
+    },
+    "spell_and_attack_minimum_added_lightning_damage": {
+      "id": "AddedLightningDamageSpellsAndAttacks",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 9,
+      "max": 16,
+      "ideal": 15,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 9,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 16
+        }
+      ]
+    },
+    "spell_and_attack_maximum_added_lightning_damage": {
+      "id": "AddedLightningDamageSpellsAndAttacks",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 48,
+      "max": 60,
+      "ideal": 59,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 48,
+          "max": 52
+        },
+        {
+          "level": 75,
+          "min": 56,
+          "max": 60
+        }
+      ]
+    },
+    "experience_gain_+%": {
+      "id": "ExperienceIncrease",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "Experience Gain increase",
+      "min": 2,
+      "max": 3,
+      "ideal": 2,
+      "tiers": [
+        {
+          "level": 85,
+          "min": 2,
+          "max": 3
+        }
+      ]
+    },
+    "base_life_gained_on_spell_hit": {
+      "id": "LifeGainedOnSpellHit",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 15,
+      "ideal": 14,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 8,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 15
+        }
+      ]
+    },
+    "mana_gained_on_spell_hit": {
+      "id": "ManaGainedOnSpellHit",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 2,
+      "max": 3,
+      "ideal": 2,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 2,
+          "max": 3
+        }
+      ]
+    },
+    "curse_on_hit_level_assassins_mark": {
+      "id": "CurseOnHitLevel",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 12,
+      "ideal": 12,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 8,
+          "max": 8
+        },
+        {
+          "level": 80,
+          "min": 12,
+          "max": 12
+        }
+      ]
+    },
+    "curse_on_hit_level_poachers_mark": {
+      "id": "CurseOnHitLevel",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 12,
+      "ideal": 12,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 8,
+          "max": 8
+        },
+        {
+          "level": 80,
+          "min": 12,
+          "max": 12
+        }
+      ]
+    },
+    "curse_on_hit_level_warlords_mark": {
+      "id": "CurseOnHitLevel",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 12,
+      "ideal": 12,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 8,
+          "max": 8
+        },
+        {
+          "level": 80,
+          "min": 12,
+          "max": 12
+        }
+      ]
+    },
+    "local_display_grants_skill_herald_of_ash_level": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "local_display_grants_skill_herald_of_ice_level": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "local_display_grants_skill_herald_of_thunder_level": {
+      "id": "GrantedSkill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "chance_to_evade_attacks_%": {
+      "id": "AdditionalChanceToEvade",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 2,
+      "max": 5,
+      "ideal": 4,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 2,
+          "max": 3
+        },
+        {
+          "level": 75,
+          "min": 4,
+          "max": 5
+        }
+      ]
+    },
+    "global_minimum_added_fire_damage_vs_ignited_enemies": {
+      "id": "AilmentChanceAddedDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 9,
+      "max": 16,
+      "ideal": 15,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 9,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 16
+        }
+      ]
+    },
+    "global_maximum_added_fire_damage_vs_ignited_enemies": {
+      "id": "AilmentChanceAddedDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 27,
+      "max": 36,
+      "ideal": 35,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 27,
+          "max": 30
+        },
+        {
+          "level": 75,
+          "min": 33,
+          "max": 36
+        }
+      ]
+    },
+    "global_minimum_added_cold_damage_vs_chilled_or_frozen_enemies": {
+      "id": "AilmentChanceAddedDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 9,
+      "max": 16,
+      "ideal": 15,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 9,
+          "max": 12
+        },
+        {
+          "level": 75,
+          "min": 13,
+          "max": 16
+        }
+      ]
+    },
+    "global_maximum_added_cold_damage_vs_chilled_or_frozen_enemies": {
+      "id": "AilmentChanceAddedDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 27,
+      "max": 36,
+      "ideal": 35,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 27,
+          "max": 30
+        },
+        {
+          "level": 75,
+          "min": 33,
+          "max": 36
+        }
+      ]
+    },
+    "global_minimum_added_lightning_damage_vs_shocked_enemies": {
+      "id": "AilmentChanceAddedDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 7
+        },
+        {
+          "level": 75,
+          "min": 6,
+          "max": 10
+        }
+      ]
+    },
+    "global_maximum_added_lightning_damage_vs_shocked_enemies": {
+      "id": "AilmentChanceAddedDamage",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 34,
+      "max": 45,
+      "ideal": 44,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 34,
+          "max": 38
+        },
+        {
+          "level": 75,
+          "min": 41,
+          "max": 45
+        }
+      ]
+    },
+    "flask_effect_+%": {
+      "id": "FlaskEffect",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 4,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 4,
+          "max": 7
+        },
+        {
+          "level": 81,
+          "min": 8,
+          "max": 10
+        }
+      ]
+    },
+    "base_self_critical_strike_multiplier_-%": {
+      "id": "ReducedCriticalStrikeDamageTaken",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "Critical Strike Multiplier",
+      "min": 15,
+      "max": 30,
+      "ideal": 27,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 20
+        },
+        {
+          "level": 75,
+          "min": 21,
+          "max": 30
+        }
+      ]
+    },
+    "life_recovery_rate_+%": {
+      "id": "LifeRecoveryRate",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 10,
+      "max": 20,
+      "ideal": 19,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 16,
+          "max": 20
+        }
+      ]
+    },
+    "energy_shield_recovery_rate_+%": {
+      "id": "EnergyShieldRecovery",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 10,
+      "max": 20,
+      "ideal": 19,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 16,
+          "max": 20
+        }
+      ]
+    },
+    "mana_recovery_rate_+%": {
+      "id": "ManaRecoveryRate",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 10,
+      "max": 20,
+      "ideal": 19,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 16,
+          "max": 20
+        }
+      ]
+    },
+    "flasks_%_chance_to_not_consume_charges": {
+      "id": "FlaskChargesUsed",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 6,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 82,
+          "min": 6,
+          "max": 10
+        }
+      ]
+    },
+    "chaos_resistance_+_while_using_flask": {
+      "id": "ChaosResistanceWhileUsingFlask",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 30,
+      "ideal": 29,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        }
+      ]
+    },
+    "movement_speed_+%_during_flask_effect": {
+      "id": "MovementSpeedDuringFlaskEffect",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 6,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 81,
+          "min": 6,
+          "max": 10
+        }
+      ]
+    },
+    "chance_to_fortify_on_melee_stun_%": {
+      "id": "FortifyOnMeleeStun",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 20,
+      "ideal": 17,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 8,
+          "max": 12
+        }
+      ]
+    },
+    "local_display_grants_skill_enduring_cry_level": {
+      "id": "GrantedSkill",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "local_display_grants_skill_rallying_cry_level": {
+      "id": "GrantedSkill",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "local_display_grants_skill_abyssal_cry_level": {
+      "id": "GrantedSkill",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 22,
+      "max": 22,
+      "ideal": 22,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 22
+        }
+      ]
+    },
+    "remove_ignite_and_burning_on_flask_use": {
+      "id": "RemoveAilmentOnFlaskUse",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "remove_chill_and_freeze_on_flask_use": {
+      "id": "RemoveAilmentOnFlaskUse",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "remove_shock_on_flask_use": {
+      "id": "RemoveAilmentOnFlaskUse",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "attack_speed_+%_during_flask_effect": {
+      "id": "SpeedDuringFlaskEffect",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 14,
+      "ideal": 12,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 8,
+          "max": 14
+        }
+      ]
+    },
+    "cast_speed_+%_during_flask_effect": {
+      "id": "SpeedDuringFlaskEffect",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 8,
+      "max": 14,
+      "ideal": 12,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 8,
+          "max": 14
+        }
+      ]
+    },
+    "melee_damage_+%_during_flask_effect": {
+      "id": "DamageDuringFlaskEffect",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 35,
+      "ideal": 34,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 80,
+          "min": 31,
+          "max": 35
+        }
+      ]
+    },
+    "projectile_attack_damage_+%_during_flask_effect": {
+      "id": "DamageDuringFlaskEffect",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 35,
+      "ideal": 34,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 80,
+          "min": 31,
+          "max": 35
+        }
+      ]
+    },
+    "spell_damage_+%_during_flask_effect": {
+      "id": "DamageDuringFlaskEffect",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 35,
+      "ideal": 34,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 30
+        },
+        {
+          "level": 80,
+          "min": 31,
+          "max": 35
+        }
+      ]
+    },
+    "base_number_of_additional_arrows": {
+      "id": "AdditionalArrows",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "Additional Arrows",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 80,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 82,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "maim_on_hit_%": {
+      "id": "GlobalMaimOnHit",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "phasing_for_4_seconds_on_kill_%": {
+      "id": "ChancetoGainPhasingOnKill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 6
+        },
+        {
+          "level": 75,
+          "min": 7,
+          "max": 8
+        },
+        {
+          "level": 80,
+          "min": 9,
+          "max": 10
+        }
+      ]
+    },
+    "minimum_added_cold_damage_per_frenzy_charge": {
+      "id": "AddedColdDamagePerFrenzyCharge",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 3,
+      "ideal": 3,
+      "tiers": [
+        {
+          "level": 80,
+          "min": 3,
+          "max": 3
+        }
+      ]
+    },
+    "maximum_added_cold_damage_per_frenzy_charge": {
+      "id": "AddedColdDamagePerFrenzyCharge",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 6,
+      "max": 6,
+      "ideal": 6,
+      "tiers": [
+        {
+          "level": 80,
+          "min": 6,
+          "max": 6
+        }
+      ]
+    },
+    "base_maximum_fire_damage_resistance_%": {
+      "id": "MaximumFireResist",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 2,
+      "ideal": 2,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 80,
+          "min": 2,
+          "max": 2
+        }
+      ]
+    },
+    "base_maximum_cold_damage_resistance_%": {
+      "id": "MaximumColdResist",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 2,
+      "ideal": 2,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 80,
+          "min": 2,
+          "max": 2
+        }
+      ]
+    },
+    "base_maximum_lightning_damage_resistance_%": {
+      "id": "MaximumLightningResistance",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 2,
+      "ideal": 2,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 80,
+          "min": 2,
+          "max": 2
+        }
+      ]
+    },
+    "additional_maximum_all_resistances_%": {
+      "id": "MaximumResistances",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 85,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_cast_on_damage_taken": {
+      "id": "SupportedByTrigger",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 5,
+      "ideal": 5,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 5
+        }
+      ]
+    },
+    "local_display_socketed_gems_have_mana_reservation_+%": {
+      "id": "DisplaySocketedGemsGetReducedReservation",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": -15,
+      "max": -10,
+      "ideal": -10,
+      "tiers": [
+        {
+          "level": 68,
+          "min": -10,
+          "max": -10
+        },
+        {
+          "level": 80,
+          "min": -15,
+          "max": -15
+        }
+      ]
+    },
+    "X_armour_if_you_have_blocked_recently": {
+      "id": "GainArmourIfBlockedRecently",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 500,
+      "max": 800,
+      "ideal": 762,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 500,
+          "max": 650
+        },
+        {
+          "level": 75,
+          "min": 651,
+          "max": 800
+        }
+      ]
+    },
+    "additional_block_%_with_5_or_more_nearby_enemies": {
+      "id": "AdditionalBlockWith5NearbyEnemies",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 2,
+      "max": 5,
+      "ideal": 4,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 2,
+          "max": 3
+        },
+        {
+          "level": 75,
+          "min": 4,
+          "max": 5
+        }
+      ]
+    },
+    "gain_random_charge_on_block": {
+      "id": "GainRandomChargeOnBlock",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "dodge_attacks_chance_%_if_you_have_blocked_recently": {
+      "id": "ChanceToDodgeIfBlockedRecently",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 5,
+      "ideal": 4,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 5
+        }
+      ]
+    },
+    "damage_+%_per_1%_block_chance": {
+      "id": "DamagePerBlockChance",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "chill_attackers_for_4_seconds_on_block_%_chance": {
+      "id": "ChanceToChillAttackersOnBlock",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 25,
+      "max": 50,
+      "ideal": 47,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 25,
+          "max": 40
+        },
+        {
+          "level": 75,
+          "min": 41,
+          "max": 50
+        }
+      ]
+    },
+    "shock_attackers_for_4_seconds_on_block_%_chance": {
+      "id": "ChanceToShockAttackersOnBlock",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 25,
+      "max": 50,
+      "ideal": 47,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 25,
+          "max": 40
+        },
+        {
+          "level": 75,
+          "min": 41,
+          "max": 50
+        }
+      ]
+    },
+    "recover_%_of_maximum_life_on_block": {
+      "id": "RecoverLifePercentOnBlock",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 5,
+      "ideal": 4,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 5
+        }
+      ]
+    },
+    "mana_%_gained_on_block": {
+      "id": "RecoverManaPercentOnBlock",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 4,
+      "max": 8,
+      "ideal": 7,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 4,
+          "max": 8
+        }
+      ]
+    },
+    "energy_shield_%_gained_on_block": {
+      "id": "RecoverEnergyShieldPercentOnBlock",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 5,
+      "ideal": 4,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 5
+        }
+      ]
+    },
+    "local_physical_damage_+%": {
+      "id": "LocalPhysicalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "Local Physical Damage +%",
+      "min": 30,
+      "max": 134,
+      "ideal": 132,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 101,
+          "max": 115
+        },
+        {
+          "level": 75,
+          "min": 116,
+          "max": 126
+        },
+        {
+          "level": 80,
+          "min": 127,
+          "max": 134
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_melee_physical_damage_level": {
+      "id": "LocalPhysicalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_brutality": {
+      "id": "LocalPhysicalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_added_fire_damage_level": {
+      "id": "LocalPhysicalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_ruthless": {
+      "id": "LocalPhysicalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_onslaught": {
+      "id": "LocalPhysicalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_endurance_charge_on_stun": {
+      "id": "LocalPhysicalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_power_charge_on_crit": {
+      "id": "LocalPhysicalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_iron_grip": {
+      "id": "LocalPhysicalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_physical_projectile_attack_damage": {
+      "id": "LocalPhysicalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_spirit_strike": {
+      "id": "SupportedByMelee",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_multistrike_level": {
+      "id": "IncreasedAttackSpeed",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "chance_to_deal_double_damage_%": {
+      "id": "IncreasedAttackSpeed",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 20
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "attack_speed_+%_if_enemy_killed_recently": {
+      "id": "IncreasedAttackSpeed",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 20
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_critical_strike_chance_+%": {
+      "id": "CriticalStrikeChanceIncrease",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Local Critical Strike Chance +%",
+      "min": 15,
+      "max": 29,
+      "ideal": 28,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 22,
+          "max": 25
+        },
+        {
+          "level": 75,
+          "min": 26,
+          "max": 29
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_increased_critical_strikes": {
+      "id": "CriticalStrikeChanceIncrease",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "critical_strike_chance_+%_if_enemy_killed_recently": {
+      "id": "CriticalStrikeChanceIncrease",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 50,
+      "max": 100,
+      "ideal": 95,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 50,
+          "max": 50
+        },
+        {
+          "level": 75,
+          "min": 50,
+          "max": 50
+        }
+      ]
+    },
+    "critical_strike_multiplier_+_if_have_not_dealt_critical_strike_recently": {
+      "id": "CriticalStrikeChanceIncrease",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 50,
+      "max": 50,
+      "ideal": 50,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 50,
+          "max": 50
+        },
+        {
+          "level": 75,
+          "min": 50,
+          "max": 50
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_increased_critical_damage_level": {
+      "id": "CriticalStrikeMultiplier",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "add_power_charge_on_critical_strike_%": {
+      "id": "CriticalStrikeMultiplier",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 10,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 8
+        },
+        {
+          "level": 75,
+          "min": 9,
+          "max": 10
+        }
+      ]
+    },
+    "elemental_damage_with_attack_skills_+%": {
+      "id": "IncreasedWeaponElementalDamagePercent",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 28,
+      "max": 37,
+      "ideal": 36,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 28,
+          "max": 32
+        },
+        {
+          "level": 75,
+          "min": 33,
+          "max": 37
+        }
+      ]
+    },
+    "local_maim_on_hit_%": {
+      "id": "LocalChanceToMaim",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_maim": {
+      "id": "LocalChanceToMaim",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_poison_on_hit_%": {
+      "id": "LocalChanceToPoisonOnHit",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_chance_to_bleed_on_hit_%": {
+      "id": "LocalChanceToBleed",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Local Chance To Bleed On Hit %",
+      "min": 10,
+      "max": 15,
+      "ideal": 15,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 10,
+          "max": 10
+        },
+        {
+          "level": 75,
+          "min": 15,
+          "max": 15
+        }
+      ]
+    },
+    "chance_to_gain_onslaught_on_kill_for_4_seconds_%": {
+      "id": "OnslaugtOnKillPercentChance",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 6
+        },
+        {
+          "level": 75,
+          "min": 7,
+          "max": 8
+        },
+        {
+          "level": 83,
+          "min": 9,
+          "max": 10
+        }
+      ]
+    },
+    "chance_to_gain_unholy_might_on_kill_for_3_seconds_%": {
+      "id": "UnholyMightOnKillPercentChance",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 6
+        },
+        {
+          "level": 75,
+          "min": 7,
+          "max": 8
+        },
+        {
+          "level": 84,
+          "min": 9,
+          "max": 10
+        }
+      ]
+    },
+    "attacks_chance_to_blind_on_hit_%": {
+      "id": "BlindOnHit",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 6
+        },
+        {
+          "level": 75,
+          "min": 7,
+          "max": 8
+        },
+        {
+          "level": 81,
+          "min": 9,
+          "max": 10
+        }
+      ]
+    },
+    "physical_damage_while_dual_wielding_+%": {
+      "id": "DualWieldingPhysicalDamage",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 23,
+      "max": 37,
+      "ideal": 36,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 23,
+          "max": 27
+        },
+        {
+          "level": 75,
+          "min": 28,
+          "max": 32
+        },
+        {
+          "level": 80,
+          "min": 33,
+          "max": 37
+        }
+      ]
+    },
+    "base_physical_damage_%_to_convert_to_chaos": {
+      "id": "PhysicalDamageConvertedToChaos",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 10,
+      "max": 25,
+      "ideal": 24,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 75,
+          "min": 16,
+          "max": 20
+        },
+        {
+          "level": 85,
+          "min": 21,
+          "max": 25
+        }
+      ]
+    },
+    "attack_minimum_added_fire_damage_per_10_strength": {
+      "id": "AddedFireDamagePerStrength",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 3,
+      "ideal": 2,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 2
+        }
+      ]
+    },
+    "attack_maximum_added_fire_damage_per_10_strength": {
+      "id": "AddedFireDamagePerStrength",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 5,
+      "ideal": 4,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 4
+        }
+      ]
+    },
+    "attacks_with_this_weapon_minimum_added_cold_damage_per_10_dexterity": {
+      "id": "AddedColdDamagePerDexterity",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 3,
+      "ideal": 2,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 2
+        }
+      ]
+    },
+    "attacks_with_this_weapon_maximum_added_cold_damage_per_10_dexterity": {
+      "id": "AddedColdDamagePerDexterity",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 5,
+      "ideal": 4,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 4
+        }
+      ]
+    },
+    "attack_minimum_added_lightning_damage_per_10_int": {
+      "id": "AddedLightningDamagePerIntelligence",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "attack_maximum_added_lightning_damage_per_10_int": {
+      "id": "AddedLightningDamagePerIntelligence",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 7,
+      "ideal": 6,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 6
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_cast_on_crit_level": {
+      "id": "SupportedByTrigger",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_cast_on_kill": {
+      "id": "SupportedByTrigger",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_cast_while_channelling": {
+      "id": "SupportedByTrigger",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "kill_enemy_on_hit_if_under_10%_life": {
+      "id": "CullingStrike",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "local_weapon_range_+": {
+      "id": "LocalWeaponRangeUber",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 2,
+      "ideal": 2,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 1,
+          "max": 1
+        },
+        {
+          "level": 85,
+          "min": 2,
+          "max": 2
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_x_controlled_destruction": {
+      "id": "WeaponCasterDamagePrefix",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_efficacy": {
+      "id": "WeaponCasterDamagePrefix",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_arcane_surge": {
+      "id": "WeaponCasterDamagePrefix",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_reduced_mana_cost_level": {
+      "id": "WeaponCasterDamagePrefix",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_elemental_focus": {
+      "id": "WeaponCasterDamagePrefix",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_fire_penetration": {
+      "id": "WeaponCasterDamagePrefix",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_x_cold_penetration": {
+      "id": "WeaponCasterDamagePrefix",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 0,
+      "max": 0,
+      "ideal": 0,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 0,
+          "max": 0
+        },
+        {
+          "level": 75,
+          "min": 0,
+          "max": 0
+        },
+        {
+          "level": 80,
+          "min": 0,
+          "max": 0
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_lightning_penetration": {
+      "id": "WeaponCasterDamagePrefix",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_multicast": {
+      "id": "IncreasedCastSpeed",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "cast_speed_+%_if_enemy_killed_recently": {
+      "id": "IncreasedCastSpeed",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 20
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "chance_to_freeze_shock_ignite_%": {
+      "id": "ChanceToFreezeShockIgnite",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 9,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 7
+        },
+        {
+          "level": 75,
+          "min": 8,
+          "max": 10
+        }
+      ]
+    },
+    "local_display_socketed_gems_get_elemental_proliferation_level": {
+      "id": "ChanceToFreezeShockIgnite",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_unbound_ailments": {
+      "id": "ChanceToFreezeShockIgnite",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_X_lesser_poison": {
+      "id": "PoisonDamage",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 18,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 75,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_spell_cascade": {
+      "id": "SupportedByAreaProjectile",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_x_lesser_multiple_projectiles_level": {
+      "id": "SupportedByAreaProjectile",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_supported_by_level_x_parallel_projectiles": {
+      "id": "SupportedByAreaProjectile",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 16,
+          "max": 16
+        },
+        {
+          "level": 75,
+          "min": 18,
+          "max": 18
+        },
+        {
+          "level": 80,
+          "min": 20,
+          "max": 20
+        }
+      ]
+    },
+    "elemental_damage_%_to_add_as_chaos": {
+      "id": "ElementalDamagePercentAddedAsChaos",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 10,
+      "max": 20,
+      "ideal": 19,
+      "tiers": [
+        {
+          "level": 75,
+          "min": 10,
+          "max": 15
+        },
+        {
+          "level": 85,
+          "min": 16,
+          "max": 20
+        }
+      ]
+    },
+    "local_display_socketed_gems_chain_X_additional_times": {
+      "id": "DisplaySocketedSkillsChain",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 85,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "spell_damage_+%_per_16_strength": {
+      "id": "SpellDamagePerStrength",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "spell_damage_+%_per_16_dex": {
+      "id": "SpellDamagePerDexterity",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "spell_damage_+%_per_16_int": {
+      "id": "SpellDamagePerIntelligence",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "spell_damage_+%_per_10_strength": {
+      "id": "SpellDamagePerStrength",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "spell_damage_+%_per_10_int": {
+      "id": "SpellDamagePerIntelligence",
+      "generation": "Prefix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "max_endurance_charges": {
+      "id": "MaximumEnduranceCharges",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Maximum Endurance Charges",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 84,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "max_frenzy_charges": {
+      "id": "MaximumFrenzyCharges",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Maximum Frenzy Charges",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 84,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "power_charge_on_block_%_chance": {
+      "id": "PowerChargeOnBlock",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 25,
+      "max": 25,
+      "ideal": 25,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 25,
+          "max": 25
+        }
+      ]
+    },
+    "staff_block_%": {
+      "id": "PowerChargeOnBlock",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "Staff Block %",
+      "min": 5,
+      "max": 5,
+      "ideal": 5,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 5
+        }
+      ]
+    },
+    "critical_strike_multiplier_+_if_you_have_blocked_recently": {
+      "id": "CriticalStrikeMultiplierIfBlockedRecently",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 35,
+      "max": 45,
+      "ideal": 42,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 35,
+          "max": 45
+        }
+      ]
+    },
+    "critical_strike_chance_+%_if_have_not_crit_recently": {
+      "id": "CriticalStrikeChanceIfNoCriticalStrikeDealtRecently",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 80,
+      "max": 100,
+      "ideal": 95,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 80,
+          "max": 100
+        }
+      ]
+    },
+    "local_display_gain_power_charge_on_spending_mana": {
+      "id": "PowerChargeOnManaSpent",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "damage_+%_per_power_charge": {
+      "id": "IncreasedDamagePerPowerCharge",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 8,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 10
+        }
+      ]
+    },
+    "projectile_damage_+%_per_pierced_enemy": {
+      "id": "ProjectileDamagePerEnemyPierced",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 30,
+      "ideal": 27,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 30
+        }
+      ]
+    },
+    "projectile_attack_damage_+%_per_200_accuracy": {
+      "id": "IncreaseProjectileAttackDamagePerAccuracy",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "critical_strike_chance_+%_vs_poisoned_enemies": {
+      "id": "CriticalStrikeChanceAgainstPoisonedEnemies",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 80,
+      "max": 100,
+      "ideal": 95,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 80,
+          "max": 100
+        }
+      ]
+    },
+    "critical_strike_multiplier_vs_enemies_on_full_life_+": {
+      "id": "CriticalStrikeMultiplierAgainstEnemiesOnFullLife",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 50,
+      "max": 60,
+      "ideal": 57,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 50,
+          "max": 60
+        }
+      ]
+    },
+    "gain_1_rare_monster_mod_on_kill_for_10_seconds_%_chance": {
+      "id": "GainRareMonsterModsOnKill",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 20,
+      "ideal": 18,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 20
+        }
+      ]
+    },
+    "enemy_evasion_+%_if_you_have_hit_them_recently": {
+      "id": "EnemiesHaveReducedEvasionIfHitRecently",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": -20,
+      "max": -20,
+      "ideal": -20,
+      "tiers": [
+        {
+          "level": 68,
+          "min": -20,
+          "max": -20
+        }
+      ]
+    },
+    "local_life_gain_per_target_vs_blinded_enemies": {
+      "id": "LifeGainPerBlindedEnemyHit",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 35,
+      "max": 50,
+      "ideal": 46,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 35,
+          "max": 50
+        }
+      ]
+    },
+    "critical_strike_chance_+%_vs_blinded_enemies": {
+      "id": "CriticalChanceAgainstBlindedEnemies",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 80,
+      "max": 100,
+      "ideal": 95,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 80,
+          "max": 100
+        }
+      ]
+    },
+    "additional_block_%_per_endurance_charge": {
+      "id": "AdditionalBlockChancePerEnduranceCharge",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "chance_to_gain_endurance_charge_on_block_%": {
+      "id": "AdditionalBlockChancePerEnduranceCharge",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 25,
+      "ideal": 23,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        }
+      ]
+    },
+    "accuracy_rating_+%_per_frenzy_charge": {
+      "id": "AccuracyRatingPerFrenzyCharge",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 5,
+      "ideal": 5,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 5
+        }
+      ]
+    },
+    "chance_to_gain_frenzy_charge_on_block_%": {
+      "id": "AccuracyRatingPerFrenzyCharge",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 20,
+      "max": 25,
+      "ideal": 23,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 20,
+          "max": 25
+        }
+      ]
+    },
+    "local_display_socketed_movement_skills_have_no_mana_cost": {
+      "id": "MovementSkillsCostNoMana",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "number_of_endurance_charges_to_gain_every_4_seconds_while_stationary": {
+      "id": "GainEnduranceChargeWhileStationary",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "local_culling_strike_vs_bleeding_enemies": {
+      "id": "CullingStrikeOnBleedingEnemies",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "chance_to_gain_endurance_charge_on_hit_%_vs_bleeding_enemy": {
+      "id": "GainEnduranceChargeOnHittingBleedingEnemy",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 8,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 10
+        }
+      ]
+    },
+    "chance_to_gain_endurance_charge_on_crit_%": {
+      "id": "GainEnduranceChargeOnCrit",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 10,
+      "ideal": 8,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 10
+        }
+      ]
+    },
+    "explode_on_kill_%_fire_damage_to_deal": {
+      "id": "EnemiesExplodeOnDeath",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 5,
+      "ideal": 5,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 5
+        }
+      ]
+    },
+    "area_of_effect_+%_per_50_strength": {
+      "id": "AreaOfEffectPerStrength",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 3,
+      "max": 3,
+      "ideal": 3,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 3,
+          "max": 3
+        }
+      ]
+    },
+    "area_of_effect_+%_if_have_stunned_an_enemy_recently": {
+      "id": "AreaOfEffectIfStunnedEnemyRecently",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 25,
+      "max": 35,
+      "ideal": 32,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 25,
+          "max": 35
+        }
+      ]
+    },
+    "melee_weapon_range_+_if_you_have_killed_recently": {
+      "id": "MeleeWeaponRangeIfKilledRecently",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 2,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 2
+        }
+      ]
+    },
+    "melee_movement_skill_chance_to_fortify_on_hit_%": {
+      "id": "MovementSkillsFortifyOnHitChance",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 30,
+      "max": 50,
+      "ideal": 45,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 30,
+          "max": 50
+        }
+      ]
+    },
+    "chance_to_gain_endurance_charge_when_you_taunt_enemy_%": {
+      "id": "GainEnduranceChargeOnTauntingEnemies",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 30,
+      "ideal": 26,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 30
+        }
+      ]
+    },
+    "remove_bleeding_on_warcry": {
+      "id": "RemoveBleedingOnWarcry",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 1,
+      "max": 1,
+      "ideal": 1,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "area_of_effect_+%_per_endurance_charge": {
+      "id": "AreaOfEffectPerEnduranceCharge",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 5,
+      "max": 5,
+      "ideal": 5,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 5,
+          "max": 5
+        }
+      ]
+    },
+    "physical_damage_%_to_add_as_random_element": {
+      "id": "PhysicalDamageAddedAsRandomElement",
+      "generation": "Suffix",
+      "domain": "Gear",
+      "text": "",
+      "min": 15,
+      "max": 30,
+      "ideal": 29,
+      "tiers": [
+        {
+          "level": 68,
+          "min": 15,
+          "max": 20
+        },
+        {
+          "level": 75,
+          "min": 21,
+          "max": 25
+        },
+        {
+          "level": 80,
+          "min": 26,
+          "max": 30
         }
       ]
     }
