@@ -19,6 +19,7 @@ echo "Pruning old cache entries..."
 coffee bin/clean-cache.coffee
 
 echo "Starting..."
+run_forever "bin/start-scheduler.coffee"
 run_forever "bin/start-watcher.coffee"
 run_forever "bin/start-emitter.coffee"
 run_forever "bin/start-web.coffee"
