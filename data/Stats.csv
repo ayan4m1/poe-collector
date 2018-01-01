@@ -220,7 +220,7 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown0,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 218,cast_speed_+%_per_power_charge,True,False,False,1,False,Cast Speed increase per Power Charge,False,False,-1,-1,True,-115527685,[],-1,True,16711422
 219,skill_cooldown_-%,True,False,False,1,False,Skill Cooldown Reduction,False,False,-1,-1,False,1421329127,[],-1,True,16711422
 220,avoid_interruption_while_casting_%,False,False,False,1,False,,False,False,-1,-1,False,1693823433,[],18,False,0
-221,base_attack_repeat_count,False,False,False,3,False,Additional Targets,False,False,-1,-1,False,200207583,[],-1,True,33488638
+221,base_attack_repeat_count,False,False,False,3,False,Additional Targets,False,False,-1,-1,False,200207583,[],-1,True,16711422
 222,base_stun_recovery_+%,True,False,False,1,False,Base Stun Recovery +%,False,False,-1,-1,True,1296349074,[],11,False,0
 223,stun_recovery_+%_per_frenzy_charge,True,False,False,1,False,Stun Recovery increase per Frenzy Charge,False,False,-1,-1,True,-1772884047,[],-1,True,16711422
 224,while_using_sword_reduce_enemy_block_%,False,False,False,1,False,,False,False,-1,-1,False,-304125896,[],6,False,0
@@ -1264,8 +1264,8 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown0,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 1262,support_melee_splash_damage_+%_final,True,False,False,3,False,,True,False,-1,-1,True,2081551524,[],-1,True,16711422
 1263,support_melee_splash_damage_+%_final_for_splash,True,False,False,3,False,,True,False,-1,-1,True,1775754280,[],-1,True,16711422
 1264,add_power_charge_on_critical_strike_%,True,False,False,1,False,,True,False,-1,-1,True,1479057381,[],-1,True,16711422
-1265,base_melee_attack_repeat_count,False,False,False,3,False,Additional Melee Targets,False,False,-1,-1,True,564703681,[],-1,True,33488638
-1266,attack_repeat_count,True,False,False,3,False,Additional Targets,True,True,-1,-1,True,0,[],-1,True,33488638
+1265,base_melee_attack_repeat_count,False,False,False,3,False,Additional Melee Targets,False,False,-1,-1,True,564703681,[],-1,True,16711422
+1266,attack_repeat_count,True,False,False,3,False,Additional Targets,True,True,-1,-1,True,0,[],-1,True,16711422
 1267,display_map_larger_maze,True,False,False,3,False,,False,False,-1,-1,False,1579821850,[],-1,True,16711422
 1268,display_map_restless_dead,True,False,False,3,False,,False,False,-1,-1,False,-839232326,[],-1,True,16711422
 1269,display_map_two_bosses,True,False,False,3,False,,False,False,-1,-1,False,-421079658,[],-1,True,16711422
@@ -2297,8 +2297,8 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown0,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 2295,cold_damage_taken_%_as_chaos,True,False,False,1,False,,False,True,-1,-1,False,0,[],-1,True,16711422
 2296,lightning_damage_taken_%_as_chaos,True,False,False,1,False,,False,True,-1,-1,False,0,[],-1,True,16711422
 2297,global_reduce_enemy_block_%,True,False,False,1,False,,False,False,-1,-1,True,1410610558,[],-1,True,16711422
-2298,base_spell_repeat_count,False,False,False,3,False,,True,False,-1,-1,True,-1398888436,[],-1,True,33488638
-2299,spell_repeat_count,True,False,False,3,False,,True,True,-1,-1,True,0,[],-1,True,33488638
+2298,base_spell_repeat_count,False,False,False,3,False,,True,False,-1,-1,True,-1398888436,[],-1,True,16711422
+2299,spell_repeat_count,True,False,False,3,False,,True,True,-1,-1,True,0,[],-1,True,16711422
 2300,pvp_damage_+%_final_scale,False,False,False,1,False,,False,False,-1,-1,False,-1506680576,[],-1,True,16711422
 2301,physical_damage_taken_+_vs_beasts,True,False,False,3,False,,False,False,-1,-1,False,169261392,[],-1,True,16711422
 2302,local_strength_requirement_+,True,True,False,3,False,,False,False,-1,-1,False,968890293,[],-1,True,16711422
@@ -7360,3 +7360,4 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown0,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 7358,skill_cannot_be_stunned,True,False,False,4,False,,True,False,-1,-1,True,-1268615396,[],-1,True,16711422
 7359,skill_cannot_be_knocked_back,True,False,False,4,False,,True,False,-1,-1,True,-1306282170,[],-1,True,16711422
 7360,is_immobilised_by_elder,True,False,False,4,False,,False,False,-1,-1,False,-1752905083,[],-1,True,16711422
+7361,volatile_dead_consume_additional_corpse,False,False,False,4,False,,False,False,-1,-1,False,905898914,[],-1,True,16711422

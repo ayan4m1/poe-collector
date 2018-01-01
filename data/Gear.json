@@ -1,5 +1,5 @@
 {
-  "createdAt": "2017-12-17T15:06:22.401Z",
+  "createdAt": "2018-01-01T14:54:15.436Z",
   "gameVersion": "3.0.0",
   "types": {
     "str_armour": [
@@ -6918,7 +6918,7 @@
       "generation": "Prefix",
       "domain": "Gear",
       "text": "Cold Damage +%",
-      "min": 0,
+      "min": 3,
       "max": 79,
       "ideal": 78,
       "tiers": [
@@ -6994,18 +6994,18 @@
         },
         {
           "level": 68,
-          "min": 0,
-          "max": 0
+          "min": 45,
+          "max": 52
         },
         {
           "level": 75,
-          "min": 0,
-          "max": 0
+          "min": 53,
+          "max": 56
         },
         {
           "level": 80,
-          "min": 0,
-          "max": 0
+          "min": 57,
+          "max": 60
         }
       ]
     },
@@ -16658,24 +16658,24 @@
       "generation": "Prefix",
       "domain": "Gear",
       "text": "",
-      "min": 0,
-      "max": 0,
-      "ideal": 0,
+      "min": 16,
+      "max": 20,
+      "ideal": 20,
       "tiers": [
         {
           "level": 68,
-          "min": 0,
-          "max": 0
+          "min": 16,
+          "max": 16
         },
         {
           "level": 75,
-          "min": 0,
-          "max": 0
+          "min": 18,
+          "max": 18
         },
         {
           "level": 80,
-          "min": 0,
-          "max": 0
+          "min": 20,
+          "max": 20
         }
       ]
     },

@@ -1,5 +1,5 @@
 {
-  "createdAt": "2017-12-17T15:06:22.417Z",
+  "createdAt": "2018-01-01T14:54:15.436Z",
   "gameVersion": "3.0.0",
   "results": [
     {
@@ -67894,12 +67894,12 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "6560",
-          "name": "volatile_dead_base_number_of_corpses_to_consume",
+          "id": "7361",
+          "name": "volatile_dead_consume_additional_corpse",
           "text": "",
           "level": 66,
-          "min": 2,
-          "max": 2
+          "min": 1,
+          "max": 1
         }
       ],
       "spawnWeights": []
@@ -67911,12 +67911,29 @@
       "generation": "Enchantment",
       "stats": [
         {
+          "id": "7361",
+          "name": "volatile_dead_consume_additional_corpse",
+          "text": "",
+          "level": 75,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentVolatileDeadOrbs3",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
           "id": "6560",
           "name": "volatile_dead_base_number_of_corpses_to_consume",
           "text": "",
           "level": 75,
-          "min": 3,
-          "max": 3
+          "min": 1,
+          "max": 1
         }
       ],
       "spawnWeights": []
@@ -71841,7 +71858,7 @@
     },
     {
       "name": "PoisonDurationSupportedUber1",
-      "group": "PoisonDuration",
+      "group": "PoisonDamage",
       "domain": "Gear",
       "generation": "Suffix",
       "stats": [
@@ -71871,7 +71888,7 @@
     },
     {
       "name": "PoisonDurationSupportedUber2",
-      "group": "PoisonDuration",
+      "group": "PoisonDamage",
       "domain": "Gear",
       "generation": "Suffix",
       "stats": [
@@ -71901,7 +71918,7 @@
     },
     {
       "name": "PoisonDurationSupportedUber3",
-      "group": "PoisonDuration",
+      "group": "PoisonDamage",
       "domain": "Gear",
       "generation": "Suffix",
       "stats": [
@@ -85406,16 +85423,16 @@
           "name": "cold_damage_+%",
           "text": "Cold Damage +%",
           "level": 68,
-          "min": 0,
-          "max": 0
+          "min": 45,
+          "max": 52
         },
         {
           "id": "3689",
           "name": "local_display_socketed_gems_supported_by_x_cold_penetration",
           "text": "",
           "level": 68,
-          "min": 0,
-          "max": 0
+          "min": 16,
+          "max": 16
         }
       ],
       "spawnWeights": [
@@ -85440,16 +85457,16 @@
           "name": "cold_damage_+%",
           "text": "Cold Damage +%",
           "level": 75,
-          "min": 0,
-          "max": 0
+          "min": 53,
+          "max": 56
         },
         {
           "id": "3689",
           "name": "local_display_socketed_gems_supported_by_x_cold_penetration",
           "text": "",
           "level": 75,
-          "min": 0,
-          "max": 0
+          "min": 18,
+          "max": 18
         }
       ],
       "spawnWeights": [
@@ -85474,16 +85491,16 @@
           "name": "cold_damage_+%",
           "text": "Cold Damage +%",
           "level": 80,
-          "min": 0,
-          "max": 0
+          "min": 57,
+          "max": 60
         },
         {
           "id": "3689",
           "name": "local_display_socketed_gems_supported_by_x_cold_penetration",
           "text": "",
           "level": 80,
-          "min": 0,
-          "max": 0
+          "min": 20,
+          "max": 20
         }
       ],
       "spawnWeights": [
@@ -85885,7 +85902,7 @@
     },
     {
       "name": "CriticalStrikeChanceSpellsSupportedUber1",
-      "group": "SpellCriticalStrikeChanceIncrease",
+      "group": "CriticalStrikeChanceIncrease",
       "domain": "Gear",
       "generation": "Suffix",
       "stats": [
@@ -85923,7 +85940,7 @@
     },
     {
       "name": "CriticalStrikeChanceSpellsSupportedUber2__",
-      "group": "SpellCriticalStrikeChanceIncrease",
+      "group": "CriticalStrikeChanceIncrease",
       "domain": "Gear",
       "generation": "Suffix",
       "stats": [
