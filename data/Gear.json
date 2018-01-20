@@ -1,5 +1,5 @@
 {
-  "createdAt": "2018-01-01T14:54:15.436Z",
+  "createdAt": "2018-01-20T21:56:36.833Z",
   "gameVersion": "3.0.0",
   "types": {
     "str_armour": [
@@ -13868,19 +13868,19 @@
       "generation": "Suffix",
       "domain": "Gear",
       "text": "",
-      "min": 5,
-      "max": 15,
-      "ideal": 14,
+      "min": -15,
+      "max": -5,
+      "ideal": -7,
       "tiers": [
         {
           "level": 68,
-          "min": 5,
-          "max": 10
+          "min": -10,
+          "max": -5
         },
         {
           "level": 75,
-          "min": 11,
-          "max": 15
+          "min": -15,
+          "max": -11
         }
       ]
     },

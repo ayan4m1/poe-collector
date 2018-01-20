@@ -1,5 +1,5 @@
 {
-  "createdAt": "2018-01-01T14:54:15.436Z",
+  "createdAt": "2018-01-20T21:56:36.849Z",
   "gameVersion": "3.0.0",
   "results": [
     {
@@ -60646,6 +60646,74 @@
       "spawnWeights": []
     },
     {
+      "name": "EnchantmentDespairDuration1",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "7413",
+          "name": "despair_duration_+%",
+          "text": "",
+          "level": 66,
+          "min": 30,
+          "max": 30
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentDespairDuration2",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "7413",
+          "name": "despair_duration_+%",
+          "text": "",
+          "level": 75,
+          "min": 45,
+          "max": 45
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentDespairEffect1_",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "7414",
+          "name": "despair_curse_effect_+%",
+          "text": "",
+          "level": 66,
+          "min": 20,
+          "max": 20
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentDespairEffect2",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "7414",
+          "name": "despair_curse_effect_+%",
+          "text": "",
+          "level": 75,
+          "min": 30,
+          "max": 30
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
       "name": "EnchantmentDeterminationManaReservation1",
       "group": "SkillEnchantment",
       "domain": "Gear",
@@ -67894,7 +67962,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7361",
+          "id": "7403",
           "name": "volatile_dead_consume_additional_corpse",
           "text": "",
           "level": 66,
@@ -67911,7 +67979,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7361",
+          "id": "7403",
           "name": "volatile_dead_consume_additional_corpse",
           "text": "",
           "level": 75,
@@ -68185,6 +68253,74 @@
         {
           "id": "7304",
           "name": "corpse_eruption_cast_speed_+%",
+          "text": "",
+          "level": 75,
+          "min": 12,
+          "max": 12
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentBodySwapDamage1_",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "7302",
+          "name": "corpse_warp_damage_+%",
+          "text": "",
+          "level": 75,
+          "min": 25,
+          "max": 25
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentBodySwapDamage2",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "7302",
+          "name": "corpse_warp_damage_+%",
+          "text": "",
+          "level": 75,
+          "min": 40,
+          "max": 40
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentBodySwapCastSpeed1__",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "7306",
+          "name": "corpse_warp_cast_speed_+%",
+          "text": "",
+          "level": 75,
+          "min": 8,
+          "max": 8
+        }
+      ],
+      "spawnWeights": []
+    },
+    {
+      "name": "EnchantmentBodySwapCastSpeed2",
+      "group": "SkillEnchantment",
+      "domain": "Gear",
+      "generation": "Enchantment",
+      "stats": [
+        {
+          "id": "7306",
+          "name": "corpse_warp_cast_speed_+%",
           "text": "",
           "level": 75,
           "min": 12,
@@ -75351,8 +75487,8 @@
           "name": "global_item_attribute_requirements_+%",
           "text": "",
           "level": 68,
-          "min": 5,
-          "max": 10
+          "min": -10,
+          "max": -5
         }
       ],
       "spawnWeights": [
@@ -75373,8 +75509,8 @@
           "name": "global_item_attribute_requirements_+%",
           "text": "",
           "level": 75,
-          "min": 11,
-          "max": 15
+          "min": -15,
+          "max": -11
         }
       ],
       "spawnWeights": [
@@ -85902,7 +86038,7 @@
     },
     {
       "name": "CriticalStrikeChanceSpellsSupportedUber1",
-      "group": "CriticalStrikeChanceIncrease",
+      "group": "SpellCriticalStrikeChanceIncrease",
       "domain": "Gear",
       "generation": "Suffix",
       "stats": [
@@ -85940,7 +86076,7 @@
     },
     {
       "name": "CriticalStrikeChanceSpellsSupportedUber2__",
-      "group": "CriticalStrikeChanceIncrease",
+      "group": "SpellCriticalStrikeChanceIncrease",
       "domain": "Gear",
       "generation": "Suffix",
       "stats": [
