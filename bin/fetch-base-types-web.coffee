@@ -31,8 +31,8 @@ fetchType = (url) ->
         .parent()
         .each (i, v) ->
           $v = $(v)
-          first = $($v.contents()[0]).text().trim()
-          second = $($v.contents()[2]).text().trim()
+          first = $($v.contents().eq(0)).text().trim()
+          second = $($v.contents().eq(3)).text().trim()
           result[first] = typeMappings[second]
       completed++
       log.as.info("#{((completed / parseFloat(types.length)) * 100.0).toFixed(2)}% completed (#{completed}/#{types.length})")
@@ -43,7 +43,7 @@ fetchTypes = (type) ->
     .catch(log.as.error)
     .then (res) ->
       $ = cheerio.load(res)
-      for v in $('#navbar-collapse2').find('li').find("a[href^=\"#{url}\"]")
+      for v in $('.navbar').last().find('.dropdown-menu').find('li').find('a')
         attr = $(v).attr('href')
         types.push(fetchType("#{baseUrl}/#{attr}"))
 
