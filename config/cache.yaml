@@ -1,7 +1,7 @@
 default:
   cachePath: '../cache/'
-  latestChangeUrl: 'http://poeninja.azureedge.net/api/Data/GetStats'
-  changeIdField: 'nextChangeId'
+  latestChangeUrl: 'http://poe.ninja/api/Data/GetStats'
+  changeIdField: 'next_change_id'
   retention:
     interval: 5
     unit: minutes
