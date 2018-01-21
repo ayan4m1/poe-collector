@@ -157,8 +157,7 @@
             "type": "integer"
           },
           "note": {
-            "type": "text",
-            "index": "not_analyzed"
+            "type": "keyword"
           },
           "level": {
             "type": "integer"
@@ -173,22 +172,18 @@
             "type": "boolean"
           },
           "icon": {
-            "type": "text",
-            "index": "not_analyzed"
+            "type": "keyword"
           },
           "iconVersion": {
-            "type": "text",
-            "index": "not_analyzed"
+            "type": "keyword"
           },
           "flavourText": {
-            "type": "text",
-            "index": "not_analyzed"
+            "type": "keyword"
           },
           "price": {
             "properties": {
               "raw": {
-                "type": "text",
-                "index": "not_analyzed"
+                "type": "keyword"
               },
               "chaos": {
                 "type": "float"
