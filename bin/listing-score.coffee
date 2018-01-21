@@ -250,7 +250,9 @@ scoreHit = (hit) ->
         _type: 'listing'
         _id: hit._id
     }, {
-      script: "ctx._source.meta.quality = #{result}"
+      script: "ctx._source.meta.quality = newQuality"
+      params:
+        newQuality: result
       upsert:
         meta:
           quality: 0
