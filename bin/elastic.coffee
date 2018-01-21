@@ -24,9 +24,9 @@ putTemplate = (name, settings, mappings) ->
   log.as.debug("asked to create template #{name}")
   elastic.client.indices.putTemplate(
     create: false
-    name: "#{name}*"
+    name: name
     body:
-      template: "#{name}*"
+      index_patterns: "#{name}*",
       settings: settings
       mappings: mappings
   ).catch(log.as.error)
