@@ -26,7 +26,7 @@ putTemplate = (name, settings, mappings) ->
     create: false
     name: name
     body:
-      index_patterns: "#{name}*",
+      index_patterns: "#{name}*"
       settings: settings
       mappings: mappings
   ).catch(log.as.error)
