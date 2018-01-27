@@ -1,5 +1,5 @@
 {
-  "createdAt": "2018-01-20T21:56:36.849Z",
+  "createdAt": "2018-01-27T00:51:37.652Z",
   "gameVersion": "3.0.0",
   "results": [
     {
@@ -83375,10 +83375,6 @@
           "name": "sword_elder"
         },
         {
-          "id": 264,
-          "name": "quiver_shaper"
-        },
-        {
           "id": 271,
           "name": "axe_elder"
         },
@@ -83419,10 +83415,6 @@
         {
           "id": 251,
           "name": "sword_elder"
-        },
-        {
-          "id": 264,
-          "name": "quiver_shaper"
         },
         {
           "id": 271,
@@ -83467,16 +83459,78 @@
           "name": "sword_elder"
         },
         {
-          "id": 264,
-          "name": "quiver_shaper"
-        },
-        {
           "id": 271,
           "name": "axe_elder"
         },
         {
           "id": 275,
           "name": "claw_elder"
+        }
+      ]
+    },
+    {
+      "name": "BlindOnHitShaperUber1",
+      "group": "BlindOnHit",
+      "domain": "Gear",
+      "generation": "Suffix",
+      "stats": [
+        {
+          "id": "6843",
+          "name": "attacks_chance_to_blind_on_hit_%",
+          "text": "",
+          "level": 68,
+          "min": 5,
+          "max": 6
+        }
+      ],
+      "spawnWeights": [
+        {
+          "id": 264,
+          "name": "quiver_shaper"
+        }
+      ]
+    },
+    {
+      "name": "BlindOnHitShaperUber2",
+      "group": "BlindOnHit",
+      "domain": "Gear",
+      "generation": "Suffix",
+      "stats": [
+        {
+          "id": "6843",
+          "name": "attacks_chance_to_blind_on_hit_%",
+          "text": "",
+          "level": 75,
+          "min": 7,
+          "max": 8
+        }
+      ],
+      "spawnWeights": [
+        {
+          "id": 264,
+          "name": "quiver_shaper"
+        }
+      ]
+    },
+    {
+      "name": "BlindOnHitShaperUber3",
+      "group": "BlindOnHit",
+      "domain": "Gear",
+      "generation": "Suffix",
+      "stats": [
+        {
+          "id": "6843",
+          "name": "attacks_chance_to_blind_on_hit_%",
+          "text": "",
+          "level": 81,
+          "min": 9,
+          "max": 10
+        }
+      ],
+      "spawnWeights": [
+        {
+          "id": 264,
+          "name": "quiver_shaper"
         }
       ]
     },
