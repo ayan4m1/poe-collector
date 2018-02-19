@@ -1,6 +1,6 @@
 {
-  "createdAt": "2018-01-27T00:51:37.651Z",
-  "gameVersion": "3.0.0",
+  "createdAt": "2018-02-19T00:12:13.325Z",
+  "gameVersion": "3.1.4",
   "types": {
     "str_armour": [
       "additional_strength",

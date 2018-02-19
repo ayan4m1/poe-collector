@@ -7414,3 +7414,4 @@ Rows,Id,Flag0,Flag1,Flag2,Unknown0,Flag3,Text,Flag5,Flag6,StatKey1,StatKey2,Flag
 7412,virtual_chance_to_evade_attacks_%,True,False,False,1,False,,True,True,-1,-1,True,0,[],-1,True,16711422
 7413,despair_duration_+%,True,False,False,1,False,,False,False,-1,-1,False,2086408285,[637492],-1,True,16711422
 7414,despair_curse_effect_+%,True,False,False,1,False,,False,False,-1,-1,False,114670135,[637564],-1,True,16711422
+7415,object_cannot_taunt_enemies,False,False,False,4,False,,False,False,-1,-1,False,-2126660267,[],-1,True,16711422

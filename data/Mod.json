@@ -1,6 +1,6 @@
 {
-  "createdAt": "2018-01-27T00:51:37.652Z",
-  "gameVersion": "3.0.0",
+  "createdAt": "2018-02-19T00:12:13.325Z",
+  "gameVersion": "3.1.4",
   "results": [
     {
       "name": "Strength2",
@@ -68203,7 +68203,7 @@
           "id": "7300",
           "name": "corpse_eruption_damage_+%",
           "text": "",
-          "level": 75,
+          "level": 66,
           "min": 25,
           "max": 25
         }
@@ -68237,7 +68237,7 @@
           "id": "7304",
           "name": "corpse_eruption_cast_speed_+%",
           "text": "",
-          "level": 75,
+          "level": 66,
           "min": 8,
           "max": 8
         }
@@ -68271,7 +68271,7 @@
           "id": "7302",
           "name": "corpse_warp_damage_+%",
           "text": "",
-          "level": 75,
+          "level": 66,
           "min": 25,
           "max": 25
         }
@@ -68305,7 +68305,7 @@
           "id": "7306",
           "name": "corpse_warp_cast_speed_+%",
           "text": "",
-          "level": 75,
+          "level": 66,
           "min": 8,
           "max": 8
         }
