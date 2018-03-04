@@ -1,6 +1,6 @@
 {
-  "createdAt": "2018-02-19T00:12:13.325Z",
-  "gameVersion": "3.1.4",
+  "createdAt": "2018-03-04T18:36:37.588Z",
+  "gameVersion": "3.2.0",
   "types": {
     "str_armour": [
       "additional_strength",
@@ -5062,6 +5062,7 @@
       "local_critical_strike_chance_+%",
       "local_display_socketed_gems_get_faster_projectiles_level",
       "local_display_socketed_gems_supported_by_level_x_iron_grip",
+      "local_display_socketed_gems_supported_by_level_x_physical_projectile_attack_damage",
       "local_physical_damage_+%",
       "projectile_attack_damage_+%_per_200_accuracy"
     ],
@@ -5079,9 +5080,7 @@
       "local_display_socketed_gems_supported_by_level_x_fire_penetration",
       "local_display_socketed_gems_supported_by_level_x_multicast",
       "local_display_socketed_gems_supported_by_level_x_onslaught",
-      "local_display_socketed_gems_supported_by_level_x_physical_projectile_attack_damage",
       "local_display_socketed_gems_supported_by_x_lesser_multiple_projectiles_level",
-      "local_physical_damage_+%",
       "projectile_damage_+%",
       "spell_damage_+%",
       "spell_damage_+%_per_16_int",

@@ -1,8 +1,8 @@
 default:
-  gameVersion: '3.1.4'
+  gameVersion: '3.2.0'
   currencyPercentile: 50
   leagues:
     - 'Standard'
     - 'Hardcore'
-    - 'Abyss'
-    - 'Hardcore Abyss'
+    - 'Bestiary'
+    - 'Hardcore Bestiary'
