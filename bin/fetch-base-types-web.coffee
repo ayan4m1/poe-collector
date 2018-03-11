@@ -57,11 +57,9 @@ fetchUniqueTypes = () ->
     .catch(log.as.error)
     .then (res) ->
       $ = cheerio.load(res)
-      counter = 0
       for v in $('.navbar').last().find('.dropdown-menu').find('li').find('a')
         attr = $(v).attr('href')
         attr = attr.substring(attr.lastIndexOf('=') + 1)
-        continue unless counter++ < 5
         types.push(fetchType("#{baseUrl}/#{uniqueUrl}#{attr}", (res) =>
           $ = cheerio.load(res)
           $('tbody').find('a[href]:first-child')
