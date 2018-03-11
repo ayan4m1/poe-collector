@@ -14,7 +14,7 @@ app.use require('compression')()
 
 # determine our webroot
 path = require 'path'
-root = path.resolve "#{__dirname}/../www"
+root = path.resolve "#{__dirname}/../build"
 
 log.as.info "web root at #{root}"
 
