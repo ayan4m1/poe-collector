@@ -11,6 +11,7 @@ import { SearchesComponent } from './component/searches';
 import { HeaderComponent, NavComponent } from './component/header';
 
 import { MomentModule } from 'angular2-moment';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const routes: Routes = [
   { path: 'search', component: SearchComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    MomentModule
+    MomentModule,
+    NgxSpinnerModule.forRoot()
   ],
   declarations: [
     AppComponent,
