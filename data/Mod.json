@@ -1,6 +1,6 @@
 {
-  "createdAt": "2018-03-04T18:36:37.588Z",
-  "gameVersion": "3.2.0",
+  "createdAt": "2018-04-29T19:44:45.959Z",
+  "gameVersion": "3.2.3",
   "results": [
     {
       "name": "Strength2",
@@ -57728,7 +57728,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7755",
+          "id": "7759",
           "name": "spectral_shield_throw_damage_+%",
           "text": "",
           "level": 66,
@@ -57745,7 +57745,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7755",
+          "id": "7759",
           "name": "spectral_shield_throw_damage_+%",
           "text": "",
           "level": 75,
@@ -58204,7 +58204,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7753",
+          "id": "7757",
           "name": "tectonic_slam_damage_+%",
           "text": "",
           "level": 66,
@@ -58221,7 +58221,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7753",
+          "id": "7757",
           "name": "tectonic_slam_damage_+%",
           "text": "",
           "level": 75,
@@ -66602,7 +66602,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7756",
+          "id": "7760",
           "name": "spectral_shield_throw_projectile_speed_+%",
           "text": "",
           "level": 66,
@@ -66619,7 +66619,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7756",
+          "id": "7760",
           "name": "spectral_shield_throw_projectile_speed_+%",
           "text": "",
           "level": 75,
@@ -66636,7 +66636,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7757",
+          "id": "7761",
           "name": "spectral_shield_throw_num_of_additional_projectiles",
           "text": "",
           "level": 66,
@@ -66653,7 +66653,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7757",
+          "id": "7761",
           "name": "spectral_shield_throw_num_of_additional_projectiles",
           "text": "",
           "level": 75,
@@ -67282,7 +67282,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7754",
+          "id": "7758",
           "name": "tectonic_slam_area_of_effect_+%",
           "text": "",
           "level": 66,
@@ -67299,7 +67299,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7754",
+          "id": "7758",
           "name": "tectonic_slam_area_of_effect_+%",
           "text": "",
           "level": 75,
@@ -67316,7 +67316,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7744",
+          "id": "7748",
           "name": "tectonic_slam_chance_to_not_consume_endurance_charge_%",
           "text": "",
           "level": 66,
@@ -67333,7 +67333,7 @@
       "generation": "Enchantment",
       "stats": [
         {
-          "id": "7744",
+          "id": "7748",
           "name": "tectonic_slam_chance_to_not_consume_endurance_charge_%",
           "text": "",
           "level": 75,
