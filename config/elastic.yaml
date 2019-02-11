@@ -1,5 +1,5 @@
 default:
-  host: http://localhost:9200
+  host: http://phreak.space:9200
   batchSize: 10000
   timeout:
     interval: 120
