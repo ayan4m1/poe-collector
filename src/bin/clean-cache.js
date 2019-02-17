@@ -33,10 +33,11 @@ const purgeCache = items => {
   }
 };
 
-log.info(`cutoff is ${cutoff.toISOString()}`);
-readDir(cacheDir)
-  .catch(log.error)
-  .then(async changeIds => {
+const cleanCache = async () => {
+  log.info(`cutoff is ${cutoff.toISOString()}`);
+  try {
+    const changeIds = await readDir(cacheDir);
+
     log.info(`${changeIds.length} total files in directory`);
     const toPurge = changeIds.filter(isStale);
 
@@ -49,29 +50,30 @@ readDir(cacheDir)
       return log.info('forced cache purge');
     }
 
-    try {
-      const res = await prompt([
-        {
-          name: 'purge',
-          type: 'confirm',
-          default: false,
-          options: [true, false],
-          message: `${
-            toPurge.length
-          } cache markers that are older than ${retention.humanize()}`
-        }
-      ]);
-
-      if (res && !res.purge) {
-        return log.info('user requested exit');
+    const res = await prompt([
+      {
+        name: 'purge',
+        type: 'confirm',
+        default: false,
+        options: [true, false],
+        message: `${
+          toPurge.length
+        } cache markers that are older than ${retention.humanize()}`
       }
+    ]);
 
-      if (!res || !res.purge) {
-        return;
-      }
-
-      purgeCache(toPurge);
-    } catch (err) {
-      log.error(err);
+    if (res && !res.purge) {
+      return log.info('user requested exit');
     }
-  });
+
+    if (!res || !res.purge) {
+      return;
+    }
+
+    purgeCache(toPurge);
+  } catch (err) {
+    log.error(err);
+  }
+};
+
+cleanCache();
