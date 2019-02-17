@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { denodeify } from 'q';
 import { prompt } from 'inquirer';
-import { stat, readdir, rawUnlink } from 'fs';
+import { stat, readdir, unlink as rawUnlink } from 'fs';
 
 import config from './config';
 import logging from './logging';
