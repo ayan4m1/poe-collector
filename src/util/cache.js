@@ -38,7 +38,7 @@ const findLatestOnDisk = async () => {
 
   const result = items.pop();
 
-  log.info('resuming from cache #{result}');
+  log.info(`resuming from cache ${result}`);
   if (result) {
     return result;
   } else {
