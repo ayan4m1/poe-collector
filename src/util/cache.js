@@ -8,13 +8,14 @@ import config from './config';
 import logging from './logging';
 
 const { cache: log } = logging;
+const { cache: cacheConfig } = config;
 
 const makeDir = promisify(mkdir);
 const unlink = promisify(rawUnlink);
 const readDir = promisify(readdir);
 const stat = promisify(rawStat);
 
-const cacheDir = `${__dirname}/${config.cache.cachePath}`;
+const cacheDir = `${__dirname}/${cacheConfig.cachePath}`;
 
 const findLatestOnDisk = async () => {
   let items = await readDir(cacheDir);
@@ -48,10 +49,10 @@ const findLatestOnDisk = async () => {
 
 const findLatestFromWeb = async () => {
   log.debug('accessing poe.ninja API to find latest change');
-  const res = await request({ uri: config.cache.latestChangeUrl });
+  const res = await request({ uri: cacheConfig.latestChangeUrl });
 
   const stats = JSON.parse(res);
-  const changeId = stats[config.cache.changeIdField];
+  const changeId = stats[cacheConfig.changeIdField];
 
   await touch(`${cacheDir}/${changeId}`);
   return changeId;
@@ -74,11 +75,9 @@ const findLatestChangeId = async () => {
 
 const removeStaleCacheFiles = async () => {
   let removed = 0;
-  const oldestToRetain = moment().subtract(
-    config.cache.retention.interval,
-    config.cache.retention.unit
-  );
+  const { retention } = cacheConfig;
   const items = await readDir(cacheDir);
+  const oldestToRetain = moment().subtract(retention.interval, retention.unit);
 
   for (const item of items) {
     const cachePath = `${cacheDir}/${item}`;

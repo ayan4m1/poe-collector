@@ -7,12 +7,12 @@ import config from './config';
 import logging from './logging';
 
 const { cache: log } = logging;
+const { retention: cacheConfig } = config.cache;
 
 const statFile = promisify(stat);
 const readDir = promisify(readdir);
 const unlink = promisify(rawUnlink);
 
-const cacheConfig = config.cache.retention;
 const retention = moment.duration(cacheConfig.interval, cacheConfig.unit);
 const cutoff = moment().subtract(retention);
 const cacheDir = `${__dirname}/../cache`;
