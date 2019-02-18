@@ -74,7 +74,7 @@ const findLatestChangeId = async () => {
 
 const removeStaleCacheFiles = async () => {
   let removed = 0;
-  const staleDate = moment().subtract(
+  const oldestToRetain = moment().subtract(
     config.cache.retention.interval,
     config.cache.retention.unit
   );
@@ -84,17 +84,10 @@ const removeStaleCacheFiles = async () => {
     const cachePath = `${cacheDir}/${item}`;
     const stats = await stat(cachePath);
 
-    if (!stats.isFile()) {
-      continue;
+    if (stats.isFile() && moment(stats.birthtime).isAfter(oldestToRetain)) {
+      await unlink(cachePath);
+      removed++;
     }
-    const created = moment(stats.birthtime);
-
-    if (created.isAfter(staleDate)) {
-      continue;
-    }
-
-    await unlink(cachePath);
-    removed++;
   }
   log.info(`removed ${removed} cache files`);
 };
