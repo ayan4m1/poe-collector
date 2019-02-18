@@ -1,6 +1,6 @@
 import touch from 'touch';
 import moment from 'moment';
-import { denodeify } from 'q';
+import { promisify } from 'util';
 import request from 'request-promise-native';
 import { mkdir, unlink as rawUnlink, readdir, stat as rawStat } from 'fs';
 
@@ -9,10 +9,10 @@ import logging from './logging';
 
 const { cache: log } = logging;
 
-const makeDir = denodeify(mkdir);
-const unlink = denodeify(rawUnlink);
-const readDir = denodeify(readdir);
-const stat = denodeify(rawStat);
+const makeDir = promisify(mkdir);
+const unlink = promisify(rawUnlink);
+const readDir = promisify(readdir);
+const stat = promisify(rawStat);
 
 const cacheDir = `${__dirname}/${config.cache.cachePath}`;
 

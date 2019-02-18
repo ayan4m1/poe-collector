@@ -1,16 +1,16 @@
 import moment from 'moment';
-import { denodeify } from 'q';
+import { promisify } from 'util';
 import { prompt } from 'inquirer';
 import { stat, readdir, unlink as rawUnlink } from 'fs';
 
 import config from './config';
 import logging from './logging';
 
-const statFile = denodeify(stat);
-const readDir = denodeify(readdir);
-const unlink = denodeify(rawUnlink);
-
 const { cache: log } = logging;
+
+const statFile = promisify(stat);
+const readDir = promisify(readdir);
+const unlink = promisify(rawUnlink);
 
 const cacheConfig = config.cache.retention;
 const retention = moment.duration(cacheConfig.interval, cacheConfig.unit);
