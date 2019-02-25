@@ -14,14 +14,14 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "bottleneck": "^2.16.2",
+    "bottleneck": "^2.17.0",
     "cheerio": "^1.0.0-rc.2",
     "chokidar": "^2.1.2",
     "cloudscraper": "^2.0.0",
     "compression": "^1.7.3",
     "core-js": "^2.6.5",
     "cors": "^2.8.5",
-    "cosmiconfig": "^5.0.7",
+    "cosmiconfig": "^5.1.0",
     "csv-parse": "^4.3.3",
     "elasticsearch": "^15.4.1",
     "express": "^4.16.4",
@@ -45,7 +45,7 @@
     "synaptic": "^1.1.4",
     "touch": "^3.1.0",
     "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^3.7.0"
+    "winston-daily-rotate-file": "^3.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
@@ -55,7 +55,7 @@
     "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "del": "^3.0.0",
-    "eslint": "^5.14.0",
+    "eslint": "^5.14.1",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "gulp": "^4.0.0",
