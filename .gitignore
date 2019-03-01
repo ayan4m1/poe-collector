@@ -1,7 +1,5 @@
-build/
-www/
-
 lib/
 node_modules/
 cache/
 log/
+.exilerc.yml
