@@ -1,5 +1,0 @@
-host: http://phreak.space:9200
-batchSize: 10000
-timeout:
-  interval: 120
-  unit: seconds

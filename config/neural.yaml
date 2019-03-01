@@ -1,4 +1,0 @@
-default:
-  idealPercentile: 0.75
-production:
-  idealPercentile: 0.95

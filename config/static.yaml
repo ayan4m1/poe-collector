@@ -1,8 +1,0 @@
-default:
-  gameVersion: '3.2.3'
-  currencyPercentile: 50
-  leagues:
-    - 'Standard'
-    - 'Hardcore'
-    - 'Bestiary'
-    - 'Hardcore Bestiary'

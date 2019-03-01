@@ -1,0 +1,82 @@
+cache:
+  cachePath: '../cache/'
+  latestChangeUrl: 'http://poe.ninja/api/Data/GetStats'
+  changeIdField: 'next_change_id'
+  retention:
+    interval: 15
+    unit: minutes
+elastic:
+  host: http://phreak.space:9200
+  batchSize: 10000
+  timeout:
+    interval: 120
+    unit: seconds
+log:
+  level: debug
+query:
+default:
+  scoring:
+    sort:
+      - lastSeen:
+          order: 'asc'
+      - firstSeen:
+          order: 'asc'
+    query:
+      bool:
+        must:
+          - match:
+              removed: false
+          - match:
+              rarity: 'Rare'
+          - match:
+              itemType: 'Gear'
+          - match:
+              'meta.quality': 0
+  unscoring:
+    query:
+      bool:
+        must:
+          - match:
+              removed: false
+          - match:
+              rarity: 'Rare'
+          - match:
+              itemType: 'Gear'
+          - range:
+              'meta.quality':
+                gt: 0
+static:
+  gameVersion: '3.5.4b'
+  currencyPercentile: 50
+  leagues:
+    - 'Standard'
+    - 'Hardcore'
+    - 'Betrayal'
+    - 'Hardcore Betrayal'
+watcher:
+  stashTabUrl: 'http://www.pathofexile.com/api/public-stash-tabs'
+  download:
+    concurrency: -1 # unlimited
+    interval:
+      value: 2
+      unit: seconds
+  index:
+    concurrency: 1 # one at a time to preserve order
+    interval:
+      value: 1
+      unit: seconds
+  retention:
+    stash:
+      interval: 7
+      unit: days
+    listing:
+      interval: 2
+      unit: days
+web:
+  hostname: localhost
+  port: 3000
+  socket: 3030
+  emit:
+    delay:
+      interval: 5
+      unit: seconds
