@@ -27,7 +27,7 @@ const createClient = () =>
   });
 
 let client = createClient();
-const schema = readFileSync(`${__dirname}/../schema.json`);
+const schema = readFileSync(`${__dirname}/../../schema.json`);
 const buffer = {
   stashes: [],
   listings: [],
