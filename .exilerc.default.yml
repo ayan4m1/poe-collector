@@ -11,8 +11,10 @@ elastic:
   timeout:
     interval: 120
     unit: seconds
-log:
+logging:
   level: debug
+  colorize: true
+  timestamp: 'YYYY-MM-DD HH:mm:ss'
 query:
 default:
   scoring:

@@ -1,6 +1,9 @@
 import config from './config';
 
 import { Container, format, transports } from 'winston';
+
+require('winston-daily-rotate-file');
+
 const { combine, colorize, label, prettyPrint, printf, timestamp } = format;
 
 const loggers = {};

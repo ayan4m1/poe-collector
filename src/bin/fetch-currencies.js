@@ -1,4 +1,4 @@
-import delay from 'delay';
+import { delay } from 'q';
 import moment from 'moment';
 import cheerio from 'cheerio';
 import ntile from 'stats-percentile';

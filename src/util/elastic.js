@@ -12,7 +12,7 @@ const { elastic: log } = logging;
 
 const {
   elastic: { host, timeout, batchSize },
-  log: { level: logLevel }
+  logging: { level: logLevel }
 } = config;
 
 let lastBufferCount = 0;
