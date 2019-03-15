@@ -16,16 +16,16 @@ cache = require './cache'
 elastic = require './elastic'
 
 downloadSpeed = config.watcher.download
-downloadLimiter = new Bottleneck(
-  downloadSpeed.concurrency
-  moment.duration(downloadSpeed.interval.value, downloadSpeed.interval.unit).asMilliseconds()
-)
+downloadLimiter = new Bottleneck({
+  maxConcurrent: downloadSpeed.concurrency
+  minTime: moment.duration(downloadSpeed.interval.value, downloadSpeed.interval.unit).asMilliseconds()
+})
 
 indexSpeed = config.watcher.index
-indexLimiter = new Bottleneck(
-  indexSpeed.concurrency
-  moment.duration(indexSpeed.interval.value, indexSpeed.interval.unit).asMilliseconds()
-)
+indexLimiter = new Bottleneck({
+  maxConcurrent: indexSpeed.concurrency
+  minTime: moment.duration(indexSpeed.interval.value, indexSpeed.interval.unit).asMilliseconds()
+})
 
 fetchNextChange = ->
   cache.findLatest()

@@ -13,7 +13,10 @@ baseUrl = 'http://poedb.tw/us'
 jsonUrl = 'json.php/item_class?cn='
 uniqueUrl = 'unique.php?cn='
 
-spamLimiter = new Bottleneck(1, 250)
+spamLimiter = new Bottleneck({
+  maxConcurrent: 1,
+  minTime: 250
+})
 mappingFile = "#{__dirname}/../data/GearTypes.json"
 resultFile = "#{__dirname}/../data/BaseTypes.json"
 
