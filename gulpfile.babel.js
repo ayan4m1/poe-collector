@@ -13,17 +13,17 @@ const lint = () =>
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 
-const build = () =>
+const compile = () =>
   gulp
     .src(src)
     .pipe(babel())
     .pipe(gulp.dest(dst));
 
 const clean = () => del(dst);
+const build = gulp.series(clean, lint, compile);
 const watch = () => gulp.watch(src, build);
 
 gulp.task('lint', lint);
-gulp.task('build', build);
 gulp.task('clean', clean);
+gulp.task('default', build);
 gulp.task('watch', gulp.series(build, watch));
-gulp.task('default', gulp.series(clean, lint, build));
